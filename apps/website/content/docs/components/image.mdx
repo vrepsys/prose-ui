@@ -1,0 +1,80 @@
+# Image
+
+Prose UI converts your images into NextJs images with all their benefits, like prevention of layout shift.
+
+Use simple Markdown syntax if you don't need to resize, align, or add a caption on it. 
+
+```md title='Local image with markdown syntax'
+![Abstract art](/img/demo-image.png)
+```
+![Abstract art](/img/demo-image.png)
+
+<Callout variant="info" title="Image location">
+  Images are retrieved from the `public` folder of your project by default, but this can be configured by passing the `imageDir` option when initializing the [Remark plugins](http://localhost:3000/docs/overview#remark-plugins).
+</Callout>
+## Images with external URLs
+
+External images are converted into simple img tags because the dimensions of the image are not known in advance.
+```md title='External image'
+![Photo of Osaka from Wikipedia](https://upload.wikimedia.org/wikipedia/commons/0/03/Dotonbori_19.jpg)
+```
+![Photo of Osaka from Wikipedia](https://upload.wikimedia.org/wikipedia/commons/0/03/Dotonbori_19.jpg)
+
+
+## Image dimensions
+
+To set image dimensions, use the `width` and `height` properties on the `Image` component. The values for `width` and `height` are in pixels.
+
+If you set only the `width`, Prose UI will calculate the `height` automatically to maintain the image's proportions. The same applies if you set only the `height`.
+
+The example below sets the width of the image to 400 pixels. The height will be automatically calculated to preserve the image's aspect ratio.
+
+```jsx title="Set the width of an image"
+<Image width={400} src="/img/demo-image-03.png" alt="Abstract art"/>
+```
+
+<Image width={400} src="/img/demo-image-03.png" alt="Abstract art"/>
+
+## Alignment and caption
+
+Use the [Frame](/docs/components/frame) component to control alignment and add captions to images. Below are examples of different alignments:
+
+```jsx
+<Frame align="left" caption="Left aligned image">
+   <Image width={200} src="/img/demo-image-01.png" alt="Abstract art"/>
+</Frame>
+<Frame align="center" caption="Center aligned image">
+   <Image width={200} src="/img/demo-image-01.png" alt="Abstract art"/>
+</Frame>
+<Frame align="right" caption="Right aligned image">
+   <Image width={200} src="/img/demo-image-03.png" alt="Abstract art"/>
+</Frame>
+```
+
+
+<Frame align="left" caption="Left aligned image">
+   <Image width={200} src="/img/demo-image-01.png" alt="Abstract art"/>
+</Frame>
+
+
+<Frame  align="center" caption="Center aligned image">
+   <Image width={200} src="/img/demo-image-02.png" alt="Abstract art"/>
+</Frame>
+
+<Frame align="right" caption="Right aligned image">
+   <Image width={200} src="/img/demo-image-03.png" alt="Abstract art"/>
+</Frame>
+
+## Inline images
+
+By default, images added using Markdown syntax or the Image component are inline and will appear inside a paragraph tag unless wrapped in a [Frame](/docs/components/frame).
+
+```mdx title="Inline image, resized"
+Here's an example <Image src="/img/demo-inline-image.svg" width={100} alt="Abstract art" /> of a resized inline image within a paragraph.
+```
+Here's an example <Image src="/img/demo-inline-image.svg" width={100} alt="Abstract art" /> of a resized inline image within a paragraph.
+
+```mdx title="Inline image with Markdown syntax"
+Here's an example ![Alt text](/img/demo-inline-image.svg) of a Markdown image within a paragraph.
+```
+Here's an example ![Alt text](/img/demo-inline-image.svg) of a Markdown image within a paragraph.

@@ -1,0 +1,37 @@
+# Overview
+
+This page provides an overview of how Prose UI works, its main concepts, and the elements that make up the library.
+
+## React components
+
+The `mdxComponents` array from `@prose-ui/next` includes React server components necessary for rendering elements such as highlighted code blocks, callouts, images, headings, and frames.
+
+```js
+import { mdxComponents } from "@prose-ui/next"
+```
+
+Prose UI also exports these components individually for use outside of MDX.
+
+```js
+import { CodeBlock, Frame, Callout, Image, Heading } from "@prose-ui/next"
+```
+
+## CSS styles
+
+CSS styles from `@prose-ui/next/prose-ui.css` provide default styles for typography and Prose UI components, scoped under the `prose-ui` ancestor CSS class.
+
+In Next.js, it's recommended to import these styles into your `globals.css` file:
+
+```css title="globals.css"
+@import '@prose-ui/next/prose-ui.css'
+```
+
+Prose UI uses the presence of the `dark` CSS class on the `<html>` element to determine whether to render content in dark mode.
+
+## Remark plugins
+
+The `remarkPlugins(options)` function from `@prose-ui/core` enables essential features such as converting Markdown images to optimized `next/image` components and Markdown links to `next/link` components. These plugins are crucial for Prose UI to function properly.
+
+```typescript
+import { remarkPlugins } from '@prose-ui/core'
+```

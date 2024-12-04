@@ -1,0 +1,68 @@
+# Table
+
+Tables in Prose UI are represented using [GFM](https://github.github.com/gfm/#tables-extension-) syntax. Here's an example:
+
+<CodeBlock language="md" title="Table using the gfm syntax">
+{`| Rocket               | Height   | Payload to LEO | Stages |
+|:---------------------|:--------:|:--------------:|:------:|
+| SpaceX Starship      | 120 m    | 150 t          | 2      |
+| NASA SLS Block 1     | 98 m     | 95 t           | 2      |
+| Blue Origin New Glenn| 98 m     | 45 t           | 2      |`}
+</CodeBlock>
+
+
+
+| Rocket               | Height   | Payload to LEO | Stages |
+|:---------------------|:--------:|:--------------:|:------:|
+| SpaceX Starship      | 120 m    | 150 t          | 2      |
+| NASA SLS Block 1     | 98 m     | 95 t           | 2      |
+| Blue Origin New Glenn| 98 m     | 45 t           | 2      |
+
+
+## Center and add a caption
+
+You can wrap a table inside a frame to center it and add a caption.
+
+```mdx title="A centered table with a caption"
+<Frame align="center" caption="Table inside a frame with a caption">
+| Rocket               | Height   | Payload to LEO | Stages |
+|:---------------------|:--------:|:--------------:|:------:|
+| SpaceX Starship      | 120 m    | 150 t          | 2      |
+| NASA SLS Block 1     | 98 m     | 95 t           | 2      |
+| Blue Origin New Glenn| 98 m     | 45 t           | 2      |
+</Frame>
+```
+
+<Frame align="center" caption="Table inside a frame with a caption">
+| Rocket               | Height   | Payload to LEO | Stages |
+|:---------------------|:--------:|:--------------:|:------:|
+| SpaceX Starship      | 120 m    | 150 t          | 2      |
+| NASA SLS Block 1     | 98 m     | 95 t           | 2      |
+| Blue Origin New Glenn| 98 m     | 45 t           | 2      |
+</Frame>
+
+
+
+## Stretch a table
+
+A table can be aligned to the left, right, center, or stretched.
+Stretching the table ensures that its width spans 100% of the available space. Here's an example:
+
+```mdx title="A stretched table with a caption"
+<Frame align="stretch" caption="Stretched table">
+| Rocket               | Height   | Payload to LEO | Stages |
+|:---------------------|:--------:|:--------------:|:------:|
+| SpaceX Starship      | 120 m    | 150 t          | 2      |
+| NASA SLS Block 1     | 98 m     | 95 t           | 2      |
+| Blue Origin New Glenn| 98 m     | 45 t           | 2      |
+</Frame>
+```
+
+<Frame align="stretch" caption="Stretched table">
+| Rocket               | Height   | Payload to LEO | Stages |
+|:---------------------|:--------:|:--------------:|:------:|
+| SpaceX Starship      | 120 m    | 150 t          | 2      |
+| NASA SLS Block 1     | 98 m     | 95 t           | 2      |
+| Blue Origin New Glenn| 98 m     | 45 t           | 2      |
+</Frame>
+

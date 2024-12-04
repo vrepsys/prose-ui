@@ -1,0 +1,40 @@
+# Frame
+
+The Frame is a block-level element that allows you to add a caption and align an inline component within it.
+
+Currently, it is specifically tailored for aligning and captioning [images](/components/image) and [tables](/components/table). Frames are rendered as `figure` elements in HTML, with a `figcaption` included if a caption is provided.
+
+## Image example
+
+```jsx title='Frame example'
+<Frame align="center" caption="Center aligned image">
+   <Image width={300} src="/img/demo-image-01.png" alt="Abstract art"/>
+</Frame>
+```
+
+<Frame align="center" caption="Center aligned image">
+   <Image width={300} src="/img/demo-image-01.png" alt="Abstract art"/>
+</Frame>
+
+
+## Table example
+
+```mdx title="A stretched table with a caption"
+<Frame align="stretch" caption="Stretched table">
+| Rocket               | Height   | Payload to LEO | Stages |
+|:---------------------|:--------:|:--------------:|:------:|
+| SpaceX Starship      | 120 m    | 150 t          | 2      |
+| NASA SLS Block 1     | 98 m     | 95 t           | 2      |
+| Blue Origin New Glenn| 98 m     | 45 t           | 2      |
+</Frame>
+```
+
+<Frame align="stretch" caption="Stretched table">
+| Rocket               | Height   | Payload to LEO | Stages |
+|:---------------------|:--------:|:--------------:|:------:|
+| SpaceX Starship      | 120 m    | 150 t          | 2      |
+| NASA SLS Block 1     | 98 m     | 95 t           | 2      |
+| Blue Origin New Glenn| 98 m     | 45 t           | 2      |
+</Frame>
+
+

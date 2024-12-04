@@ -1,0 +1,58 @@
+import { BookType, Image, Megaphone, Table as TableIcon, Frame as FrameIcon, Link as LinkIcon } from 'lucide-react'
+
+# Components overview
+
+With Prose UI, we aimed to follow the default [GitHub Flavored Markdown](https://github.github.com/gfm) syntax as closely as possible and avoid introducing new syntax for unsupported features.
+
+Instead of creating custom syntax, we provide React components that you can use within your MDX code to add functionality not natively supported by Markdown.
+
+For example, to add an image caption and center an image, you can use the [Frame](/docs/comopnents/frame) and [Image](/docs/comopnents/image) React components we provide:
+
+```jsx title='Center an image and add a caption'
+<Frame align="center" caption="Center aligned image">
+   <Image src="/img/image.png" alt="Abstract art"/>
+</Frame>
+```
+
+Check out the following resources to get started with Prose UI typography and components:
+
+<Cards
+  content={[
+    { 
+      icon: BookType, 
+      title: 'Typography', 
+      description: 'Style headings, paragraphs, and links with Prose UI.', 
+      url: '/docs/components/typography', 
+    },
+    { 
+      icon: Image, 
+      title: 'Image', 
+      description: 'Display, resize, and align images using Image and Frame components.', 
+      url: '/docs/components/image', 
+    },
+    { 
+      icon: Megaphone, 
+      title: 'Callout', 
+      description: 'Highlight key information with callout boxes.', 
+      url: '/docs/components/callout', 
+    },
+    { 
+      icon: TableIcon, 
+      title: 'Table', 
+      description: 'Create and style tables for technical content.', 
+      url: '/docs/components/table', 
+    },
+    { 
+      icon: FrameIcon, 
+      title: 'Frame', 
+      description: 'Add captions and align content with the Frame component.', 
+      url: '/docs/components/frame', 
+    },
+    { 
+      icon: LinkIcon, 
+      title: 'Link', 
+      description: 'Use next/link for seamless navigation.', 
+      url: '/docs/components/link', 
+    },
+  ]}
+/>

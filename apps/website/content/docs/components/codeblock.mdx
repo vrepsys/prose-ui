@@ -1,0 +1,59 @@
+# Code block
+
+You can add code blocks with line numbers and a title using Markdown syntax like this:
+
+````mdx title="Markdown syntax" showLineNumbers
+```js showLineNumbers title="Code block title"
+const x = "Hello world"
+```
+````
+
+You can also use the React component if you prefer:
+
+```mdx title="MDX syntax" showLineNumbers
+<CodeBlock language="js" title="Code block title" showLineNumbers>
+    {`const x = "Hello world"`}
+</CodeBlock>
+```
+
+Here's how a code block without a title looks like:
+
+```js showLineNumbers
+const x = "Code block without a title"
+```
+
+## Code highlighting
+
+Prose UI code blocks are highlighted server-side using [Shiki](https://github.com/shikijs/shiki). Check out the [list of languages supported by Shiki](https://github.com/shikijs/shiki/blob/main/docs/languages.md).
+
+Since code highlighting happens server-side (the `CodeBlock` is a server component), all languages supported by Shiki are built-in. You don't need to configure them separately.
+
+## Customizing Highlighter Theme Colors
+
+To customize the highlighter theme colors we recommend that you override the following css variables:
+
+| CSS Variable               |
+| :------------------------- |
+| `--p-color-syntax-syntax1` |
+| `--p-color-syntax-syntax2` |
+| `--p-color-syntax-syntax3` |
+| `--p-color-syntax-syntax4` |
+
+## Fine-Tuning Code Highlighting
+
+If you'd like more granular control, you can modify syntax token colors for the code block component. Below are all the available CSS variables and their default values:
+
+|     Variable                              | Default value                        |
+| :---------------------------------------- | :----------------------------------- |
+| `--p-code-block-color-text`               | `hsl(var(--p-color-text))`           |
+| `--p-code-block-color-constant`           | `hsl(var(--p-color-syntax-syntax1))` |
+| `--p-code-block-color-string`             | `hsl(var(--p-color-syntax-syntax2))` |
+| `--p-code-block-color-comment`            | `hsl(var(--p-color-text-low))`       |
+| `--p-code-block-color-keyword`            | `hsl(var(--p-color-syntax-syntax3))` |
+| `--p-code-block-color-parameter`          | `hsl(var(--p-color-text))`           |
+| `--p-code-block-color-function`           | `hsl(var(--p-color-syntax-syntax4))` |
+| `--p-code-block-color-string-expression`  | `hsl(var(--p-color-syntax-syntax2))` |
+| `--p-code-block-color-punctuation`        | `hsl(var(--p-color-text))`           |
+| `--p-code-block-color-link`               | `hsl(var(--p-color-syntax-syntax2))` |
+
+To learn more about Prose UI design system and CSS variables check out the [styling page](/docs/styling).

@@ -1,0 +1,96 @@
+# Installation
+
+While the easiest way to start a new project with Prose UI is by cloning one of the [templates](/templates), we provide the instructions below to help you set up an brand-you project with Prose UI on your own.
+
+Here's how to create and configure a [Next.js](https://nextjs.org) project with [next/mdx](https://nextjs.org/docs/pages/building-your-application/configuring/mdx) and Prose UI.
+
+## Create a new project and install dependencies
+
+Start by creating a Next.js project, choosing defaults in the prompts.
+
+```bash title="Create a new NextJs project"
+npx create-next-app@latest
+```
+
+Enter your project’s folder and install the dependencies for rendering MDX and Prose UI. We're using pnpm, but feel free to use your preferred package manager.
+
+```bash title="Add npm packages"
+pnpm add @prose-ui/core @prose-ui/next @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
+```
+
+## Set up mdx components
+
+Create an `mdx-components.tsx` file in the root of your project. This file will be used to override the default components used by MDX.
+
+```tsx title="mdx-components.tsx" showLineNumbers
+import { mdxComponents } from "@prose-ui/next";
+import type { MDXComponents } from "mdx/types";
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...components,
+    ...mdxComponents,
+  };
+}
+```
+
+## Add Prose UI css styles
+
+Next, go to your `src/app/globals.css` file and import Prose UI styles at the top:
+
+```css title="globals.css"
+@import "@prose-ui/next/prose-ui.css";
+```
+
+## Set up MDX rendering
+
+Configure your project to use mdx with Prose UI by modifying the next.config.ts in the following way:
+
+```typescript title="next.config.ts"
+import createMDX from "@next/mdx";
+import { remarkPlugins } from "@prose-ui/core";
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+};
+
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: remrkPlugins(),
+  },
+});
+
+export default withMDX(nextConfig);
+```
+
+## Adjust the layout
+
+Go to your `app/layout.tsx` and replace the content it returns with the code below to ensure that your pages have the correct fonts and styles applied.
+
+```tsx title="layout.tsx" showLineNumbers
+<html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
+  <body className="prose-ui antialiased">
+    <div className="mx-auto max-w-3xl px-8">{children}</div>
+  </body>
+</html>
+```
+
+## Add MDX content
+
+Rename `src/app/page.tsx` to `src/app/page.mdx` and replace the content with your Markdown/MDX. For example:
+
+```md title="page.mdx" showLineNumbers
+# Hello, world!
+
+The Viking landers, part of NASA's [Viking program](https://en.wikipedia.org/wiki/Viking_program), were the first U.S. missions to successfully land on Mars and transmit images and scientific data back to Earth in 1976.
+
+<Frame align="center" caption="Viking lander">
+  <Image
+    src="https://nssdc.gsfc.nasa.gov/image/spacecraft/viking_lander.jpg"
+    alt="Viking lander"
+  />
+</Frame>
+```
+
+That's it! Run `pnpm dev` and open your project in the browser.

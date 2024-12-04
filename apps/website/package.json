@@ -1,0 +1,48 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@icons-pack/react-simple-icons": "^10.2.0",
+    "@radix-ui/colors": "^3.0.0",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-scroll-area": "^1.2.1",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-visually-hidden": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "framer-motion": "^11.11.17",
+    "lucide-react": "^0.396.0",
+    "next": "15.0.3",
+    "next-themes": "^0.4.3",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "@content-collections/core": "^0.7.2",
+    "@content-collections/mdx": "^0.2.0",
+    "@content-collections/next": "^0.2.3",
+    "@prose-ui/core": "1.0.0-beta.8",
+    "@prose-ui/next": "1.0.0-beta.15",
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^20",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "acorn": "^8.12.1",
+    "clsx": "^2.1.1",
+    "mdast-util-to-string": "^4.0.0",
+    "postcss": "^8",
+    "remark": "^15.0.1",
+    "remark-mdx": "^3.0.1",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.6.3"
+  }
+}

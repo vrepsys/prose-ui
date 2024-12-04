@@ -1,0 +1,31 @@
+{
+  "name": "@prose-ui/styles",
+  "version": "1.0.0-beta.4",
+  "exports": {
+    ".": "./dist/index.js",
+    "./prose-ui.css": "./dist/prose-ui.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "TIMING=1 eslint \"**/*.ts*\"",
+    "build": "rm -rf dist && tsc && pnpm build:css",
+    "build:css": "ts-node src/scripts/build-css.ts",
+    "watch": "rm -rf dist && npx nodemon --watch src --ext ts --exec \"pnpm build && cp dist/prose-ui.css ../next\""
+  },
+  "devDependencies": {
+    "@prose-ui/eslint-config": "workspace:*",
+    "@prose-ui/tsconfig": "workspace:*",
+    "@radix-ui/colors": "^3.0.0",
+    "@types/node": "^20.11.24",
+    "@types/postcss-js": "^4.0.4",
+    "eslint": "^9.3.0",
+    "jest": "^29.7.0",
+    "postcss": "^8",
+    "postcss-js": "^4.0.1",
+    "postcss-nested": "^7.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,73 @@
+@import '@prose-ui/next/prose-ui.css';
+@import '@radix-ui/colors/gray.css';
+@import '@radix-ui/colors/gray-dark.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.prose-ui {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    scroll-margin-top: 100px;
+  }
+}
+
+@layer base {
+  :root {
+    --p-font-family: var(--font-geist-sans);
+    --p-font-family-heading: var(--font-geist-sans);
+    --p-font-family-mono: var(--font-geist-mono);
+    --sidenav-width: 15.625rem;
+    --site-width: 80rem;
+    --site-padding-x: 1.5rem;
+    --toc-width: 12rem;
+    --topnav-height: 3.5rem;
+    --article-padding-t: var(--p-content-gap-heading);
+    --article-padding-x: 0;
+    --article-padding-x-md: theme(padding.6);
+    --article-padding-x-lg: theme(padding.10);
+    --article-padding-x-xl: theme(padding.14);
+    --nav-heading-font-size: var(--p-h6-font-size);
+    --nav-heading-line-height: var(--p-h6-font-height);
+    --nav-heading-letter-spacing: var(--p-h6-letter-spacing);
+    --nav-heading-font-weight: var(--p-h6-font-weight);
+
+    --nav-link-font-size: var(--p-body-font-size);
+    --nav-link-line-height: var(--p-body-font-height);
+    --nav-link-letter-spacing: var(--p-body-letter-spacing);
+    --nav-link-font-weight: var(--p-body-font-weight);
+  }
+
+  :root {
+    --p-link-font-weight: var(--p-font-weight-medium);
+    --p-color-accent-high: 0, 0%, 0%;
+    --p-color-accent: 0, 0%, 0%;
+    --p-color-accent-low: 0, 0%, 40%;
+    --button-primary-color-bg: var(--gray-12);
+    --button-primary-color-text: var(--gray-1);
+  }
+  :root:is(.dark) {
+    --p-color-accent-high: 180, 0%, 100%;
+    --p-color-accent: 180, 0%, 90%;
+    --p-color-accent-low: 180, 0%, 30%;
+    --button-primary-color-bg: var(--gray-12);
+    --button-primary-color-text: var(--gray-3);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-color-base;
+  }
+}

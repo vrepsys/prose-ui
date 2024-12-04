@@ -12,6 +12,7 @@ import { Logo } from './logo'
 import { Button } from '../ui/button'
 import Link from 'next/link'
 import { MenuIcon, XIcon } from 'lucide-react'
+import { GithubButton } from '../github-button'
 
 export const MobileNav = ({ className }: { className?: string }) => {
   const [open, setOpen] = useState(false)
@@ -42,7 +43,7 @@ export const MobileNav = ({ className }: { className?: string }) => {
                   <Dialog.Title>Navigation</Dialog.Title>
                 </VisuallyHidden.Root>
                 <motion.nav
-                  className="border-color-base flex h-[var(--topnav-height)] w-full items-center justify-between gap-2 border-b px-[var(--site-padding-x)] py-2"
+                  className="bg-color-base border-color-base flex h-[var(--topnav-height)] w-full items-center justify-between gap-2 border-b px-[var(--site-padding-x)] py-2"
                   transition={{ duration: 0.15, ease: 'easeInOut' }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -50,6 +51,7 @@ export const MobileNav = ({ className }: { className?: string }) => {
                 >
                   <Logo showText href="/" onClick={() => setOpen(false)} />
                   <div className="flex items-center gap-2">
+                    <GithubButton />
                     <ThemeToggle />
                     <Button
                       size="icon"

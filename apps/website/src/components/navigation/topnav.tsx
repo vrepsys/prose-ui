@@ -6,7 +6,7 @@ import { Logo } from './logo'
 import { Button } from '../ui/button'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { SiGithub } from '@icons-pack/react-simple-icons'
+import { GithubButton } from '../github-button'
 
 export const TopNav = () => {
   const pathname = usePathname()
@@ -28,16 +28,11 @@ export const TopNav = () => {
           </Button>
         </nav>
         <div className="hidden items-center justify-start gap-2 md:flex">
-          <Button variant="ghost" asChild>
-            <Link href="https://github.com/vrepsys/prose-ui">
-              <SiGithub size={16} />
-              Github
-            </Link>
-          </Button>
+          <GithubButton />
           <ThemeToggle />
         </div>
-
         <nav className="flex flex-1 items-center justify-end gap-2 md:hidden">
+          <GithubButton />
           <ThemeToggle />
           <MobileNav />
         </nav>

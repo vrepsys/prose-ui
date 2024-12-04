@@ -1,7 +1,5 @@
-import Cards from '@/components/cards'
 import { Button } from '@/components/ui/button'
 import { Callout, CodeBlock, Heading } from '@prose-ui/next'
-import { BookOpen } from 'lucide-react'
 import Link from 'next/link'
 
 export default () => {

@@ -55,8 +55,7 @@ export const TemplateCard = ({ image, title, description, previewUrl, sourceUrl 
         </div>
       </div>
       <div className="relative w-full px-2 pb-2">
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[hsl(var(--p-color-bg))]" /> */}
-        <Image alt="Template preview" className="rounded" src={image} />
+        <Image alt="Template preview" className="border-color-base/30 rounded border" src={image} />
       </div>
     </div>
   )

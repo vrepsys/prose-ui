@@ -513,6 +513,9 @@
     border-top: 1px solid;
     border-color: hsl(var(--p-color-border));
 }
+.prose-ui hr:has(+ :is(h1, h2, h3, h4, h5, h6)) {
+    margin-top: var(--p-content-gap-heading);
+}
 .prose-ui h1 {
     font-family: var(--p-h1-font-family);
     font-size: var(--p-h1-font-size);

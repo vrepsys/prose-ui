@@ -53,10 +53,6 @@ export const SidenavProvider = ({ tree, children }: { tree: TreeNode[]; children
 
   const isExpanded = (path: string) => expandedFolders.has(path)
 
-  useEffect(() => {
-    console.log(expandedFolders)
-  }, [expandedFolders])
-
   const toggleExpandFolder = useCallback(
     (path: string) => {
       setExpandedFolders((all) => {

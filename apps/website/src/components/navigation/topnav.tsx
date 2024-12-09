@@ -27,7 +27,6 @@ export const TopNav = () => {
   useEffect(() => {
     setBorderOpacity(pathname === '/' ? Math.min(scrolled, 80) / 80 : 1)
   }, [scrolled, pathname])
-  console.log(borerOpacity)
   return (
     // bg-color-base border-b-color-base border-b
     <header

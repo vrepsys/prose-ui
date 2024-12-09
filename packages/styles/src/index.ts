@@ -675,6 +675,9 @@ export const componentsStyles = (ds: DesignSystem) => {
       'border-top': '1px solid',
       'border-color': color.border,
     },
+    'hr:has(+ :is(h1, h2, h3, h4, h5, h6))': {
+      'margin-top': gap.heading,
+    },
     'h1': headingStyle(ds.h1),
     'h2': headingStyle(ds.h2),
     'h3': headingStyle(ds.h3),

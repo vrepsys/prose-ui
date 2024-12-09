@@ -73,11 +73,11 @@ importers:
         specifier: ^0.2.3
         version: 0.2.3(@content-collections/core@0.7.3(typescript@5.6.3))(next@15.0.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))
       '@prose-ui/core':
-        specifier: workspace:*
-        version: link:../../packages/core
+        specifier: 1.0.0-beta.8
+        version: 1.0.0-beta.8
       '@prose-ui/next':
-        specifier: workspace:*
-        version: link:../../packages/next
+        specifier: 1.0.0-beta.18
+        version: 1.0.0-beta.18(@types/react-dom@18.3.1)(@types/react@18.3.12)(next@15.0.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)(sharp@0.33.5)
       '@types/mdast':
         specifier: ^4.0.4
         version: 4.0.4
@@ -1190,6 +1190,15 @@ packages:
   '@pkgr/core@0.1.1':
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+
+  '@prose-ui/core@1.0.0-beta.8':
+    resolution: {integrity: sha512-KH3qmqhfXRrJ9xk8PLm+4AlFhmXfgud58M+dZEsKh8W4J5pBHRilNqjogvRD/ahNWVsVBP2JMM6+6F/u25yTXA==}
+
+  '@prose-ui/next@1.0.0-beta.18':
+    resolution: {integrity: sha512-9m+fk1U0cW5lNjeqI0JnTGEHlzfQ9eHUWMNbgdxBY3ByALBlAbCFVymcmCfKWKGgiiRS76SUit30AYY/yXZnBw==}
+    peerDependencies:
+      next: ^14 || ^15
+      sharp: ^0.33.5
 
   '@radix-ui/colors@3.0.0':
     resolution: {integrity: sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg==}
@@ -6212,6 +6221,59 @@ snapshots:
     optional: true
 
   '@pkgr/core@0.1.1': {}
+
+  '@prose-ui/core@1.0.0-beta.8':
+    dependencies:
+      '@sindresorhus/slugify': 2.2.1
+      acorn: 8.14.0
+      hast-util-to-string: 3.0.1
+      mdast-util-definitions: 6.0.0
+      mdast-util-directive: 3.0.0
+      mdast-util-from-markdown: 2.0.2
+      mdast-util-gfm-table: 2.0.0
+      mdast-util-mdx-expression: 2.0.1
+      mdast-util-mdx-jsx: 3.1.3
+      mdast-util-mdxjs-esm: 2.0.1
+      mdast-util-to-markdown: 2.1.2
+      mdast-util-to-string: 4.0.0
+      micromark-extension-gfm-table: 2.1.0
+      micromark-extension-mdx-expression: 3.0.0
+      micromark-extension-mdx-jsx: 3.0.1
+      remark-custom-heading-id: 1.0.1
+      remark-directive: 3.0.0
+      remark-frontmatter: 5.0.0
+      remark-gfm: 4.0.0
+      remark-parse: 11.0.0
+      remark-stringify: 11.0.0
+      slash: 5.1.0
+      unified: 11.0.5
+      unist-util-filter: 5.0.1
+      unist-util-remove-position: 5.0.0
+      unist-util-visit: 5.0.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@prose-ui/next@1.0.0-beta.18(@types/react-dom@18.3.1)(@types/react@18.3.12)(next@15.0.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)(sharp@0.33.5)':
+    dependencies:
+      '@radix-ui/react-scroll-area': 1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      clsx: 2.1.1
+      hast-util-to-jsx-runtime: 2.3.2
+      lucide-react: 0.460.0(react@19.0.0-rc-66855b96-20241106)
+      mdast-util-mdx-expression: 2.0.1
+      mdast-util-mdx-jsx: 3.1.3
+      next: 15.0.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      remark: 15.0.1
+      sharp: 0.33.5
+      shiki: 1.23.0
+      slugify: 1.6.6
+      unified: 11.0.5
+      unist-util-visit: 5.0.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react
+      - react-dom
+      - supports-color
 
   '@radix-ui/colors@3.0.0': {}
 

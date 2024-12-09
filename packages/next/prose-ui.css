@@ -265,7 +265,7 @@
     padding-top: var(--p-spacing-space1-5);
     padding-bottom: var(--p-spacing-space1-5);
     padding-left: var(--p-spacing-space3);
-    padding-right: var(--p-spacing-space3);
+    padding-right: var(--p-spacing-space1-5);
     border-color: hsl(var(--p-color-border));
 }
 .prose-ui .code-block .header .title {
@@ -324,8 +324,10 @@
     font-family: var(--p-font-family-mono);
     font-size: var(--p-code-block-font-size);
     line-height: var(--p-code-block-font-height);
+    font-weight: var(--p-code-block-font-weight);
     letter-spacing: var(--p-code-block-font-spacing);
     word-break: keep-all;
+    font-variant-ligatures: none;
 }
 .prose-ui .code-block .body .copy-button {
     visibility: hidden;
@@ -638,6 +640,7 @@
 }
 .prose-ui .frame[data-align="center"] {
     align-items: center;
+    text-align: center;
 }
 .prose-ui .frame[data-align="right"] {
     align-items: flex-end;

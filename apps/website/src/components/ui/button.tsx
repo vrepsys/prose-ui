@@ -9,19 +9,20 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'transition ease-in-out hover:brightness-125 hover:contrast-[0.8] hover:saturation-125 text-[hsl(var(--p-color-bg-high))] bg-[hsl(var(--p-color-text-high))] hover:bg-color-accent-base active:translate-y-[1px] rounded-md md:rounded',
-        reactive: 'transition text-color-low group-hover:text-[hsl(var(--p-color-bg-high))] hover:brightness-125 hover:contrast-[0.8] hover:saturation-125 group-hover:bg-[hsl(var(--p-color-text-high))] hover:bg-color-accent-base active:translate-y-[1px] rounded-md md:rounded',
+          'transition ease-in-out hover:brightness-125 hover:saturation-125 text-[hsl(var(--p-color-bg-high))] bg-[hsl(var(--p-color-text-high))] hover:bg-color-accent-base active:translate-y-[1px] rounded-md md:rounded',
+        reactive:
+          'transition text-color-base group-hover:text-[hsl(var(--p-color-bg-high))] hover:brightness-125 hover:saturation-125 group-hover:bg-[hsl(var(--p-color-text-high))] hover:bg-color-accent-base active:translate-y-[1px] rounded-md md:rounded tracking-tight',
         secondary:
-          'text-color-low hover:text-color-base bg-color-low hover:bg-color-lower active:translate-y-[1px] rounded-md md:rounded',
+          'text-color-base hover:text-color-base bg-color-low hover:bg-color-lower active:translate-y-[1px] rounded-md md:rounded',
         ghost:
           'text-color-low hover:text-color-base hover:bg-color-low/60 active:translate-y-[1px] rounded-md md:rounded',
         link: 'text-color-low hover:text-color-base',
-        navitem: 'text-color-low hover:text-color-base rounded-lg',
+        navitem: 'rounded-lg',
       },
       size: {
         default: 'py-1.5 px-2 min-w-11 min-h-11 md:min-w-8 md:min-h-8 text-sm',
         compact: 'py-1 px-0.5 text-sm',
-        lg: 'h-10 rounded-md px-8',
+        lg: 'font-semibold text-sm h-10 rounded-md px-4 tracking-[-0.015em]',
         icon: 'justify-center h-8 w-8',
       },
       active: {
@@ -38,7 +39,7 @@ const buttonVariants = cva(
       {
         variant: 'navitem',
         active: false,
-        class: 'hover:text-color-low text-color-lower hover:bg-color-low/60',
+        class: 'hover:text-color-base text-color-low hover:bg-color-low/60',
       },
     ],
     defaultVariants: {

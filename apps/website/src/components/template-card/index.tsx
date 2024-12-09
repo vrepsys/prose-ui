@@ -20,17 +20,14 @@ export const TemplateCard = ({ image, title, description, previewUrl, sourceUrl 
       onClick={() => {
         window.open(previewUrl)
       }}
-      className="border-color-base hover:border-color-accent-base bg-color-low hover:bg-color-low/95 group flex cursor-pointer flex-col overflow-hidden rounded-lg border transition duration-100"
+      className="bg-color-low/50 border-color-base hover:border-color-accent-low group flex cursor-pointer flex-col overflow-hidden rounded-lg border transition duration-100"
     >
-      <div className="border-b-color-base w-full border-b">
-        <Image alt="Template preview" src={image} />
-      </div>
-      <div className="flex flex-1 flex-col justify-between gap-4 p-4">
+      <div className="flex flex-1 flex-col justify-between gap-7 px-9 py-8">
         <div className="flex flex-col gap-2">
-          <h3 className="text-color-high text-xl font-bold tracking-tight">{title}</h3>
-          <div className="text-color-low text-sm tracking-wide">{description}</div>
+          <h2 className="text-color-high text-2xl font-medium">{title}</h2>
+          <div className="text-color-low tracking-wide">{description}</div>
         </div>
-        <div className="flex justify-end gap-3">
+        <div className="flex justify-start gap-3">
           <Button variant="secondary" asChild>
             <Link
               href={sourceUrl}
@@ -56,6 +53,10 @@ export const TemplateCard = ({ image, title, description, previewUrl, sourceUrl 
             </Link>
           </Button>
         </div>
+      </div>
+      <div className="relative w-full px-2 pb-2">
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[hsl(var(--p-color-bg))]" /> */}
+        <Image alt="Template preview" className="rounded" src={image} />
       </div>
     </div>
   )

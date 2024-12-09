@@ -32,6 +32,25 @@ const pages = defineCollection({
   },
 })
 
+const demos = defineCollection({
+  name: 'demos',
+  directory: 'content/demo',
+  include: '**/*.mdx',
+  schema: (z) => ({
+    title: z.optional(z.string()),
+    hideCode: z.optional(z.boolean()),
+  }),
+  transform: async (page, ctx) => {
+    const content = await compileMDX(ctx, page, {
+      remarkPlugins: remarkPlugins(),
+    })
+    return {
+      ...page,
+      content,
+    }
+  },
+})
+
 export default defineConfig({
-  collections: [pages],
+  collections: [pages, demos],
 })

@@ -7,7 +7,6 @@ export const GithubButton = () => {
     <Button variant="ghost" asChild>
       <Link href="https://github.com/vrepsys/prose-ui">
         <SiGithub size={16} />
-        Github
       </Link>
     </Button>
   )

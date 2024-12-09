@@ -4,11 +4,13 @@ import { TemplateCard } from '@/components/template-card/index'
 
 const Templates = () => {
   return (
-    <div className="mx-auto w-full max-w-3xl flex-1 px-[var(--article-padding-x)] md:px-[var(--article-padding-x-md)] lg:px-[var(--article-padding-x-lg)] xl:px-[var(--article-padding-x-xl)]">
+    <div className="mx-auto w-full max-w-[var(--site-width)] flex-1 items-center justify-between px-[var(--site-padding-x)]">
       <h1 className="mb-[var(--p-content-gap-cluster)] mt-[var(--p-content-gap-heading)] text-[length:var(--p-h1-font-size)] font-[var(--p-h1-font-weight)] leading-[var(--p-h1-line-height)] tracking-[var(--p-h1-letter-spacing)] text-[color:var(--p-h1-color)]">
         Templates
       </h1>
-      <div className="mb-32 mt-[var(--p-content-gap)] grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <p>Slick templates for your life. Extra words here no AI suggestions.</p>
+
+      <div className="mb-32 mt-[var(--p-content-gap-heading)] grid grid-cols-1 gap-4 sm:grid-cols-2">
         <TemplateCard
           image={basicTemplate}
           title="Basic starter"

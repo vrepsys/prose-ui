@@ -87,10 +87,8 @@ const SidenavFolder = ({ item, level }: { item: TreeNode; level: number }) => {
           }
         }}
         className={classes(
-          'group relative mb-px flex cursor-pointer flex-row items-center justify-between rounded-md px-[0.875rem] py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
-          active
-            ? 'text-color-accent-high'
-            : 'hover:text-color-low text-color-lower hover:bg-color-low/60',
+          'hover:bg-color-low/60 group relative mb-px flex cursor-pointer flex-row items-center justify-between rounded-md px-[0.875rem] py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
+          active ? 'text-color-accent-high' : 'hover:text-color-base text-color-low',
           open && 'bg-color-lower',
         )}
       >
@@ -154,7 +152,7 @@ const SidenavLink = ({ item }: { item: TreeNode; level: number }) => {
           'flex w-full cursor-pointer rounded-lg px-[0.875rem] py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
           active
             ? 'bg-color-low text-color-accent-high'
-            : 'hover:text-color-low text-color-lower hover:bg-color-low/60',
+            : 'hover:text-color-base text-color-low hover:bg-color-low/60',
         )}
         href={item.href!}
       >

@@ -418,7 +418,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'padding-top': ds.spacing['space1-5'],
         'padding-bottom': ds.spacing['space1-5'],
         'padding-left': ds.spacing.space3,
-        'padding-right': ds.spacing.space3,
+        'padding-right': ds.spacing['space1-5'],
         'border-color': ds.color.border,
         '.title': {
           'color': ds.color.text.low,
@@ -479,8 +479,10 @@ export const componentsStyles = (ds: DesignSystem) => {
         'font-family': ds.font.family.mono,
         'font-size': ds.codeBlock.font.size,
         'line-height': ds.codeBlock.font.height,
+        'font-weight': ds.codeBlock.font.weight,
         'letter-spacing': ds.codeBlock.font.spacing,
         'word-break': 'keep-all',
+        'font-variant-ligatures': 'none',
         '.copy-button': {
           'visibility': 'hidden',
           'transition': 'opacity 100ms ease',

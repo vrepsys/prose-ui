@@ -1,6 +1,6 @@
 {
   "name": "@prose-ui/next",
-  "version": "1.0.0-beta.18",
+  "version": "1.0.0-beta.20",
   "scripts": {
     "build": "rm -rf dist prose-ui.css && tsc && cp ../styles/dist/prose-ui.css ./",
     "watch": "nodemon -e ts,tsx,json --watch src --watch package.json --exec 'pnpm build'",

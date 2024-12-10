@@ -6,18 +6,24 @@ type Props = {
   href?: string
   width?: number
   height?: number
+  blurDataURL?: string
 }
 
-export const Image = ({ src, alt, href, width, height }: Props) => {
+export const Image = ({ src, alt, href, width, height, blurDataURL }: Props) => {
   let render
-  if (src.startsWith('http') && (width === undefined || height === undefined)) {
+  if (width === undefined || height === undefined) {
     render = <img src={src} alt={alt} />
   } else {
-    const props = {
-      width: width ?? 100,
-      height: height ?? 100,
-    }
-    render = <NextImage src={src} alt={alt ?? ''} {...props} />
+    render = (
+      <NextImage
+        src={src}
+        alt={alt ?? ''}
+        placeholder={blurDataURL ? 'blur' : undefined}
+        blurDataURL={blurDataURL}
+        width={width}
+        height={height}
+      />
+    )
   }
   if (href) {
     render = <a href={href}>{render}</a>

@@ -7,13 +7,17 @@ import remarkCodeBlock from '../src/remark/remark-code-block.js'
 import remarkImage from '../src/remark/remark-image.js'
 import remarkLink from '../src/remark/remark-link.js'
 
+const DEMO_IMG_BLUR_DATA_URL =
+  'data:image/jpeg;base64,/9j/2wBDAFA3PEY8MlBGQUZaVVBfeMiCeG5uePWvuZHI////////////////////////////////////////////////////2wBDAVVaWnhpeOuCguv/////////////////////////////////////////////////////////////////////////wAARCAAFAAgDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAT/xAAYEAADAQEAAAAAAAAAAAAAAAAAARECIf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCep5sXGAAP/9k='
+
 const expectOutput = async (input: string, expectedOutput: string) => {
   const output = await remark()
-    .use(remarkImage({ imageFolder: 'test/images' }))
+    .use(remarkImage({ imageDir: 'test/images' }))
     .use(remarkCodeBlock)
     .use(remarkMdx)
-    .use(remarkLink)
+    .use(remarkLink())
     .process(input)
+
   expect(output.value).toBe(expectedOutput)
 }
 
@@ -30,7 +34,7 @@ test('code block with language', async () => {
 </CodeBlock>
 `
 
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })
 
 test('transform code block with lang, showLineNumbers, and title', async () => {
@@ -46,7 +50,7 @@ test('transform code block with lang, showLineNumbers, and title', async () => {
 </CodeBlock>
 `
 
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })
 
 test('transform code block without language', async () => {
@@ -62,14 +66,14 @@ test('transform code block without language', async () => {
 </CodeBlock>
 `
 
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })
 
 test('transform images', async () => {
   const input = `![Alt text](/demo.png)`
-  const output = `<Image src="/demo.png" alt="Alt text" width={1600} height={900} />
+  const output = `<Image src="/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" />
 `
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })
 
 test('transform remote image, pass exactly same url as in markdown', async () => {
@@ -77,7 +81,7 @@ test('transform remote image, pass exactly same url as in markdown', async () =>
 
   const output = `<Image src="https://hello.world/isr.png" alt="Alt text" />
 `
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })
 
 test('Tag does not change if image does not exist', async () => {
@@ -85,30 +89,30 @@ test('Tag does not change if image does not exist', async () => {
 
   const output = `<Image src="/does-not-exist.png" alt="Alt text" />
 `
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })
 test('Sets size when image present', async () => {
   const input = `<Image src="/demo.png" alt="Alt text" />`
 
-  const output = `<Image src="/demo.png" alt="Alt text" width={1600} height={900} />
+  const output = `<Image src="/demo.png" alt="Alt text" blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" width={1600} height={900} />
 `
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })
 
 test('calculates height and maintains ratio ', async () => {
   const input = `<Image src="/demo.png" alt="Alt text" width={800} />`
-  const output = `<Image src="/demo.png" alt="Alt text" width={800} height={450} />
+  const output = `<Image src="/demo.png" alt="Alt text" width={800} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" height={450} />
 `
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })
 
 test('transform src for inline JSX images', async () => {
   const input = `hello <Image src="/demo.png" alt="Alt text" /> world`
 
-  const output = `hello <Image src="/demo.png" alt="Alt text" width={1600} height={900} /> world
+  const output = `hello <Image src="/demo.png" alt="Alt text" blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" width={1600} height={900} /> world
 `
 
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })
 
 test('transform markdown links to next/link', async () => {
@@ -117,5 +121,5 @@ test('transform markdown links to next/link', async () => {
   const output = `hello <Link href="/animals/dogs">dogs</Link>
 `
 
-  expectOutput(input, output)
+  await expectOutput(input, output)
 })

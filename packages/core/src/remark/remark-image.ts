@@ -41,6 +41,7 @@ const createImageTag = (
           ),
         )
       : undefined
+
   return flowElement('Image', [], [attr('src', src), attr('alt', alt), widthAttr, heightAttr])
 }
 
@@ -48,6 +49,7 @@ export type Options = {
   imageDir?: string
 }
 const DEFAULT_IMAGE_DIR = './public'
+const BLUR_EXT = ['jpeg', 'jpg', 'png', 'webp', 'avif', 'tiff', 'gif']
 
 const remarkImage = ({ imageDir }: Options = { imageDir: DEFAULT_IMAGE_DIR }) => {
   imageDir = imageDir ?? DEFAULT_IMAGE_DIR
@@ -81,15 +83,27 @@ const remarkImage = ({ imageDir }: Options = { imageDir: DEFAULT_IMAGE_DIR }) =>
       },
     )
 
-    // Compute width and height for each path
-    const dimensions = new Map<string, { width: number; height: number }>()
+    // Compute width, height, blurDataURL for each path
+    const dimensions = new Map<string, { width: number; height: number; blurDataURL?: string }>()
     for (const localPath of localPaths) {
       const fullPath = path.join(imageDir, localPath)
       if (!dimensions.has(localPath)) {
         if (fs.existsSync(fullPath)) {
-          const { width, height } = await sharp(fullPath).metadata()
+          const sharpImage = sharp(fullPath)
+          const metadata = await sharpImage.metadata()
+          const { width, height } = metadata
+          let blurDataURL
+          const extension = path.extname(localPath).toLowerCase().replace('.', '')
+          if (BLUR_EXT.includes(extension)) {
+            try {
+              blurDataURL = await generateBlurDataURL(fullPath)
+            } catch (error) {
+              console.error('Error generating blurDataURL for', localPath, ':', error)
+            }
+          }
+
           if (width && height) {
-            dimensions.set(localPath, { width, height })
+            dimensions.set(localPath, { width, height, blurDataURL })
           }
         } else {
           console.error('Image not found', fullPath)
@@ -133,6 +147,9 @@ const remarkImage = ({ imageDir }: Options = { imageDir: DEFAULT_IMAGE_DIR }) =>
               width = size.width
               height = size.height
             }
+            if (size.blurDataURL) {
+              node.attributes.push(attr('blurDataURL', size.blurDataURL)!)
+            }
           }
         }
 
@@ -157,6 +174,7 @@ const remarkImage = ({ imageDir }: Options = { imageDir: DEFAULT_IMAGE_DIR }) =>
                 ),
               )
             : undefined
+
         if (widthAttr) {
           node.attributes.push(widthAttr)
         }
@@ -165,9 +183,16 @@ const remarkImage = ({ imageDir }: Options = { imageDir: DEFAULT_IMAGE_DIR }) =>
         }
       },
     )
+
     done()
   }
   return plugin
+}
+async function generateBlurDataURL(fullPath: string) {
+  const smallImg = await sharp(fullPath).resize(8, 8, { fit: 'inside' })
+  const buffer = await smallImg.jpeg({ quality: 10 }).toBuffer()
+  const base64Image = buffer.toString('base64')
+  return `data:image/jpeg;base64,${base64Image}`
 }
 
 export default remarkImage

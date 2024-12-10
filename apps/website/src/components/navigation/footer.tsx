@@ -8,14 +8,14 @@ export const Footer = () => (
         <p className="text-color-lowest !my-0 text-sm font-medium">
           Created by{' '}
           <a
-            className="text-color-low underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4"
+            className="text-color-low hover:text-color-base underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4 hover:decoration-[hsl(var(--p-color-text-base))]"
             href="#"
           >
             Valdemaras
           </a>
           . Source code available on{' '}
           <a
-            className="text-color-low underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4"
+            className="text-color-low hover:text-color-base underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4 hover:decoration-[hsl(var(--p-color-text-base))]"
             href="https://github.com/valdemaras/prose-ui"
           >
             GitHub

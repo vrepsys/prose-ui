@@ -7,6 +7,7 @@ import { codeToHtml, mdxComponents } from '@prose-ui/next'
 import { allDemos } from 'content-collections'
 import fs from 'fs/promises'
 import path from 'path'
+import React from 'react'
 
 const demos = await Promise.all(
   allDemos.map(async (demo) => ({
@@ -22,10 +23,11 @@ const demos = await Promise.all(
 const order = [
   // 'intro.mdx',
   'images.mdx',
+  'typography.mdx',
   'callouts.mdx',
   'code-block.mdx',
-  'typography.mdx',
   'tables.mdx',
+  'styling.mdx',
 ]
 
 const RenderedExample = ({ content }: { content: string }) => {
@@ -78,18 +80,15 @@ export default () => {
           </div>
         )}
         {sortedDemos.map((demo) => (
-          <>
-            <div
-              key={demo.fileName}
-              className="mx-auto grid w-full max-w-[var(--site-width)] grid-cols-1 gap-12 px-[var(--site-padding-x)] md:grid-cols-[6fr_4fr]"
-            >
+          <React.Fragment key={demo.fileName}>
+            <div className="mx-auto grid w-full max-w-[var(--site-width)] grid-cols-1 gap-8 px-[var(--site-padding-x)] md:grid-cols-[6fr_4fr] md:gap-12">
               <RenderedExample content={demo.content ?? ''} />
               {demo.fileName !== 'intro.mdx' && (
                 <ExampleCode fileName={demo.fileName} code={demo.mdx} />
               )}
             </div>
-            <div className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-[hsl(var(--p-color-border))] to-transparent last:hidden"></div>
-          </>
+            <div className="mb-12 mt-24 h-px w-full bg-gradient-to-r from-transparent via-[hsl(var(--p-color-border))] to-transparent last:hidden"></div>
+          </React.Fragment>
         ))}
       </div>
       <Footer />

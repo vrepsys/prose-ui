@@ -1,6 +1,6 @@
 {
   "name": "@prose-ui/core",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.10",
   "type": "module",
   "exports": {
     ".": "./dist/index.js",
@@ -15,7 +15,9 @@
     "build": "rm -rf dist && tsc",
     "build:watch": "nodemon -e json --watch package.json --exec 'npm run build && npm pack'",
     "watch": "rm -rf dist && tsc --watch",
-    "test": "vitest"
+    "test": "vitest",
+    "patch:beta": "pnpm version prerelease --preid=beta",
+    "publish:beta": "pnpm publish --access public --tag latest --no-git-checks"
   },
   "devDependencies": {
     "@prose-ui/eslint-config": "workspace:*",

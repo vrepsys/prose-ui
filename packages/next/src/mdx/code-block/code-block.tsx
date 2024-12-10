@@ -15,9 +15,10 @@ function extractCodeString(children: ReactNode): string {
       .join('\n')
   }
 
-  if (isValidElement(children) && children.props.children) {
+  if (isValidElement<{ children?: ReactNode }>(children) && children.props.children) {
     return extractCodeString(children.props.children)
   }
+
   return ''
 }
 

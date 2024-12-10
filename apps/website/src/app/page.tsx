@@ -1,6 +1,7 @@
 import { LandingButtons } from '@/components/landing-buttons'
 import { Footer } from '@/components/navigation/footer'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { classes } from '@/utils/classes'
 import { MDXContent } from '@content-collections/mdx/react'
 import { codeToHtml, mdxComponents } from '@prose-ui/next'
 import { allDemos } from 'content-collections'
@@ -19,7 +20,7 @@ const demos = await Promise.all(
   })),
 )
 const order = [
-  'intro.mdx',
+  // 'intro.mdx',
   'images.mdx',
   'callouts.mdx',
   'code-block.mdx',
@@ -63,9 +64,19 @@ export default () => {
     .filter((d) => order.includes(d.fileName))
     .sort((a, b) => order.indexOf(a.fileName) - order.indexOf(b.fileName))
 
+  const intro = allDemos.find((d) => d._meta.fileName === 'intro.mdx')
+
   return (
     <div className="w-full">
       <div className="pb-12">
+        {intro && (
+          <div className="prose-ui mx-auto grid w-full max-w-[var(--site-width)] px-[var(--site-padding-x)] text-center">
+            <MDXContent
+              code={intro.content ?? ''}
+              components={{ ...mdxComponents, LandingButtons }}
+            />
+          </div>
+        )}
         {sortedDemos.map((demo) => (
           <>
             <div
@@ -73,7 +84,9 @@ export default () => {
               className="mx-auto grid w-full max-w-[var(--site-width)] grid-cols-1 gap-12 px-[var(--site-padding-x)] md:grid-cols-[6fr_4fr]"
             >
               <RenderedExample content={demo.content ?? ''} />
-              {!demo.hideCode && <ExampleCode fileName={demo.fileName} code={demo.mdx} />}
+              {demo.fileName !== 'intro.mdx' && (
+                <ExampleCode fileName={demo.fileName} code={demo.mdx} />
+              )}
             </div>
             <div className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-[hsl(var(--p-color-border))] to-transparent last:hidden"></div>
           </>

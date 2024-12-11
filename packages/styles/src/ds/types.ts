@@ -120,6 +120,12 @@ export type Components = {
     }
   }
   inlineCode: {
+    font: {
+      size: CssValue
+      height: CssValue
+      weight: CssValue
+      spacing: CssValue
+    }
     color: {
       bg: CssValue
     }

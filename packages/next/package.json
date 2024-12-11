@@ -1,11 +1,12 @@
 {
   "name": "@prose-ui/next",
-  "version": "1.0.0-beta.21",
+  "version": "1.0.0-beta.23",
+  "license": "MIT",
   "scripts": {
     "build": "rm -rf dist prose-ui.css && tsc && cp ../styles/dist/prose-ui.css ./",
     "watch": "nodemon -e ts,tsx,json --watch src --watch package.json --exec 'pnpm build'",
     "patch:beta": "pnpm version prerelease --preid=beta",
-    "publish:beta": "pnpm publish --access public --tag beta --no-git-checks"
+    "publish:beta": "pnpm publish --access public --tag latest --no-git-checks"
   },
   "type": "module",
   "files": [
@@ -33,8 +34,8 @@
     "@types/mdast": "^4.0.4",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20.11.24",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "next": "^15",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "react": "^19.0.0-rc-66855b96-20241106",

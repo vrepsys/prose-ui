@@ -2,6 +2,7 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -29,7 +30,7 @@
     "@content-collections/mdx": "^0.2.0",
     "@content-collections/next": "^0.2.3",
     "@prose-ui/core": "1.0.0-beta.10",
-    "@prose-ui/next": "1.0.0-beta.21",
+    "@prose-ui/next": "1.0.0-beta.23",
     "@types/mdast": "^4.0.4",
     "@types/node": "^20",
     "@types/react": "^18.3.12",

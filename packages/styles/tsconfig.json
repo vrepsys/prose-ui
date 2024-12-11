@@ -2,7 +2,7 @@
   "extends": "../tsconfig/base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "types": ["jest", "node"]
+    "types": ["node"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

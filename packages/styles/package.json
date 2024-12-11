@@ -18,7 +18,7 @@
     "@prose-ui/eslint-config": "workspace:*",
     "@prose-ui/tsconfig": "workspace:*",
     "@radix-ui/colors": "^3.0.0",
-    "@types/node": "^20.11.24",
+    "@types/node": "^20.17.10",
     "@types/postcss-js": "^4.0.4",
     "eslint": "^9.3.0",
     "jest": "^29.7.0",

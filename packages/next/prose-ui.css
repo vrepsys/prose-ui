@@ -21,10 +21,10 @@
     --p-color-accent-high: 154 60% 32%;
     --p-color-accent: 152 56% 39%;
     --p-color-accent-low: 151 40% 54%;
-    --p-color-syntax-syntax1: 207 40% 44%;
-    --p-color-syntax-syntax2: 27 90% 30%;
-    --p-color-syntax-syntax3: 295 60% 40%;
-    --p-color-syntax-syntax4: 240 60% 40%;
+    --p-color-syntax-syntax1: 210 80% 40%;
+    --p-color-syntax-syntax2: 156 60% 35%;
+    --p-color-syntax-syntax3: 212 50% 40%;
+    --p-color-syntax-syntax4: 256 39% 50%;
     --p-color-note: 210 13% 13%;
     --p-color-info: 208 88% 43%;
     --p-color-warning: 35 100% 34%;
@@ -48,10 +48,10 @@
     --p-color-accent-high: 151 65% 54%;
     --p-color-accent: 151 55% 45%;
     --p-color-accent-low: 151 45% 34%;
-    --p-color-syntax-syntax1: 150 66% 66%;
-    --p-color-syntax-syntax2: 40 50% 66%;
-    --p-color-syntax-syntax3: 340 50% 75%;
-    --p-color-syntax-syntax4: 210 77% 69%;
+    --p-color-syntax-syntax1: 210 80% 66%;
+    --p-color-syntax-syntax2: 156 60% 75%;
+    --p-color-syntax-syntax3: 212 50% 70%;
+    --p-color-syntax-syntax4: 256 40% 70%;
     --p-color-note: 220 9% 94%;
     --p-color-info: 210 100% 72%;
     --p-color-warning: 46 100% 54%;
@@ -140,6 +140,10 @@
     --p-link-text-color: hsl(var(--p-color-accent));
     --p-link-text-decoration: underline solid hsl(var(--p-color-accent-low));
     --p-link-font-weight: var(--p-font-weight-normal);
+    --p-inline-code-font-size: var(--p-font-size-sm);
+    --p-inline-code-font-weight: var(--p-font-weight-normal);
+    --p-inline-code-font-height: var(--p-font-height-sm);
+    --p-inline-code-font-spacing: var(--p-letter-spacing-sm);
     --p-inline-code-color-bg: hsl(var(--p-color-bg-low));
     --p-inline-code-letter-spacing: var(--p-letter-spacing-sm);
     --p-callout-color-text: hsl(var(--p-color-text));
@@ -217,7 +221,6 @@
 }
 .prose-ui code {
     font-family: var(--p-font-family-mono);
-    letter-spacing: var(--p-inline-code-letter-spacing);
 }
 .prose-ui li > .code-block, .prose-ui li > table, .prose-ui li > .frame, .prose-ui li > .callout, .prose-ui li > ul, .prose-ui li > ol {
     margin-top: var(--p-content-gap-cluster);
@@ -240,6 +243,10 @@
     padding-top: var(--p-spacing-space0-5);
     padding-bottom: var(--p-spacing-space0-5);
     border-radius: var(--p-border-radius);
+    letter-spacing: var(--p-inline-code-letter-spacing);
+    font-size: var(--p-inline-code-font-size);
+    line-height: var(--p-inline-code-font-height);
+    font-weight: var(--p-inline-code-font-weight);
 }
 .prose-ui p pre code, .prose-ui table pre code, .prose-ui li pre code {
     background-color: transparent;

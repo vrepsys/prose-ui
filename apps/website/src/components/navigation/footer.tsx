@@ -9,7 +9,7 @@ export const Footer = () => (
           Created by{' '}
           <a
             className="text-color-low hover:text-color-base underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4 hover:decoration-[hsl(var(--p-color-text-base))]"
-            href="#"
+            href="https://x.com/vrepsys"
           >
             Valdemaras
           </a>

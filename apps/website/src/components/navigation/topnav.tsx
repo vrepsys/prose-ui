@@ -50,9 +50,6 @@ export const TopNav = () => {
           <Button variant="navitem" active={/^\/templates(\/|$)/.test(pathname)} asChild>
             <Link href="/templates">Templates</Link>
           </Button>
-          <Button variant="navitem" active={/^\/cms(\/|$)/.test(pathname)} asChild>
-            <Link href="/cms">Inline editor</Link>
-          </Button>
           <div className="hidden items-center justify-start gap-2 md:flex">
             <GithubButton />
             <ThemeToggle />

@@ -10,13 +10,18 @@
       },
       {
         "type": "link",
-        "name": "Overview",
-        "href": "/overview"
+        "name": "How it works",
+        "href": "/how-it-works"
       },
       {
         "type": "link",
         "name": "Installation",
         "href": "/installation"
+      },
+      {
+        "type": "link",
+        "name": "Roadmap",
+        "href": "/roadmap"
       }
     ]
   },

@@ -104,10 +104,10 @@ export const getLightColorsSpec = (): ColorSpec => ({
       low: hsl(green.green8),
     },
     syntax: {
-      syntax1: '207 40% 44%',
-      syntax2: '27 90% 30%',
-      syntax3: '295 60% 40%',
-      syntax4: '240 60% 40%',
+      syntax1: '210 80% 40%',
+      syntax2: '156 60% 35%',
+      syntax3: '212 50% 40%',
+      syntax4: '256 39% 50%',
     },
     note: hsl(slate.slate12),
     info: hsl(blue.blue11),
@@ -142,10 +142,10 @@ export const getDarkColorsSpec = (): ColorSpec => ({
       low: hsl(greenDark.green8),
     },
     syntax: {
-      syntax1: '150 66% 66%',
-      syntax2: '40 50% 66%',
-      syntax3: '340 50% 75%',
-      syntax4: '210 77% 69%',
+      syntax1: '210 80% 66%',
+      syntax2: '156 60% 75%',
+      syntax3: '212 50% 70%',
+      syntax4: '256 40% 70%',
     },
     note: hsl(slateDark.slate12),
     info: hsl(blueDark.blue11),
@@ -250,6 +250,12 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
       fontWeight: ds.font.weight.normal,
     },
     inlineCode: {
+      font: {
+        size: ds.font.size.sm,
+        weight: ds.font.weight.normal,
+        height: ds.font.height.sm,
+        spacing: ds.letterSpacing.sm,
+      },
       color: {
         bg: ds.color.bg.low,
       },
@@ -364,7 +370,6 @@ export const componentsStyles = (ds: DesignSystem) => {
     },
     'code': {
       'font-family': ds.font.family.mono,
-      'letter-spacing': ds.inlineCode.letterSpacing,
     },
     'li': {
       '& > .code-block, & > table, & > .frame, & > .callout, & > ul, & > ol': {
@@ -392,6 +397,10 @@ export const componentsStyles = (ds: DesignSystem) => {
         'padding-top': ds.spacing['space0-5'],
         'padding-bottom': ds.spacing['space0-5'],
         'border-radius': ds.border.radius,
+        'letter-spacing': ds.inlineCode.letterSpacing,
+        'font-size': ds.inlineCode.font.size,
+        'line-height': ds.inlineCode.font.height,
+        'font-weight': ds.inlineCode.font.weight,
       },
       'pre code': {
         'background-color': 'transparent',

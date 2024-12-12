@@ -4,7 +4,7 @@ import { SiGithub } from '@icons-pack/react-simple-icons'
 
 export const GithubButton = () => {
   return (
-    <Button variant="ghost" asChild>
+    <Button variant="ghost" size="icon" asChild>
       <Link href="https://github.com/vrepsys/prose-ui">
         <SiGithub size={16} />
       </Link>

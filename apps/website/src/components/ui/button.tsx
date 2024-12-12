@@ -8,19 +8,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary:
-          'transition ease-in-out hover:brightness-125 hover:saturation-125 text-[hsl(var(--p-color-bg-high))] bg-[hsl(var(--p-color-text-high))] hover:bg-color-accent-base active:translate-y-[1px] rounded-md md:rounded',
+        primary: `transition ease-in-out text-[hsl(var(--p-color-bg-high))] bg-[hsl(var(--p-color-text-high))] active:translate-y-[1px] rounded-md sm:rounded hover:ring-1 ring-offset-[hsl(var(--p-color-bg))] hover:ring-color-accent-low hover:ring-offset-2`,
         reactive:
-          'transition text-color-base group-hover:text-[hsl(var(--p-color-bg-high))] hover:brightness-125 hover:saturation-125 group-hover:bg-[hsl(var(--p-color-text-high))] hover:bg-color-accent-base active:translate-y-[1px] rounded-md md:rounded tracking-tight',
+          'transition text-color-base group-hover:text-[hsl(var(--p-color-bg-high))] hover:brightness-125 hover:saturation-125 group-hover:bg-[hsl(var(--p-color-text-high))] hover:bg-color-accent-base active:translate-y-[1px] rounded-md sm:rounded tracking-tight',
         secondary:
-          'text-color-base hover:text-color-base bg-color-low hover:bg-color-lower active:translate-y-[1px] rounded-md md:rounded',
+          'text-color-base hover:text-color-base bg-color-low hover:bg-color-lower active:translate-y-[1px] rounded-md sm:rounded',
         ghost:
-          'text-color-low hover:text-color-base hover:bg-color-low/60 active:translate-y-[1px] rounded-md md:rounded',
+          'text-color-low hover:text-color-base hover:bg-color-low/60 active:translate-y-[1px] rounded-md sm:rounded',
         link: 'text-color-low hover:text-color-base',
         navitem: 'rounded-lg',
       },
       size: {
-        default: 'py-1.5 px-2 min-w-11 min-h-11 md:min-w-8 md:min-h-8 text-sm',
+        default: 'py-1.5 px-4 sm:px-2 min-w-11 min-h-11 sm:min-w-8 sm:min-h-8 text-sm',
         compact: 'py-1 px-0.5 text-sm',
         lg: 'font-semibold text-sm h-10 rounded-md px-4 tracking-[-0.015em]',
         icon: 'justify-center h-8 w-8',

@@ -9,8 +9,8 @@ export const LandingButtons = ({ className }: { className: string }) => {
       <Button size="lg" asChild>
         <Link href="/docs">View documentation</Link>
       </Button>
-      <Button variant="ghost" className={className} size="lg" asChild>
-        <Link href="/docs">
+      <Button variant="ghost" size="lg" asChild>
+        <Link href="/docs" className="!text-color-base">
           <SiGithub size={16} /> Source code
         </Link>
       </Button>

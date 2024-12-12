@@ -18,6 +18,12 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: 'Prose UI',
   description: 'Typography and components for rendering MDX content. Free and open-source.',
+  openGraph: {
+    type: 'website',
+    title: 'Prose UI',
+    description: 'Typography and components for rendering MDX content. Free and open-source.',
+    url: 'https://prose.ui.com',
+  },
 }
 
 export default function RootLayout({

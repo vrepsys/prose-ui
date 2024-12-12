@@ -37,6 +37,7 @@ export const MobileNav = ({ className }: { className?: string }) => {
       <AnimatePresence>
         {open && (
           <>
+            <Dialog.Overlay className="fixed z-50" />
             <Dialog.Content forceMount asChild>
               <div className="fixed inset-0 z-50 grid h-screen w-screen grid-rows-[auto_1fr]">
                 <VisuallyHidden.Root>
@@ -50,7 +51,7 @@ export const MobileNav = ({ className }: { className?: string }) => {
                   exit={{ opacity: 0 }}
                 >
                   <Logo showText href="/" onClick={() => setOpen(false)} />
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-4">
                     <GithubButton />
                     <ThemeToggle />
                     <Button
@@ -71,7 +72,16 @@ export const MobileNav = ({ className }: { className?: string }) => {
                   exit={{ translateX: 100, opacity: 0 }}
                 >
                   <div className="px-[var(--site-padding-x)] py-6">
-                    <SideNav tree={navigationTree} />
+                    <SideNav
+                      tree={[
+                        {
+                          type: 'link',
+                          name: 'Templates',
+                          href: '/templates',
+                        },
+                        ...navigationTree,
+                      ]}
+                    />
                   </div>
                   <div className="bg-color-low px-2 pb-40 pt-6">
                     <Button variant="link" asChild>

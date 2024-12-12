@@ -28,10 +28,10 @@ const Cards = ({ content }: { content?: Content[] }) => (
 const Card = ({ title, description, url, icon: Icon }: Content) => (
   <Link
     role="listitem"
-    className="border-color-base bg-color-low hover:border-color-accent-base hover:bg-color-low/95 max-w-[320px] overflow-hidden rounded border transition duration-100 active:translate-y-[1px]"
+    className="border-color-base bg-color-low hover:border-color-accent-low hover:bg-color-low/95 overflow-hidden rounded border transition duration-100 active:translate-y-[1px]"
     href={url}
   >
-    <div className="flex gap-3 p-4">
+    <div className="flex flex-col sm:flex-row gap-3 p-4">
       {Icon && (
         <Icon
           className="text-color-low mt-0.5"

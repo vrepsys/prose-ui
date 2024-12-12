@@ -39,6 +39,7 @@
     "clsx": "^2.1.1",
     "mdast-util-to-string": "^4.0.0",
     "postcss": "^8",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "remark": "^15.0.1",
     "remark-mdx": "^3.0.1",
     "tailwind-merge": "^2.5.4",

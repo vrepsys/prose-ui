@@ -1,3 +1,4 @@
+import { Footer } from '@/components/navigation/footer'
 import basicTemplate from '../../../public/img/template-basic.png'
 import docsTemplate from '../../../public/img/template-docs.png'
 import { TemplateCard } from '@/components/template-card/index'
@@ -8,7 +9,7 @@ const Templates = () => {
       <h1 className="mb-[var(--p-content-gap-cluster)] mt-[var(--p-content-gap-heading)] text-[length:var(--p-h1-font-size)] font-[var(--p-h1-font-weight)] leading-[var(--p-h1-line-height)] tracking-[var(--p-h1-letter-spacing)] text-[color:var(--p-h1-color)]">
         Templates
       </h1>
-      <p>Slick templates for your life. Extra words here no AI suggestions.</p>
+      <p>Get started with Prose UI templates.</p>
 
       <div className="mb-32 mt-[var(--p-content-gap-heading)] grid grid-cols-1 gap-4 sm:grid-cols-2">
         <TemplateCard
@@ -26,6 +27,7 @@ const Templates = () => {
           sourceUrl="https://github.com/vrepsys/prose-ui-docs-starter"
         />
       </div>
+      <Footer />
     </div>
   )
 }

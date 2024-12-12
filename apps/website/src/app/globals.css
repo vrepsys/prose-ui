@@ -24,7 +24,7 @@
     --p-font-family-mono: var(--font-geist-mono);
     --sidenav-width: 15.625rem;
     --site-width: 80rem;
-    --site-padding-x: 1.5rem;
+    --site-padding-x: 0.75rem;
     --toc-width: 12rem;
     --topnav-height: 3.5rem;
     --article-padding-t: var(--p-content-gap-heading);
@@ -41,6 +41,12 @@
     --nav-link-letter-spacing: var(--p-body-letter-spacing);
     --nav-link-font-weight: var(--p-body-font-weight);
   }
+  
+  @media (min-width: 768px) {
+    :root {
+      --site-padding-x: 1.5rem;
+    }
+  }
 
   :root {
     --p-link-font-weight: var(--p-font-weight-medium);
@@ -48,8 +54,8 @@
     --p-code-block-font-weight: 400;
 
     --p-color-accent-high: 0, 0%, 0%;
-    --p-color-accent: 0, 0%, 0%;
-    --p-color-accent-low: 0, 0%, 40%;
+    --p-color-accent: 0, 0%, 10%;
+    --p-color-accent-low: 0, 0%, 70%;
     --button-primary-color-bg: var(--gray-12);
     --button-primary-color-text: var(--gray-1);
     /* --p-color-syntax-syntax1: 207 100% 30%;

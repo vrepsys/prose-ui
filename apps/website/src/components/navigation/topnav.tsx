@@ -13,7 +13,7 @@ import { classes } from '@/utils/classes'
 export const TopNav = () => {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(0)
-  const [borerOpacity, setBorderOpacity] = useState(1)
+  const [borerOpacity, setBorderOpacity] = useState(pathname === '/' ? 0 : 1)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,15 +24,14 @@ export const TopNav = () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
   useEffect(() => {
     setBorderOpacity(pathname === '/' ? Math.min(scrolled, 80) / 80 : 1)
   }, [scrolled, pathname])
   return (
-    // bg-color-base border-b-color-base border-b
     <header
       className={classes(
-        'bg-color-base sticky top-0 z-10 flex h-[var(--topnav-height)] w-full py-2',
-        borerOpacity > 0 && 'border-b',
+        'bg-color-base sticky top-0 z-10 flex h-[var(--topnav-height)] w-full border-b py-2',
       )}
       style={{
         borderBottomColor: `hsl(var(--p-color-border) / ${borerOpacity})`,
@@ -55,7 +54,7 @@ export const TopNav = () => {
             <ThemeToggle />
           </div>
         </nav>
-        <nav className="flex flex-1 items-center justify-end gap-2 md:hidden">
+        <nav className="flex flex-1 items-center justify-end gap-4 md:hidden md:gap-2">
           <GithubButton />
           <ThemeToggle />
           <MobileNav />

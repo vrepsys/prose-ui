@@ -6,22 +6,22 @@
       {
         "type": "link",
         "name": "Introduction",
-        "href": "/"
+        "href": "/docs"
       },
       {
         "type": "link",
         "name": "How it works",
-        "href": "/how-it-works"
+        "href": "/docs/how-it-works"
       },
       {
         "type": "link",
         "name": "Installation",
-        "href": "/installation"
+        "href": "/docs/installation"
       },
       {
         "type": "link",
         "name": "Roadmap",
-        "href": "/roadmap"
+        "href": "/docs/roadmap"
       }
     ]
   },
@@ -32,42 +32,42 @@
       {
         "type": "link",
         "name": "Overview",
-        "href": "/components/overview"
+        "href": "/docs/components/overview"
       },
       {
         "type": "link",
         "name": "Typography",
-        "href": "/components/typography"
+        "href": "/docs/components/typography"
       },
       {
         "type": "link",
         "name": "Image",
-        "href": "/components/image"
+        "href": "/docs/components/image"
       },
       {
         "type": "link",
         "name": "Code block",
-        "href": "/components/codeblock"
+        "href": "/docs/components/codeblock"
       },
       {
         "type": "link",
         "name": "Callout",
-        "href": "/components/callout"
+        "href": "/docs/components/callout"
       },
       {
         "type": "link",
         "name": "Table",
-        "href": "/components/table"
+        "href": "/docs/components/table"
       },
       {
         "type": "link",
         "name": "Frame",
-        "href": "/components/frame"
+        "href": "/docs/components/frame"
       },
       {
         "type": "link",
         "name": "Link",
-        "href": "/components/link"
+        "href": "/docs/components/link"
       }
     ]
   },
@@ -78,7 +78,7 @@
       {
         "type": "link",
         "name": "Styling",
-        "href": "/styling"
+        "href": "/docs/styling"
       }
     ]
   }

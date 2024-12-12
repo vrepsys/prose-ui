@@ -657,6 +657,7 @@
 }
 .prose-ui .frame[data-align="stretch"] {
     align-items: stretch;
+    overflow-x: scroll;
 }
 .prose-ui .frame[data-align="stretch"] .caption {
     text-align: center;

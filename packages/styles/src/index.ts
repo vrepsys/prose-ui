@@ -776,6 +776,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
       '&[data-align="stretch"]': {
         'align-items': 'stretch',
+        'overflow-x': 'scroll',
       },
       '&[data-align="stretch"] .caption': {
         'text-align': 'center',

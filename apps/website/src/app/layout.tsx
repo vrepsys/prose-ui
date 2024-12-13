@@ -17,13 +17,29 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: 'Prose UI',
-  description: 'Typography and components for rendering MDX content. Free and open-source.',
+  description:
+    'Refined typography and components for rendering MDX content in Next.js. Free and open-source.',
   openGraph: {
     type: 'website',
     title: 'Prose UI',
-    description: 'Typography and components for rendering MDX content. Free and open-source.',
+    description:
+      'Refined typography and components for rendering MDX content in Next.js. Free and open-source.',
     url: 'https://prose.ui.com',
   },
+  icons: [
+    {
+      rel: 'icon',
+      type: 'image/svg+xml',
+      url: '/favicon-dark.svg',
+      media: '(prefers-color-scheme: light)',
+    },
+    {
+      rel: 'icon',
+      type: 'image/svg+xml',
+      url: '/favicon-light.svg',
+      media: '(prefers-color-scheme: dark)',
+    },
+  ],
 }
 
 export default function RootLayout({

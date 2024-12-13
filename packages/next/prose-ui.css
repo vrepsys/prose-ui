@@ -367,7 +367,7 @@
 }
 .prose-ui .code-block .code-container {
     padding-top: var(--p-spacing-space3);
-    padding-bottom: var(--p-spacing-space2);
+    padding-bottom: var(--p-spacing-space3);
     padding-left: var(--p-spacing-space3);
     padding-right: var(--p-spacing-space3);
 }

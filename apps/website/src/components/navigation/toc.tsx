@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { classes } from '@/utils/classes'
-import { Section } from '@/lib/make-sections'
+import { Section } from '@/lib/extract-toc'
 import { Button } from '../ui/button'
 
 type Heading = {

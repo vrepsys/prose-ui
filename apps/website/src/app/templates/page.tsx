@@ -2,6 +2,11 @@ import { Footer } from '@/components/navigation/footer'
 import basicTemplate from '../../../public/img/template-basic.png'
 import docsTemplate from '../../../public/img/template-docs.png'
 import { TemplateCard } from '@/components/template-card/index'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Templates - Prose UI',
+}
 
 const Templates = () => {
   return (

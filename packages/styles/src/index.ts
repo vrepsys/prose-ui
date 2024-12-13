@@ -524,7 +524,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
       '.code-container': {
         'padding-top': ds.spacing.space3,
-        'padding-bottom': ds.spacing.space2,
+        'padding-bottom': ds.spacing.space3,
         'padding-left': ds.spacing.space3,
         'padding-right': ds.spacing.space3,
       },

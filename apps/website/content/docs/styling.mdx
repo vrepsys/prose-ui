@@ -14,7 +14,7 @@ Styling is organized around a design system, with its CSS variables (design toke
 
 ## Core Variables
 
-Core variables are reused in component-specific variables to ensure a consistent look and feel. For example, you can override the fonts to make Prose UI use the [Geist Sans](https://github.com/geist-org/geist-font) font family:
+Core variables are reused in component-specific variables to ensure a consistent look and feel. For example, you can override the fonts to make Prose UI use Vercel's [Geist](https://vercel.com/font) font family:
 
 ```css title="Override fonts"
 :root {
@@ -31,8 +31,8 @@ Color variables are divided into light and dark mode categories. Here's how you 
 ```css title="Override accent colors"
 :root {
   --p-color-accent-high: 0, 0%, 0%;
-  --p-color-accent: 0, 0%, 0%;
-  --p-color-accent-low: 0, 0%, 40%;
+  --p-color-accent: 0, 0%, 10%;
+  --p-color-accent-low: 0, 0%, 70%;
 }
 :root:is(.dark) {
   --p-color-accent-high: 180, 0%, 100%;

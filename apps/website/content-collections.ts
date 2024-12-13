@@ -1,4 +1,4 @@
-import { buildToc } from '@/lib/build-toc'
+import { extractMetadata } from '@/lib/extract-metadata'
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
 import { remarkPlugins } from '@prose-ui/core'
@@ -11,7 +11,7 @@ const pages = defineCollection({
     title: z.optional(z.string()),
   }),
   transform: async (post, ctx) => {
-    const toc = await buildToc(post.content)
+    const { toc, title } = await extractMetadata(post.content)
     const content = await compileMDX(ctx, post, {
       remarkPlugins: remarkPlugins(),
     })
@@ -27,6 +27,7 @@ const pages = defineCollection({
       ...post,
       path: `/${path}`,
       toc,
+      title,
       content,
     }
   },

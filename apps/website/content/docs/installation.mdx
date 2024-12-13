@@ -4,6 +4,10 @@ While the easiest way to start a new project with Prose UI is by cloning one of 
 
 Here's how to create and configure a [Next.js](https://nextjs.org) project with [next/mdx](https://nextjs.org/docs/pages/building-your-application/configuring/mdx) and Prose UI.
 
+<Callout title="Note">
+  Note that this is a very basic setup. For an example that uses an MDX bundler, content collections, and a separate MDX content folder, refer to our [docs starter template](/templates).
+</Callout>
+
 ## Create a new project and install dependencies
 
 Start by creating a Next.js project, choosing defaults in the prompts.
@@ -68,7 +72,7 @@ Go to your `app/layout.tsx` and replace the content it returns with the code bel
 </html>
 ```
 
-## Add Prose UI css styles
+## Add Prose UI CSS styles
 
 Next, go to your `src/app/globals.css` file and import Prose UI styles at the top:
 
@@ -76,7 +80,7 @@ Next, go to your `src/app/globals.css` file and import Prose UI styles at the to
 @import "@prose-ui/next/prose-ui.css";
 ```
 
-Optional step: if you want to override fonts in Prose UI, update the variables for the base, heading, and mono fonts in your `globals.css`. For more details on styling, refer to the [Styling](/docs/styling) page.
+Optional step: if you want to override fonts in Prose UI, update the variables for the base, heading, and mono fonts in your `globals.css`. For more details on styling, refer to the [styling](/docs/styling) page.
 
 ```css title="globals.css"
 :root {

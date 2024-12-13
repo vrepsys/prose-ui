@@ -13,6 +13,7 @@ import { Button } from '../ui/button'
 import Link from 'next/link'
 import { MenuIcon, XIcon } from 'lucide-react'
 import { GithubButton } from '../github-button'
+import { Footer } from './footer'
 
 export const MobileNav = ({ className }: { className?: string }) => {
   const [open, setOpen] = useState(false)
@@ -83,17 +84,7 @@ export const MobileNav = ({ className }: { className?: string }) => {
                       ]}
                     />
                   </div>
-                  <div className="bg-color-low px-2 pb-40 pt-6">
-                    <Button variant="link" asChild>
-                      <Link href="#">Support</Link>
-                    </Button>
-                    <Button variant="link" asChild>
-                      <Link href="#">Create account</Link>
-                    </Button>
-                    <Button variant="link" asChild>
-                      <Link href="#">Sign in</Link>
-                    </Button>
-                  </div>
+                  <Footer />
                 </motion.nav>
               </div>
             </Dialog.Content>

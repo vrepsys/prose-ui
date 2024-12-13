@@ -18,7 +18,7 @@ Enter your project’s folder and install the dependencies for rendering MDX and
 pnpm add @prose-ui/core @prose-ui/next @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
 ```
 
-## Set up mdx components
+## Set up MDX components
 
 Create an `mdx-components.tsx` file in the root of your project. This file will be used to override the default components used by MDX.
 
@@ -32,14 +32,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ...mdxComponents,
   };
 }
-```
-
-## Add Prose UI css styles
-
-Next, go to your `src/app/globals.css` file and import Prose UI styles at the top:
-
-```css title="globals.css"
-@import "@prose-ui/next/prose-ui.css";
 ```
 
 ## Set up MDX rendering
@@ -74,6 +66,24 @@ Go to your `app/layout.tsx` and replace the content it returns with the code bel
     <div className="mx-auto max-w-3xl px-8">{children}</div>
   </body>
 </html>
+```
+
+## Add Prose UI css styles
+
+Next, go to your `src/app/globals.css` file and import Prose UI styles at the top:
+
+```css title="globals.css"
+@import "@prose-ui/next/prose-ui.css";
+```
+
+Optional step: if you want to override fonts in Prose UI, update the variables for the base, heading, and mono fonts in your `globals.css`. For more details on styling, refer to the [Styling](/docs/styling) page.
+
+```css title="globals.css"
+:root {
+  --p-font-family: var(--font-geist-sans);
+  --p-font-family-heading: var(--font-geist-sans);
+  --p-font-family-mono: var(--font-geist-mono);
+}
 ```
 
 ## Add MDX content

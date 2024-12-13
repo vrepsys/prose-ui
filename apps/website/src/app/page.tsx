@@ -20,7 +20,6 @@ const demos = await Promise.all(
   })),
 )
 const order = [
-  // 'intro.mdx',
   'images.mdx',
   'typography.mdx',
   'callouts.mdx',

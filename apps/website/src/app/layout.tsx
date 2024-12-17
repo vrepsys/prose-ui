@@ -24,7 +24,16 @@ export const metadata: Metadata = {
     title: 'Prose UI',
     description:
       'Refined typography and components for rendering MDX content in Next.js. Free and open-source.',
-    url: 'https://prose.ui.com',
+    url: 'https://prose-ui.com',
+    images: [{ url: 'https://prose-ui.com/img/social.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@vrepsys',
+    title: 'Prose UI',
+    description:
+      'Refined typography and components for rendering MDX content in Next.js. Free and open-source.',
+    images: ['https://prose-ui.com/img/social.png'],
   },
   icons: [
     {

@@ -6,7 +6,7 @@ import { mdxComponents } from '@prose-ui/next'
 import { allPages } from 'content-collections'
 import { Metadata } from 'next'
 
-type Params = Promise<{ path: string[]; title: string | null }>
+type Params = Promise<{ path: string[] }>
 type Props = {
   params: Params
 }
@@ -19,7 +19,6 @@ const findPage = (pathArr: string[]) => {
 export async function generateStaticParams() {
   return allPages.map((page) => ({
     path: page.path.slice(1).split('/'),
-    title: page.title,
   }))
 }
 

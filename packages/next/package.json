@@ -1,6 +1,6 @@
 {
   "name": "@prose-ui/next",
-  "version": "1.0.0",
+  "version": "1.0.1-rc.0",
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist prose-ui.css && tsc && cp ../styles/dist/prose-ui.css ./",

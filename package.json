@@ -5,6 +5,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "test:ci": "turbo test:ci",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "bump:rc": "pnpm -r run bump:rc",
     "publish:rc": "pnpm -r run publish:rc",

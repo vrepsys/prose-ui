@@ -1,4 +1,4 @@
-name: Build packages
+name: Run packages tests
 
 on:
   pull_request:
@@ -27,3 +27,6 @@ jobs:
 
       - name: Build packages
         run: pnpm build --filter './packages/*'
+
+      - name: Run tests
+        run: pnpm test:ci --filter='packages/*'

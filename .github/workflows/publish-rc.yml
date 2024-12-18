@@ -1,4 +1,4 @@
-name: 'Publish release candidate'
+name: 'Publish release candidates to npm'
 
 on:
   pull_request:

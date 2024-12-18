@@ -1,4 +1,4 @@
-name: Build all packages
+name: Build packages
 
 on:
   pull_request:
@@ -13,19 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Install Turbo
-        run: pnpm add turbo --global
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build packages in packages/*
-        run: turbo build --filter="packages/*"
+      - name: Build packages
+        run: pnpm build --filter './packages/*'

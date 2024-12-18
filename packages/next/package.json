@@ -1,12 +1,15 @@
 {
   "name": "@prose-ui/next",
-  "version": "1.0.0-beta.25",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist prose-ui.css && tsc && cp ../styles/dist/prose-ui.css ./",
     "watch": "nodemon -e ts,tsx,json --watch src --watch package.json --exec 'pnpm build'",
     "patch:beta": "pnpm version prerelease --preid=beta",
-    "publish:beta": "pnpm publish --access public --tag latest --no-git-checks"
+    "bump:rc": "pnpm version prerelease --preid=rc --no-git-tag-version",
+    "publish:rc": "pnpm publish --access public --tag next --no-git-checks --dry-run",
+    "bump:latest": "pnpm version patch --no-git-tag-version",
+    "publish:latest": "pnpm publish --access public --tag latest --no-git-checks"
   },
   "type": "module",
   "files": [

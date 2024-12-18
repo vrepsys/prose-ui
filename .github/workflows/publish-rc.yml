@@ -1,0 +1,47 @@
+name: 'Publish release candidates to npm'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/**'
+      - '!**/package.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Bump version
+        run: pnpm bump:rc
+
+      - name: Set publishing config
+        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish
+        run: pnpm publish:rc
+
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: publish release candidate

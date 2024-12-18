@@ -21,6 +21,9 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: Install Turbo
+        run: pnpm add turbo --global
+
       - name: Install dependencies
         run: pnpm install
 

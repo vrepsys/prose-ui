@@ -5,7 +5,12 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "test:ci": "turbo test:ci",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "bump:rc": "pnpm -r run bump:rc",
+    "publish:rc": "pnpm -r run publish:rc",
+    "bump:latest": "pnpm -r run bump:latest",
+    "publish:latest": "pnpm -r run publish:latest"
   },
   "devDependencies": {
     "prettier": "^3.2.5",

@@ -2,6 +2,11 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "tasks": {
+    "test:ci": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
     "build": {
       "dependsOn": [
         "^build"

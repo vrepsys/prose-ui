@@ -1,6 +1,6 @@
 {
   "name": "@prose-ui/core",
-  "version": "1.0.0-beta.10",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -17,8 +17,11 @@
     "build:watch": "nodemon -e json --watch package.json --exec 'npm run build && npm pack'",
     "watch": "rm -rf dist && tsc --watch",
     "test": "vitest",
-    "patch:beta": "pnpm version prerelease --preid=beta",
-    "publish:beta": "pnpm publish --access public --tag latest --no-git-checks"
+    "test:ci": "vitest run",
+    "bump:rc": "pnpm version prerelease --preid=rc --no-git-tag-version",
+    "publish:rc": "pnpm publish --access public --tag next --no-git-checks --dry-run",
+    "bump:latest": "pnpm version patch --no-git-tag-version",
+    "publish:latest": "pnpm publish --access public --tag latest --no-git-checks"
   },
   "devDependencies": {
     "@prose-ui/eslint-config": "workspace:*",

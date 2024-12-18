@@ -19,7 +19,7 @@
     "test": "vitest",
     "test:ci": "vitest run",
     "bump:rc": "pnpm version prerelease --preid=rc --no-git-tag-version",
-    "publish:rc": "pnpm publish --access public --tag next --no-git-checks --dry-run",
+    "publish:rc": "pnpm publish --access public --tag next --no-git-checks",
     "bump:latest": "pnpm version patch --no-git-tag-version",
     "publish:latest": "pnpm publish --access public --tag latest --no-git-checks"
   },

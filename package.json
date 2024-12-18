@@ -6,7 +6,8 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "bump:rc": "pnpm -r run bump:rc"
+    "bump:rc": "pnpm -r run bump:rc",
+    "publish:rc": "pnpm -r run publish:rc"
   },
   "devDependencies": {
     "prettier": "^3.2.5",

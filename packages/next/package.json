@@ -7,7 +7,7 @@
     "watch": "nodemon -e ts,tsx,json --watch src --watch package.json --exec 'pnpm build'",
     "patch:beta": "pnpm version prerelease --preid=beta",
     "bump:rc": "pnpm version prerelease --preid=rc --no-git-tag-version",
-    "publish:rc": "pnpm publish --access public --tag next --no-git-checks"
+    "publish:rc": "pnpm publish --access public --tag next --no-git-checks --dry-run"
   },
   "type": "module",
   "files": [

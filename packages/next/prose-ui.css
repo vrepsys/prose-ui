@@ -12,19 +12,19 @@
     --shiki-token-link: var(--p-code-block-color-link)
 }
 :root {
-    --p-color-text-high: 219 100% 100%;
-    --p-color-text: 219 5% 89%;
-    --p-color-text-low: 219 6% 70%;
-    --p-color-text-lower: 219 6% 65%;
-    --p-color-text-lowest: 219 6% 60%;
-    --p-color-text-disabled: 219 6% 70%;
-    --p-color-accent-high: 150 95% 75%;
-    --p-color-accent: 150 90% 65%;
-    --p-color-accent-low: 150 15% 30%;
-    --p-color-syntax-syntax1: 150 66% 66%;
-    --p-color-syntax-syntax2: 40 50% 66%;
-    --p-color-syntax-syntax3: 340 50% 75%;
-    --p-color-syntax-syntax4: 210 77% 69%;
+    --p-color-text-high: 219 5% 5%;
+    --p-color-text: 219 5% 23%;
+    --p-color-text-low: 219 6% 36%;
+    --p-color-text-lower: 219 6% 42%;
+    --p-color-text-lowest: 219 6% 47%;
+    --p-color-text-disabled: 219 6% 36%;
+    --p-color-accent-high: 117 62% 20%;
+    --p-color-accent: 117 62% 30%;
+    --p-color-accent-low: 150 15% 80%;
+    --p-color-syntax-syntax1: 117 62% 30%;
+    --p-color-syntax-syntax2: 27 90% 30%;
+    --p-color-syntax-syntax3: 295 60% 40%;
+    --p-color-syntax-syntax4: 240 60% 40%;
     --p-color-note: 210 13% 13%;
     --p-color-info: 208 88% 43%;
     --p-color-warning: 35 100% 34%;

@@ -2,6 +2,10 @@
   "name": "@prose-ui/core",
   "version": "1.0.1-rc.0",
   "license": "MIT",
+  "homepage": "https://prose-ui.com",
+  "repository": {
+    "repository": "github:vrepsys/prose-ui"
+  },
   "type": "module",
   "exports": {
     ".": "./dist/index.js",
@@ -9,7 +13,7 @@
   },
   "files": [
     "dist",
-    "readme.md"
+    "README.md"
   ],
   "scripts": {
     "lint": "TIMING=1 eslint \"**/*.ts*\"",

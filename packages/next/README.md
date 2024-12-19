@@ -1,3 +1,9 @@
-# @prose-ui/next
+# `@prose-ui/next`
 
-Prose UI components and utilities for [Next.js](https://nextjs.org).
+[Prose UI](https://prose-ui.com) components and utilities for Next.js.
+
+## Installation
+
+```sh
+$ npm install @prose-ui/next
+```

@@ -1,10 +1,11 @@
 {
   "name": "@prose-ui/core",
-  "version": "1.0.1-rc.1",
+  "version": "1.0.2",
   "license": "MIT",
   "homepage": "https://prose-ui.com",
   "repository": {
-    "repository": "github:vrepsys/prose-ui"
+    "type": "git",
+    "url": "git+https://github.com/vrepsys/prose-ui.git"
   },
   "type": "module",
   "exports": {

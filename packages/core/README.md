@@ -1,3 +1,9 @@
-# @prose-ui/core
+# `@prose-ui/core`
 
-Prose UI [Remark](https://github.com/remarkjs/remark) plugins and other essentials.
+A core library of [Prose UI](https://prose-ui.com), providing essential utilities and Remark plugins.
+
+## Installation
+
+```sh
+npm install @prose-ui/core
+```

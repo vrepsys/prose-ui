@@ -12,19 +12,19 @@
     --shiki-token-link: var(--p-code-block-color-link)
 }
 :root {
-    --p-color-text-high: 0 0% 0%;
-    --p-color-text: 210 13% 13%;
-    --p-color-text-low: 220 6% 40%;
-    --p-color-text-lower: 226 5% 53%;
-    --p-color-text-lowest: 231 6% 57%;
-    --p-color-text-disabled: 231 10% 75%;
-    --p-color-accent-high: 154 60% 32%;
-    --p-color-accent: 152 56% 39%;
-    --p-color-accent-low: 151 40% 54%;
-    --p-color-syntax-syntax1: 210 80% 40%;
-    --p-color-syntax-syntax2: 156 60% 35%;
-    --p-color-syntax-syntax3: 212 50% 40%;
-    --p-color-syntax-syntax4: 256 39% 50%;
+    --p-color-text-high: 219 100% 100%;
+    --p-color-text: 219 5% 89%;
+    --p-color-text-low: 219 6% 70%;
+    --p-color-text-lower: 219 6% 65%;
+    --p-color-text-lowest: 219 6% 60%;
+    --p-color-text-disabled: 219 6% 70%;
+    --p-color-accent-high: 150 95% 75%;
+    --p-color-accent: 150 90% 65%;
+    --p-color-accent-low: 150 15% 30%;
+    --p-color-syntax-syntax1: 150 66% 66%;
+    --p-color-syntax-syntax2: 40 50% 66%;
+    --p-color-syntax-syntax3: 340 50% 75%;
+    --p-color-syntax-syntax4: 210 77% 69%;
     --p-color-note: 210 13% 13%;
     --p-color-info: 208 88% 43%;
     --p-color-warning: 35 100% 34%;
@@ -39,19 +39,19 @@
     --p-color-outline: 152 56% 39%
 }
 :is(.dark) {
-    --p-color-text-high: 0 0% 100%;
-    --p-color-text: 220 9% 94%;
-    --p-color-text-low: 216 7% 71%;
-    --p-color-text-lower: 222 5% 49%;
-    --p-color-text-lowest: 219 6% 44%;
-    --p-color-text-disabled: 212 8% 38%;
-    --p-color-accent-high: 151 65% 54%;
-    --p-color-accent: 151 55% 45%;
-    --p-color-accent-low: 151 45% 34%;
-    --p-color-syntax-syntax1: 210 80% 66%;
-    --p-color-syntax-syntax2: 156 60% 75%;
-    --p-color-syntax-syntax3: 212 50% 70%;
-    --p-color-syntax-syntax4: 256 40% 70%;
+    --p-color-text-high: 219 0% 100%;
+    --p-color-text: 219 100% 100%;
+    --p-color-text-low: 219 6% 70%;
+    --p-color-text-lower: 219 6% 65%;
+    --p-color-text-lowest: 219 6% 60%;
+    --p-color-text-disabled: 219 6% 53%;
+    --p-color-accent-high: 150 95% 75%;
+    --p-color-accent: 150 90% 65%;
+    --p-color-accent-low: 150 15% 30%;
+    --p-color-syntax-syntax1: 150 66% 66%;
+    --p-color-syntax-syntax2: 40 50% 66%;
+    --p-color-syntax-syntax3: 340 50% 75%;
+    --p-color-syntax-syntax4: 210 77% 69%;
     --p-color-note: 220 9% 94%;
     --p-color-info: 210 100% 72%;
     --p-color-warning: 46 100% 54%;

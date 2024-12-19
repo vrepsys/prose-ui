@@ -37,6 +37,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Build packages
+        run: pnpm build --filter './packages/*'
+
+      - name: Run tests
+        run: pnpm test:ci --filter='./packages/*'
+
       - name: Publish
         run: pnpm publish:rc
 

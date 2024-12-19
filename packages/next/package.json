@@ -2,6 +2,10 @@
   "name": "@prose-ui/next",
   "version": "1.0.1-rc.0",
   "license": "MIT",
+  "homepage": "https://prose-ui.com",
+  "repository": {
+    "repository": "github:vrepsys/prose-ui"
+  },
   "scripts": {
     "build": "rm -rf dist prose-ui.css && tsc && cp ../styles/dist/prose-ui.css ./",
     "watch": "nodemon -e ts,tsx,json --watch src --watch package.json --exec 'pnpm build'",
@@ -14,7 +18,8 @@
   "type": "module",
   "files": [
     "dist",
-    "prose-ui.css"
+    "prose-ui.css",
+    "README.md"
   ],
   "exports": {
     ".": {

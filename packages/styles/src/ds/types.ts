@@ -116,7 +116,9 @@ export type Components = {
     fontWeight: CssValue
     text: {
       color: CssValue
-      decoration: CssValue
+      decorationLine: CssValue
+      decorationColor: CssValue
+      decorationStyle: CssValue
     }
   }
   inlineCode: {

@@ -138,7 +138,9 @@
     --p-h6-font-weight: 500;
     --p-h6-color: hsl(var(--p-color-text-high));
     --p-link-text-color: hsl(var(--p-color-accent));
-    --p-link-text-decoration: underline solid hsl(var(--p-color-accent-low));
+    --p-link-text-decoration-line: underline;
+    --p-link-text-decoration-style: solid;
+    --p-link-text-decoration-color: hsl(var(--p-color-accent-low));
     --p-link-font-weight: var(--p-font-weight-normal);
     --p-inline-code-font-size: var(--p-font-size-sm);
     --p-inline-code-font-weight: var(--p-font-weight-normal);
@@ -585,7 +587,9 @@
 }
 .prose-ui p a, .prose-ui td a, .prose-ui li a {
     color: var(--p-link-text-color);
-    text-decoration: var(--p-link-text-decoration);
+    text-decoration-line: var(--p-link-text-decoration-line);
+    text-decoration-color: var(--p-link-text-decoration-color);
+    text-decoration-style: var(--p-link-text-decoration-style);
     font-weight: var(--p-link-font-weight);
     text-underline-offset: 0.25rem;
     transition: color 0.1s ease, text-decoration-color 0.1s ease;

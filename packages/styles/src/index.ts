@@ -245,7 +245,9 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     link: {
       text: {
         color: ds.color.accent.base,
-        decoration: `underline solid ${ds.color.accent.low}`,
+        decorationLine: 'underline',
+        decorationStyle: 'solid',
+        decorationColor: ds.color.accent.low,
       },
       fontWeight: ds.font.weight.normal,
     },
@@ -695,7 +697,9 @@ export const componentsStyles = (ds: DesignSystem) => {
     'h6': headingStyle(ds.h6),
     'p a, td a, li a': {
       'color': ds.link.text.color,
-      'text-decoration': ds.link.text.decoration,
+      'text-decoration-line': ds.link.text.decorationLine,
+      'text-decoration-color': ds.link.text.decorationColor,
+      'text-decoration-style': ds.link.text.decorationStyle,
       'font-weight': ds.link.fontWeight,
       'text-underline-offset': '0.25rem',
       'transition': 'color 0.1s ease, text-decoration-color 0.1s ease',

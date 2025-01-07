@@ -23,10 +23,12 @@ const Templates = () => {
             Prose UI MDX is fully supported by <Link href="https://dhub.dev">Dhub</Link> - a
             collaborative WYSIWYG editor for MDX content with direct GitHub publishing.
           </p>
-          <Image
-            src={dhubDemo}
-            alt="Screenshot of Dhub's WYSIWYG editor with MarkDown preview open on the right side"
-          />
+          <a href="https://dhub.dev" target="_blank">
+            <Image
+              src={dhubDemo}
+              alt="Screenshot of Dhub's WYSIWYG editor with Markdown preview open on the right side"
+            />
+          </a>
         </div>
       </div>
       <Footer />

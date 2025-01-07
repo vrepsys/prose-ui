@@ -1,5 +1,5 @@
 <a href="https://prose-ui.com" >
-  <img alt="Prose UI social image" src="https://repository-images.githubusercontent.com/898552859/60af321f-9566-42e9-9a20-6120a366639a">
+  <img alt="Prose UI social image" src="https://repository-images.githubusercontent.com/898552859/60af321f-9566-42e9-9a20-6120a366639a" />
 </a>
 
 # Prose UI

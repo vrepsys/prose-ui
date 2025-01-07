@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import { TopNav } from '@/components/navigation/topnav'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -62,6 +63,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
+      {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
       <body className="bg-color-base min-h-screen font-sans antialiased">
         <ThemeProvider
           attribute="class"

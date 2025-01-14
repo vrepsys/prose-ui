@@ -11,7 +11,7 @@ export const LandingButtons = ({ className }: { className: string }) => {
       </Button>
       <Button variant="ghost" size="lg" asChild>
         <Link href="https://github.com/vrepsys/prose-ui" className="!text-color-base">
-          <SiGithub size={16} /> Source code
+          <SiGithub size={16} /> Star on GitHub
         </Link>
       </Button>
     </div>

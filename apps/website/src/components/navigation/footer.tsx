@@ -23,7 +23,7 @@ export const Footer = () => (
           . Source code available on{' '}
           <a
             className="text-color-low hover:text-color-base underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4 hover:decoration-[hsl(var(--p-color-text-base))]"
-            href="https://github.com/valdemaras/prose-ui"
+            href="https://github.com/vrepsys/prose-ui"
           >
             GitHub
           </a>

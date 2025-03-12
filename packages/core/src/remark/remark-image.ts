@@ -17,6 +17,13 @@ import { attrsToObj, parseNumberExpressionAttr, parseStringAttr } from './jsx-ut
 
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
 
+const mapUrl = (url: string, basePath: string): string => {
+  if (EXTERNAL_URL_REGEX.test(url)) {
+    return url
+  }
+  return url.startsWith('/') ? `${basePath}${url}` : `${basePath}/${url}`
+}
+
 const createImageTag = (
   src: string | MdxJsxAttributeValueExpression,
   { alt, width, height }: { alt?: string; width?: number; height?: number },
@@ -47,11 +54,12 @@ const createImageTag = (
 
 export type Options = {
   imageDir?: string
+  basePath?: string
 }
 const DEFAULT_IMAGE_DIR = './public'
 const BLUR_EXT = ['jpeg', 'jpg', 'png', 'webp', 'avif', 'tiff', 'gif']
 
-const remarkImage = ({ imageDir }: Options = { imageDir: DEFAULT_IMAGE_DIR }) => {
+const remarkImage = ({ imageDir, basePath }: Options = { imageDir: DEFAULT_IMAGE_DIR }) => {
   imageDir = imageDir ?? DEFAULT_IMAGE_DIR
   const plugin: Plugin<[], Root> = () => async (tree, _file, done) => {
     const localPaths = new Set<string>()
@@ -137,6 +145,9 @@ const remarkImage = ({ imageDir }: Options = { imageDir: DEFAULT_IMAGE_DIR }) =>
         const src = parseStringAttr(attrs, 'src')
         let url = src ? slash(decodeURI(src)) : undefined
         if (url) {
+          if (basePath) {
+            attrs['src'].value = mapUrl(url, basePath)
+          }
           const size = dimensions.get(url)
           if (size) {
             if (width && !height) {

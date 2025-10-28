@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { Caption } from './caption'
 
 type Props = {
   align?: 'left' | 'right' | 'center' | 'stretch'
@@ -10,7 +11,7 @@ export const Frame = ({ align, caption, children }: Props) => {
   return (
     <figure data-align={align || 'left'} className="frame">
       {children}
-      {caption && <figcaption className="caption">{caption}</figcaption>}
+      {caption && <Caption>{caption}</Caption>}
     </figure>
   )
 }

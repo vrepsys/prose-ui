@@ -1,11 +1,12 @@
 import { MDXComponents } from 'mdx/types'
-import { Callout } from './callout'
-import { CodeBlock } from './code-block/code-block'
-import { Image } from './image'
-import { Heading, type Props as HeadingProps } from './heading'
-import { Frame } from './frame'
 import Link from 'next/link'
+import { Callout } from './callout'
+import { Caption } from './caption'
+import { CodeBlock } from './code-block/code-block'
 import { codeToHtml } from './code-block/highlighter'
+import { Frame } from './frame'
+import { Heading, type Props as HeadingProps } from './heading'
+import { Image } from './image'
 
 type HeadingPropsWithoutLevel = Omit<HeadingProps, 'level'>
 
@@ -16,13 +17,14 @@ const h4 = (props: HeadingPropsWithoutLevel) => <Heading level={4} {...props} />
 const h5 = (props: HeadingPropsWithoutLevel) => <Heading level={5} {...props} />
 const h6 = (props: HeadingPropsWithoutLevel) => <Heading level={6} {...props} />
 
-export { Callout, CodeBlock, Image, Frame, Link, Heading, codeToHtml }
+export { Callout, CodeBlock, codeToHtml, Frame, Heading, Image, Link }
 
 export const mdxComponents: MDXComponents = {
   Callout,
   CodeBlock,
   Image,
   Frame,
+  Caption,
   Link,
   h1,
   h2,

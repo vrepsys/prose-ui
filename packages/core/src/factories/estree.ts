@@ -56,5 +56,6 @@ export const importDeclaration = (
       },
     ],
     source: literalExpression(path),
+    attributes: [],
   }
 }

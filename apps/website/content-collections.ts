@@ -2,6 +2,12 @@ import { extractMetadata } from '@/lib/extract-metadata'
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
 import { remarkPlugins } from '@prose-ui/core'
+import type { Root } from 'mdast'
+
+// Custom remark plugin to log the AST
+// const logAst = () => (tree: Root) => {
+//   console.log('MD AST with remark plugins applied:', JSON.stringify(tree, null, 2))
+// }
 
 const pages = defineCollection({
   name: 'pages',
@@ -13,7 +19,7 @@ const pages = defineCollection({
   transform: async (post, ctx) => {
     const { toc, title } = await extractMetadata(post.content)
     const content = await compileMDX(ctx, post, {
-      remarkPlugins: remarkPlugins(),
+      remarkPlugins: [...remarkPlugins()],
     })
     let path
     if (post._meta.path === 'index') {
@@ -43,7 +49,7 @@ const demos = defineCollection({
   }),
   transform: async (page, ctx) => {
     const content = await compileMDX(ctx, page, {
-      remarkPlugins: remarkPlugins(),
+      remarkPlugins: [...remarkPlugins()],
     })
     return {
       ...page,

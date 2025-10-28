@@ -7,34 +7,42 @@ Currently, it is specifically tailored for aligning and captioning [images](/doc
 ## Image example
 
 ```jsx title='Frame example'
-<Frame align="center" caption="Center aligned image">
+<Frame align="center">
    <Image width={300} src="/img/demo-image-01.png" alt="Abstract art"/>
+   <Caption>Center aligned image</Caption>
 </Frame>
 ```
 
-<Frame align="center" caption="Center aligned image">
+<Frame align="center">
    <Image width={300} src="/img/demo-image-01.png" alt="Abstract art"/>
+   <Caption>Center aligned image</Caption>
 </Frame>
 
 
 ## Table example
 
 ```mdx title="A stretched table with a caption"
-<Frame align="stretch" caption="Stretched table">
+<Frame align="stretch">
+
 | Rocket               | Height   | Payload to LEO | Stages |
 |:---------------------|:--------:|:--------------:|:------:|
 | SpaceX Starship      | 120 m    | 150 t          | 2      |
 | NASA SLS Block 1     | 98 m     | 95 t           | 2      |
 | Blue Origin New Glenn| 98 m     | 45 t           | 2      |
+
+<Caption>Stretched table</Caption>
 </Frame>
 ```
 
-<Frame align="stretch" caption="Stretched table">
+<Frame align="stretch">
+
 | Rocket               | Height   | Payload to LEO | Stages |
 |:---------------------|:--------:|:--------------:|:------:|
 | SpaceX Starship      | 120 m    | 150 t          | 2      |
 | NASA SLS Block 1     | 98 m     | 95 t           | 2      |
 | Blue Origin New Glenn| 98 m     | 45 t           | 2      |
+
+<Caption>Stretched table</Caption>
 </Frame>
 
 

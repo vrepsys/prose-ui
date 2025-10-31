@@ -20,6 +20,8 @@
   "files": [
     "dist",
     "prose-ui.css",
+    "katex.min.css",
+    "fonts",
     "README.md"
   ],
   "exports": {
@@ -29,7 +31,8 @@
       "types": "./dist/index.d.ts",
       "react-server": "./dist/mdx/server.js"
     },
-    "./prose-ui.css": "./prose-ui.css"
+    "./prose-ui.css": "./prose-ui.css",
+    "./katex.min.css": "./katex.min.css"
   },
   "peerDependencies": {
     "next": "^14 || ^15 || ^16",
@@ -45,6 +48,7 @@
     "@types/node": "^20.11.24",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
+    "@types/react-katex": "^3.0.4",
     "next": "^16",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "react": "^19.0.0-rc-66855b96-20241106",
@@ -60,6 +64,7 @@
     "lucide-react": "^0.460.0",
     "mdast-util-mdx-expression": "^2.0.0",
     "mdast-util-mdx-jsx": "^3.1.2",
+    "react-katex": "^3.1.0",
     "remark": "^15.0.1",
     "shiki": "^3.14.0",
     "slugify": "^1.6.6",

@@ -24,6 +24,7 @@ const order = [
   'typography.mdx',
   'callouts.mdx',
   'code-block.mdx',
+  'math-formulas.mdx',
   'tables.mdx',
   'styling.mdx',
 ]

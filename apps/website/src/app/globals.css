@@ -1,6 +1,7 @@
 @import '@prose-ui/next/prose-ui.css';
 @import '@radix-ui/colors/gray.css';
 @import '@radix-ui/colors/gray-dark.css';
+@import '@prose-ui/next/katex.min.css';
 
 @tailwind base;
 @tailwind components;

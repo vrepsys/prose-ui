@@ -61,6 +61,7 @@
     "remark-custom-heading-id": "^2.0.0",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
+    "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
     "remark-stringify": "^11.0.0",
     "slash": "^5.1.0",

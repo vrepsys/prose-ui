@@ -1,0 +1,51 @@
+## Math formulas
+
+Prose UI supports inline and block math in LaTeX. Formulas are rendered with KaTeX, producing beautiful mathematical notation.
+
+### Inline math
+
+Use single dollar signs `$...$` for inline math formulas that appear within a paragraph.
+
+The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ for solving equations.
+
+The famous equation $E = mc^2$ relates energy and mass. Another example: $F = ma$ represents Newton's second law of motion.
+
+### Block math
+
+Use double dollar signs `$$...$$` on separate lines for block math formulas that appear as standalone, centered equations.
+
+The quadratic formula:
+
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+
+Summation notation:
+
+$$
+\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n
+$$
+
+Matrix example:
+
+$$
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+=
+\begin{bmatrix}
+ax + by \\
+cx + dy
+\end{bmatrix}
+$$
+
+Integral notation:
+
+$$
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+$$

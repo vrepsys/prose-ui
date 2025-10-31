@@ -1,6 +1,6 @@
 # Installation
 
-While the easiest way to start a new project with Prose UI is by cloning one of the [templates](/templates), we provide the instructions below to help you set up an brand-you project with Prose UI on your own.
+While the easiest way to start a new project with Prose UI is by cloning one of the [templates](/templates), we provide the instructions below to help you set up a brand-new project with Prose UI on your own.
 
 Here's how to create and configure a [Next.js](https://nextjs.org) project with [next/mdx](https://nextjs.org/docs/pages/building-your-application/configuring/mdx) and Prose UI.
 
@@ -12,7 +12,7 @@ Here's how to create and configure a [Next.js](https://nextjs.org) project with 
 
 Start by creating a Next.js project, choosing defaults in the prompts.
 
-```bash title="Create a new NextJs project"
+```bash title="Create a new Next.js project"
 npx create-next-app@latest
 ```
 
@@ -40,7 +40,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
 ## Set up MDX rendering
 
-Configure your project to use mdx with Prose UI by modifying the next.config.ts in the following way:
+Configure your project to use MDX with Prose UI by modifying your next.config.ts in the following way:
 
 ```typescript title="next.config.ts"
 import createMDX from "@next/mdx";
@@ -78,7 +78,10 @@ Next, go to your `src/app/globals.css` file and import Prose UI styles at the to
 
 ```css title="globals.css"
 @import "@prose-ui/next/prose-ui.css";
+@import "@prose-ui/next/katex.min.css";
 ```
+
+The `katex.min.css` import is required only if you use math formulas.
 
 Optional step: if you want to override fonts in Prose UI, update the variables for the base, heading, and mono fonts in your `globals.css`. For more details on styling, refer to the [styling](/docs/styling) page.
 

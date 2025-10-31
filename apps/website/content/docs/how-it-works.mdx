@@ -2,7 +2,7 @@
 
 If you just want to start using Prose UI quickly, feel free to jump to the [installation](/docs/installation) guide or begin with one of the [templates](/templates).
 
-Prose UI consists for 3 main elements:
+Prose UI consists of 3 main elements:
 - **React components**\
 Available in `@prose-ui/next`
 - **CSS styles**\
@@ -12,7 +12,7 @@ Available in `@prose-ui/core`
 
 ## React components
 
-The `mdxComponents` array from `@prose-ui/next` includes React server components necessary for rendering elements such as highlighted code blocks, callouts, images, headings, and frames.
+The `mdxComponents` array from `@prose-ui/next` includes React server components necessary for rendering elements such as highlighted code blocks, callouts, images, headings, frames, and math formulas.
 
 ```js
 import { mdxComponents } from "@prose-ui/next"
@@ -21,18 +21,30 @@ import { mdxComponents } from "@prose-ui/next"
 Prose UI also exports these components individually for use outside of MDX.
 
 ```js
-import { CodeBlock, Frame, Callout, Image, Heading } from "@prose-ui/next"
+import {
+  Callout,
+  CodeBlock,
+  Frame,
+  Heading,
+  Image,
+  Link,
+  InlineMath,
+  BlockMath,
+} from "@prose-ui/next"
 ```
 
 ## CSS styles
 
 CSS styles from `@prose-ui/next/prose-ui.css` provide default styles for typography and Prose UI components, scoped under the `prose-ui` ancestor CSS class.
 
-In Next.js, it's recommended to import these styles into your `globals.css` file:
+In Next.js, it's recommended to import these styles into your `globals.css` file.
 
 ```css title="globals.css"
-@import '@prose-ui/next/prose-ui.css'
+@import '@prose-ui/next/prose-ui.css';
+@import '@prose-ui/next/katex.min.css';
 ```
+
+The `katex.min.css` import is required only if you use math formulas.
 
 Prose UI uses the presence of the `dark` CSS class on the `<html>` element to determine whether to render content in dark mode.
 
@@ -43,14 +55,15 @@ The easiest way to customize styles is by overriding the CSS variables defined i
 ## Remark plugins
 
 The `remarkPlugins(options)` function from `@prose-ui/core` enables essential 
-features such as converting Markdown images to optimized `next/image` components 
-and Markdown links to `next/link` components.
+features such as converting Markdown images to optimized `next/image` components, 
+Markdown links to `next/link` components, and LaTeX math formulas to KaTeX-rendered 
+components using `$...$` for inline math and `$$...$$` for block math.
 
 ```typescript
 import { remarkPlugins } from '@prose-ui/core'
 ```
 
-The function accepts an optional `options` object, and returns an arary of remark plugins you can use to set up your MDX renderer.
+The function accepts an optional `options` object, and returns an array of remark plugins you can use to set up your MDX renderer.
 Here's an example:
 
 ```typescript

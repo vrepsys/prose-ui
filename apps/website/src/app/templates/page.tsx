@@ -30,7 +30,7 @@ const Templates = () => {
           <TemplateCard
             image={docsTemplate}
             title="Docs starter"
-            description="Documenatation starter with Next.js 15, Tailwind CSS v4, Content collections, Dark theme, and Prose UI for content."
+            description="Documenatation starter with Next.js 16, Tailwind CSS v4, Content collections, Dark theme, and Prose UI for content."
             previewUrl="https://prose-ui-docs-starter.vercel.app"
             sourceUrl="https://github.com/vrepsys/prose-ui-docs-starter"
           />

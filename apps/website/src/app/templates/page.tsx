@@ -23,14 +23,14 @@ const Templates = () => {
           <TemplateCard
             image={basicTemplate}
             title="Basic starter"
-            description="Barebones starter template with Next.js 15, next/mdx, and Prose UI to render MDX content."
+            description="Barebones starter template with Next.js 16, next/mdx, and Prose UI to render MDX content."
             previewUrl="https://prose-ui-basic-starter.vercel.app"
             sourceUrl="https://github.com/vrepsys/prose-ui-basic-starter"
           />
           <TemplateCard
             image={docsTemplate}
             title="Docs starter"
-            description="Documenatation starter with Next.js 15, Tailwind CSS, Content collections, Dark theme, and Prose UI for content."
+            description="Documenatation starter with Next.js 15, Tailwind CSS v4, Content collections, Dark theme, and Prose UI for content."
             previewUrl="https://prose-ui-docs-starter.vercel.app"
             sourceUrl="https://github.com/vrepsys/prose-ui-docs-starter"
           />

@@ -56,6 +56,11 @@
       },
       {
         "type": "link",
+        "name": "Math",
+        "href": "/docs/components/math"
+      },
+      {
+        "type": "link",
         "name": "Table",
         "href": "/docs/components/table"
       },

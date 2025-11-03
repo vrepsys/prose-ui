@@ -16,6 +16,12 @@ Start by creating a Next.js project, choosing defaults in the prompts.
 npx create-next-app@latest
 ```
 
+<Callout variant="danger">
+  Note that if you're using `@next/mdx`, as we do in this example setup, you have to make sure your project is using Webpack and not Turbopack.
+
+  Next.js 16 comes with Turbopack by default, so you'll need to disable it explicitly when creating the project with the npx command above.
+</Callout>
+
 Enter your project’s folder and install the dependencies for rendering MDX and Prose UI. We're using pnpm, but feel free to use your preferred package manager.
 
 ```bash title="Add npm packages"

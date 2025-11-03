@@ -10,7 +10,27 @@
   "type": "module",
   "exports": {
     ".": "./dist/index.js",
-    "./metadata": "./dist/metadata.js"
+    "./metadata": "./dist/metadata.js",
+    "./remark-code-block": {
+      "types": "./dist/remark/remark-code-block.d.ts",
+      "default": "./dist/remark/remark-code-block.js"
+    },
+    "./remark-image": {
+      "types": "./dist/remark/remark-image.d.ts",
+      "default": "./dist/remark/remark-image.js"
+    },
+    "./remark-inline-math": {
+      "types": "./dist/remark/remark-inline-math.d.ts",
+      "default": "./dist/remark/remark-inline-math.js"
+    },
+    "./remark-block-math": {
+      "types": "./dist/remark/remark-block-math.d.ts",
+      "default": "./dist/remark/remark-block-math.js"
+    },
+    "./remark-link": {
+      "types": "./dist/remark/remark-link.d.ts",
+      "default": "./dist/remark/remark-link.js"
+    }
   },
   "files": [
     "dist",

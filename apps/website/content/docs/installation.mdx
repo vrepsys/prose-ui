@@ -28,12 +28,27 @@ Enter your project’s folder and install the dependencies for rendering MDX and
 pnpm add @prose-ui/core @prose-ui/next @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
 ```
 
+<Callout variant="info">
+Building for a non-Next.js React runtime (Vite, CRA, Remix, etc.)? Install `@prose-ui/react` instead of `@prose-ui/next`, and use the same APIs shown below.
+</Callout>
 ## Set up MDX components
 
 Create an `mdx-components.tsx` file in the root of your project. This file will be used to override the default components used by MDX.
 
 ```tsx title="mdx-components.tsx" showLineNumbers
 import { mdxComponents } from "@prose-ui/next";
+import type { MDXComponents } from "mdx/types";
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...components,
+    ...mdxComponents,
+  };
+}
+```
+
+```tsx title="mdx-components.tsx (generic React)"
+import { mdxComponents } from "@prose-ui/react";
 import type { MDXComponents } from "mdx/types";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -85,6 +100,11 @@ Next, go to your `src/app/globals.css` file and import Prose UI styles at the to
 ```css title="globals.css"
 @import "@prose-ui/next/prose-ui.css";
 @import "@prose-ui/next/katex.min.css";
+```
+
+```css title="globals.css (generic React)"
+@import "@prose-ui/react/prose-ui.css";
+@import "@prose-ui/react/katex.min.css";
 ```
 
 The `katex.min.css` import is required only if you use math formulas.

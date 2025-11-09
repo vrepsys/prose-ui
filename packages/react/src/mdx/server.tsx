@@ -1,14 +1,13 @@
 import { MDXComponents } from 'mdx/types'
-import Link from 'next/link'
 import { Callout } from './callout'
 import { Caption } from './caption'
 import { CodeBlock } from './code-block/code-block'
-import { codeToHtml } from './code-block/highlighter'
 import { Frame } from './frame'
 import { Heading, type Props as HeadingProps } from './heading'
-import { Image } from './image'
-import { InlineMath} from './inline-math'
+import { Image, type ImageProps } from './image'
+import { InlineMath } from './inline-math'
 import { BlockMath } from './block-math'
+import { Link, type LinkProps } from './link'
 
 type HeadingPropsWithoutLevel = Omit<HeadingProps, 'level'>
 
@@ -19,9 +18,7 @@ const h4 = (props: HeadingPropsWithoutLevel) => <Heading level={4} {...props} />
 const h5 = (props: HeadingPropsWithoutLevel) => <Heading level={5} {...props} />
 const h6 = (props: HeadingPropsWithoutLevel) => <Heading level={6} {...props} />
 
-export { Callout, CodeBlock, codeToHtml, Frame, Heading, Image, Link, InlineMath, BlockMath }
-
-export const mdxComponents: MDXComponents = {
+const baseComponents = {
   InlineMath,
   BlockMath,
   Callout,
@@ -36,4 +33,20 @@ export const mdxComponents: MDXComponents = {
   h4,
   h5,
   h6,
-} as any as MDXComponents
+}
+
+export type ProseUIMdxComponents = typeof baseComponents
+export type ProseUILinkProps = LinkProps
+export type ProseUIImageProps = ImageProps
+
+export const createMdxComponents = (overrides: Partial<ProseUIMdxComponents> = {}) => {
+  return {
+    ...baseComponents,
+    ...overrides,
+  } as MDXComponents
+}
+
+export const mdxComponents = createMdxComponents()
+
+export { Callout, CodeBlock, Frame, Heading, Image, Link, InlineMath, BlockMath, Caption }
+export { CodeBlockClient } from './code-block/code-block-client'

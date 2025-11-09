@@ -1,3 +1,5 @@
+'use client'
+
 import { ScrollArea } from '../../ui/scroll-area'
 import { CopyButton } from './copy-button'
 import { Props } from './props'

@@ -4,18 +4,21 @@ If you just want to start using Prose UI quickly, feel free to jump to the [inst
 
 Prose UI consists of 3 main elements:
 - **React components**\
-Available in `@prose-ui/next`
+Available in `@prose-ui/react` for any React runtime, with Next-specific overrides shipped from `@prose-ui/next`.
 - **CSS styles**\
-Available in `@prose-ui/next/prose-ui.css`, and `@prose-ui/next/katex.min.css`
+Available in both `@prose-ui/react/prose-ui.css` and `@prose-ui/next/prose-ui.css` (plus their matching `katex.min.css` entries).
 - **Remark plugins**\
 Available in `@prose-ui/core`
 
 ## React components
 
-The `mdxComponents` array from `@prose-ui/next` includes React server components necessary for rendering elements such as highlighted code blocks, callouts, images, headings, frames, and math formulas.
+The `mdxComponents` array from `@prose-ui/react` includes React server components necessary for rendering elements such as highlighted code blocks, callouts, images, headings, frames, and math formulas. Next.js users can rely on `@prose-ui/next`, which re-exports the same surface but swaps in `next/link` and `next/image` under the hood.
 
 ```js
-import { mdxComponents } from "@prose-ui/next"
+import { mdxComponents } from "@prose-ui/react"
+
+// Next.js projects can continue importing from:
+// import { mdxComponents } from "@prose-ui/next"
 ```
 
 Prose UI also exports these components individually for use outside of MDX.
@@ -30,14 +33,21 @@ import {
   Link,
   InlineMath,
   BlockMath,
-} from "@prose-ui/next"
+} from "@prose-ui/react"
 ```
 
 ## CSS styles
 
-CSS styles from `@prose-ui/next/prose-ui.css` provide default styles for typography and Prose UI components, scoped under the `prose-ui` ancestor CSS class.
+CSS styles from `@prose-ui/react/prose-ui.css` (or the matching path under `@prose-ui/next`) provide default styles for typography and Prose UI components, scoped under the `prose-ui` ancestor CSS class.
 
 In Next.js, it's recommended to import these styles into your `globals.css` file.
+
+```css title="globals.css"
+@import '@prose-ui/react/prose-ui.css';
+@import '@prose-ui/react/katex.min.css';
+```
+
+If you're using the Next.js-specific entry point, you can keep the previous imports:
 
 ```css title="globals.css"
 @import '@prose-ui/next/prose-ui.css';
@@ -49,14 +59,14 @@ The `katex.min.css` import is required only if you use math formulas.
 Prose UI uses the presence of the `dark` CSS class on the `<html>` element to determine whether to render content in dark mode.
 
 <Callout variant="tip" title="Customize styles">
-The easiest way to customize styles is by overriding the CSS variables defined in [`@prose-ui/next/prose-ui.css`](https://github.com/vrepsys/prose-ui/blob/main/packages/next/prose-ui.css).
+The easiest way to customize styles is by overriding the CSS variables defined in [`@prose-ui/react/prose-ui.css`](https://github.com/vrepsys/prose-ui/blob/main/packages/styles/dist/prose-ui.css).
 </Callout>
 
 ## Remark plugins
 
 The `remarkPlugins(options)` function from `@prose-ui/core` enables essential 
-features such as converting Markdown images to optimized `next/image` components, 
-Markdown links to `next/link` components, and LaTeX math formulas to KaTeX-rendered 
+features such as converting Markdown images to `<Image />` components (which the Next package upgrades to `next/image`), 
+Markdown links to `<Link />` components (Next upgrades these to `next/link`), and LaTeX math formulas to KaTeX-rendered 
 components using `$...$` for inline math and `$$...$$` for block math.
 
 ```typescript

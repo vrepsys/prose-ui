@@ -1,6 +1,10 @@
 {
   "name": "prose-ui",
   "private": true,
+  "resolutions": {
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",

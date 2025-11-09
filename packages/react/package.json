@@ -1,0 +1,57 @@
+{
+  "name": "@prose-ui/react",
+  "version": "1.0.8-rc.0",
+  "license": "MIT",
+  "homepage": "https://prose-ui.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vrepsys/prose-ui.git"
+  },
+  "scripts": {
+    "build": "rm -rf dist prose-ui.css katex.min.css fonts && tsc && cp ../styles/dist/prose-ui.css ./ && node scripts/copy-katex-css.cjs",
+    "watch": "nodemon -e ts,tsx,json --watch src --watch package.json --exec 'pnpm build'"
+  },
+  "type": "module",
+  "files": [
+    "dist",
+    "prose-ui.css",
+    "katex.min.css",
+    "fonts",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "react-server": "./dist/mdx/server.js"
+    },
+    "./prose-ui.css": "./prose-ui.css",
+    "./katex.min.css": "./katex.min.css"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "devDependencies": {
+    "@prose-ui/styles": "workspace:*",
+    "@prose-ui/tsconfig": "workspace:*",
+    "@turbo/gen": "^2.6.0",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "@types/react-katex": "^3.0.4",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@radix-ui/react-scroll-area": "^1.2.1",
+    "clsx": "^2.1.1",
+    "html-entities": "^2.6.0",
+    "lucide-react": "^0.552.0",
+    "react-katex": "^3.1.0",
+    "shiki": "^3.14.0",
+    "slugify": "^1.6.6"
+  }
+}

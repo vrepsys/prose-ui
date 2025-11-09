@@ -8,7 +8,7 @@
     "url": "git+https://github.com/vrepsys/prose-ui.git"
   },
   "scripts": {
-    "build": "rm -rf dist prose-ui.css && tsc && cp ../styles/dist/prose-ui.css ./",
+    "build": "rm -rf dist prose-ui.css katex.min.css fonts && tsc && cp ../styles/dist/prose-ui.css ./ && node scripts/copy-katex-css.cjs",
     "watch": "nodemon -e ts,tsx,json --watch src --watch package.json --exec 'pnpm build'",
     "patch:beta": "pnpm version prerelease --preid=beta",
     "bump:rc": "pnpm version prerelease --preid=rc --no-git-tag-version",
@@ -29,44 +29,28 @@
       "import": "./dist/index.js",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts",
-      "react-server": "./dist/mdx/server.js"
+      "react-server": "./dist/mdx.js"
     },
     "./prose-ui.css": "./prose-ui.css",
     "./katex.min.css": "./katex.min.css"
   },
   "peerDependencies": {
     "next": "^14 || ^15 || ^16",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
   },
   "devDependencies": {
-    "@prose-ui/core": "workspace:*",
     "@prose-ui/styles": "workspace:*",
     "@prose-ui/tsconfig": "workspace:*",
-    "@turbo/gen": "^2.6.0",
-    "@types/mdast": "^4.0.4",
-    "@types/mdx": "^2.0.13",
     "@types/node": "^24.10.0",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
     "@types/react-katex": "^3.0.4",
     "next": "^16.0.1",
-    "react": "^19.0.0-rc-66855b96-20241106",
-    "sharp": "^0.34.4",
-    "typescript": "^5.3.3",
-    "webpack": "^5"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@radix-ui/react-scroll-area": "^1.2.1",
-    "clsx": "^2.1.1",
-    "hast-util-to-jsx-runtime": "^2.3.0",
-    "lucide-react": "^0.552.0",
-    "mdast-util-mdx-expression": "^2.0.0",
-    "mdast-util-mdx-jsx": "^3.1.2",
-    "react-katex": "^3.1.0",
-    "remark": "^15.0.1",
-    "shiki": "^3.14.0",
-    "slugify": "^1.6.6",
-    "unified": "^11.0.4",
-    "unist-util-visit": "^5.0.0"
+    "@prose-ui/react": "workspace:*"
   }
 }

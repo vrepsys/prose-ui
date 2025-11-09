@@ -572,6 +572,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'flex-direction': 'column',
       'gap': ds.spacing.space1,
       'border-left-width': ds.spacing.space1,
+      'border-left-style': 'solid',
       'padding-left': ds.spacing.space2,
       'padding-right': ds.spacing.space2,
       'padding-top': ds.spacing.space1,

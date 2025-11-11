@@ -1,4 +1,4 @@
-import { MDXComponents } from 'mdx/types'
+import type { MDXComponents } from 'mdx/types.js'
 import { Callout } from './callout.js'
 import { Caption } from './caption.js'
 import { CodeBlock } from './code-block/code-block.js'
@@ -49,4 +49,3 @@ export const createMdxComponents = (overrides: Partial<ProseUIMdxComponents> = {
 export const mdxComponents = createMdxComponents()
 
 export { Callout, CodeBlock, Frame, Heading, Image, Link, InlineMath, BlockMath, Caption }
-export { CodeBlockClient } from './code-block/code-block-client'

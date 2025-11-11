@@ -1,5 +1,5 @@
 {
-  "extends": "@prose-ui/tsconfig/react-library.json",
+  "extends": "@prose-ui/tsconfig/react-esm.json",
   "compilerOptions": {
     "outDir": "dist"
   },

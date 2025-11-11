@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { classes } from '../classes'
+import { classes } from '../classes.js'
 
 type Props = {
   title?: string

@@ -1,5 +1,6 @@
 import { HTMLAttributes } from 'react'
-import slugify from 'slugify'
+import * as slugifyModule from 'slugify'
+const slugify = (slugifyModule as any).default || slugifyModule
 
 export type Props = {
   level: 1 | 2 | 3 | 4 | 5 | 6

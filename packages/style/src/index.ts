@@ -7,8 +7,8 @@ import type {
   CssVar,
   DesignSystem,
   TextStyle,
-} from './ds'
-import { cssSystem, cssVariables, MEDIA_ABOVE_LARGE } from './ds'
+} from './ds/index.js'
+import { cssSystem, cssVariables, MEDIA_ABOVE_LARGE } from './ds/index.js'
 import {
   slateDark,
   blueDark,
@@ -22,7 +22,7 @@ import {
   red,
 } from '@radix-ui/colors'
 
-import { hexToHsl } from './utils/hex-to-hsl'
+import { hexToHsl } from './utils/hex-to-hsl.js'
 
 const hsl = (color: string) => {
   return color.startsWith('#') ? hexToHsl(color) : color

@@ -1,4 +1,4 @@
-import { allStyles } from '..'
+import { allStyles } from '../../dist/index.js'
 import postcss from 'postcss'
 import { parse as postcssJsParse } from 'postcss-js'
 import nested from 'postcss-nested'

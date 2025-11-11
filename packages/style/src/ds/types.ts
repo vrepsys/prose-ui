@@ -1,4 +1,4 @@
-import type { CssValue, DesignSpec } from './ds'
+import type { CssValue, DesignSpec } from './ds.js'
 
 export type Base = Core & Colors
 export type DesignSystem = Base & Components

@@ -1,13 +1,13 @@
 import { MDXComponents } from 'mdx/types'
-import { Callout } from './callout'
-import { Caption } from './caption'
-import { CodeBlock } from './code-block/code-block'
-import { Frame } from './frame'
-import { Heading, type Props as HeadingProps } from './heading'
-import { Image, type ImageProps } from './image'
-import { InlineMath } from './inline-math'
-import { BlockMath } from './block-math'
-import { Link, type LinkProps } from './link'
+import { Callout } from './callout.js'
+import { Caption } from './caption.js'
+import { CodeBlock } from './code-block/code-block.js'
+import { Frame } from './frame.js'
+import { Heading, type Props as HeadingProps } from './heading.js'
+import { Image, type ImageProps } from './image.js'
+import { InlineMath } from './inline-math.js'
+import { BlockMath } from './block-math.js'
+import { Link, type LinkProps } from './link.js'
 
 type HeadingPropsWithoutLevel = Omit<HeadingProps, 'level'>
 

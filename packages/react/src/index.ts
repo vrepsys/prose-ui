@@ -1,1 +1,1 @@
-export * from './mdx'
+export * from './mdx/index.js'

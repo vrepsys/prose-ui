@@ -1,8 +1,8 @@
 'use client'
 
 import { ScrollArea } from '../../ui/scroll-area'
-import { CopyButton } from './copy-button'
-import { Props } from './props'
+import { CopyButton } from './copy-button.js'
+import { Props } from './props.js'
 
 export const HighlightedCodeBlock = ({
   highlightedCode,

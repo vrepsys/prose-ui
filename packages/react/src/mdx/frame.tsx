@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Caption } from './caption'
+import { Caption } from './caption.js'
 
 type Props = {
   align?: 'left' | 'right' | 'center' | 'stretch'

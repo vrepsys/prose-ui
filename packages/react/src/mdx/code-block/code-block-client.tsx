@@ -2,9 +2,9 @@
 
 import { ReactNode, isValidElement, useEffect, useState } from 'react'
 import { decode } from 'html-entities'
-import { codeToHtml } from './highlighter'
-import { Props } from './props'
-import { HighlightedCodeBlock } from './highlighted-code-block'
+import { codeToHtml } from './highlighter.js'
+import { Props } from './props.js'
+import { HighlightedCodeBlock } from './highlighted-code-block.js'
 
 function extractCodeString(children: ReactNode): string {
   if (typeof children === 'string') {

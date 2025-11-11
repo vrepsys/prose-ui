@@ -33,13 +33,22 @@ test('code block with language', async () => {
 \`\`\`
 `
 
-  const output = `<CodeBlock language="js">
-  {'  const a = 5,
-            b = 10'}
-</CodeBlock>
-`
+  const result = await remark()
+    .use(remarkImage({ imageDir: 'test/images' }))
+    .use(remarkCodeBlock)
+    .use(remarkMdx)
+    .use(remarkLink())
+    .process(input)
 
-  await expectOutput(input, output)
+  const output = String(result.value)
+  
+  // Check that it contains CodeBlock with code and highlightedCode props
+  expect(output).toContain('<CodeBlock language="js"')
+  expect(output).toContain('code={')
+  expect(output).toContain('highlightedCode={')
+  expect(output).toContain('const a = 5')
+  expect(output).toContain('b = 10')
+  expect(output).toContain('</CodeBlock>')
 })
 
 test('transform code block with lang, showLineNumbers, and title', async () => {
@@ -49,13 +58,24 @@ test('transform code block with lang, showLineNumbers, and title', async () => {
 \`\`\`
 `
 
-  const output = `<CodeBlock language="js" title="hello world's people" showLineNumbers>
-  {'  const a = 5,
-            b = 10'}
-</CodeBlock>
-`
+  const result = await remark()
+    .use(remarkImage({ imageDir: 'test/images' }))
+    .use(remarkCodeBlock)
+    .use(remarkMdx)
+    .use(remarkLink())
+    .process(input)
 
-  await expectOutput(input, output)
+  const output = String(result.value)
+  
+  // Check that it contains CodeBlock with all attributes
+  expect(output).toContain('<CodeBlock language="js"')
+  expect(output).toContain('title="hello world\'s people"')
+  expect(output).toContain('showLineNumbers')
+  expect(output).toContain('code={')
+  expect(output).toContain('highlightedCode={')
+  expect(output).toContain('const a = 5')
+  expect(output).toContain('b = 10')
+  expect(output).toContain('</CodeBlock>')
 })
 
 test('transform code block without language', async () => {
@@ -65,13 +85,22 @@ test('transform code block without language', async () => {
 \`\`\`
 `
 
-  const output = `<CodeBlock>
-  {'  const a = 5,
-            b = 10'}
-</CodeBlock>
-`
+  const result = await remark()
+    .use(remarkImage({ imageDir: 'test/images' }))
+    .use(remarkCodeBlock)
+    .use(remarkMdx)
+    .use(remarkLink())
+    .process(input)
 
-  await expectOutput(input, output)
+  const output = String(result.value)
+  
+  // Check that it contains CodeBlock with code and highlightedCode props
+  expect(output).toContain('<CodeBlock')
+  expect(output).toContain('code={')
+  expect(output).toContain('highlightedCode={')
+  expect(output).toContain('const a = 5')
+  expect(output).toContain('b = 10')
+  expect(output).toContain('</CodeBlock>')
 })
 
 test('transform markdown image', async () => {

@@ -60,13 +60,13 @@
     "@types/unist": "^3.0.2",
     "remark": "^15.0.1",
     "remark-mdx": "^3.0.1",
-    "sharp": "^0.33.5",
     "typescript": "^5.4.5",
     "vitest": "^2.1.4"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^2.2.1",
     "acorn": "^8.12.1",
+    "sharp": "^0.33.5",
     "hast-util-to-string": "^3.0.0",
     "mdast-util-definitions": "^6.0.0",
     "mdast-util-directive": "^3.0.0",

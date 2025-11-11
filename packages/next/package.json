@@ -25,8 +25,7 @@
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.js",
-      "types": "./dist/index.d.ts",
-      "react-server": "./dist/mdx.js"
+      "types": "./dist/index.d.ts"
     }
   },
   "peerDependencies": {

@@ -14,7 +14,9 @@
     "bump:rc": "pnpm -r run bump:rc",
     "publish:rc": "pnpm -r run publish:rc",
     "bump:latest": "pnpm -r run bump:latest",
-    "publish:latest": "pnpm -r run publish:latest"
+    "publish:latest": "pnpm -r run publish:latest",
+    "release:rc": "pnpm build && pnpm bump:rc && pnpm publish:rc",
+    "release:latest": "pnpm build && pnpm bump:latest && pnpm publish:latest"
   },
   "devDependencies": {
     "prettier": "^3.2.5",

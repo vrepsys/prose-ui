@@ -6,7 +6,7 @@ Prose UI consists of 3 main elements:
 - **React components**\
 Available in `@prose-ui/react` for any React runtime, with Next-specific overrides shipped from `@prose-ui/next`.
 - **CSS styles**\
-Available in both `@prose-ui/react/prose-ui.css` and `@prose-ui/next/prose-ui.css` (plus their matching `katex.min.css` entries).
+Available from `@prose-ui/styles` (`prose-ui.css` plus `katex.min.css` and fonts).
 - **Remark plugins**\
 Available in `@prose-ui/core`
 
@@ -38,20 +38,13 @@ import {
 
 ## CSS styles
 
-CSS styles from `@prose-ui/react/prose-ui.css` (or the matching path under `@prose-ui/next`) provide default styles for typography and Prose UI components, scoped under the `prose-ui` ancestor CSS class.
+CSS styles from `@prose-ui/styles/prose-ui.css` provide default typography and component styles scoped under the `prose-ui` ancestor CSS class.
 
-In Next.js, it's recommended to import these styles into your `globals.css` file.
-
-```css title="globals.css"
-@import '@prose-ui/react/prose-ui.css';
-@import '@prose-ui/react/katex.min.css';
-```
-
-If you're using the Next.js-specific entry point, you can keep the previous imports:
+In Next.js (or any React runtime), import these styles into your global stylesheet:
 
 ```css title="globals.css"
-@import '@prose-ui/next/prose-ui.css';
-@import '@prose-ui/next/katex.min.css';
+@import '@prose-ui/styles/prose-ui.css';
+@import '@prose-ui/styles/katex.min.css';
 ```
 
 The `katex.min.css` import is required only if you use math formulas.
@@ -59,7 +52,7 @@ The `katex.min.css` import is required only if you use math formulas.
 Prose UI uses the presence of the `dark` CSS class on the `<html>` element to determine whether to render content in dark mode.
 
 <Callout variant="tip" title="Customize styles">
-The easiest way to customize styles is by overriding the CSS variables defined in [`@prose-ui/react/prose-ui.css`](https://github.com/vrepsys/prose-ui/blob/main/packages/styles/dist/prose-ui.css).
+The easiest way to customize styles is by overriding the CSS variables defined in [`@prose-ui/styles/prose-ui.css`](https://github.com/vrepsys/prose-ui/blob/main/packages/styles/dist/prose-ui.css).
 </Callout>
 
 ## Remark plugins

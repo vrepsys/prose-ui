@@ -1,5 +1,5 @@
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { codeToHtml } from '@prose-ui/next'
+import { highlightCode } from '@prose-ui/core'
 
 interface ExampleCodeProps {
   fileName: string
@@ -7,7 +7,7 @@ interface ExampleCodeProps {
 }
 
 export const ExampleCode = async ({ fileName, code }: ExampleCodeProps) => {
-  const html = await codeToHtml({ code, language: 'mdx' })
+  const html = await highlightCode(code, 'mdx')
 
   return (
     <div className="prose-ui flex min-w-0 flex-col">

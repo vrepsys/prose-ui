@@ -1,6 +1,6 @@
 {
   "name": "@prose-ui/next",
-  "version": "1.0.8-rc.0",
+  "version": "2.0.0",
   "license": "MIT",
   "homepage": "https://prose-ui.com",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "git+https://github.com/vrepsys/prose-ui.git"
   },
   "scripts": {
-    "build": "rm -rf dist prose-ui.css katex.min.css fonts && tsc && cp ../styles/dist/prose-ui.css ./ && node scripts/copy-katex-css.cjs",
+    "build": "rm -rf dist && tsc",
     "watch": "nodemon -e ts,tsx,json --watch src --watch package.json --exec 'pnpm build'",
     "patch:beta": "pnpm version prerelease --preid=beta",
     "bump:rc": "pnpm version prerelease --preid=rc --no-git-tag-version",
@@ -19,9 +19,6 @@
   "type": "module",
   "files": [
     "dist",
-    "prose-ui.css",
-    "katex.min.css",
-    "fonts",
     "README.md"
   ],
   "exports": {
@@ -30,9 +27,7 @@
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "react-server": "./dist/mdx.js"
-    },
-    "./prose-ui.css": "./prose-ui.css",
-    "./katex.min.css": "./katex.min.css"
+    }
   },
   "peerDependencies": {
     "next": "^14 || ^15 || ^16",
@@ -41,7 +36,7 @@
     "react-dom": "^18 || ^19"
   },
   "devDependencies": {
-    "@prose-ui/styles": "workspace:*",
+    "@prose-ui/style": "workspace:*",
     "@prose-ui/tsconfig": "workspace:*",
     "@types/node": "^24.10.0",
     "@types/react": "^19.0.1",

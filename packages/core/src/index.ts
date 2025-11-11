@@ -7,6 +7,8 @@ import remarkBlockMath from './remark/remark-block-math.js'
 import remarkLink, { Options as LinkOptions } from './remark/remark-link.js'
 import type { Plugin } from 'unified'
 
+export { highlightCode } from './highlight-code.js'
+
 export type Options = {
   link?: LinkOptions
   image?: ImageOptions

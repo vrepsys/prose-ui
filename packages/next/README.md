@@ -5,7 +5,14 @@
 ## Installation
 
 ```sh
-$ npm install @prose-ui/next
+$ npm install @prose-ui/next @prose-ui/styles
+```
+
+Import the shared styles (and optional KaTeX bundle) from `@prose-ui/styles` inside your global stylesheet:
+
+```css
+@import "@prose-ui/styles/prose-ui.css";
+@import "@prose-ui/styles/katex.min.css";
 ```
 
 For React runtimes outside of Next.js, install `@prose-ui/react` instead.

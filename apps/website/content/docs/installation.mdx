@@ -25,11 +25,11 @@ npx create-next-app@latest
 Enter your project’s folder and install the dependencies for rendering MDX and Prose UI. We're using pnpm, but feel free to use your preferred package manager.
 
 ```bash title="Add npm packages"
-pnpm add @prose-ui/core @prose-ui/next @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
+pnpm add @prose-ui/core @prose-ui/next @prose-ui/styles @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
 ```
 
 <Callout variant="info">
-Building for a non-Next.js React runtime (Vite, CRA, Remix, etc.)? Install `@prose-ui/react` instead of `@prose-ui/next`, and use the same APIs shown below.
+Building for a non-Next.js React runtime (Vite, CRA, Remix, etc.)? Install `@prose-ui/react` instead of `@prose-ui/next`, keep `@prose-ui/styles`, and use the same APIs shown below.
 </Callout>
 ## Set up MDX components
 
@@ -98,13 +98,8 @@ Go to your `app/layout.tsx` and replace the content it returns with the code bel
 Next, go to your `src/app/globals.css` file and import Prose UI styles at the top:
 
 ```css title="globals.css"
-@import "@prose-ui/next/prose-ui.css";
-@import "@prose-ui/next/katex.min.css";
-```
-
-```css title="globals.css (generic React)"
-@import "@prose-ui/react/prose-ui.css";
-@import "@prose-ui/react/katex.min.css";
+@import "@prose-ui/styles/prose-ui.css";
+@import "@prose-ui/styles/katex.min.css";
 ```
 
 The `katex.min.css` import is required only if you use math formulas.

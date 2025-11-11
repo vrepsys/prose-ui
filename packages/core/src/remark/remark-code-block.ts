@@ -4,29 +4,9 @@ import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { attr, attrValueExpression, flowElement, flowExpression } from '../factories/mdx.js'
 import { estree, expressionStatement, literalExpression } from '../factories/estree.js'
-import { createCssVariablesTheme, createHighlighter, makeSingletonHighlighter } from 'shiki'
-import { bundledLanguages } from 'shiki/bundle/web'
+import { highlightCode } from '../highlight-code.js'
 
 const TITLE_REGEX = /title=(['"])(?<title>.*)(\1)/i
-
-const getHighlighter = makeSingletonHighlighter(createHighlighter)
-
-const proseUITheme = createCssVariablesTheme({
-  name: 'custom',
-  variablePrefix: '--shiki-',
-})
-
-const highlightCode = async (code: string, language: string) => {
-  const highlighter = await getHighlighter({
-    langs: [...Object.keys(bundledLanguages)],
-    themes: [proseUITheme],
-  })
-
-  return highlighter.codeToHtml(code, {
-    lang: language,
-    theme: 'custom',
-  })
-}
 
 const remarkCodeBlock: Plugin<[], Root> = () => {
   return async (tree) => {

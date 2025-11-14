@@ -12,7 +12,7 @@ export const HighlightedCodeBlock = ({
 }: Omit<Props, 'children'> & { highlightedCode: any; code: string }) => {
   const lines = code.trim().split(/\r\n|\r|\n/)
   const attrs = {
-    'data-show-line-nubmers': showLineNumbers ? '' : undefined,
+    'data-show-line-numbers': showLineNumbers ? '' : undefined,
     'data-has-title': title ? '' : undefined,
   }
   return (

@@ -10,18 +10,34 @@
       },
       {
         "type": "link",
-        "name": "How it works",
+        "name": "Roadmap",
+        "href": "/docs/roadmap"
+      }
+    ]
+  },
+  {
+    "type": "category",
+    "name": "Installation",
+    "children": [
+      {
+        "type": "link",
+        "name": "Overview",
         "href": "/docs/how-it-works"
       },
       {
         "type": "link",
-        "name": "Installation",
-        "href": "/docs/installation"
+        "name": "Next.js",
+        "href": "/docs/nextjs"
       },
       {
         "type": "link",
-        "name": "Roadmap",
-        "href": "/docs/roadmap"
+        "name": "TanStack Start",
+        "href": "/docs/tanstack-start"
+      },
+      {
+        "type": "link",
+        "name": "Custom Setup",
+        "href": "/docs/custom-setup"
       }
     ]
   },

@@ -32,7 +32,8 @@
   "devDependencies": {
     "@content-collections/core": "^0.7.2",
     "@content-collections/mdx": "^0.2.0",
-    "@content-collections/next": "^0.2.8",
+    "@content-collections/next": "^0.2.9",
+    "@mdx-js/esbuild": "^3.1.1",
     "@prose-ui/core": "workspace:*",
     "@prose-ui/next": "workspace:*",
     "@prose-ui/style": "workspace:*",

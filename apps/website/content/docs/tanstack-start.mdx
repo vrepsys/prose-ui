@@ -1,0 +1,92 @@
+# Tanstack Start
+
+```
+pnpm create @tanstack/start@latest
+```
+
+```
+pnpm add @prose-ui/core @prose-ui/react
+```
+
+```
+pnpm install
+```
+
+#### Instructions for content collections
+
+```
+pnpm add @content-collections/core @content-collections/vite @content-collections/mdx zod -D
+```
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    // ...
+    "paths": {
+      "@/*": ["./src/*"],
+      "content-collections": ["./.content-collections/generated"]
+    }
+  }
+}
+```
+
+```javascript title="vite.config.js"
+import contentCollections from "@content-collections/vite";
+// ...
+ 
+export default defineConfig({
+  vite: {
+    plugins: [
+      contentCollections(),
+      tsConfigPaths({
+        projects: ["./tsconfig.json"],
+      }),
+      tanstackStart({ customViteReactPlugin: true }),
+      viteReact()
+    ],
+  },
+});
+```
+
+```title=".gitignore"
+.content-collections
+```
+
+Create file
+
+```title="content-collections.ts"
+import { defineCollection, defineConfig } from "@content-collections/core";
+import { z } from "zod";
+ 
+const pages = defineCollection({
+  name: "posts",
+  directory: "content/posts",
+  include: "**/*.md",
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    content: z.string(),
+  }),
+});
+ 
+export default defineConfig({
+  collections: [pages],
+});
+```
+
+Create a folder `content/pages` and add your a page
+
+```title="content/pages/index.mdx"
+---
+title: "Hello world"
+summary: "This is my first post!"
+---
+ 
+# Hello world
+ 
+This is my first post!
+
+<Callout type='tip'>
+   Hello
+</Callout>
+```

@@ -1,0 +1,130 @@
+# Installation Overview
+
+Prose UI consists of 3 main elements:
+
+- **React components**\
+  Available in `@prose-ui/react` for any React runtime, and `@prose-ui/next` for components specific to Next.js. You only need one of the two.
+- **CSS styles**\
+  Available from `@prose-ui/style`
+- **Remark plugins**\
+  Available from `@prose-ui/core`
+
+## Quick start
+
+Here's a rough overview of the basic concept of how to install Prose UI to any type of project. For a detailed example and information head to one of the pages for specific installation instructions for Next.js, TanStack Start if available.
+
+### 1. React components
+
+To make use of highlighted code blocks, use callouts and other components, you're going to need to provide Prose UI components to your MDX renderer.
+
+You can import a list of all the components from `@prose-ui/react` or `@prose-ui/next` (if you use Next.js).
+
+The `mdxComponents` array from `@prose-ui/react` includes all React components necessary for rendering elements such as highlighted code blocks, callouts, images, headings, frames, and math formulas. Next.js users can rely on `@prose-ui/next`, which re-exports the same surface but swaps in `next/link` and `next/image` under the hood.
+
+```javascript
+import { mdxComponents } from "@prose-ui/react"
+
+// Next.js projects
+// import { mdxComponents } from "@prose-ui/next"
+```
+
+So, for example, if you're using Content Collections you'd provide `mdxComponents` to the renderer this way:
+
+```javascript
+import { MDXContent } from '@content-collections/mdx/react'
+import { mdxComponents } from "@prose-ui/react"
+
+<MDXContent code={markdownContent} components={mdxComponents} />
+```
+
+<Callout variant="tip" title="You can also pick individual components you need">
+  ```
+  import {
+    Callout,
+    CodeBlock,
+    Frame,
+    Heading,
+    Image,
+    Link,
+    InlineMath,
+    BlockMath,
+    ...
+  } from "@prose-ui/react"
+  ```
+</Callout>
+
+### 2. CSS styles
+
+CSS styles from `@prose-ui/styles/prose-ui.css` provide default typography and component styles scoped under the `prose-ui` ancestor CSS class.
+
+Import these styles into your global stylesheet:
+
+```css title="globals.css"
+@import '@prose-ui/styles/prose-ui.css';
+@import '@prose-ui/styles/katex.min.css';
+```
+
+The `katex.min.css` import is required only if you use math formulas.
+
+Prose UI uses the presence of the `dark` CSS class on the `<html>` element to determine whether to render content in dark mode.
+
+For the styles to pick up, wrap your content into the `prose-ui` class.&#x20;
+
+```react
+<div className='prose-ui'>
+   Your Markdown content
+</div>
+```
+
+<Callout variant="tip" title="Customize styles">
+  The easiest way to customize styles is by overriding the CSS variables defined in [`@prose-ui/styles/prose-ui.css`](https://github.com/vrepsys/prose-ui/blob/main/packages/styles/dist/prose-ui.css).
+</Callout>
+
+### 3. Remark plugins
+
+The `remarkPlugins(options)` function from `@prose-ui/core` enables essential features such as code highlighting, rendering LaTeX math formulas, converting basic markdown to React components (images to \<Image> component which in turns converts it to `next/image` for Next.js).
+
+It is required that you initialize and provide Prose UI remark plugins into your Markdown/MDX renderer. So for example with Content Collections you'd have to pass remarkPlugins into the `compileMDX` function in your collection definition.
+
+```javascript
+import { remarkPlugins } from '@prose-ui/core'
+
+const plugins = remarkPlugins({
+  // Optional params
+  image: { 
+    imageDir: './public',
+  },
+})
+
+const content = await compileMDX(ctx, post, {
+   remarkPlugins: plugins,
+})
+```
+
+\
+
+
+\
+
+
+\
+
+
+
+
+\
+
+
+\
+
+
+\
+
+
+\
+
+
+The function accepts an optional `options` object, and returns an array of remark plugins you can use to set up your MDX renderer. Here's an example:
+
+```typescript
+```

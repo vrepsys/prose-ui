@@ -1,24 +1,30 @@
 # Installation overview
 
-Prose UI works with any React + MDX setup.  
+Prose UI works with any React + MDX setup.\
 This page gives you a high‑level overview and generic installation steps.
 
 If you’re using a specific framework like **Next.js** or **TanStack Start**, you’ll get a smoother experience by following the corresponding framework guide instead.
+
+- asdfdsaf
+
+- sadfasdfasdf
+
+- sadfasdfasdf
 
 ## General overview
 
 Prose UI has three main pieces:
 
-- **React components**  
-  Available as `@prose-ui/react` for any React runtime, and `@prose-ui/next` for [Next.js](https://nextjs.org/).  
+- **React components**\
+  Available as `@prose-ui/react` for any React runtime, and `@prose-ui/next` for [Next.js](https://nextjs.org/).\
   You only need one of these packages, and you pass its components into your MDX renderer.
 
-- **CSS styles**  
-  Available from `@prose-ui/style`.  
+- **CSS styles**\
+  Available from `@prose-ui/style`.\
   You import a single CSS file into your global styles and wrap your content in a `prose-ui` container.
 
-- **Remark plugins**  
-  Available from `@prose-ui/core`.  
+- **Remark plugins**\
+  Available from `@prose-ui/core`.\
   You add these plugins to your Markdown/MDX pipeline to enable code highlighting, math, images, and other components.
 
 The rest of this page walks through each of these pieces in a generic React + MDX setup.
@@ -50,7 +56,7 @@ import { mdxComponents } from '@prose-ui/react'
 ```
 
 <Callout variant="tip" title="You can also import individual components">
-  ```ts
+  ```typescript
   import {
     Callout,
     CodeBlock,
@@ -76,7 +82,7 @@ Import the styles into your global stylesheet:
 @import '@prose-ui/style/katex.min.css';
 ```
 
-- `prose-ui.css` – base typography and component styles  
+- `prose-ui.css` – base typography and component styles
 - `katex.min.css` – only needed if you use math formulas
 
 Then wrap your rendered Markdown/MDX content in a `prose-ui` container:
@@ -90,8 +96,7 @@ Then wrap your rendered Markdown/MDX content in a `prose-ui` container:
 Prose UI uses the `dark` class on the `<html>` element to switch to dark mode, so it plugs into most existing theme toggles.
 
 <Callout variant="info" title="Customizing styles">
-  The easiest way to customize Prose UI is by overriding the CSS variables defined in
-  `@prose-ui/style/prose-ui.css`. You can inspect the generated CSS and override the variables in your own stylesheet.
+  The easiest way to customize Prose UI is by overriding the CSS variables defined in `@prose-ui/style/prose-ui.css`. You can inspect the generated CSS and override the variables in your own stylesheet.
 </Callout>
 
 ## 3. Remark plugins
@@ -106,7 +111,7 @@ You should initialize the plugins once and pass them into your Markdown/MDX pipe
 
 For example, with Content Collections:
 
-```ts
+```typescript
 import { remarkPlugins } from '@prose-ui/core'
 
 const plugins = remarkPlugins({

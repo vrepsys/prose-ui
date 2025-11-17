@@ -1,17 +1,29 @@
 # Installation Overview
 
+For a detailed example and information head to one of the pages for specific installation instructions for Next.js, TanStack Start if available.
+
+## General overview
+
 Prose UI consists of 3 main elements:
 
 - **React components**\
-  Available in `@prose-ui/react` for any React runtime, and `@prose-ui/next` for components specific to Next.js. You only need one of the two.
+  Available in `@prose-ui/react` for any React runtime, and `@prose-ui/next` for [Next.js](http://nextjs.org/). You only need one of the two.\
+  \
+  Should be imported like below and passed into your mdx renderer.\
+  `import { mdxComponents } from '@prose-ui/react`
 - **CSS styles**\
-  Available from `@prose-ui/style`
+  Available from `@prose-ui/style`. \
+  \
+  To be imported into your global css.\
+  `@import '@prose-ui/style/prose-ui.css'`
 - **Remark plugins**\
-  Available from `@prose-ui/core`
+  Available from `@prose-ui/core`\
+  Should be imported like below and passed to your mdx renderer.\
+  `import { remarkPlugins } from '@prose-ui/core'`\
+  `const plugins = remarkPlugins()`\
 
-## Quick start
 
-Here's a rough overview of the basic concept of how to install Prose UI to any type of project. For a detailed example and information head to one of the pages for specific installation instructions for Next.js, TanStack Start if available.
+## More details
 
 ### 1. React components
 
@@ -76,7 +88,7 @@ For the styles to pick up, wrap your content into the `prose-ui` class.&#x20;
 </div>
 ```
 
-<Callout variant="tip" title="Customize styles">
+<Callout variant="info" title="Customize styles">
   The easiest way to customize styles is by overriding the CSS variables defined in [`@prose-ui/styles/prose-ui.css`](https://github.com/vrepsys/prose-ui/blob/main/packages/styles/dist/prose-ui.css).
 </Callout>
 
@@ -99,32 +111,4 @@ const plugins = remarkPlugins({
 const content = await compileMDX(ctx, post, {
    remarkPlugins: plugins,
 })
-```
-
-\
-
-
-\
-
-
-\
-
-
-
-
-\
-
-
-\
-
-
-\
-
-
-\
-
-
-The function accepts an optional `options` object, and returns an array of remark plugins you can use to set up your MDX renderer. Here's an example:
-
-```typescript
 ```

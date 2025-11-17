@@ -1,12 +1,4 @@
-# Installation
-
-While the easiest way to start a new project with Prose UI is by cloning one of the [templates](/templates), we provide the instructions below to help you set up a brand-new project with Prose UI on your own.
-
-Here's how to create and configure a [Next.js](https://nextjs.org) project with [next/mdx](https://nextjs.org/docs/pages/building-your-application/configuring/mdx) and Prose UI.
-
-<Callout title="Note">
-  Note that this is a very basic setup. For an example that uses an MDX bundler, content collections, and a separate MDX content folder, refer to our [docs starter template](/templates).
-</Callout>
+# Installation: Next.js + Content Collections + Prose UI
 
 ## Create a new project and install dependencies
 
@@ -16,22 +8,61 @@ Start by creating a Next.js project, choosing defaults in the prompts.
 npx create-next-app@latest
 ```
 
-<Callout variant="danger">
-  Note that if you're using `@next/mdx`, as we do in this example setup, you have to make sure your project is using Webpack and not Turbopack.
+## Set up MDX rendering with Content Collections
 
-  Next.js 16 comes with Turbopack by default, so you'll need to disable it explicitly when creating the project with the npx command above.
+[Content Collections](https://www.content-collections.dev/docs/quickstart/next) is a library that will help us to keep our mdx content organized, and will render our MDX files.
+
+Follow [Content Collections Next.js](https://www.content-collections.dev/docs/quickstart/next) and [MDX guides](https://www.content-collections.dev/docs/content/mdx) to set up your project.
+
+<Callout variant="note">
+  You can set up Prose UI with `next/mdx` as well. But we're going to use Content Collections library in this example because it will help us keep our Markdown files organized in a single folder, and provide a better developer experience.&#x20;
 </Callout>
 
-Enter your project’s folder and install the dependencies for rendering MDX and Prose UI. We're using pnpm, but feel free to use your preferred package manager.
+## Set up Prose UI
 
-```bash title="Add npm packages"
-pnpm add @prose-ui/core @prose-ui/next @prose-ui/styles @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
+Install dependencies
+
+```bash
+pnpm add @prose-ui/core @prose-ui/next @prose-ui/style
 ```
 
-<Callout variant="info">
-Building for a non-Next.js React runtime (Vite, CRA, Remix, etc.)? Install `@prose-ui/react` instead of `@prose-ui/next`, keep `@prose-ui/styles`, and use the same APIs shown below.
-</Callout>
-## Set up MDX components
+Import styles into your `globals.css`.
+
+```css
+@import "@prose-ui/style/prose-ui.css";
+@import "@prose-ui/style/katex.min.css";
+```
+
+In your `content-collections.ts` initialize and pass remarkPlugins to the MDX compiler.
+
+```typescript title="content-collections.ts"
+import { remarkPlugins } from '@prose-ui/core'
+
+
+const content = await compileMDX(ctx, page, {
+   remarkPlugins: remarkPlugins(),
+})
+```
+
+In your page.tsx where you render your Markdown pass Prose UI `mdxComponents` into the MDXContent, and wrap the content into a tag with a `prose-ui` css class.
+
+```typescript title="page.tsx"
+import { mdxComponents } from '@prose-ui/next'
+
+<article className='prose-ui'>
+   <MDXContent code={page.content} components={mdxComponents} />
+</article>
+```
+
+
+
+
+
+
+
+
+
+## Old
 
 Create an `mdx-components.tsx` file in the root of your project. This file will be used to override the default components used by MDX.
 

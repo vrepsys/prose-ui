@@ -1,8 +1,8 @@
-# Installation: Next.js + Content Collections + Prose UI
+# Prose UI with Next.js and Content Collections
 
-## Create a new project and install dependencies
+## Create a new project
 
-Start by creating a Next.js project, choosing defaults in the prompts.
+Start by creating a Next.js project, choosing the recommended Next.js defaults in the prompt.
 
 ```bash title="Create a new Next.js project"
 npx create-next-app@latest
@@ -10,20 +10,83 @@ npx create-next-app@latest
 
 ## Set up MDX rendering with Content Collections
 
-[Content Collections](https://www.content-collections.dev/docs/quickstart/next) is a library that will help us to keep our mdx content organized, and will render our MDX files.
-
-Follow [Content Collections Next.js](https://www.content-collections.dev/docs/quickstart/next) and [MDX guides](https://www.content-collections.dev/docs/content/mdx) to set up your project.
+[Content Collections](https://www.content-collections.dev/docs/quickstart/next) is a library that will help us to keep our mdx content organized, and will render our MDX files. Content collections setup below is based on [Content Collections Next.js](https://www.content-collections.dev/docs/quickstart/next) and [MDX guides](https://www.content-collections.dev/docs/content/mdx).
 
 <Callout variant="note">
   You can set up Prose UI with `next/mdx` as well. But we're going to use Content Collections library in this example because it will help us keep our Markdown files organized in a single folder, and provide a better developer experience.&#x20;
 </Callout>
 
-## Set up Prose UI
+Install packages
+
+```bash
+npm install @content-collections/core @content-collections/next @content-collections/mdx zod -D
+```
+
+Add content-collections path to your `tsconfig.json`
+
+```title="tsconfig.json"
+{
+  "compilerOptions": {
+    // ...
+    "paths": {
+      "@/*": ["./*"],
+      "content-collections": ["./.content-collections/generated"]
+    }
+  }
+}
+```
+
+Modify your Next.js configuration
+
+```title="next.config.ts"
+import type { NextConfig } from "next";
+import { withContentCollections } from "@content-collections/next";
+ 
+const nextConfig: NextConfig = {};
+ 
+export default withContentCollections(nextConfig);
+```
+
+Add .content-collections to `.gitignore`
+
+```title=".gitignore"
+.content-collections
+```
+
+Create `content-collections.ts` file at the root of your project:
+
+```
+import { defineCollection, defineConfig } from "@content-collections/core";
+import { compileMDX } from "@content-collections/mdx";
+import { z } from "zod";
+ 
+const posts = defineCollection({
+  name: "posts",
+  directory: "content",
+  include: "**/*.mdx",
+  schema: z.object({
+    content: z.string(),
+  }),
+  transform: async (document, context) => {
+    const mdx = await compileMDX(context, document);
+    return {
+      ...document,
+      mdx,
+    };
+  },
+});
+ 
+export default defineConfig({
+  collections: [posts],
+});
+```
+
+## Set up Prose UI and Markdown rendering
 
 Install dependencies
 
 ```bash
-pnpm add @prose-ui/core @prose-ui/next @prose-ui/style
+npm install @prose-ui/core @prose-ui/next @prose-ui/style
 ```
 
 Import styles into your `globals.css`.
@@ -33,134 +96,72 @@ Import styles into your `globals.css`.
 @import "@prose-ui/style/katex.min.css";
 ```
 
-In your `content-collections.ts` initialize and pass remarkPlugins to the MDX compiler.
+In your `content-collections.ts` initialize and pass `remarkPlugins` to the MDX compiler.
 
 ```typescript title="content-collections.ts"
 import { remarkPlugins } from '@prose-ui/core'
 
-
+// ...
 const content = await compileMDX(ctx, page, {
    remarkPlugins: remarkPlugins(),
 })
+// ...
 ```
 
-In your page.tsx where you render your Markdown pass Prose UI `mdxComponents` into the MDXContent, and wrap the content into a tag with a `prose-ui` css class.
+Create the page that will render your Markdown: `/app/posts/[[...path]]/page.tsx` where you render your Markdown pass Prose UI `mdxComponents` into the MDXContent, and wrap the content into a tag with a `prose-ui` css class.
 
-```typescript title="page.tsx"
-import { mdxComponents } from '@prose-ui/next'
-
-<article className='prose-ui'>
-   <MDXContent code={page.content} components={mdxComponents} />
-</article>
-```
-
-
-
-
-
-
-
-
-
-## Old
-
-Create an `mdx-components.tsx` file in the root of your project. This file will be used to override the default components used by MDX.
-
-```tsx title="mdx-components.tsx" showLineNumbers
+```tsx title="/app/posts/[[...path]]/page.tsx"
+import { notFound } from "next/navigation";
+import { allPosts } from "content-collections";
 import { mdxComponents } from "@prose-ui/next";
-import type { MDXComponents } from "mdx/types";
+import { MDXContent } from "@content-collections/mdx/react";
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
-  return {
-    ...components,
-    ...mdxComponents,
-  };
+
+type Params = Promise<{ path: string[] }>
+type PageProps = {
+  params: Params
+}
+
+const findPage = (pathArr: string[]) => {
+  const path = pathArr ? `${pathArr.join('/')}` : '/'
+  return allPosts.find((page) => page._meta.path === path)
+}
+
+export async function generateStaticParams() {
+  return allPosts.map((page) => ({
+    path: page._meta.path.slice(1).split('/'),
+  }))
+}
+
+export default async function Page({
+  params,
+}: PageProps) {
+  const { path } = await params
+  let page = findPage(path)
+  if (!page) notFound();
+
+  return (
+    <article className="prose-ui w-full max-w-5xl mx-auto">
+      <MDXContent code={page.mdx} components={mdxComponents} />
+    </article>
+  )
 }
 ```
 
-```tsx title="mdx-components.tsx (generic React)"
-import { mdxComponents } from "@prose-ui/react";
-import type { MDXComponents } from "mdx/types";
+Add your first page
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
-  return {
-    ...components,
-    ...mdxComponents,
-  };
-}
-```
+Create a folder `content/pages` and add your a page
 
-## Set up MDX rendering
-
-Configure your project to use MDX with Prose UI by modifying your next.config.ts in the following way:
-
-```typescript title="next.config.ts"
-import createMDX from "@next/mdx";
-import { remarkPlugins } from "@prose-ui/core";
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-};
-
-const withMDX = createMDX({
-  options: {
-    remarkPlugins: remarkPlugins(),
-  },
-});
-
-export default withMDX(nextConfig);
-```
-
-## Adjust the layout
-
-Go to your `app/layout.tsx` and replace the content it returns with the code below to ensure that your pages have the correct fonts and styles applied.
-
-```tsx title="layout.tsx" showLineNumbers
-<html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
-  <body className="prose-ui antialiased">
-    <div className="mx-auto max-w-3xl px-8">{children}</div>
-  </body>
-</html>
-```
-
-## Add Prose UI CSS styles
-
-Next, go to your `src/app/globals.css` file and import Prose UI styles at the top:
-
-```css title="globals.css"
-@import "@prose-ui/styles/prose-ui.css";
-@import "@prose-ui/styles/katex.min.css";
-```
-
-The `katex.min.css` import is required only if you use math formulas.
-
-Optional step: if you want to override fonts in Prose UI, update the variables for the base, heading, and mono fonts in your `globals.css`. For more details on styling, refer to the [styling](/docs/styling) page.
-
-```css title="globals.css"
-:root {
-  --p-font-family: var(--font-geist-sans);
-  --p-font-family-heading: var(--font-geist-sans);
-  --p-font-family-mono: var(--font-geist-mono);
-}
-```
-
-## Add MDX content
-
-Rename `src/app/page.tsx` to `src/app/page.mdx` and replace the content with your Markdown/MDX. For example:
-
-```md title="page.mdx" showLineNumbers
+```markdown title="content/pages/index.mdx"
 # Hello, world!
 
-The Viking landers, part of NASA's [Viking program](https://en.wikipedia.org/wiki/Viking_program), were the first U.S. missions to successfully land on Mars and transmit images and scientific data back to Earth in 1976.
+This stunning image is from [NASA's Juno mission](https://science.nasa.gov/mission/juno).
 
-<Frame align="center">
+<Frame>
   <Image
-    src="https://nssdc.gsfc.nasa.gov/image/spacecraft/viking_lander.jpg"
-    alt="Viking lander"
+    src="https://media.dhub.dev/jupiter-cropped.jpg"
+    alt="Jupiter"
   />
-  <Caption>Viking lander</Caption>
+  <Caption>Juno Captures Jupiter. Credits: NASA/JPL-Caltech/SwRI/MSSS, Thomas Thomopoulos © CC BY</Caption>
 </Frame>
 ```
-
-That's it! Run `pnpm dev` and open your project in the browser.

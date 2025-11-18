@@ -22,17 +22,17 @@
       {
         "type": "link",
         "name": "Overview",
-        "href": "/docs/how-it-works"
+        "href": "/docs/installation/overview"
       },
       {
         "type": "link",
         "name": "Next.js",
-        "href": "/docs/nextjs"
+        "href": "/docs/installation/nextjs"
       },
       {
         "type": "link",
         "name": "TanStack Start",
-        "href": "/docs/tanstack-start"
+        "href": "/docs/installation/tanstack-start"
       },
       {
         "type": "link",

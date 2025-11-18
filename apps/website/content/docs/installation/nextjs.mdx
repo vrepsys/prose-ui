@@ -2,7 +2,7 @@
 
 ## Create a new project
 
-Start by creating a Next.js project, choosing the recommended Next.js defaults in the prompt.
+Start by creating a new Next.js app and selecting the recommended Next.js defaults when prompted.
 
 ```bash title="Create a new Next.js project"
 npx create-next-app@latest
@@ -10,19 +10,19 @@ npx create-next-app@latest
 
 ## Set up MDX rendering with Content Collections
 
-[Content Collections](https://www.content-collections.dev/docs/quickstart/next) is a library that will help us to keep our mdx content organized, and will render our MDX files. Content collections setup below is based on [Content Collections Next.js](https://www.content-collections.dev/docs/quickstart/next) and [MDX guides](https://www.content-collections.dev/docs/content/mdx).
+[Content Collections](https://www.content-collections.dev/docs/quickstart/next) helps you organize your MDX content and render MDX files. The setup below follows the official [Next.js quickstart](https://www.content-collections.dev/docs/quickstart/next) and [MDX guides](https://www.content-collections.dev/docs/content/mdx).
 
 <Callout variant="note">
-  You can set up Prose UI with `next/mdx` as well. But we're going to use Content Collections library in this example because it will help us keep our Markdown files organized in a single folder, and provide a better developer experience.&#x20;
+  You can also set up Prose UI with `next/mdx`. In this guide we use Content Collections because it keeps all Markdown files in a single place and provides a great developer experience.&#x20;
 </Callout>
 
-Install packages
+Install the required packages:
 
 ```bash
 npm install @content-collections/core @content-collections/next @content-collections/mdx zod -D
 ```
 
-Add content-collections path to your `tsconfig.json`
+Add the `content-collections` path to your `tsconfig.json`:
 
 ```json title="tsconfig.json"
 {
@@ -36,7 +36,7 @@ Add content-collections path to your `tsconfig.json`
 }
 ```
 
-Modify your Next.js configuration
+Update your Next.js configuration:
 
 ```typescript title="next.config.ts"
 import type { NextConfig } from "next";
@@ -47,15 +47,15 @@ const nextConfig: NextConfig = {};
 export default withContentCollections(nextConfig);
 ```
 
-Add .content-collections to `.gitignore`
+Add `.content-collections` to your `.gitignore`:
 
 ```title=".gitignore"
 .content-collections
 ```
 
-Create `content-collections.ts` file at the root of your project:
+Create a `content-collections.ts` file in the root of your project:
 
-```typescript
+```typescript title="content-collections.ts"
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
@@ -83,20 +83,20 @@ export default defineConfig({
 
 ## Set up Prose UI and Markdown rendering
 
-Install dependencies
+Install Prose UI dependencies:
 
 ```bash
 npm install @prose-ui/core @prose-ui/next @prose-ui/style
 ```
 
-Import styles into your `globals.css`.
+Import the styles into your `globals.css`:
 
-```css
+```css title="globals.css"
 @import "@prose-ui/style/prose-ui.css";
 @import "@prose-ui/style/katex.min.css";
 ```
 
-In your `content-collections.ts` initialize and pass `remarkPlugins` to the MDX compiler.
+In `content-collections.ts`, initialize and pass `remarkPlugins` to the MDX compiler:
 
 ```typescript title="content-collections.ts"
 import { remarkPlugins } from '@prose-ui/core'
@@ -108,7 +108,7 @@ const content = await compileMDX(ctx, page, {
 // ...
 ```
 
-Create the page that will render your Markdown: `/app/posts/[[...path]]/page.tsx` where you render your Markdown pass Prose UI `mdxComponents` into the MDXContent, and wrap the content into a tag with a `prose-ui` css class.
+Create the page that will render your Markdown at `/app/posts/[[...path]]/page.tsx`. Pass Prose UI `mdxComponents` to `MDXContent`, and wrap the content in an element with the `prose-ui` CSS class.
 
 ```tsx title="/app/posts/[[...path]]/page.tsx"
 import { notFound } from "next/navigation";
@@ -148,9 +148,9 @@ export default async function Page({
 }
 ```
 
-Add your first page
+## Add your first page
 
-Create a folder `content/pages` and add your a page
+Create a `content/posts` folder (if it doesn't exist yet) and add a page:
 
 ```markdown title="content/posts/hello.mdx"
 # Hello, world!
@@ -166,4 +166,4 @@ This stunning image is from [NASA's Juno mission](https://science.nasa.gov/missi
 </Frame>
 ```
 
-Run your project and localhost:3000/posts/hello should point to the rendered MDX page.
+Run your project and open `http://localhost:3000/posts/hello` to view the rendered MDX page.

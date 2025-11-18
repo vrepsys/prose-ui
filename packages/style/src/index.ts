@@ -634,7 +634,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'padding-left': ds.spacing.space6,
 
       'li': {
-        'margin-bottom': ds.spacing['space0-5'],
+        'margin-bottom': ds.spacing.space1,
         'padding-left': ds.spacing.space1,
       },
 
@@ -860,8 +860,10 @@ const darkCssVars = cssVariables(darkColorSpec, '--p')
 const cssVars = cssVariables({ ...coreSpec, ...componentsSpec }, '--p')
 export const allStyles = [
   { '.prose-ui': shikiCssVars },
-  { ':root': lightCssVars },
-  { ':is(.dark)': darkCssVars },
+  { ':root': lightCssVars }, // Default light theme
+  { '@media (prefers-color-scheme: dark)': { ':root': darkCssVars } }, // System dark theme
+  { ':is(.dark)': darkCssVars }, // Explicit dark (overrides system)
+  { ':is(.light)': lightCssVars }, // Explicit light (overrides system)
   { ':root': cssVars },
 
   {

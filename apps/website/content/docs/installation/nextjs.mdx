@@ -24,7 +24,7 @@ npm install @content-collections/core @content-collections/next @content-collect
 
 Add content-collections path to your `tsconfig.json`
 
-```title="tsconfig.json"
+```json title="tsconfig.json"
 {
   "compilerOptions": {
     // ...
@@ -38,7 +38,7 @@ Add content-collections path to your `tsconfig.json`
 
 Modify your Next.js configuration
 
-```title="next.config.ts"
+```typescript title="next.config.ts"
 import type { NextConfig } from "next";
 import { withContentCollections } from "@content-collections/next";
  
@@ -55,7 +55,7 @@ Add .content-collections to `.gitignore`
 
 Create `content-collections.ts` file at the root of your project:
 
-```
+```typescript
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";

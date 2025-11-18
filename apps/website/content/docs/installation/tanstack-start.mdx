@@ -1,4 +1,6 @@
-# Tanstack Start
+# Prose UI with Tanstack Start
+
+Here are the steps needed to set up a fresh Tanstack Start project with&#x20;
 
 ```
 pnpm create @tanstack/start@latest
@@ -76,17 +78,16 @@ export default defineConfig({
 
 Create a folder `content/pages` and add your a page
 
-```title="content/pages/index.mdx"
----
-title: "Hello world"
-summary: "This is my first post!"
----
- 
-# Hello world
- 
-This is my first post!
+```markdown title="content/pages/index.mdx"
+# Hello, world!
 
-<Callout type='tip'>
-   Hello
-</Callout>
+The Viking landers, part of NASA's [Viking program](https://en.wikipedia.org/wiki/Viking_program), were the first U.S. missions to successfully land on Mars and transmit images and scientific data back to Earth in 1976.
+
+<Frame align="center">
+  <Image
+    src="https://nssdc.gsfc.nasa.gov/image/spacecraft/viking_lander.jpg"
+    alt="Viking lander"
+  />
+  <Caption>Viking lander</Caption>
+</Frame>
 ```

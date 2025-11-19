@@ -1,10 +1,12 @@
 <a href="https://prose-ui.com" >
-  <img alt="Prose UI social image" src="https://repository-images.githubusercontent.com/898552859/60af321f-9566-42e9-9a20-6120a366639a" />
+  <img alt="Prose UI social image" src="https://repository-images.githubusercontent.com/898552859/3b3d9307-a559-4a32-a9a3-b6806142c47c" />
 </a>
 
 # Prose UI
 
-Prose UI provides polished typography and components for content-focused websites that use MDX.
+Prose UI provides beautiful styling and components for Markdown prose.
+
+It's an open-source library of React components and customizable CSS styles for Markdown and MDX.
 
 ## Documentation
 

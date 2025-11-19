@@ -31,13 +31,13 @@
       },
       {
         "type": "link",
-        "name": "TanStack Start",
-        "href": "/docs/installation/tanstack-start"
+        "name": "Astro",
+        "href": "/docs/installation/astro"
       },
       {
         "type": "link",
-        "name": "Custom Setup",
-        "href": "/docs/custom-setup"
+        "name": "TanStack Start",
+        "href": "/docs/installation/tanstack-start"
       }
     ]
   },

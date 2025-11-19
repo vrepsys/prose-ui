@@ -31,11 +31,6 @@
       },
       {
         "type": "link",
-        "name": "Astro",
-        "href": "/docs/installation/astro"
-      },
-      {
-        "type": "link",
         "name": "TanStack Start",
         "href": "/docs/installation/tanstack-start"
       }

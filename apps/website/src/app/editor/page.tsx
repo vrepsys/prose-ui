@@ -17,16 +17,21 @@ const Templates = () => {
             Editor
           </h1>
           <p className="text-color-low">
-            Enable inline editing and collaboration for your MDX content.
+            Enable inline editing and collaboration for your Markdown and MDX content.
           </p>
-          <p className="mb-8">
-            Prose UI MDX is fully supported by <Link href="https://dhub.dev">Dhub</Link> - a
-            collaborative WYSIWYG editor for MDX content with direct GitHub publishing.
+          <p className="mb-8 max-w-2xl">
+          <Link href="https://dhub.dev">Dhub</Link> is probably the quickest way to author and manage Markdown for your site. Dhub is a
+            collaborative Markdown editor for static sites with direct GitHub publishing.
           </p>
           <a href="https://dhub.dev" target="_blank">
             <Image
               src={dhubDemo}
               alt="Screenshot of Dhub's WYSIWYG editor with Markdown preview open on the right side"
+              quality={100}
+              loading="eager"
+              fetchPriority="high"
+              placeholder="blur"
+              className="rounded-lg border"
             />
           </a>
         </div>

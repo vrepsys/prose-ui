@@ -1,93 +1,174 @@
 # Prose UI with Tanstack Start
 
-Here are the steps needed to set up a fresh Tanstack Start project with&#x20;
+Here are the steps needed to set up a fresh Tanstack Start project with Prose UI.
 
-```
-pnpm create @tanstack/start@latest
-```
+Start by creating a new project.
 
-```
-pnpm add @prose-ui/core @prose-ui/react
+```bash title="Create a new project"
+npm create @tanstack/start@latest
 ```
 
-```
-pnpm install
+## Set up MDX rendering with Content Collections
+
+[Content Collections](https://www.content-collections.dev/docs/quickstart/next) is a library that will help us to keep our mdx content organized, and will render our MDX files. Content collections setup below is based on [Content Collections Next.js](https://www.content-collections.dev/docs/quickstart/next) and [MDX guides](https://www.content-collections.dev/docs/content/mdx).
+
+Install packages
+
+```bash
+npm install @content-collections/core @content-collections/vite @content-collections/mdx zod -D
 ```
 
-#### Instructions for content collections
-
-```
-pnpm add @content-collections/core @content-collections/vite @content-collections/mdx zod -D
-```
+Add content-collections path to your `tsconfig.json`
 
 ```json title="tsconfig.json"
 {
   "compilerOptions": {
     // ...
     "paths": {
-      "@/*": ["./src/*"],
+      // ...
       "content-collections": ["./.content-collections/generated"]
     }
   }
 }
 ```
 
-```javascript title="vite.config.js"
+Add content collections vite plugin to your vite config. It must be the first plugin in the list.
+
+```typescript title="vite.config.js"
 import contentCollections from "@content-collections/vite";
 // ...
  
 export default defineConfig({
-  vite: {
-    plugins: [
-      contentCollections(),
-      tsConfigPaths({
-        projects: ["./tsconfig.json"],
-      }),
-      tanstackStart({ customViteReactPlugin: true }),
-      viteReact()
-    ],
-  },
+  plugins: [
+    contentCollections()
+    // ...
+  ],
 });
 ```
+
+Add .content-collections to `.gitignore`
 
 ```title=".gitignore"
 .content-collections
 ```
 
-Create file
+Create `content-collections.ts` file at the root of your project:
 
-```title="content-collections.ts"
+```typescript
 import { defineCollection, defineConfig } from "@content-collections/core";
+import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
  
-const pages = defineCollection({
+const posts = defineCollection({
   name: "posts",
-  directory: "content/posts",
-  include: "**/*.md",
+  directory: "content",
+  include: "**/*.mdx",
   schema: z.object({
-    title: z.string(),
-    summary: z.string(),
     content: z.string(),
   }),
+  transform: async (document, context) => {
+    const mdx = await compileMDX(context, document);
+    return {
+      ...document,
+      mdx,
+    };
+  },
 });
  
 export default defineConfig({
-  collections: [pages],
+  collections: [posts],
 });
 ```
 
+## Set up Prose UI and Markdown rendering
+
+Install dependencies
+
+```bash
+npm install @prose-ui/core @prose-ui/react @prose-ui/style sharp
+```
+
+Import styles into your `styles.css`.
+
+```css title="styles.css"
+@import "@prose-ui/style/prose-ui.css";
+@import "@prose-ui/style/katex.min.css";
+```
+
+In your `content-collections.ts` initialize and pass `remarkPlugins` to the MDX compiler.
+
+```typescript title="content-collections.ts"
+import { remarkPlugins } from '@prose-ui/core'
+
+// ...
+const content = await compileMDX(ctx, page, {
+   remarkPlugins: remarkPlugins(),
+})
+// ...
+```
+
+### Create the route that will render your Markdown
+
+Create the route `src/routes/posts/$.tsx`. Pass Prose UI `mdxComponents` into the MDXContent, and wrap the content into a tag with a `prose-ui` css class.
+
+```tsx title="src/routes/posts/$.tsx"
+import { createFileRoute, notFound } from '@tanstack/react-router'
+import { allPosts } from 'content-collections'
+import { mdxComponents } from '@prose-ui/react'
+import { MDXContent } from '@content-collections/mdx/react'
+
+const findPage = (pathArr: string[]) => {
+  const path = pathArr && pathArr.length > 0 ? `${pathArr.join('/')}` : '/'
+  return allPosts.find((post) => post._meta.path === path)
+}
+
+export const Route = createFileRoute('/posts/$')({
+  component: PostPage,
+  loader: async ({ params }) => {
+    const pathSegments = params._splat ? params._splat.split('/').filter(Boolean) : []
+    const page = findPage(pathSegments)
+    
+    if (!page) {
+      throw notFound()
+    }
+    
+    return { page }
+  },
+})
+
+function PostPage() {
+  const { page } = Route.useLoaderData()
+  
+  if (!page) {
+    throw notFound()
+  }
+
+  return (
+    <div className="w-full bg-[hsl(var(--p-color-bg))] min-h-screen">
+      <article className="prose-ui w-full max-w-3xl mx-auto px-4 py-8">
+        <MDXContent code={page.mdx} components={mdxComponents} />
+      </article>
+    </div>
+  )
+}
+```
+
+### Add your first page
+
 Create a folder `content/pages` and add your a page
 
-```markdown title="content/pages/index.mdx"
+```markdown title="content/posts/hello.mdx"
 # Hello, world!
 
-The Viking landers, part of NASA's [Viking program](https://en.wikipedia.org/wiki/Viking_program), were the first U.S. missions to successfully land on Mars and transmit images and scientific data back to Earth in 1976.
+This stunning image is from [NASA's Juno mission](https://science.nasa.gov/mission/juno).
 
-<Frame align="center">
+<Frame>
   <Image
-    src="https://nssdc.gsfc.nasa.gov/image/spacecraft/viking_lander.jpg"
-    alt="Viking lander"
+    src="https://media.dhub.dev/jupiter-cropped.jpg"
+    alt="Jupiter"
   />
-  <Caption>Viking lander</Caption>
+  <Caption>Juno Captures Jupiter. Credits: NASA/JPL-Caltech/SwRI/MSSS, Thomas Thomopoulos © CC BY</Caption>
 </Frame>
 ```
+
+Run your project and localhost:3000/posts/hello should point to the rendered MDX page.

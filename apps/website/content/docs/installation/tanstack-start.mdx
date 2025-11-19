@@ -1,8 +1,8 @@
-# Prose UI with Tanstack Start
+# Prose UI with TanStack Start
 
-Here are the steps needed to set up a fresh Tanstack Start project with Prose UI.
+This guide walks you through setting up a fresh TanStack Start project with Prose UI.
 
-Start by creating a new project.
+Start by creating a new project:
 
 ```bash title="Create a new project"
 npm create @tanstack/start@latest
@@ -10,15 +10,15 @@ npm create @tanstack/start@latest
 
 ## Set up MDX rendering with Content Collections
 
-[Content Collections](https://www.content-collections.dev/docs/quickstart/next) is a library that will help us to keep our mdx content organized, and will render our MDX files. Content collections setup below is based on [Content Collections Next.js](https://www.content-collections.dev/docs/quickstart/next) and [MDX guides](https://www.content-collections.dev/docs/content/mdx).
+[Content Collections](https://www.content-collections.dev) helps you keep your MDX content organized and handles rendering your MDX files. The setup below is based on the [Content Collections Next.js quickstart](https://www.content-collections.dev/docs/quickstart/tanstack-start) and the [MDX guide](https://www.content-collections.dev/docs/content/mdx).
 
-Install packages
+Install the required packages:
 
 ```bash
 npm install @content-collections/core @content-collections/vite @content-collections/mdx zod -D
 ```
 
-Add content-collections path to your `tsconfig.json`
+Add the `content-collections` path to your `tsconfig.json`:
 
 ```json title="tsconfig.json"
 {
@@ -32,9 +32,9 @@ Add content-collections path to your `tsconfig.json`
 }
 ```
 
-Add content collections vite plugin to your vite config. It must be the first plugin in the list.
+Add the Content Collections Vite plugin to your Vite config. It must be the first plugin in the list:
 
-```typescript title="vite.config.js"
+```typescript title="vite.config.ts"
 import contentCollections from "@content-collections/vite";
 // ...
  
@@ -46,7 +46,7 @@ export default defineConfig({
 });
 ```
 
-Add .content-collections to `.gitignore`
+Add `.content-collections` to your `.gitignore`:
 
 ```title=".gitignore"
 .content-collections
@@ -82,20 +82,20 @@ export default defineConfig({
 
 ## Set up Prose UI and Markdown rendering
 
-Install dependencies
+Install the Prose UI dependencies:
 
 ```bash
 npm install @prose-ui/core @prose-ui/react @prose-ui/style sharp
 ```
 
-Import styles into your `styles.css`.
+Import the styles into your `styles.css`:
 
 ```css title="styles.css"
 @import "@prose-ui/style/prose-ui.css";
 @import "@prose-ui/style/katex.min.css";
 ```
 
-In your `content-collections.ts` initialize and pass `remarkPlugins` to the MDX compiler.
+In your `content-collections.ts`, initialize and pass `remarkPlugins` to the MDX compiler:
 
 ```typescript title="content-collections.ts"
 import { remarkPlugins } from '@prose-ui/core'
@@ -109,7 +109,7 @@ const content = await compileMDX(ctx, page, {
 
 ### Create the route that will render your Markdown
 
-Create the route `src/routes/posts/$.tsx`. Pass Prose UI `mdxComponents` into the MDXContent, and wrap the content into a tag with a `prose-ui` css class.
+Create the route at `src/routes/posts/$.tsx`. Pass Prose UI `mdxComponents` into `MDXContent`, and wrap the content in an element with the `prose-ui` CSS class:
 
 ```tsx title="src/routes/posts/$.tsx"
 import { createFileRoute, notFound } from '@tanstack/react-router'
@@ -155,7 +155,7 @@ function PostPage() {
 
 ### Add your first page
 
-Create a folder `content/pages` and add your a page
+Create a folder `content/posts` and add your first page:
 
 ```markdown title="content/posts/hello.mdx"
 # Hello, world!
@@ -171,4 +171,4 @@ This stunning image is from [NASA's Juno mission](https://science.nasa.gov/missi
 </Frame>
 ```
 
-Run your project and localhost:3000/posts/hello should point to the rendered MDX page.
+Run your project, then open `http://localhost:3000/posts/hello` to view your rendered MDX page.

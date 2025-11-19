@@ -46,9 +46,9 @@ export const TopNav = () => {
           <Button variant="navitem" active={/^\/docs(\/|$)/.test(pathname)} asChild>
             <Link href="/docs">Documentation</Link>
           </Button>
-          <Button variant="navitem" active={/^\/templates(\/|$)/.test(pathname)} asChild>
+          {/* <Button variant="navitem" active={/^\/templates(\/|$)/.test(pathname)} asChild>
             <Link href="/templates">Templates</Link>
-          </Button>
+          </Button> */}
           <Button variant="navitem" active={/^\/editor(\/|$)/.test(pathname)} asChild>
             <Link href="/editor">Editor</Link>
           </Button>

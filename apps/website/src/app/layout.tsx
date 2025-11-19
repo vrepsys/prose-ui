@@ -17,23 +17,23 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Prose UI',
+  title: 'Prose UI – Beautiful styling and components for Markdown prose',
   description:
-    'Refined typography and components for rendering MDX content in Next.js. Free and open-source.',
+    'An open source library of React components and customizable CSS styles for Markdown and MDX. Code blocks, callouts, math formulas, and polished typography included.',
   openGraph: {
     type: 'website',
-    title: 'Prose UI',
+    title: 'Beautiful styling and components for Markdown prose',
     description:
-      'Refined typography and components for rendering MDX content in Next.js. Free and open-source.',
+      'An open source library of React components and customizable CSS styles for Markdown and MDX. Code blocks, callouts, math formulas, and polished typography included.',
     url: 'https://prose-ui.com',
     images: [{ url: 'https://prose-ui.com/img/social.png' }],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@vrepsys',
-    title: 'Prose UI',
+    title: 'Beautiful styling and components for Markdown prose',
     description:
-      'Refined typography and components for rendering MDX content in Next.js. Free and open-source.',
+      'An open source library of React components and customizable CSS styles for Markdown and MDX. Code blocks, callouts, math formulas, and polished typography included.',
     images: ['https://prose-ui.com/img/social.png'],
   },
   icons: [

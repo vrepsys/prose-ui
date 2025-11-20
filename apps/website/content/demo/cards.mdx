@@ -1,0 +1,26 @@
+## Cards
+
+Highlight navigation targets and key links with the Card component. Cards support icons, CTAs, arrows, and a horizontal layout for compact link rows.
+
+<Card
+  title="Read the docs"
+  icon="book-open"
+  href="/docs"
+  cta="Open docs"
+  horizontal
+  arrow="true"
+>
+  Get started with installation, configuration, and component guides.
+</Card>
+
+<Columns columns={3}>
+  <Card title="Components" icon="shapes" href="/docs/components/overview" cta="Explore" arrow="true">
+    Browse every MDX-ready component in Prose UI.
+  </Card>
+  <Card title="Styling" icon="sparkles" href="/docs/styling" cta="Customize" arrow="true">
+    Tune design tokens and CSS variables to match your brand.
+  </Card>
+  <Card title="Math & code" icon="code" href="/docs/components/math" cta="View examples" arrow="true">
+    See how math, code, and tables render with Prose UI.
+  </Card>
+</Columns>

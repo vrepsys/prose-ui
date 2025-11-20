@@ -23,6 +23,7 @@ const order = [
   'images.mdx',
   'typography.mdx',
   'callouts.mdx',
+  'cards.mdx',
   'code-block.mdx',
   'math-formulas.mdx',
   'tables.mdx',

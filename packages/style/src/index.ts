@@ -273,6 +273,36 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
         height: ds.font.height.sm,
       },
     },
+    card: {
+      color: {
+        text: ds.color.text.base,
+        muted: ds.color.text.lower,
+        bg: ds.color.bg.low,
+        bgHover: ds.color.bg.lower,
+        border: ds.color.border,
+        borderHover: ds.color.accent.low,
+        icon: ds.color.accent.base,
+        cta: ds.color.accent.base,
+        ctaHover: ds.color.accent.high,
+      },
+      font: {
+        title: {
+          size: ds.font.size.sm,
+          height: ds.font.height.sm,
+          weight: ds.font.weight.medium,
+        },
+        body: {
+          size: ds.font.size.sm,
+          height: ds.font.height.sm,
+          weight: ds.font.weight.normal,
+        },
+        cta: {
+          size: ds.font.size.sm,
+          height: ds.font.height.sm,
+          weight: ds.font.weight.medium,
+        },
+      },
+    },
     blockquote: {
       color: {
         text: ds.color.text.base,
@@ -363,18 +393,18 @@ export const componentsStyles = (ds: DesignSystem) => {
     'p': {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
-      '& + .code-block, & + ul, & + ol': {
+      '& + .code-block, & + ul, & + ol, & + .card, & + .columns': {
         'margin-top': gap.cluster,
       },
     },
-    '.code-block + .code-block, .callout + .callout': {
+    '.code-block + .code-block, .callout + .callout, .card + .card, .columns + .columns': {
       'margin-top': gap.cluster,
     },
     'code': {
       'font-family': ds.font.family.mono,
     },
     'li': {
-      '& > .code-block, & > table, & > .frame, & > .callout, & > ul, & > ol': {
+      '& > .code-block, & > table, & > .frame, & > .callout, & > .card, & > .columns, & > ul, & > ol': {
         'margin-top': gap.cluster,
         'margin-bottom': gap.cluster,
       },
@@ -387,7 +417,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
     },
     'h1, h2, h3, h4, h5, h6': {
-      '& + table, & + .callout, & + p, & + ul, & + ol': {
+      '& + table, & + .callout, & + .card, & + .columns, & + p, & + ul, & + ol': {
         'margin-top': gap.cluster,
       },
     },
@@ -624,6 +654,150 @@ export const componentsStyles = (ds: DesignSystem) => {
       'border-color': color.danger,
       '.title': {
         color: color.danger,
+      },
+    },
+    '.card': {
+      'margin-top': gap.base,
+      'margin-bottom': gap.cluster,
+      'display': 'flex',
+      'flex-direction': 'column',
+      'gap': ds.spacing.space2,
+      'border-radius': ds.border.radius,
+      'border': `1px solid ${ds.card.color.border}`,
+      'background-color': ds.card.color.bg,
+      'padding': ds.spacing.space4,
+      'text-decoration': 'none',
+      'color': ds.card.color.text,
+      'transition': 'background-color 150ms ease, border-color 150ms ease, transform 150ms ease',
+      '&.interactive': {
+        'cursor': 'pointer',
+        '&:hover': {
+          'background-color': ds.card.color.bgHover,
+          'border-color': ds.card.color.borderHover,
+        },
+        '&:active': {
+          'transform': 'translateY(1px)',
+        },
+      },
+      '&:focus-visible': {
+        'outline': `2px solid ${color.outline}`,
+        'outline-offset': '2px',
+      },
+      '.card-content': {
+        'display': 'flex',
+        'flex-direction': 'column',
+        'gap': ds.spacing.space2,
+        'flex': '1',
+      },
+      '&.horizontal': {
+        'flex-direction': 'row',
+        'align-items': 'flex-start',
+        'gap': ds.spacing.space3,
+      },
+      '&.horizontal .card-content': {
+        'flex-direction': 'row',
+        'align-items': 'flex-start',
+        'justify-content': 'space-between',
+        'gap': ds.spacing.space3,
+      },
+      '.card-header': {
+        'display': 'flex',
+        'align-items': 'center',
+        'gap': ds.spacing.space2,
+      },
+      '.card-icon': {
+        'display': 'inline-flex',
+        'align-items': 'center',
+        'justify-content': 'center',
+        'color': ds.card.color.icon,
+        'flex-shrink': '0',
+        'svg': {
+          width: ds.spacing.space4,
+          height: ds.spacing.space4,
+        },
+      },
+      '.card-title': {
+        'margin': '0',
+        'font-size': ds.card.font.title.size,
+        'line-height': ds.card.font.title.height,
+        'font-weight': ds.card.font.title.weight,
+        'color': ds.card.color.text,
+      },
+      '.card-body': {
+        'margin': '0',
+        'color': ds.card.color.muted,
+        'font-size': ds.card.font.body.size,
+        'line-height': ds.card.font.body.height,
+        'font-weight': ds.card.font.body.weight,
+        'min-width': '0',
+        '> *': {
+          'margin-top': '0',
+          'margin-bottom': '0',
+        },
+        'p + p': {
+          'margin-top': ds.spacing.space1,
+        },
+      },
+      '&.horizontal .card-body': {
+        'flex': '1',
+      },
+      '.card-footer': {
+        'display': 'flex',
+        'align-items': 'center',
+        'justify-content': 'flex-end',
+        'gap': ds.spacing.space1,
+        'font-size': ds.card.font.cta.size,
+        'line-height': ds.card.font.cta.height,
+        'font-weight': ds.card.font.cta.weight,
+        'color': ds.card.color.cta,
+        'transition': 'color 150ms ease',
+        'margin-top': 'auto',
+        'padding-top': ds.spacing.space1,
+        'width': '100%',
+      },
+      '&.horizontal .card-footer': {
+        'margin-top': '0',
+        'padding-top': '0',
+        'align-self': 'center',
+        'width': 'auto',
+        'flex-shrink': '0',
+      },
+      '.card-arrow': {
+        'display': 'inline-flex',
+        'align-items': 'center',
+
+        'justify-content': 'center',
+        'width': ds.spacing.space4,
+        'height': ds.spacing.space4,
+        'transform': 'translateX(0)',
+        'transition': 'transform 150ms ease',
+      },
+      '&:hover .card-arrow': {
+        'transform': 'translateX(2px)',
+      },
+      '&:hover .card-footer': {
+        'color': ds.card.color.ctaHover,
+      },
+    },
+    '.columns > .card': {
+      'margin': '0',
+    },
+    '.columns': {
+      'margin-top': gap.base,
+      'margin-bottom': gap.cluster,
+      'display': 'grid',
+      'grid-template-columns': 'repeat(var(--columns, 3), minmax(0, 1fr))',
+      'column-gap': ds.spacing.space2,
+      'row-gap': ds.spacing.space2,
+      'align-items': 'stretch',
+      '> *': {
+        'height': '100%',
+        'margin': '0',
+      },
+    },
+    '@media (max-width: 768px)': {
+      '.columns': {
+        'grid-template-columns': 'repeat(1, minmax(0, 1fr))',
       },
     },
     'ul': {

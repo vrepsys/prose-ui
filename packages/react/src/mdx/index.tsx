@@ -8,6 +8,8 @@ import { Image, type ImageProps } from './image.js'
 import { InlineMath } from './inline-math.js'
 import { BlockMath } from './block-math.js'
 import { Link, type LinkProps } from './link.js'
+import { Card } from './card.js'
+import { Columns } from './columns.js'
 
 type HeadingPropsWithoutLevel = Omit<HeadingProps, 'level'>
 
@@ -23,6 +25,8 @@ const baseComponents = {
   BlockMath,
   Callout,
   CodeBlock,
+  Card,
+  Columns,
   Image,
   Frame,
   Caption,
@@ -48,4 +52,16 @@ export const createMdxComponents = (overrides: Partial<ProseUIMdxComponents> = {
 
 export const mdxComponents = createMdxComponents()
 
-export { Callout, CodeBlock, Frame, Heading, Image, Link, InlineMath, BlockMath, Caption }
+export {
+  Callout,
+  Card,
+  Columns,
+  CodeBlock,
+  Frame,
+  Heading,
+  Image,
+  Link,
+  InlineMath,
+  BlockMath,
+  Caption,
+}

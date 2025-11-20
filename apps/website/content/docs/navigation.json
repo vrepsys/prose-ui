@@ -67,6 +67,11 @@
       },
       {
         "type": "link",
+        "name": "Card",
+        "href": "/docs/components/card"
+      },
+      {
+        "type": "link",
         "name": "Math",
         "href": "/docs/components/math"
       },
@@ -74,6 +79,11 @@
         "type": "link",
         "name": "Table",
         "href": "/docs/components/table"
+      },
+      {
+        "type": "link",
+        "name": "Columns",
+        "href": "/docs/components/columns"
       },
       {
         "type": "link",

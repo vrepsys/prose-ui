@@ -143,6 +143,36 @@ export type Components = {
       height: CssValue
     }
   }
+  card: {
+    color: {
+      text: CssValue
+      muted: CssValue
+      bg: CssValue
+      bgHover: CssValue
+      border: CssValue
+      borderHover: CssValue
+      icon: CssValue
+      cta: CssValue
+      ctaHover: CssValue
+    }
+    font: {
+      title: {
+        size: CssValue
+        height: CssValue
+        weight: CssValue
+      }
+      body: {
+        size: CssValue
+        height: CssValue
+        weight: CssValue
+      }
+      cta: {
+        size: CssValue
+        height: CssValue
+        weight: CssValue
+      }
+    }
+  }
   blockquote: {
     color: {
       text: CssValue

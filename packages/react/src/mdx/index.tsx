@@ -10,6 +10,7 @@ import { BlockMath } from './block-math.js'
 import { Link, type LinkProps } from './link.js'
 import { Card } from './card.js'
 import { Columns } from './columns.js'
+import { Steps, Step } from './steps.js'
 
 type HeadingPropsWithoutLevel = Omit<HeadingProps, 'level'>
 
@@ -27,6 +28,8 @@ const baseComponents = {
   CodeBlock,
   Card,
   Columns,
+  Steps,
+  Step,
   Image,
   Frame,
   Caption,
@@ -64,4 +67,6 @@ export {
   InlineMath,
   BlockMath,
   Caption,
+  Steps,
+  Step,
 }

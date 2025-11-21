@@ -165,6 +165,72 @@ export const getDarkColorsSpec = (): ColorSpec => ({
 })
 
 export const getComponentsSpec = (ds: Base): ComponentsSpec => {
+  const h1 = {
+    fontFamily: ds.font.family.heading,
+    fontSize: '1.875rem',
+    fontWeight: ds.font.weight.semiBold,
+    lineHeight: '2.25rem',
+    letterSpacing: '-0.065rem',
+    color: ds.color.text.high,
+    [MEDIA_ABOVE_LARGE]: {
+      fontSize: '2.125rem',
+      lineHeight: '2.75rem',
+      letterSpacing: '-0.085rem',
+    },
+  }
+  const h2 = {
+    fontFamily: ds.font.family.heading,
+    fontSize: '1.25rem',
+    lineHeight: '1.75rem',
+    letterSpacing: '-0.035rem',
+    fontWeight: ds.font.weight.semiBold,
+    color: ds.color.text.high,
+    [MEDIA_ABOVE_LARGE]: {
+      fontSize: '1.375rem',
+      lineHeight: '2rem',
+    },
+  }
+  const h3 = {
+    fontFamily: ds.font.family.heading,
+    fontSize: '1.09375rem',
+    lineHeight: '1.5rem',
+    letterSpacing: '-0.035rem',
+    fontWeight: ds.font.weight.semiBold,
+    color: ds.color.text.high,
+    [MEDIA_ABOVE_LARGE]: {
+      fontSize: '1.125rem',
+      lineHeight: '1.75rem',
+    },
+  }
+  const h4 = {
+    fontFamily: ds.font.family.heading,
+    fontSize: '0.9375rem',
+    lineHeight: '1.5rem',
+    letterSpacing: '-0.015rem',
+    fontWeight: ds.font.weight.semiBold,
+    color: ds.color.text.high,
+    [MEDIA_ABOVE_LARGE]: {
+      fontSize: '1rem',
+      lineHeight: '1.75rem',
+    },
+  }
+  const h6 = {
+    fontFamily: ds.font.family.heading,
+    fontSize: '0.875rem',
+    lineHeight: '1.25rem',
+    letterSpacing: '-0.015rem',
+    fontWeight: '500',
+    color: ds.color.text.high,
+  }
+  const baseTitle = {
+    fontFamily: ds.font.family.heading,
+    fontSize: ds.font.size.base,
+    lineHeight: ds.font.height.base,
+    letterSpacing: ds.letterSpacing.base,
+    fontWeight: ds.font.weight.medium,
+    color: ds.color.text.high,
+  }
+
   return {
     body: {
       font: {
@@ -178,53 +244,16 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
       },
     },
     h1: {
-      fontFamily: ds.font.family.heading,
-      fontSize: '1.875rem',
-      fontWeight: ds.font.weight.semiBold,
-      lineHeight: '2.25rem',
-      letterSpacing: '-0.065rem',
-      color: ds.color.text.high,
-      [MEDIA_ABOVE_LARGE]: {
-        fontSize: '2.125rem',
-        lineHeight: '2.75rem',
-        letterSpacing: '-0.085rem',
-      },
+      ...h1,
     },
     h2: {
-      fontFamily: ds.font.family.heading,
-      fontSize: '1.25rem',
-      lineHeight: '1.75rem',
-      letterSpacing: '-0.035rem',
-      fontWeight: ds.font.weight.semiBold,
-      color: ds.color.text.high,
-      [MEDIA_ABOVE_LARGE]: {
-        fontSize: '1.375rem',
-        lineHeight: '2rem',
-      },
+      ...h2,
     },
     h3: {
-      fontFamily: ds.font.family.heading,
-      fontSize: '1.09375rem',
-      lineHeight: '1.5rem',
-      letterSpacing: '-0.035rem',
-      fontWeight: ds.font.weight.semiBold,
-      color: ds.color.text.high,
-      [MEDIA_ABOVE_LARGE]: {
-        fontSize: '1.125rem',
-        lineHeight: '1.75',
-      },
+      ...h3,
     },
     h4: {
-      fontFamily: ds.font.family.heading,
-      fontSize: '0.9375rem',
-      lineHeight: '1.5rem',
-      letterSpacing: '-0.015rem',
-      fontWeight: ds.font.weight.semiBold,
-      color: ds.color.text.high,
-      [MEDIA_ABOVE_LARGE]: {
-        fontSize: '1rem',
-        lineHeight: '1.75rem',
-      },
+      ...h4,
     },
     h5: {
       fontFamily: ds.font.family.heading,
@@ -235,12 +264,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
       color: ds.color.text.high,
     },
     h6: {
-      fontFamily: ds.font.family.heading,
-      fontSize: '0.875rem',
-      lineHeight: '1.25rem',
-      letterSpacing: '-0.015rem',
-      fontWeight: '500',
-      color: ds.color.text.high,
+      ...h6,
     },
     link: {
       text: {
@@ -301,6 +325,36 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
           height: ds.font.height.sm,
           weight: ds.font.weight.medium,
         },
+      },
+    },
+    steps: {
+      indicator: {
+        bg: ds.color.bg.lowest,
+        text: ds.color.text.high,
+        outline: ds.color.bg.base,
+      },
+      connector: ds.color.border,
+      title: {
+        base: { ...baseTitle },
+        h1: { ...h1 },
+        h2: { ...h2 },
+        h3: { ...h3 },
+        h4: { ...h4 },
+        h5: {
+          fontFamily: ds.font.family.heading,
+          fontSize: '0.90625rem',
+          lineHeight: '1.25rem',
+          letterSpacing: '-0.015rem',
+          fontWeight: ds.font.weight.semiBold,
+          color: ds.color.text.high,
+        },
+        h6: { ...h6 },
+      },
+      body: {
+        color: ds.color.text.low,
+        size: ds.font.size.base,
+        height: ds.font.height.base,
+        weight: ds.font.weight.normal,
       },
     },
     blockquote: {
@@ -794,6 +848,189 @@ export const componentsStyles = (ds: DesignSystem) => {
         'height': '100%',
         'margin': '0',
       },
+    },
+    '.steps': {
+      'margin-top': gap.base,
+      'margin-bottom': gap.cluster,
+      'list-style': 'none',
+      'padding': '0',
+      'display': 'flex',
+      'flex-direction': 'column',
+      'counter-reset': 'step',
+      '--step-indicator-size': ds.spacing.space5,
+      '--step-gap': ds.spacing.space3,
+      '--step-connector-gap': ds.spacing.space2,
+      '--step-title-line-height': ds.steps.title.base.lineHeight,
+      '--step-indicator-offset': 'calc((var(--step-title-line-height) - var(--step-indicator-size)) / 2)',
+      '--step-indicator-top': 'max(var(--step-indicator-offset), 0px)',
+      '--step-connector-start': 'calc(var(--step-indicator-top) + var(--step-indicator-size) + var(--step-connector-gap))',
+      '--step-connector-end': 'calc(var(--step-connector-gap) - var(--step-indicator-top))',
+      '> li::before': {
+        content: 'none',
+      },
+      '> li': {
+        marginBottom: '0',
+      },
+    },
+    '.step': {
+      'display': 'grid',
+      'grid-template-columns': 'auto 1fr',
+      'column-gap': ds.spacing.space3,
+      'align-items': 'flex-start',
+      'position': 'relative',
+      'counter-increment': 'step',
+      'padding-top': 'max(0px, calc(var(--step-indicator-offset) * -1))',
+      'padding-bottom': 'var(--step-gap)',
+    },
+    '.step:last-child': {
+      'padding-bottom': '0',
+    },
+    '.step:not(:last-child)::after': {
+      'content': "''",
+      'position': 'absolute',
+      'left': 'calc((var(--step-indicator-size) / 2) - 0.5px)',
+      'top': 'var(--step-connector-start)',
+      'bottom': 'var(--step-connector-end)',
+      'width': '1px',
+      'background-color': ds.steps.connector,
+    },
+    '.step:last-child::after': {
+      'content': "''",
+      'position': 'absolute',
+      'left': 'calc((var(--step-indicator-size) / 2) - 0.5px)',
+      'top': 'var(--step-connector-start)',
+      'bottom': 'var(--step-connector-end)',
+      'width': '1px',
+      'background-image': `linear-gradient(to bottom, ${ds.steps.connector} 0%, ${ds.steps.connector} 80%, transparent 100%)`,
+    },
+    '.step-indicator': {
+      'width': 'var(--step-indicator-size)',
+      'height': 'var(--step-indicator-size)',
+      'border-radius': '999px',
+      'display': 'inline-flex',
+      'align-items': 'center',
+      'justify-content': 'center',
+      'background-color': ds.steps.indicator.bg,
+      'color': ds.steps.indicator.text,
+      'font-weight': ds.font.weight.semiBold,
+      'font-size': ds.font.size.sm,
+      'line-height': ds.font.height.sm,
+      'flex-shrink': '0',
+      'position': 'relative',
+      'box-shadow': `0 0 0 1px ${ds.steps.indicator.outline}`,
+      'margin-top': 'var(--step-indicator-offset)',
+    },
+    '.step-number': {
+      'display': 'inline-flex',
+      'align-items': 'center',
+      'justify-content': 'center',
+      'width': '100%',
+      'height': '100%',
+    },
+    '.step-number::before': {
+      'content': 'counter(step)',
+    },
+    '.step-indicator svg': {
+      width: '60%',
+      height: '60%',
+    },
+    '.step-content': {
+      'display': 'flex',
+      'flex-direction': 'column',
+      'gap': ds.spacing['space0-5'],
+      'min-width': '0',
+    },
+    '.step-body > *:first-child': {
+      'margin-top': '0',
+    },
+    '.step-title': {
+      'margin': '0',
+      'color': ds.steps.title.base.color,
+      'font-weight': ds.steps.title.base.fontWeight,
+    },
+    '.steps[data-title-size="base"] .step-title': {
+      'font-size': ds.steps.title.base.fontSize,
+      'line-height': ds.steps.title.base.lineHeight,
+      'letter-spacing': ds.steps.title.base.letterSpacing,
+      'font-family': ds.steps.title.base.fontFamily,
+      'font-weight': ds.steps.title.base.fontWeight,
+      'color': ds.steps.title.base.color,
+    },
+    '.steps[data-title-size="base"]': {
+      '--step-title-line-height': ds.steps.title.base.lineHeight,
+      '--step-indicator-size': ds.spacing.space5,
+    },
+    '.steps[data-title-size="h1"] .step-title': {
+      'font-size': ds.steps.title.h1.fontSize,
+      'line-height': ds.steps.title.h1.lineHeight,
+      'letter-spacing': ds.steps.title.h1.letterSpacing,
+      'font-family': ds.steps.title.h1.fontFamily,
+      'font-weight': ds.steps.title.h1.fontWeight,
+      'color': ds.steps.title.h1.color,
+    },
+    '.steps[data-title-size="h1"]': {
+      '--step-title-line-height': ds.steps.title.h1.lineHeight,
+      '--step-indicator-size': ds.spacing.space6,
+    },
+    '.steps[data-title-size="h2"] .step-title': {
+      'font-size': ds.steps.title.h2.fontSize,
+      'line-height': ds.steps.title.h2.lineHeight,
+      'letter-spacing': ds.steps.title.h2.letterSpacing,
+      'font-family': ds.steps.title.h2.fontFamily,
+      'font-weight': ds.steps.title.h2.fontWeight,
+      'color': ds.steps.title.h2.color,
+    },
+    '.steps[data-title-size="h2"]': {
+      '--step-title-line-height': ds.steps.title.h2.lineHeight,
+      '--step-indicator-size': ds.spacing.space6,
+    },
+    '.steps[data-title-size="h3"] .step-title': {
+      'font-size': ds.steps.title.h3.fontSize,
+      'line-height': ds.steps.title.h3.lineHeight,
+      'letter-spacing': ds.steps.title.h3.letterSpacing,
+      'font-family': ds.steps.title.h3.fontFamily,
+      'font-weight': ds.steps.title.h3.fontWeight,
+      'color': ds.steps.title.h3.color,
+    },
+    '.steps[data-title-size="h3"]': {
+      '--step-title-line-height': ds.steps.title.h3.lineHeight,
+      '--step-indicator-size': ds.spacing.space6,
+    },
+    '.steps[data-title-size="h4"] .step-title': {
+      'font-size': ds.steps.title.h4.fontSize,
+      'line-height': ds.steps.title.h4.lineHeight,
+      'letter-spacing': ds.steps.title.h4.letterSpacing,
+      'font-family': ds.steps.title.h4.fontFamily,
+      'font-weight': ds.steps.title.h4.fontWeight,
+      'color': ds.steps.title.h4.color,
+    },
+    '.steps[data-title-size="h4"]': {
+      '--step-title-line-height': ds.steps.title.h4.lineHeight,
+      '--step-indicator-size': ds.spacing.space5,
+    },
+    '.steps[data-title-size="h5"] .step-title': {
+      'font-size': ds.steps.title.h5.fontSize,
+      'line-height': ds.steps.title.h5.lineHeight,
+      'letter-spacing': ds.steps.title.h5.letterSpacing,
+      'font-family': ds.steps.title.h5.fontFamily,
+      'font-weight': ds.steps.title.h5.fontWeight,
+      'color': ds.steps.title.h5.color,
+    },
+    '.steps[data-title-size="h5"]': {
+      '--step-title-line-height': ds.steps.title.h5.lineHeight,
+      '--step-indicator-size': ds.spacing.space5,
+    },
+    '.steps[data-title-size="h6"] .step-title': {
+      'font-size': ds.steps.title.h6.fontSize,
+      'line-height': ds.steps.title.h6.lineHeight,
+      'letter-spacing': ds.steps.title.h6.letterSpacing,
+      'font-family': ds.steps.title.h6.fontFamily,
+      'font-weight': ds.steps.title.h6.fontWeight,
+      'color': ds.steps.title.h6.color,
+    },
+    '.steps[data-title-size="h6"]': {
+      '--step-title-line-height': ds.steps.title.h6.lineHeight,
+      '--step-indicator-size': ds.spacing.space5,
     },
     '@media (max-width: 768px)': {
       '.columns': {

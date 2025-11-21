@@ -72,6 +72,7 @@
     --p-color-accent-low: 180, 0%, 30%;
     --button-primary-color-bg: var(--gray-12);
     --button-primary-color-text: var(--gray-3);
+    --p-color-text: 219 10% 90%;
     /* --p-color-syntax-syntax1: 207 61% 59%;
     --p-color-syntax-syntax2: 153 40% 54%;
     --p-color-syntax-syntax3: 0 79% 71%;

@@ -173,6 +173,29 @@ export type Components = {
       }
     }
   }
+  steps: {
+    indicator: {
+      bg: CssValue
+      text: CssValue
+      outline: CssValue
+    }
+    connector: CssValue
+    title: {
+      base: TextStyle
+      h1: TextStyle
+      h2: TextStyle
+      h3: TextStyle
+      h4: TextStyle
+      h5: TextStyle
+      h6: TextStyle
+    }
+    body: {
+      color: CssValue
+      size: CssValue
+      height: CssValue
+      weight: CssValue
+    }
+  }
   blockquote: {
     color: {
       text: CssValue

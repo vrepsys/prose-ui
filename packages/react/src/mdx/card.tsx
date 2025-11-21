@@ -1,55 +1,11 @@
-import type { ComponentPropsWithoutRef, ComponentType, ReactNode } from 'react'
-import { isValidElement } from 'react'
-import { ArrowRight, icons, type LucideIcon } from 'lucide-react'
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { ArrowRight } from 'lucide-react'
 import { classes } from '../classes.js'
+import { parseBoolean, type Booleanish } from './booleanish.js'
+import { resolveIconNode, type IconSource } from './icon-utils.js'
 
 type NativeProps = Omit<ComponentPropsWithoutRef<'div'>, 'title' | 'children' | 'color' | 'href'> &
   Omit<ComponentPropsWithoutRef<'a'>, 'title' | 'children' | 'color' | 'href'>
-
-type CardIcon = string | ReactNode | ComponentType<Record<string, unknown>>
-type Booleanish = boolean | 'true' | 'false' | undefined
-
-const lucideIconMap = icons as Record<string, LucideIcon>
-
-const toPascalCase = (value: string) => {
-  return value
-    .trim()
-    .split(/[\s_-]+/)
-    .filter(Boolean)
-    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
-    .join('')
-}
-
-const resolveLucideIcon = (name: string) => {
-  if (!name) return undefined
-  if (lucideIconMap[name]) return lucideIconMap[name]
-  const normalized = toPascalCase(name)
-  return lucideIconMap[normalized]
-}
-
-const resolveIconNode = (icon?: CardIcon) => {
-  if (!icon) return null
-  if (typeof icon === 'string') {
-    const IconComponent = resolveLucideIcon(icon)
-    return IconComponent ? <IconComponent aria-hidden="true" /> : null
-  }
-  if (isValidElement(icon)) {
-    return icon
-  }
-  if (typeof icon === 'function') {
-    const IconComponent = icon as ComponentType<Record<string, unknown>>
-    return <IconComponent aria-hidden="true" />
-  }
-  return null
-}
-
-const parseBoolean = (value: Booleanish) => {
-  if (typeof value === 'string') {
-    if (!value.length) return true
-    return value.toLowerCase() === 'true'
-  }
-  return Boolean(value)
-}
 
 const isExternalHref = (href?: string) => {
   if (!href) return false
@@ -58,7 +14,7 @@ const isExternalHref = (href?: string) => {
 
 export type CardProps = NativeProps & {
   title: string
-  icon?: CardIcon
+  icon?: IconSource
   color?: string
   href?: string
   horizontal?: Booleanish

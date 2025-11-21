@@ -87,6 +87,11 @@
       },
       {
         "type": "link",
+        "name": "Steps",
+        "href": "/docs/components/steps"
+      },
+      {
+        "type": "link",
         "name": "Frame",
         "href": "/docs/components/frame"
       },

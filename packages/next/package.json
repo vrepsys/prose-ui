@@ -30,9 +30,9 @@
   },
   "peerDependencies": {
     "next": "^14 || ^15 || ^16",
-    "sharp": "^0.33.5",
     "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
+    "react-dom": "^18 || ^19",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@prose-ui/style": "workspace:*",
@@ -45,6 +45,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@prose-ui/react": "workspace:*"
+    "@prose-ui/react": "workspace:*",
+    "react-medium-image-zoom": "^5.4.0"
   }
 }

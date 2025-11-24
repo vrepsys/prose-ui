@@ -118,7 +118,7 @@ export const getLightColorsSpec = (): ColorSpec => ({
       high: '0 0% 100%',
       base: hsl(slate.slate1),
       low: hsl(slate.slate3),
-      lower: hsl(slate.slate5),
+      lower: hsl(slate.slate4),
       lowest: hsl(slate.slate7),
     },
     border: hsl(slate.slate4),
@@ -329,9 +329,9 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     },
     steps: {
       indicator: {
-        bg: ds.color.bg.lowest,
+        bg: ds.color.bg.lower,
         text: ds.color.text.high,
-        outline: ds.color.bg.base,
+        outline: ds.color.bg.lower,
       },
       connector: ds.color.border,
       title: {
@@ -1265,6 +1265,84 @@ const ds: DesignSystem = { ...base, ...components }
 
 const styles = componentsStyles(ds)
 
+// Modal styles need to be unscoped since the modal is rendered outside .prose-ui container
+const modalStyles = {
+  '[data-rmiz-ghost]': {
+    'position': 'absolute',
+    'pointer-events': 'none',
+  },
+  '[data-rmiz-btn-zoom], [data-rmiz-btn-unzoom]': {
+    'display': 'none',
+  },
+  '[data-rmiz-content="found"] img, [data-rmiz-content="found"] svg, [data-rmiz-content="found"] [role="img"], [data-rmiz-content="found"] [data-zoom]': {
+    'cursor': 'zoom-in',
+  },
+  '[data-rmiz-modal]': {
+    'border': '0',
+    'outline': 'none',
+    'box-shadow': 'none',
+  },
+  '[data-rmiz-modal]::backdrop': {
+    'display': 'none',
+  },
+  '[data-rmiz-modal][open]': {
+    'position': 'fixed',
+    'width': '100vw',
+    'height': '100vh',
+    'max-width': 'none',
+    'max-height': 'none',
+    'margin': '0',
+    'padding': '0',
+    'border': '0',
+    'outline': 'none',
+    'background': 'transparent',
+    'overflow': 'hidden',
+    'pointer-events': 'all',
+    '@supports (width: 100dvw)': {
+      'width': '100dvw',
+      'height': '100dvh',
+    },
+  },
+  '[data-rmiz-modal]:focus': {
+    'outline': 'none',
+  },
+  '[data-rmiz-modal]:focus-visible': {
+    'outline': 'none',
+  },
+  '[data-rmiz-modal-overlay]': {
+    'position': 'absolute',
+    'inset': '0',
+    'transition': 'background-color 0.3s',
+  },
+  '[data-rmiz-modal-overlay="hidden"]': {
+    'background-color': 'rgba(255, 255, 255, 0)',
+  },
+  '[data-rmiz-modal-overlay="visible"]': {
+    'background-color': ds.color.bg.base,
+  },
+  '[data-rmiz-modal-content]': {
+    'position': 'relative',
+    'width': '100%',
+    'height': '100%',
+    'outline': 'none',
+    'border': '0',
+  },
+  '[data-rmiz-modal-img]': {
+    'position': 'absolute',
+    'cursor': 'zoom-out',
+    'image-rendering': 'high-quality',
+    'transform-origin': 'top left',
+    'transition': 'transform 0.3s',
+    'outline': 'none',
+    'border': '0',
+  },
+  '@media (prefers-reduced-motion: reduce)': {
+    '[data-rmiz-modal-overlay], [data-rmiz-modal-img]': {
+      'transition-duration': '0.01ms !important',
+    },
+  },
+}
+
 const shikiCssVars = shikiCssVariables(ds)
 const lightCssVars = cssVariables(lightColorSpec, '--p')
 const darkCssVars = cssVariables(darkColorSpec, '--p')
@@ -1288,4 +1366,5 @@ export const allStyles = [
     },
   },
   { '.prose-ui': styles },
+  modalStyles, // Unscoped styles for modal elements rendered outside .prose-ui
 ]

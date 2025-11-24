@@ -11,6 +11,8 @@ import { Link, type LinkProps } from './link.js'
 import { Card } from './card.js'
 import { Columns } from './columns.js'
 import { Steps, Step } from './steps.js'
+import { parseBoolean } from './booleanish.js'
+export type { Booleanish } from './booleanish.js'
 
 type HeadingPropsWithoutLevel = Omit<HeadingProps, 'level'>
 
@@ -69,4 +71,5 @@ export {
   Caption,
   Steps,
   Step,
+  parseBoolean,
 }

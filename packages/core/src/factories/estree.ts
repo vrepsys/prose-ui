@@ -36,7 +36,7 @@ export const identifierExpression = (name: string): Identifier => {
   }
 }
 
-export const literalExpression = (value: string): Literal => {
+export const literalExpression = (value: string | number | boolean): Literal => {
   return {
     type: 'Literal' as const,
     value,

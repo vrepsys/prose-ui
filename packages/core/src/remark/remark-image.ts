@@ -17,6 +17,20 @@ import { attrsToObj, parseNumberExpressionAttr, parseStringAttr } from './jsx-ut
 
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
 
+const isInlineImage = (parent: any): boolean => {
+  return parent?.type === 'paragraph' && Array.isArray(parent.children) && parent.children.length > 1
+}
+
+const createZoomAttr = (zoom: boolean) => {
+  return attr(
+    'zoom',
+    attrValueExpression(
+      zoom.toString(),
+      estree([expressionStatement(literalExpression(zoom))]),
+    ),
+  )
+}
+
 const mapUrl = (url: string, basePath: string): string => {
   if (EXTERNAL_URL_REGEX.test(url)) {
     return url
@@ -26,7 +40,12 @@ const mapUrl = (url: string, basePath: string): string => {
 
 const createImageTag = (
   src: string | MdxJsxAttributeValueExpression,
-  { alt, width, height }: { alt?: string; width?: number; height?: number },
+  {
+    alt,
+    width,
+    height,
+    zoom,
+  }: { alt?: string; width?: number; height?: number; zoom?: boolean },
 ) => {
   const widthAttr =
     width !== undefined
@@ -46,10 +65,11 @@ const createImageTag = (
             height.toString(),
             estree([expressionStatement(literalExpression(height.toString()))]),
           ),
-        )
+      )
       : undefined
+  const zoomAttr = zoom !== undefined ? createZoomAttr(zoom) : undefined
 
-  return flowElement('Image', [], [attr('src', src), attr('alt', alt), widthAttr, heightAttr])
+  return flowElement('Image', [], [attr('src', src), attr('alt', alt), widthAttr, heightAttr, zoomAttr])
 }
 
 export type Options = {
@@ -125,7 +145,13 @@ const remarkImage = ({ imageDir, basePath }: Options = { imageDir: DEFAULT_IMAGE
       let imageTag: MdxJsxFlowElement
       const size = dimensions.get(url) || {}
 
-      imageTag = createImageTag(url, { alt: node?.alt ?? undefined, ...size })
+      const isInline = isInlineImage(parent)
+
+      imageTag = createImageTag(url, {
+        alt: node?.alt ?? undefined,
+        zoom: isInline ? false : undefined,
+        ...size,
+      })
       if (parent && index !== undefined) {
         parent.children.splice(index, 1, imageTag)
       }
@@ -137,7 +163,7 @@ const remarkImage = ({ imageDir, basePath }: Options = { imageDir: DEFAULT_IMAGE
         { type: 'mdxJsxFlowElement', name: 'Image' },
         { type: 'mdxJsxTextElement', name: 'Image' },
       ],
-      (node) => {
+      (node, _index, parent) => {
         node = node as MdxJsxFlowElement | MdxJsxTextElement
         const attrs = attrsToObj(node.attributes)
         let width = parseNumberExpressionAttr(attrs, 'width')
@@ -191,6 +217,10 @@ const remarkImage = ({ imageDir, basePath }: Options = { imageDir: DEFAULT_IMAGE
         }
         if (heightAttr) {
           node.attributes.push(heightAttr)
+        }
+
+        if (!attrs.zoom) {
+          node.attributes.push(createZoomAttr(isInlineImage(parent) ? false : true)!)
         }
       },
     )

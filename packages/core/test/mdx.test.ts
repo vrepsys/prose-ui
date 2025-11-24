@@ -2,6 +2,7 @@ import { expect, test } from 'vitest'
 
 import { remark } from 'remark'
 import remarkMdx from 'remark-mdx'
+import { visit } from 'unist-util-visit'
 
 import remarkCodeBlock from '../src/remark/remark-code-block.js'
 import remarkImage from '../src/remark/remark-image.js'
@@ -105,14 +106,30 @@ test('transform code block without language', async () => {
 
 test('transform markdown image', async () => {
   const input = `![Alt text](/demo.png)`
-  const output = `<Image src="/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" />
+  const output = `<Image src="/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" zoom={true} />
+`
+  await expectOutput(input, output)
+})
+
+test('markdown inline image (paragraph has text siblings) disables zoom', async () => {
+  const input = `hello ![Alt text](/demo.png) world`
+  const output = `hello <Image src="/demo.png" alt="Alt text" width={1600} height={900} zoom={false} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" /> world
+`
+  await expectOutput(input, output)
+})
+
+test('standalone markdown image keeps zoom enabled', async () => {
+  const input = `
+![Alt text](/demo.png)
+`
+  const output = `<Image src="/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" zoom={true} />
 `
   await expectOutput(input, output)
 })
 
 test('transform markdown image with url mapping', async () => {
   const input = `![Alt text](/demo.png)`
-  const output = `<Image src="/docs/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" />
+  const output = `<Image src="/docs/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" zoom={true} />
 `
   await expectOutput(input, output, {
     image: { imageDir: 'test/images', basePath: '/docs' },
@@ -122,7 +139,7 @@ test('transform markdown image with url mapping', async () => {
 test('transform remote image, pass exactly same url as in markdown', async () => {
   const input = `![Alt text](https://hello.world/isr.png)`
 
-  const output = `<Image src="https://hello.world/isr.png" alt="Alt text" />
+  const output = `<Image src="https://hello.world/isr.png" alt="Alt text" zoom={true} />
 `
   await expectOutput(input, output)
 })
@@ -130,7 +147,7 @@ test('transform remote image, pass exactly same url as in markdown', async () =>
 test('transform remote image, exactly the same url as in markdown, even with mapUrl', async () => {
   const input = `![Alt text](https://hello.world/isr.png)`
 
-  const output = `<Image src="https://hello.world/isr.png" alt="Alt text" />
+  const output = `<Image src="https://hello.world/isr.png" alt="Alt text" zoom={true} />
 `
   await expectOutput(input, output, {
     image: { imageDir: 'test/images', basePath: '/docs' },
@@ -140,7 +157,7 @@ test('transform remote image, exactly the same url as in markdown, even with map
 test('Tag does not change if image does not exist', async () => {
   const input = `<Image src="/does-not-exist.png" alt="Alt text" />`
 
-  const output = `<Image src="/does-not-exist.png" alt="Alt text" />
+  const output = `<Image src="/does-not-exist.png" alt="Alt text" zoom={true} />
 `
   await expectOutput(input, output)
 })
@@ -148,14 +165,14 @@ test('Tag does not change if image does not exist', async () => {
 test('Sets size when image present', async () => {
   const input = `<Image src="/demo.png" alt="Alt text" />`
 
-  const output = `<Image src="/demo.png" alt="Alt text" blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" width={1600} height={900} />
+  const output = `<Image src="/demo.png" alt="Alt text" blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" width={1600} height={900} zoom={true} />
 `
   await expectOutput(input, output)
 })
 
 test('calculates height and maintains ratio ', async () => {
   const input = `<Image src="/demo.png" alt="Alt text" width={800} />`
-  const output = `<Image src="/demo.png" alt="Alt text" width={800} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" height={450} />
+  const output = `<Image src="/demo.png" alt="Alt text" width={800} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" height={450} zoom={true} />
 `
   await expectOutput(input, output)
 })
@@ -163,7 +180,7 @@ test('calculates height and maintains ratio ', async () => {
 test('transform image src for inline JSX images', async () => {
   const input = `hello <Image src="/demo.png" alt="Alt text" /> world`
 
-  const output = `hello <Image src="/demo.png" alt="Alt text" blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" width={1600} height={900} /> world
+  const output = `hello <Image src="/demo.png" alt="Alt text" blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" width={1600} height={900} zoom={false} /> world
 `
 
   await expectOutput(input, output)
@@ -172,12 +189,41 @@ test('transform image src for inline JSX images', async () => {
 test('transform src for inline JSX images with basePath', async () => {
   const input = `hello <Image src="/demo.png" alt="Alt text" /> world`
 
-  const output = `hello <Image src="/docs/demo.png" alt="Alt text" blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" width={1600} height={900} /> world
+  const output = `hello <Image src="/docs/demo.png" alt="Alt text" blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" width={1600} height={900} zoom={false} /> world
 `
 
   await expectOutput(input, output, {
     image: { imageDir: 'test/images', basePath: '/docs' },
   })
+})
+
+test('inline JSX image with siblings disables zoom', async () => {
+  const input = `hello <Image src="/demo.png" alt="Alt text" /> world`
+
+  const output = `hello <Image src="/demo.png" alt="Alt text" blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" width={1600} height={900} zoom={false} /> world
+`
+
+  await expectOutput(input, output)
+})
+
+test('inline JSX image injects boolean zoom in estree (currently string -> reproduces bug)', async () => {
+  const processor = remark()
+    .use(remarkImage({ imageDir: 'test/images' }))
+    .use(remarkMdx)
+
+  const tree = await processor.run(processor.parse('hello <Image src="/demo.png" alt="Alt text" /> world'))
+
+  let zoomLiteralValue: unknown
+  visit(tree, ['mdxJsxTextElement', 'mdxJsxFlowElement'], (node: any) => {
+    if (node.name !== 'Image') return
+    const zoomAttr = node.attributes.find((attr: any) => attr.name === 'zoom')
+    const literal = zoomAttr?.value?.data?.estree?.body?.[0]?.expression
+    if (literal?.type === 'Literal') {
+      zoomLiteralValue = literal.value
+    }
+  })
+
+  expect(zoomLiteralValue).toBe(false)
 })
 
 test('transform markdown links to next/link', async () => {

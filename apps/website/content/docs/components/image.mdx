@@ -71,6 +71,15 @@ Use the [Frame](/docs/components/frame) component to control alignment and add c
    <Caption>Right aligned image</Caption>
 </Frame>
 
+## Zoom on click
+
+Standalone images zoom on click by default. Inline images skip zoom so text flows naturally. Toggle either behavior with the `zoom` prop on `Image`.
+
+```mdx title="Inline image with zoom enabled"
+Zoom me: <Image src="/img/demo-inline-image.svg" width={80} zoom alt="Abstract art" /> inside a sentence.
+```
+Zoom me: <Image src="/img/demo-inline-image.svg" width={80} zoom alt="Abstract art" /> inside a sentence.
+
 ## Inline images
 
 By default, images added using Markdown syntax or the Image component are inline and will appear inside a paragraph tag unless wrapped in a [Frame](/docs/components/frame).

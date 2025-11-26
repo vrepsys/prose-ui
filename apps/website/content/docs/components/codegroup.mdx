@@ -44,66 +44,39 @@ yarn add @prose-ui/react
 
 ## Language variants
 
-When multiple code blocks share the same `title` but have different languages, they are grouped into a single tab with a language selector:
+When multiple code blocks share the same `title` but have different languages, they are grouped into a single tab with a language selector. Switching languages updates all tabs to show the selected language variant (if available).
 
 ````mdx title="Markdown syntax"
 <CodeGroup>
 
-```typescript title='greet'
-function greet(name: string): string {
-  return `Hello, ${name}!`
+```typescript title='Install'
+npm install @prose-ui/react
+npm install @prose-ui/style
+```
+
+```python title='Install'
+pip install prose-ui
+```
+
+```typescript title='Usage'
+import { CodeBlock, Callout } from '@prose-ui/react'
+
+export default function Page() {
+  return <Callout>Hello world</Callout>
 }
 ```
 
-```javascript title='greet'
-function greet(name) {
-  return `Hello, ${name}!`
-}
-```
+```python title='Usage'
+from prose_ui import CodeBlock, Callout
 
-```python title='greet'
-def greet(name):
-    return f"Hello, {name}!"
+def render():
+    return Callout("Hello world")
 ```
 
 </CodeGroup>
 ````
 
 Result:
-
-<CodeGroup>
-
-```typescript title='greet'
-function greet(name: string): string {
-  return `Hello, ${name}!`
-}
-
-const message = greet('World')
-console.log(message)
-```
-
-```javascript title='greet'
-function greet(name) {
-  return `Hello, ${name}!`
-}
-
-const message = greet('World')
-console.log(message)
-```
-
-```python title='greet'
-def greet(name):
-    return f"Hello, {name}!"
-
-message = greet("World")
-print(message)
-```
-
-</CodeGroup>
-
-## Multiple tabs with language variants
-
-You can combine multiple tabs with language variants. Each unique `title` becomes a tab, and each language variant is accessible via the language selector:
 
 <CodeGroup>
 
@@ -132,6 +105,3 @@ def render():
 ```
 
 </CodeGroup>
-
-When switching languages, all tabs update to show the selected language variant (if available).
-

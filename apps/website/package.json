@@ -16,6 +16,7 @@
     "@radix-ui/react-dialog": "^1.1.4",
     "@radix-ui/react-scroll-area": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-visually-hidden": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "framer-motion": "^11.11.17",

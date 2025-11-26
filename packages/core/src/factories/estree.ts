@@ -6,6 +6,9 @@ import {
   ImportDeclaration,
   Identifier,
   Literal,
+  Property,
+  ObjectExpression,
+  ArrayExpression,
 } from 'estree'
 
 export const estree = (
@@ -57,5 +60,45 @@ export const importDeclaration = (
     ],
     source: literalExpression(path),
     attributes: [],
+  }
+}
+
+/**
+ * Create a property for an object expression.
+ * Accepts either a primitive value or an Expression.
+ */
+export const property = (
+  key: string,
+  value: string | number | boolean | Expression,
+): Property => {
+  const valueExpr = typeof value === 'object' ? value : literalExpression(value)
+  return {
+    type: 'Property' as const,
+    method: false,
+    shorthand: false,
+    computed: false,
+    kind: 'init' as const,
+    key: identifierExpression(key),
+    value: valueExpr,
+  }
+}
+
+/**
+ * Create an object expression from properties.
+ */
+export const objectExpression = (properties: Property[]): ObjectExpression => {
+  return {
+    type: 'ObjectExpression' as const,
+    properties,
+  }
+}
+
+/**
+ * Create an array expression from elements.
+ */
+export const arrayExpression = (elements: Expression[]): ArrayExpression => {
+  return {
+    type: 'ArrayExpression' as const,
+    elements,
   }
 }

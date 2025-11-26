@@ -2,34 +2,36 @@ import type { Root, Code } from 'mdast'
 import type { Parent } from 'unist'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
+import { MdxJsxFlowElement } from 'mdast-util-mdx-jsx'
 import { attr, attrValueExpression, flowElement, flowExpression } from '../factories/mdx.js'
 import { estree, expressionStatement, literalExpression } from '../factories/estree.js'
 import { highlightCode } from '../highlight-code.js'
+import { parseCodeBlockMeta } from './code-utils.js'
 
-const TITLE_REGEX = /title=(['"])(?<title>.*)(\1)/i
+const isInsideCodeGroup = (parent: Parent | undefined): boolean => {
+  if (!parent) return false
+  const p = parent as MdxJsxFlowElement
+  return p.type === 'mdxJsxFlowElement' && p.name === 'CodeGroup'
+}
 
 const remarkCodeBlock: Plugin<[], Root> = () => {
   return async (tree) => {
     const codeNodes: Array<{ node: Code; index: number; parent: Parent }> = []
 
     visit(tree, 'code', (node: Code, index, parent) => {
+      // Skip code blocks inside CodeGroup - they are handled by remark-code-group
+      if (isInsideCodeGroup(parent)) {
+        return
+      }
       if (parent && typeof index === 'number') {
         codeNodes.push({ node, index, parent })
       }
     })
 
     for (const { node, index, parent } of codeNodes) {
-      // when lang is not present showLineNumbers and title will apper in node.lang
-      const attrsStr = [node.lang, node.meta ?? ''].filter((x) => !!x).join(' ')
-      const m = attrsStr.match(TITLE_REGEX)
-      const title = m?.groups?.title
-      const lang =
-        node.lang && !node.lang.includes('showLineNumbers') && !node.lang.includes('title=')
-          ? node.lang
-          : undefined
-      const showLineNumbers = attrsStr.includes('showLineNumbers')
+      const { title, lang, showLineNumbers } = parseCodeBlockMeta(node)
 
-      const highlightedCode = await highlightCode(node.value, lang || 'text')
+      const highlightedCode = await highlightCode(node.value, lang)
 
       const content = flowExpression(
         `'${node.value}'`,

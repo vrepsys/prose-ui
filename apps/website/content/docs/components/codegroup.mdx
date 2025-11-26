@@ -1,0 +1,137 @@
+# Code group
+
+Code groups let you display multiple code blocks as tabs, with optional language switching. This is useful for showing the same code in different languages, or grouping related code snippets together.
+
+## Basic usage
+
+Wrap multiple code blocks in a `<CodeGroup>` component. Each code block's `title` becomes a tab:
+
+````mdx title="Markdown syntax"
+<CodeGroup>
+
+```bash title='npm'
+npm install @prose-ui/react
+```
+
+```bash title='pnpm'
+pnpm add @prose-ui/react
+```
+
+```bash title='yarn'
+yarn add @prose-ui/react
+```
+
+</CodeGroup>
+````
+
+Result:
+
+<CodeGroup>
+
+```bash title='npm'
+npm install @prose-ui/react
+```
+
+```bash title='pnpm'
+pnpm add @prose-ui/react
+```
+
+```bash title='yarn'
+yarn add @prose-ui/react
+```
+
+</CodeGroup>
+
+## Language variants
+
+When multiple code blocks share the same `title` but have different languages, they are grouped into a single tab with a language selector:
+
+````mdx title="Markdown syntax"
+<CodeGroup>
+
+```typescript title='greet'
+function greet(name: string): string {
+  return `Hello, ${name}!`
+}
+```
+
+```javascript title='greet'
+function greet(name) {
+  return `Hello, ${name}!`
+}
+```
+
+```python title='greet'
+def greet(name):
+    return f"Hello, {name}!"
+```
+
+</CodeGroup>
+````
+
+Result:
+
+<CodeGroup>
+
+```typescript title='greet'
+function greet(name: string): string {
+  return `Hello, ${name}!`
+}
+
+const message = greet('World')
+console.log(message)
+```
+
+```javascript title='greet'
+function greet(name) {
+  return `Hello, ${name}!`
+}
+
+const message = greet('World')
+console.log(message)
+```
+
+```python title='greet'
+def greet(name):
+    return f"Hello, {name}!"
+
+message = greet("World")
+print(message)
+```
+
+</CodeGroup>
+
+## Multiple tabs with language variants
+
+You can combine multiple tabs with language variants. Each unique `title` becomes a tab, and each language variant is accessible via the language selector:
+
+<CodeGroup>
+
+```typescript title='Install'
+npm install @prose-ui/react
+npm install @prose-ui/style
+```
+
+```python title='Install'
+pip install prose-ui
+```
+
+```typescript title='Usage'
+import { CodeBlock, Callout } from '@prose-ui/react'
+
+export default function Page() {
+  return <Callout>Hello world</Callout>
+}
+```
+
+```python title='Usage'
+from prose_ui import CodeBlock, Callout
+
+def render():
+    return Callout("Hello world")
+```
+
+</CodeGroup>
+
+When switching languages, all tabs update to show the selected language variant (if available).
+

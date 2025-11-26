@@ -23,6 +23,7 @@ import {
 } from '@radix-ui/colors'
 
 import { hexToHsl } from './utils/hex-to-hsl.js'
+import { selectTriggerStyles, selectPortalStyles } from './select.js'
 
 const hsl = (color: string) => {
   return color.startsWith('#') ? hexToHsl(color) : color
@@ -495,6 +496,104 @@ export const componentsStyles = (ds: DesignSystem) => {
         'border-radius': '0',
       },
     },
+    '.copy-button': {
+      'position': 'relative',
+      'background-color': ds.codeBlock.color.bg,
+      'border-radius': ds.border.radius,
+      'padding': ds.spacing.space1,
+      'color': ds.color.text.lowest,
+      'transition': 'color 150ms ease, background-color 150ms ease',
+      'cursor': 'pointer',
+
+      '.icon-wrapper': {
+        position: 'relative',
+        width: '16px',
+        height: '16px',
+      },
+      '.icon': {
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        transition: 'opacity 150ms ease',
+      },
+      '.icon-default': {
+        opacity: '1',
+      },
+
+      '.icon-hover': {
+        opacity: '0',
+      },
+    },
+    '.copy-button:hover': {
+      'color': ds.color.text.lower,
+      'background-color': ds.color.bg.lower,
+      '.icon-default': {
+        opacity: '0',
+      },
+      '.icon-hover': {
+        opacity: '1',
+      },
+    },
+    '.copied-icon': {
+      'background-color': ds.codeBlock.color.bg,
+      'padding': ds.spacing.space1,
+      'border-radius': ds.border.radius,
+      'color': ds.color.success,
+    },
+    '.code-group': {
+      'margin-top': gap.base,
+      'margin-bottom': gap.cluster,
+      'border-width': '1px',
+      'border-color': ds.color.border,
+      'border-radius': ds.border.radius,
+      'background-color': ds.codeBlock.color.bg,
+      'display': 'flex',
+      'flex-direction': 'column',
+      '.header': {
+        'display': 'flex',
+        'align-items': 'center',
+        'justify-content': 'space-between',
+        'gap': ds.spacing.space2,
+        'border-bottom': `1px solid ${ds.color.border}`,
+        'padding-top': ds.spacing['space1-5'],
+        'padding-bottom': ds.spacing['space1-5'],
+        'padding-left': ds.spacing.space3,
+        'padding-right': ds.spacing['space1-5'],
+        'border-color': ds.color.border,
+        '.header-actions': {
+          'display': 'flex',
+          'align-items': 'center',
+          'gap': ds.spacing['space0-5'],
+        },
+        '.tabs-list': {
+          'display': 'flex',
+          'gap': ds.spacing.space1,
+          'margin-left': `calc(-1 * ${ds.spacing.space1})`,
+          '.tab-trigger': {
+            'color': ds.color.text.low,
+            'font-size': ds.font.size.sm,
+            'font-weight': ds.font.weight.medium,
+            'line-height': ds.font.height.sm,
+            'letter-spacing': ds.letterSpacing.sm,
+            'padding-left': ds.spacing['space1'],
+            'padding-right': ds.spacing['space1'],
+            'transition': 'color 150ms ease',
+            '&:hover': {
+              'color': ds.color.text.base,
+            },
+          },
+          '.tab-trigger[data-state="active"]': {
+            'color': ds.color.accent.base,
+            'box-shadow': `0 6px 0 0 ${ds.codeBlock.color.bg}, 0 8px 0 0 currentColor`,
+          },
+        },
+        '.select-trigger': {
+          'margin-left': 'auto',
+        },
+      },
+    },
     '.code-block': {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
@@ -520,57 +619,32 @@ export const componentsStyles = (ds: DesignSystem) => {
           'font-size': ds.font.size.sm,
           'line-height': ds.font.height.sm,
           'letter-spacing': ds.letterSpacing.sm,
+          'font-weight': ds.font.weight.medium,
         },
       },
-      '.copy-button': {
-        'position': 'relative',
-        'background-color': ds.codeBlock.color.bg,
-        'border-radius': ds.border.radius,
-        'padding': ds.spacing.space1,
-        'color': ds.color.text.lowest,
-        'transition': 'color 150ms ease, background-color 150ms ease',
-        'cursor': 'pointer',
-
-        '.icon-wrapper': {
-          position: 'relative',
-          width: '16px',
-          height: '16px',
+    },
+    '.code-block, .code-group': {
+      '.body:has(> .copy-button), .body:has(> .copied-icon)': {
+        'padding-right': ds.spacing.space6,
+        '.scroll-area-root': {
+          'position': 'relative',
+          '&::after': {
+            // fade on the right to hint horizontal scroll without covering the scrollbar
+            'content': "''",
+            'position': 'absolute',
+            'top': 0,
+            'right': 0,
+            'width': ds.spacing.space6,
+            'bottom': `calc(${ds.spacing['space1-5']} + ${ds.spacing['space0-5']} * 2)`,
+            'pointer-events': 'none',
+            'background': `linear-gradient(90deg, transparent, ${ds.codeBlock.color.bg})`,
+          },
         },
-        '.icon': {
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          width: '100%',
-          height: '100%',
-          transition: 'opacity 150ms ease',
-        },
-        '.icon-default': {
-          opacity: '1',
-        },
-
-        '.icon-hover': {
-          opacity: '0',
-        },
-      },
-      '.copy-button:hover': {
-        'color': ds.color.text.lower,
-        'background-color': ds.color.bg.lower,
-        '.icon-default': {
-          opacity: '0',
-        },
-        '.icon-hover': {
-          opacity: '1',
-        },
-      },
-      '.copied-icon': {
-        'background-color': ds.codeBlock.color.bg,
-        'padding': ds.spacing.space1,
-        'border-radius': ds.border.radius,
-        'color': ds.color.success,
       },
       '.body': {
         'position': 'relative',
         'display': 'flex',
+        'width': '100%',
         'font-family': ds.font.family.mono,
         'font-size': ds.codeBlock.font.size,
         'line-height': ds.codeBlock.font.height,
@@ -579,24 +653,22 @@ export const componentsStyles = (ds: DesignSystem) => {
         'word-break': 'keep-all',
         'font-variant-ligatures': 'none',
         '.copy-button': {
-          'visibility': 'hidden',
-          'transition': 'opacity 100ms ease',
-          'border-width': '1px',
-          'border-color': ds.color.border,
-          'opacity': 0,
+          // 'visibility': 'hidden',
+          // 'transition': 'opacity 100ms ease',
+          // 'border-width': '1px',
+          // 'border-color': ds.color.border,
+          // 'opacity': 0,
           'position': 'absolute',
           'right': ds.spacing.space2,
           'top': ds.spacing.space2,
         },
         '.copied-icon': {
-          'border-width': '1px',
-          'border-color': ds.color.border,
           'position': 'absolute',
           'right': ds.spacing.space2,
           'top': ds.spacing.space2,
         },
         '&:hover .copy-button': {
-          opacity: 1,
+          // opacity: 1,
           visibility: 'visible',
         },
       },
@@ -612,7 +684,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'padding-top': ds.spacing.space3,
         'padding-bottom': ds.spacing.space3,
         'padding-left': ds.spacing.space3,
-        'padding-right': ds.spacing.space3,
+        'padding-right': ds.spacing.space6,
       },
       'code': {
         'display': 'flex',
@@ -1234,6 +1306,8 @@ export const componentsStyles = (ds: DesignSystem) => {
       'border-radius': ds.spacing['space1-5'],
       'position': 'relative',
     },
+    // Select trigger styles (inline, inside .prose-ui)
+    ...selectTriggerStyles(ds),
   }
 }
 
@@ -1367,4 +1441,5 @@ export const allStyles = [
   },
   { '.prose-ui': styles },
   modalStyles, // Unscoped styles for modal elements rendered outside .prose-ui
+  selectPortalStyles(ds), // Unscoped styles for select dropdown rendered via portal
 ]

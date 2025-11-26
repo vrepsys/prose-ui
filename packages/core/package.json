@@ -41,7 +41,7 @@
     "build": "rm -rf dist && tsc",
     "build:watch": "nodemon -e json --watch package.json --exec 'npm run build && npm pack'",
     "watch": "rm -rf dist && tsc --watch",
-    "test": "vitest --pool=threads --poolOptions.threads.singleThread",
+    "test": "vitest run --pool=threads --poolOptions.threads.singleThread",
     "test:ci": "vitest run --pool=threads --poolOptions.threads.singleThread",
     "test:image": "vitest run --pool=threads --poolOptions.threads.singleThread -t image",
     "bump:rc": "pnpm version prerelease --preid=rc --no-git-tag-version",

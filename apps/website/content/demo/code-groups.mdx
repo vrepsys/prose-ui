@@ -1,0 +1,33 @@
+## Code groups
+Code groups display multiple code blocks as tabs, perfect for showing installation commands or the same code in different languages.
+
+Use the same title with different languages to enable language switching.
+
+<CodeGroup>
+
+```typescript title='Server'
+const app: Express = express()
+app.use(cors({ origin: '*' }))
+app.listen(3000, () => console.log('Ready'))
+```
+
+```javascript title='Server'
+const app = express()
+app.use(cors({ origin: '*' }))
+app.listen(3000, () => console.log('Ready'))
+```
+
+```typescript title='Client'
+const res = await fetch('/api/data')
+const data: User[] = await res.json()
+console.log(data)
+```
+
+```javascript title='Client'
+const res = await fetch('/api/data')
+const data = await res.json()
+console.log(data)
+```
+
+</CodeGroup>
+

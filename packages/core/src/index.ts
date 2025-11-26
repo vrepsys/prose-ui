@@ -1,5 +1,6 @@
 import remarkGfm from 'remark-gfm'
 import remarkMath, { Options as MathOptions } from 'remark-math'
+import remarkCodeGroup from './remark/remark-code-group.js'
 import remarkCodeBlock from './remark/remark-code-block.js'
 import remarkImage, { Options as ImageOptions } from './remark/remark-image.js'
 import remarkInlineMath from './remark/remark-inline-math.js'
@@ -22,6 +23,7 @@ export const remarkPlugins = (options: Options = {}) => {
 
   return [
     remarkGfm,
+    remarkCodeGroup,
     remarkCodeBlock,
     mathPlugin,
     remarkImage(options.image),

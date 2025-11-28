@@ -4,7 +4,25 @@ Code groups let you display multiple code blocks as tabs, with optional language
 
 ## Basic usage
 
-Wrap multiple code blocks in a `<CodeGroup>` component. Each code block's `title` becomes a tab:
+Wrap multiple code blocks in a `<CodeGroup>` component. Each code block's `title` becomes a tab. Example:
+
+<CodeGroup>
+
+```bash title='npm'
+npm install @prose-ui/react
+```
+
+```bash title='pnpm'
+pnpm add @prose-ui/react
+```
+
+```bash title='yarn'
+yarn add @prose-ui/react
+```
+
+</CodeGroup>
+
+Source:
 
 ````mdx title="Markdown syntax"
 <CodeGroup>
@@ -23,85 +41,109 @@ yarn add @prose-ui/react
 
 </CodeGroup>
 ````
-
-Result:
-
-<CodeGroup>
-
-```bash title='npm'
-npm install @prose-ui/react
-```
-
-```bash title='pnpm'
-pnpm add @prose-ui/react
-```
-
-```bash title='yarn'
-yarn add @prose-ui/react
-```
-
-</CodeGroup>
 
 ## Language variants
 
-When multiple code blocks share the same `title` but have different languages, they are grouped into a single tab with a language selector. Switching languages updates all tabs to show the selected language variant (if available).
+When multiple code blocks share the same `title` but have different languages, they are grouped into a single tab with a language selector. Switching languages updates all tabs to show the selected language variant (if available). Example:
+
+<CodeGroup>
+
+```typescript title='Random'
+const roll = (sides: number) => Math.ceil(Math.random() * sides)
+```
+
+```javascript title='Random'
+const roll = (sides) => Math.ceil(Math.random() * sides)
+```
+
+```typescript title='Format'
+const total = (n: number) => `$${n.toFixed(2)}`
+```
+
+```javascript title='Format'
+const total = (n) => `$${n.toFixed(2)}`
+```
+
+</CodeGroup>
+
+Source:
 
 ````mdx title="Markdown syntax"
 <CodeGroup>
 
-```typescript title='Install'
-npm install @prose-ui/react
-npm install @prose-ui/style
+```typescript title='Random'
+const roll = (sides: number) => Math.ceil(Math.random() * sides)
 ```
 
-```python title='Install'
-pip install prose-ui
+```javascript title='Random'
+const roll = (sides) => Math.ceil(Math.random() * sides)
 ```
 
-```typescript title='Usage'
-import { CodeBlock, Callout } from '@prose-ui/react'
-
-export default function Page() {
-  return <Callout>Hello world</Callout>
-}
+```typescript title='Format'
+const total = (n: number) => `$${n.toFixed(2)}`
 ```
 
-```python title='Usage'
-from prose_ui import CodeBlock, Callout
-
-def render():
-    return Callout("Hello world")
+```javascript title='Format'
+const total = (n) => `$${n.toFixed(2)}`
 ```
 
 </CodeGroup>
 ````
 
-Result:
+## Synced tabs with groupId
 
-<CodeGroup>
+By default, all code groups share the selected language globally. To also sync the selected tab across multiple code groups, use the `groupId` prop. Code groups with the same `groupId` will keep their active tab in sync. Try clicking a tab below — the other code group will update:
 
-```typescript title='Install'
+<CodeGroup groupId="install">
+
+```bash title='npm'
 npm install @prose-ui/react
-npm install @prose-ui/style
 ```
 
-```python title='Install'
-pip install prose-ui
-```
-
-```typescript title='Usage'
-import { CodeBlock, Callout } from '@prose-ui/react'
-
-export default function Page() {
-  return <Callout>Hello world</Callout>
-}
-```
-
-```python title='Usage'
-from prose_ui import CodeBlock, Callout
-
-def render():
-    return Callout("Hello world")
+```bash title='pnpm'
+pnpm add @prose-ui/react
 ```
 
 </CodeGroup>
+
+<CodeGroup groupId="install">
+
+```bash title='npm'
+npm install @prose-ui/style
+```
+
+```bash title='pnpm'
+pnpm add @prose-ui/style
+```
+
+</CodeGroup>
+
+Source:
+
+````mdx title="Markdown syntax"
+<CodeGroup groupId="install">
+
+```bash title='npm'
+npm install @prose-ui/react
+```
+
+```bash title='pnpm'
+pnpm add @prose-ui/react
+```
+
+</CodeGroup>
+
+<!-- Later on the same page... -->
+
+<CodeGroup groupId="install">
+
+```bash title='npm'
+npm install @prose-ui/style
+```
+
+```bash title='pnpm'
+pnpm add @prose-ui/style
+```
+
+</CodeGroup>
+````

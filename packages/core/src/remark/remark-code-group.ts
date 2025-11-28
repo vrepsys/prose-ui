@@ -1,6 +1,5 @@
 import type { Root, Code } from 'mdast'
 import type { Plugin } from 'unified'
-import { visit } from 'unist-util-visit'
 import { MdxJsxFlowElement } from 'mdast-util-mdx-jsx'
 import { attr, attrValueExpression, flowElement } from '../factories/mdx.js'
 import {
@@ -11,7 +10,8 @@ import {
   arrayExpression,
 } from '../factories/estree.js'
 import { highlightCode } from '../highlight-code.js'
-import { parseCodeBlockMeta } from './code-utils.js'
+import { capitalize, parseCodeBlockMeta } from './code-utils.js'
+import { collectNodesAsync, replaceNode } from './mdx-utils.js'
 
 type CodeVariant = {
   code: string
@@ -28,9 +28,6 @@ type LanguageOption = {
   value: string
   label: string
 }
-
-const capitalize = (s: string): string =>
-  s.charAt(0).toUpperCase() + s.slice(1)
 
 const buildVariantObject = (variant: CodeVariant) =>
   objectExpression([
@@ -60,15 +57,18 @@ const buildLanguageObject = (lang: LanguageOption) =>
 
 const remarkCodeGroup: Plugin<[], Root> = () => {
   return async (tree) => {
-    const codeGroupNodes: Array<{ node: MdxJsxFlowElement; index: number; parent: any }> = []
-
-    visit(tree, { type: 'mdxJsxFlowElement', name: 'CodeGroup' }, (node, index, parent) => {
-      if (parent && typeof index === 'number') {
-        codeGroupNodes.push({ node: node as MdxJsxFlowElement, index, parent })
-      }
-    })
+    const codeGroupNodes = collectNodesAsync<MdxJsxFlowElement>(
+      tree,
+      { type: 'mdxJsxFlowElement', name: 'CodeGroup' },
+    )
 
     for (const { node, index, parent } of codeGroupNodes) {
+      // Extract groupId attribute if present
+      const groupIdAttr = node.attributes.find(
+        (a) => a.type === 'mdxJsxAttribute' && a.name === 'groupId'
+      )
+      const groupId = groupIdAttr?.type === 'mdxJsxAttribute' ? groupIdAttr.value : undefined
+
       const tabsMap = new Map<string, TabData>()
       const languagesSet = new Set<string>()
       const tabOrder: string[] = []
@@ -118,27 +118,34 @@ const remarkCodeGroup: Plugin<[], Root> = () => {
       const tabsArrayExpr = arrayExpression(tabs.map(buildTabObject))
 
       // Create attributes
-      const languagesAttr = attr(
-        'languages',
-        attrValueExpression(
-          JSON.stringify(languages),
-          estree([expressionStatement(languagesArrayExpr)]),
+      const attributes = []
+
+      if (typeof groupId === 'string') {
+        attributes.push(attr('groupId', groupId))
+      }
+
+      attributes.push(
+        attr(
+          'languages',
+          attrValueExpression(
+            JSON.stringify(languages),
+            estree([expressionStatement(languagesArrayExpr)]),
+          ),
+        ),
+        attr(
+          'tabs',
+          attrValueExpression(
+            JSON.stringify(tabs),
+            estree([expressionStatement(tabsArrayExpr)]),
+          ),
         ),
       )
 
-      const tabsAttr = attr(
-        'tabs',
-        attrValueExpression(
-          JSON.stringify(tabs),
-          estree([expressionStatement(tabsArrayExpr)]),
-        ),
-      )
-
-      // Create new CodeGroup with both attributes
-      const newCodeGroup = flowElement('CodeGroup', [], [languagesAttr, tabsAttr])
+      // Create new CodeGroup with attributes
+      const newCodeGroup = flowElement('CodeGroup', [], attributes)
 
       // Replace the original
-      parent.children.splice(index, 1, newCodeGroup)
+      replaceNode(parent, index, newCodeGroup)
     }
   }
 }

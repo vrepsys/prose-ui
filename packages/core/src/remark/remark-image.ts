@@ -1,4 +1,5 @@
 import fs from 'fs'
+import path from 'path'
 import type { Root } from 'mdast'
 import {
   MdxJsxAttributeValueExpression,
@@ -9,11 +10,8 @@ import sharp from 'sharp'
 import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { estree, expressionStatement, literalExpression } from '../factories/estree.js'
-
-import path from 'path'
-import { attr, attrValueExpression, flowElement } from '../factories/mdx.js'
-import { attrsToObj, parseNumberExpressionAttr, parseStringAttr } from './jsx-utils.js'
+import { attr, flowElement, literalAttr } from '../factories/mdx.js'
+import { attrsToObj, parseNumberExpressionAttr, parseStringAttr, replaceNode } from './mdx-utils.js'
 
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
 
@@ -21,15 +19,7 @@ const isInlineImage = (parent: any): boolean => {
   return parent?.type === 'paragraph' && Array.isArray(parent.children) && parent.children.length > 1
 }
 
-const createZoomAttr = (zoom: boolean) => {
-  return attr(
-    'zoom',
-    attrValueExpression(
-      zoom.toString(),
-      estree([expressionStatement(literalExpression(zoom))]),
-    ),
-  )
-}
+const createZoomAttr = (zoom: boolean) => literalAttr('zoom', zoom)
 
 const mapUrl = (url: string, basePath: string): string => {
   if (EXTERNAL_URL_REGEX.test(url)) {
@@ -47,26 +37,8 @@ const createImageTag = (
     zoom,
   }: { alt?: string; width?: number; height?: number; zoom?: boolean },
 ) => {
-  const widthAttr =
-    width !== undefined
-      ? attr(
-          'width',
-          attrValueExpression(
-            width.toString(),
-            estree([expressionStatement(literalExpression(width.toString()))]),
-          ),
-        )
-      : undefined
-  const heightAttr =
-    height !== undefined
-      ? attr(
-          'height',
-          attrValueExpression(
-            height.toString(),
-            estree([expressionStatement(literalExpression(height.toString()))]),
-          ),
-      )
-      : undefined
+  const widthAttr = width !== undefined ? literalAttr('width', width) : undefined
+  const heightAttr = height !== undefined ? literalAttr('height', height) : undefined
   const zoomAttr = zoom !== undefined ? createZoomAttr(zoom) : undefined
 
   return flowElement('Image', [], [attr('src', src), attr('alt', alt), widthAttr, heightAttr, zoomAttr])
@@ -152,9 +124,7 @@ const remarkImage = ({ imageDir, basePath }: Options = { imageDir: DEFAULT_IMAGE
         zoom: isInline ? false : undefined,
         ...size,
       })
-      if (parent && index !== undefined) {
-        parent.children.splice(index, 1, imageTag)
-      }
+      replaceNode(parent, index, imageTag)
     })
 
     visit(
@@ -190,27 +160,8 @@ const remarkImage = ({ imageDir, basePath }: Options = { imageDir: DEFAULT_IMAGE
           }
         }
 
-        const widthAttr =
-          !attrs.width && width
-            ? attr(
-                'width',
-                attrValueExpression(
-                  width.toString(),
-                  estree([expressionStatement(literalExpression(width.toString()))]),
-                ),
-              )
-            : undefined
-
-        const heightAttr =
-          !attrs.height && height
-            ? attr(
-                'height',
-                attrValueExpression(
-                  height.toString(),
-                  estree([expressionStatement(literalExpression(height.toString()))]),
-                ),
-              )
-            : undefined
+        const widthAttr = !attrs.width && width ? literalAttr('width', width) : undefined
+        const heightAttr = !attrs.height && height ? literalAttr('height', height) : undefined
 
         if (widthAttr) {
           node.attributes.push(widthAttr)

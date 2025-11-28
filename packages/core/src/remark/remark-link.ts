@@ -1,9 +1,9 @@
 import type { PhrasingContent, Root } from 'mdast'
-import { MdxJsxTextElement } from 'mdast-util-mdx-jsx'
 import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { attr, textElement } from '../factories/mdx.js'
+import { replaceNode } from './mdx-utils.js'
 
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
 
@@ -23,12 +23,9 @@ const remarkLink = ({ mapUrl }: Options = {}) => {
       if (mapUrl) {
         url = mapUrl(url)
       }
-      let linkTag: MdxJsxTextElement
       if (url.startsWith('/')) {
-        linkTag = createLinkTag({ children: node.children, href: url })
-        if (parent && index !== undefined) {
-          parent.children.splice(index, 1, linkTag)
-        }
+        const linkTag = createLinkTag({ children: node.children, href: url })
+        replaceNode(parent, index, linkTag)
       }
     })
 

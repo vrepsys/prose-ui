@@ -94,3 +94,30 @@ export const jsEsm = (
     data,
   }
 }
+
+// Import estree helpers for composite functions
+import { estree, expressionStatement, literalExpression } from './estree.js'
+
+/**
+ * Creates an MDX attribute with a literal value expression.
+ * Combines: attr + attrValueExpression + estree + expressionStatement + literalExpression
+ */
+export const literalAttr = (name: string, value: string | number | boolean) =>
+  attr(
+    name,
+    attrValueExpression(
+      JSON.stringify(value),
+      estree([expressionStatement(literalExpression(value))]),
+    ),
+  )
+
+/**
+ * Creates an MDX flow expression with a literal string value.
+ * Combines: flowExpression + estree + expressionStatement + literalExpression
+ * Uses single quotes to match original MDX output format.
+ */
+export const literalFlowExpression = (value: string) =>
+  flowExpression(
+    `'${value}'`,
+    estree([expressionStatement(literalExpression(value))]),
+  )

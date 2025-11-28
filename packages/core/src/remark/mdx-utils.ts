@@ -1,4 +1,4 @@
-import { BlockContent, DefinitionContent, PhrasingContent } from 'mdast'
+import { BlockContent, DefinitionContent, PhrasingContent, Root } from 'mdast'
 import { MdxFlowExpression, MdxTextExpression } from 'mdast-util-mdx-expression'
 import {
   MdxJsxAttribute,
@@ -6,6 +6,8 @@ import {
   MdxJsxFlowElement,
   MdxJsxTextElement,
 } from 'mdast-util-mdx-jsx'
+import type { Parent } from 'unist'
+import { visit, Test } from 'unist-util-visit'
 
 export type AttrMap = Record<MdxJsxAttribute['name'], MdxJsxAttribute>
 
@@ -110,3 +112,31 @@ export const parseNumberExpressionAttr = (attrs: AttrMap, attrName: string): num
   }
   return null
 }
+
+/**
+ * Replaces a node in the parent's children array.
+ * Common pattern used across all remark plugins.
+ */
+export const replaceNode = (parent: Parent | undefined, index: number | undefined, newNode: any) => {
+  if (parent && index !== undefined) {
+    parent.children.splice(index, 1, newNode)
+  }
+}
+
+/**
+ * Collects nodes matching a test for async processing.
+ * Used when async operations (like code highlighting) are needed.
+ */
+export function collectNodesAsync<T>(
+  tree: Root,
+  test: Test,
+): Array<{ node: T; index: number; parent: Parent }> {
+  const nodes: Array<{ node: T; index: number; parent: Parent }> = []
+  visit(tree, test, (node, index, parent) => {
+    if (parent && typeof index === 'number') {
+      nodes.push({ node: node as T, index, parent })
+    }
+  })
+  return nodes
+}
+

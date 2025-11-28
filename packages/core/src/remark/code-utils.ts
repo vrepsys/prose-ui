@@ -2,6 +2,12 @@ import type { Code } from 'mdast'
 
 const TITLE_REGEX = /title=(['"])(?<title>.*)(\1)/i
 
+/**
+ * Capitalizes the first letter of a string.
+ */
+export const capitalize = (s: string): string =>
+  s.charAt(0).toUpperCase() + s.slice(1)
+
 export type CodeBlockMeta = {
   title: string | undefined
   lang: string

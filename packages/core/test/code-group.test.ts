@@ -346,3 +346,51 @@ f = Foo()
   expect(Object.keys(tabs[1].variants)).toHaveLength(3)
   expect(tabs[1].variants.python.code).toBe('from foo import Foo\nf = Foo()')
 })
+
+test('CodeGroup passes through groupId attribute', async () => {
+  const input = `<CodeGroup groupId="install-commands">
+
+\`\`\`bash title='npm'
+npm install foo
+\`\`\`
+
+\`\`\`bash title='pnpm'
+pnpm add foo
+\`\`\`
+
+</CodeGroup>
+`
+  
+  const output = await processInput(input)
+  
+  // Verify groupId is in the output
+  expect(output).toContain('groupId="install-commands"')
+  
+  // Verify other attributes are still present
+  const languagesMatch = output.match(/languages=\{(\[.*?\])\}/)
+  expect(languagesMatch).toBeTruthy()
+  
+  const tabsMatch = output.match(/tabs=\{(\[.*\])\}/)
+  expect(tabsMatch).toBeTruthy()
+  const tabs = JSON.parse(tabsMatch![1])
+  
+  expect(tabs).toHaveLength(2)
+  expect(tabs[0].title).toBe('npm')
+  expect(tabs[1].title).toBe('pnpm')
+})
+
+test('CodeGroup without groupId does not include groupId attribute', async () => {
+  const input = `<CodeGroup>
+
+\`\`\`bash title='npm'
+npm install foo
+\`\`\`
+
+</CodeGroup>
+`
+  
+  const output = await processInput(input)
+  
+  // Verify groupId is NOT in the output
+  expect(output).not.toContain('groupId=')
+})

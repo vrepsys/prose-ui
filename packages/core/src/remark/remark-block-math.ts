@@ -2,8 +2,8 @@ import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import katex from 'katex'
-import { attr, attrValueExpression, flowElement, flowExpression } from '../factories/mdx.js'
-import { estree, expressionStatement, literalExpression } from '../factories/estree.js'
+import { flowElement, literalAttr, literalFlowExpression } from '../factories/mdx.js'
+import { replaceNode } from './mdx-utils.js'
 
 const remarkBlockMath: Plugin<[], Root> = () => {
   return (tree, _file) => {
@@ -13,22 +13,12 @@ const remarkBlockMath: Plugin<[], Root> = () => {
         throwOnError: false,
       })
 
-      const renderedAttr = attr(
-        'renderedMath',
-        attrValueExpression(
-          JSON.stringify(renderedMath),
-          estree([expressionStatement(literalExpression(renderedMath))]),
-        ),
+      const blockMathJsx = flowElement(
+        'BlockMath',
+        [literalFlowExpression(node.value)],
+        [literalAttr('renderedMath', renderedMath)],
       )
-
-      const content = flowExpression(
-        `'${node.value}'`,
-        estree([expressionStatement(literalExpression(node.value))]),
-      )
-      const blockMathJsx = flowElement('BlockMath', [content], [renderedAttr])
-      if (parent && index !== undefined) {
-        parent.children.splice(index, 1, blockMathJsx)
-      }
+      replaceNode(parent, index, blockMathJsx)
     })
   }
 }

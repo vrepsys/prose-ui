@@ -3,7 +3,7 @@ Code groups display multiple code blocks as tabs, perfect for showing installati
 
 Use the same title with different languages to enable language switching.
 
-<CodeGroup>
+<CodeGroup groupId="example">
 
 ```typescript title='Server'
 const app: Express = express()
@@ -27,6 +27,40 @@ console.log(data)
 const res = await fetch('/api/data')
 const data = await res.json()
 console.log(data)
+```
+
+</CodeGroup>
+
+Try changing the language or tab above - the code group below will sync automatically:
+
+<CodeGroup groupId="example">
+
+```typescript title='Server'
+function greet(name: string) {
+  return `Hello, ${name}!`
+}
+
+const message = greet('World')
+console.log(message)
+```
+
+```javascript title='Server'
+function greet(name) {
+  return `Hello, ${name}!`
+}
+
+const message = greet('World')
+console.log(message)
+```
+
+```typescript title='Client'
+const client: Client = createClient()
+client.connect()
+```
+
+```javascript title='Client'
+const client = createClient()
+client.connect()
 ```
 
 </CodeGroup>

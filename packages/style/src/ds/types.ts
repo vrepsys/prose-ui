@@ -3,6 +3,45 @@ import type { CssValue, DesignSpec } from './ds.js'
 export type Base = Core & Colors
 export type DesignSystem = Base & Components
 
+export type ColorScale = {
+  50: CssValue
+  100: CssValue
+  200: CssValue
+  300: CssValue
+  400: CssValue
+  500: CssValue
+  600: CssValue
+  700: CssValue
+  800: CssValue
+  900: CssValue
+  950: CssValue
+}
+
+export type Palette = {
+  slate: ColorScale
+  gray: ColorScale
+  zinc: ColorScale
+  neutral: ColorScale
+  stone: ColorScale
+  red: ColorScale
+  orange: ColorScale
+  amber: ColorScale
+  yellow: ColorScale
+  lime: ColorScale
+  green: ColorScale
+  emerald: ColorScale
+  teal: ColorScale
+  cyan: ColorScale
+  sky: ColorScale
+  blue: ColorScale
+  indigo: ColorScale
+  violet: ColorScale
+  purple: ColorScale
+  fuchsia: ColorScale
+  pink: ColorScale
+  rose: ColorScale
+}
+
 export type Core = {
   spacing: {
     'none': CssValue
@@ -65,6 +104,12 @@ export type Colors = {
       lower: CssValue
       lowest: CssValue
       disabled: CssValue
+      accent: CssValue
+      note: CssValue
+      info: CssValue
+      warning: CssValue
+      success: CssValue
+      danger: CssValue
     }
     accent: {
       high: CssValue
@@ -77,20 +122,22 @@ export type Colors = {
       syntax3: CssValue
       syntax4: CssValue
     }
-    note: CssValue
-    info: CssValue
-    warning: CssValue
-    success: CssValue
-    danger: CssValue
     bg: {
       high: CssValue
       base: CssValue
       low: CssValue
       lower: CssValue
       lowest: CssValue
+      accent: CssValue
+      note: CssValue
+      info: CssValue
+      warning: CssValue
+      success: CssValue
+      danger: CssValue
     }
     border: CssValue
     outline: CssValue
+    palette: Palette
   }
 }
 
@@ -136,6 +183,36 @@ export type Components = {
   callout: {
     color: {
       text: CssValue
+    }
+    note: {
+      color: {
+        text: CssValue
+        bg: CssValue
+      }
+    }
+    info: {
+      color: {
+        text: CssValue
+        bg: CssValue
+      }
+    }
+    warning: {
+      color: {
+        text: CssValue
+        bg: CssValue
+      }
+    }
+    success: {
+      color: {
+        text: CssValue
+        bg: CssValue
+      }
+    }
+    danger: {
+      color: {
+        text: CssValue
+        bg: CssValue
+      }
     }
     font: {
       size: CssValue

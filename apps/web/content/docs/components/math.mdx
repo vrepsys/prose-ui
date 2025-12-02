@@ -1,0 +1,40 @@
+---
+title: Math
+description: ""
+---
+
+Prose UI supports inline and block math formulas in LaTeX syntax, rendered with [KaTeX](https://katex.org/).
+
+<Callout title="KaTeX CSS required">
+  Make sure you've imported the KaTeX stylesheet in your `globals.css` file:
+
+  ```css
+  @import "@prose-ui/style/katex.min.css";
+  ```
+
+  See the [installation guide](/docs/installation#add-prose-ui-css-styles) for more details.
+</Callout>
+
+## Inline math
+
+Use single dollar signs `$...$` for inline math formulas within paragraphs.
+
+```mdx title="Inline math example"
+The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ for solving equations.
+```
+
+The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ for solving equations.
+
+## Block math
+
+Use double dollar signs `$$...$$` on separate lines for block math formulas that appear as standalone, centered equations.
+
+```mdx title="Block math example"
+$$
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+$$
+```
+
+$$
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+$$

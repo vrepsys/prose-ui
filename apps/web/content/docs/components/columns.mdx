@@ -1,0 +1,48 @@
+---
+title: Columns
+description: ""
+---
+
+Use `Columns` to lay out cards or other blocks in a responsive grid. By default, it renders 3 columns and collapses to a single column on small screens.
+
+## Basic usage
+
+<Columns>
+  <Card title="Docs" icon="book-open" href="/docs" cta="Visit" arrow="true">
+    Start with the Prose UI documentation.
+  </Card>
+  <Card title="Components" icon="panel-left-close" href="/docs/components/overview" cta="Open" arrow="true">
+    Browse the available MDX-ready components.
+  </Card>
+  <Card title="Styling" icon="sparkles" href="/docs/styling" cta="Open" arrow="true">
+    Learn how to theme and adjust typography tokens.
+  </Card>
+</Columns>
+
+```jsx
+<Columns>
+  <Card title="Docs" icon="book-open" href="/docs" cta="Visit" arrow="true">...</Card>
+  <Card title="Components" icon="panel-left-close" href="/docs/components/overview" cta="Open" arrow="true">...</Card>
+  <Card title="Styling" icon="sparkles" href="/docs/styling" cta="Open" arrow="true">...</Card>
+</Columns>
+```
+
+## Custom column count
+
+Control the number of columns with the `columns` prop. On narrow viewports, the layout still stacks into a single column.
+
+<Columns columns={2}>
+  <Card title="Two columns" icon="divide">
+    Set `columns={2}` to force a two-column layout on wider screens.
+  </Card>
+  <Card title="Responsive stacking" icon="smartphone">
+    On small screens, the grid collapses to one column automatically.
+  </Card>
+</Columns>
+
+```jsx
+<Columns columns={2}>
+  <Card title="Two columns" icon="divide">...</Card>
+  <Card title="Responsive stacking" icon="smartphone">...</Card>
+</Columns>
+```

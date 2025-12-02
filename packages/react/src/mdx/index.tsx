@@ -14,6 +14,7 @@ import { Columns } from './columns.js'
 import { Steps, Step } from './steps.js'
 import { parseBoolean } from './booleanish.js'
 import TabsDemo from './tabs-demo.js'
+import { Tabs, Tab } from './tabs.js'
 export type { Booleanish } from './booleanish.js'
 
 type HeadingPropsWithoutLevel = Omit<HeadingProps, 'level'>
@@ -46,6 +47,8 @@ const baseComponents = {
   h5,
   h6,
   TabsDemo,
+  Tabs,
+  Tab,
 }
 
 export type ProseUIMdxComponents = typeof baseComponents
@@ -76,5 +79,7 @@ export {
   Caption,
   Steps,
   Step,
+  Tabs,
+  Tab,
   parseBoolean,
 }

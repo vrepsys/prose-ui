@@ -13,7 +13,7 @@ import { classes } from '@/utils/classes'
 export const TopNav = () => {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(0)
-  const [borerOpacity, setBorderOpacity] = useState(pathname === '/' ? 0 : 1)
+  const [borderOpacity, setBorderOpacity] = useState(pathname === '/' ? 0 : 1)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,13 +31,13 @@ export const TopNav = () => {
   return (
     <header
       className={classes(
-        'bg-color-base sticky top-0 z-10 flex h-[var(--topnav-height)] w-full border-b py-2',
+        'bg-high sticky top-0 z-20 flex h-(--topnav-height) w-full py-2',
       )}
       style={{
-        borderBottomColor: `hsl(var(--p-color-border) / ${borerOpacity})`,
+        borderBottomColor: `color-mix(in srgb, var(--p-color-border) ${borderOpacity * 100}%, transparent)`,
       }}
     >
-      <div className="relative mx-auto flex w-full max-w-[var(--site-width)] items-center justify-between px-[var(--site-padding-x)] lg:gap-8">
+      <div className="relative mx-auto flex w-full max-w-(--site-width) items-center justify-between px-(--site-padding-x) lg:gap-8">
         <div className="flex shrink-0 items-center gap-2">
           <Logo href="/" showText />
         </div>

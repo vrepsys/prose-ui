@@ -10,16 +10,8 @@ import type {
 } from './ds/index.js'
 import { cssSystem, cssVariables, MEDIA_ABOVE_LARGE } from './ds/index.js'
 import {
-  slateDark,
-  blueDark,
   greenDark,
-  amberDark,
-  redDark,
-  slate,
-  blue,
-  green,
-  amber,
-  red,
+  green as radixGreen,
 } from '@radix-ui/colors'
 
 import { hexToHsl } from './utils/hex-to-hsl.js'
@@ -30,6 +22,349 @@ const hsl = (color: string) => {
 }
 
 const negative = (value: string) => `calc(${value} * -1)`
+
+const transparent = (color: string, opacity: number) => `color-mix(in oklab, ${color} ${opacity}%, transparent)`
+
+const mix = (color1: string, color2: string, opacity: number = 100, ratio: number = 50) => `color-mix(in oklab, color-mix(in oklab, ${color1} ${100 - ratio}%, ${color2} ${ratio}%) ${opacity}%, transparent)`
+
+const slate = {
+  50: 'oklch(0.984 0.003 247.858)',
+  100: 'oklch(0.968 0.007 247.896)',
+  200: 'oklch(0.929 0.013 255.508)',
+  300: 'oklch(0.869 0.022 252.894)',
+  400: 'oklch(0.704 0.04 256.788)',
+  500: 'oklch(0.554 0.046 257.417)',
+  600: 'oklch(0.446 0.043 257.281)',
+  700: 'oklch(0.372 0.044 257.287)',
+  800: 'oklch(0.279 0.041 260.031)',
+  900: 'oklch(0.208 0.042 265.755)',
+  950: 'oklch(0.129 0.042 264.695)',
+}
+
+const gray = {
+  50: 'oklch(0.985 0.002 247.839)',
+  100: 'oklch(0.967 0.003 264.542)',
+  200: 'oklch(0.928 0.006 264.531)',
+  300: 'oklch(0.872 0.01 258.338)',
+  400: 'oklch(0.707 0.022 261.325)',
+  500: 'oklch(0.551 0.027 264.364)',
+  600: 'oklch(0.446 0.03 256.802)',
+  700: 'oklch(0.373 0.034 259.733)',
+  800: 'oklch(0.278 0.033 256.848)',
+  900: 'oklch(0.21 0.034 264.665)',
+  950: 'oklch(0.13 0.028 261.692)',
+}
+
+const zinc = {
+  50: 'oklch(0.985 0 0)',
+  100: 'oklch(0.967 0.001 286.375)',
+  200: 'oklch(0.92 0.004 286.32)',
+  300: 'oklch(0.871 0.006 286.286)',
+  400: 'oklch(0.705 0.015 286.067)',
+  500: 'oklch(0.552 0.016 285.938)',
+  600: 'oklch(0.442 0.017 285.786)',
+  700: 'oklch(0.37 0.013 285.805)',
+  800: 'oklch(0.274 0.006 286.033)',
+  900: 'oklch(0.21 0.006 285.885)',
+  950: 'oklch(0.141 0.005 285.823)',
+}
+
+const neutral = {
+  50: 'oklch(0.985 0 0)',
+  100: 'oklch(0.97 0 0)',
+  200: 'oklch(0.922 0 0)',
+  300: 'oklch(0.87 0 0)',
+  400: 'oklch(0.708 0 0)',
+  500: 'oklch(0.556 0 0)',
+  600: 'oklch(0.439 0 0)',
+  700: 'oklch(0.371 0 0)',
+  800: 'oklch(0.269 0 0)',
+  900: 'oklch(0.205 0 0)',
+  950: 'oklch(0.145 0 0)',
+}
+
+const stone = {
+  50: 'oklch(0.985 0.001 106.423)',
+  100: 'oklch(0.97 0.001 106.424)',
+  200: 'oklch(0.923 0.003 48.717)',
+  300: 'oklch(0.869 0.005 56.366)',
+  400: 'oklch(0.709 0.01 56.259)',
+  500: 'oklch(0.553 0.013 58.071)',
+  600: 'oklch(0.444 0.011 73.639)',
+  700: 'oklch(0.374 0.01 67.558)',
+  800: 'oklch(0.268 0.007 34.298)',
+  900: 'oklch(0.216 0.006 56.043)',
+  950: 'oklch(0.147 0.004 49.25)',
+}
+
+const red = {
+  50: 'oklch(0.971 0.013 17.38)',
+  100: 'oklch(0.936 0.032 17.717)',
+  200: 'oklch(0.885 0.062 18.334)',
+  300: 'oklch(0.808 0.114 19.571)',
+  400: 'oklch(0.704 0.191 22.216)',
+  500: 'oklch(0.637 0.237 25.331)',
+  600: 'oklch(0.577 0.245 27.325)',
+  700: 'oklch(0.505 0.213 27.518)',
+  800: 'oklch(0.444 0.177 26.899)',
+  900: 'oklch(0.396 0.141 25.723)',
+  950: 'oklch(0.258 0.092 26.042)',
+}
+
+const orange = {
+  50: 'oklch(0.98 0.016 73.684)',
+  100: 'oklch(0.954 0.038 75.164)',
+  200: 'oklch(0.901 0.076 70.697)',
+  300: 'oklch(0.837 0.128 66.29)',
+  400: 'oklch(0.75 0.183 55.934)',
+  500: 'oklch(0.705 0.213 47.604)',
+  600: 'oklch(0.646 0.222 41.116)',
+  700: 'oklch(0.553 0.195 38.402)',
+  800: 'oklch(0.47 0.157 37.304)',
+  900: 'oklch(0.408 0.123 38.172)',
+  950: 'oklch(0.266 0.079 36.259)',
+}
+
+const amber = {
+  50: 'oklch(0.987 0.022 95.277)',
+  100: 'oklch(0.962 0.059 95.617)',
+  200: 'oklch(0.924 0.12 95.746)',
+  300: 'oklch(0.879 0.169 91.605)',
+  400: 'oklch(0.828 0.189 84.429)',
+  500: 'oklch(0.769 0.188 70.08)',
+  600: 'oklch(0.666 0.179 58.318)',
+  700: 'oklch(0.555 0.163 48.998)',
+  800: 'oklch(0.473 0.137 46.201)',
+  900: 'oklch(0.414 0.112 45.904)',
+  950: 'oklch(0.279 0.077 45.635)',
+}
+
+const yellow = {
+  50: 'oklch(0.987 0.026 102.212)',
+  100: 'oklch(0.973 0.071 103.193)',
+  200: 'oklch(0.945 0.129 101.54)',
+  300: 'oklch(0.905 0.182 98.111)',
+  400: 'oklch(0.852 0.199 91.936)',
+  500: 'oklch(0.795 0.184 86.047)',
+  600: 'oklch(0.681 0.162 75.834)',
+  700: 'oklch(0.554 0.135 66.442)',
+  800: 'oklch(0.476 0.114 61.907)',
+  900: 'oklch(0.421 0.095 57.708)',
+  950: 'oklch(0.286 0.066 53.813)',
+}
+
+const lime = {
+  50: 'oklch(0.986 0.031 120.757)',
+  100: 'oklch(0.967 0.067 122.328)',
+  200: 'oklch(0.938 0.127 124.321)',
+  300: 'oklch(0.897 0.196 126.665)',
+  400: 'oklch(0.841 0.238 128.85)',
+  500: 'oklch(0.768 0.233 130.85)',
+  600: 'oklch(0.648 0.2 131.684)',
+  700: 'oklch(0.532 0.157 131.589)',
+  800: 'oklch(0.453 0.124 130.933)',
+  900: 'oklch(0.405 0.101 131.063)',
+  950: 'oklch(0.274 0.072 132.109)',
+}
+
+const green = {
+  50: 'oklch(0.982 0.018 155.826)',
+  100: 'oklch(0.962 0.044 156.743)',
+  200: 'oklch(0.925 0.084 155.995)',
+  300: 'oklch(0.871 0.15 154.449)',
+  400: 'oklch(0.792 0.209 151.711)',
+  500: 'oklch(0.723 0.219 149.579)',
+  600: 'oklch(0.627 0.194 149.214)',
+  700: 'oklch(0.527 0.154 150.069)',
+  800: 'oklch(0.448 0.119 151.328)',
+  900: 'oklch(0.393 0.095 152.535)',
+  950: 'oklch(0.266 0.065 152.934)',
+}
+
+const emerald = {
+  50: 'oklch(0.979 0.021 166.113)',
+  100: 'oklch(0.95 0.052 163.051)',
+  200: 'oklch(0.905 0.093 164.15)',
+  300: 'oklch(0.845 0.143 164.978)',
+  400: 'oklch(0.765 0.177 163.223)',
+  500: 'oklch(0.696 0.17 162.48)',
+  600: 'oklch(0.596 0.145 163.225)',
+  700: 'oklch(0.508 0.118 165.612)',
+  800: 'oklch(0.432 0.095 166.913)',
+  900: 'oklch(0.378 0.077 168.94)',
+  950: 'oklch(0.262 0.051 172.552)',
+}
+
+const teal = {
+  50: 'oklch(0.984 0.014 180.72)',
+  100: 'oklch(0.953 0.051 180.801)',
+  200: 'oklch(0.91 0.096 180.426)',
+  300: 'oklch(0.855 0.138 181.071)',
+  400: 'oklch(0.777 0.152 181.912)',
+  500: 'oklch(0.704 0.14 182.503)',
+  600: 'oklch(0.6 0.118 184.704)',
+  700: 'oklch(0.511 0.096 186.391)',
+  800: 'oklch(0.437 0.078 188.216)',
+  900: 'oklch(0.386 0.063 188.416)',
+  950: 'oklch(0.277 0.046 192.524)',
+}
+
+const cyan = {
+  50: 'oklch(0.984 0.019 200.873)',
+  100: 'oklch(0.956 0.045 203.388)',
+  200: 'oklch(0.917 0.08 205.041)',
+  300: 'oklch(0.865 0.127 207.078)',
+  400: 'oklch(0.789 0.154 211.53)',
+  500: 'oklch(0.715 0.143 215.221)',
+  600: 'oklch(0.609 0.126 221.723)',
+  700: 'oklch(0.52 0.105 223.128)',
+  800: 'oklch(0.45 0.085 224.283)',
+  900: 'oklch(0.398 0.07 227.392)',
+  950: 'oklch(0.302 0.056 229.695)',
+}
+
+const sky = {
+  50: 'oklch(0.977 0.013 236.62)',
+  100: 'oklch(0.951 0.026 236.824)',
+  200: 'oklch(0.901 0.058 230.902)',
+  300: 'oklch(0.828 0.111 230.318)',
+  400: 'oklch(0.746 0.16 232.661)',
+  500: 'oklch(0.685 0.169 237.323)',
+  600: 'oklch(0.588 0.158 241.966)',
+  700: 'oklch(0.5 0.134 242.749)',
+  800: 'oklch(0.443 0.11 240.79)',
+  900: 'oklch(0.391 0.09 240.876)',
+  950: 'oklch(0.293 0.066 243.157)',
+}
+
+const blue = {
+  50: 'oklch(0.97 0.014 254.604)',
+  100: 'oklch(0.932 0.032 255.585)',
+  200: 'oklch(0.882 0.059 254.128)',
+  300: 'oklch(0.809 0.105 251.813)',
+  400: 'oklch(0.707 0.165 254.624)',
+  500: 'oklch(0.623 0.214 259.815)',
+  600: 'oklch(0.546 0.245 262.881)',
+  700: 'oklch(0.488 0.243 264.376)',
+  800: 'oklch(0.424 0.199 265.638)',
+  900: 'oklch(0.379 0.146 265.522)',
+  950: 'oklch(0.282 0.091 267.935)',
+}
+
+const indigo = {
+  50: 'oklch(0.962 0.018 272.314)',
+  100: 'oklch(0.93 0.034 272.788)',
+  200: 'oklch(0.87 0.065 274.039)',
+  300: 'oklch(0.785 0.115 274.713)',
+  400: 'oklch(0.673 0.182 276.935)',
+  500: 'oklch(0.585 0.233 277.117)',
+  600: 'oklch(0.511 0.262 276.966)',
+  700: 'oklch(0.457 0.24 277.023)',
+  800: 'oklch(0.398 0.195 277.366)',
+  900: 'oklch(0.359 0.144 278.697)',
+  950: 'oklch(0.257 0.09 281.288)',
+}
+
+const violet = {
+  50: 'oklch(0.969 0.016 293.756)',
+  100: 'oklch(0.943 0.029 294.588)',
+  200: 'oklch(0.894 0.057 293.283)',
+  300: 'oklch(0.811 0.111 293.571)',
+  400: 'oklch(0.702 0.183 293.541)',
+  500: 'oklch(0.606 0.25 292.717)',
+  600: 'oklch(0.541 0.281 293.009)',
+  700: 'oklch(0.491 0.27 292.581)',
+  800: 'oklch(0.432 0.232 292.759)',
+  900: 'oklch(0.38 0.189 293.745)',
+  950: 'oklch(0.283 0.141 291.089)',
+}
+
+const purple = {
+  50: 'oklch(0.977 0.014 308.299)',
+  100: 'oklch(0.946 0.033 307.174)',
+  200: 'oklch(0.902 0.063 306.703)',
+  300: 'oklch(0.827 0.119 306.383)',
+  400: 'oklch(0.714 0.203 305.504)',
+  500: 'oklch(0.627 0.265 303.9)',
+  600: 'oklch(0.558 0.288 302.321)',
+  700: 'oklch(0.496 0.265 301.924)',
+  800: 'oklch(0.438 0.218 303.724)',
+  900: 'oklch(0.381 0.176 304.987)',
+  950: 'oklch(0.291 0.149 302.717)',
+}
+
+const fuchsia = {
+  50: 'oklch(0.977 0.017 320.058)',
+  100: 'oklch(0.952 0.037 318.852)',
+  200: 'oklch(0.903 0.076 319.62)',
+  300: 'oklch(0.833 0.145 321.434)',
+  400: 'oklch(0.74 0.238 322.16)',
+  500: 'oklch(0.667 0.295 322.15)',
+  600: 'oklch(0.591 0.293 322.896)',
+  700: 'oklch(0.518 0.253 323.949)',
+  800: 'oklch(0.452 0.211 324.591)',
+  900: 'oklch(0.401 0.17 325.612)',
+  950: 'oklch(0.293 0.136 325.661)',
+}
+
+const pink = {
+  50: 'oklch(0.971 0.014 343.198)',
+  100: 'oklch(0.948 0.028 342.258)',
+  200: 'oklch(0.899 0.061 343.231)',
+  300: 'oklch(0.823 0.12 346.018)',
+  400: 'oklch(0.718 0.202 349.761)',
+  500: 'oklch(0.656 0.241 354.308)',
+  600: 'oklch(0.592 0.249 0.584)',
+  700: 'oklch(0.525 0.223 3.958)',
+  800: 'oklch(0.459 0.187 3.815)',
+  900: 'oklch(0.408 0.153 2.432)',
+  950: 'oklch(0.284 0.109 3.907)',
+}
+
+const rose = {
+  50: 'oklch(0.969 0.015 12.422)',
+  100: 'oklch(0.941 0.03 12.58)',
+  200: 'oklch(0.892 0.058 10.001)',
+  300: 'oklch(0.81 0.117 11.638)',
+  400: 'oklch(0.712 0.194 13.428)',
+  500: 'oklch(0.645 0.246 16.439)',
+  600: 'oklch(0.586 0.253 17.585)',
+  700: 'oklch(0.514 0.222 16.935)',
+  800: 'oklch(0.455 0.188 13.697)',
+  900: 'oklch(0.41 0.159 10.272)',
+  950: 'oklch(0.271 0.105 12.094)',
+}
+
+const palette = {
+  slate,
+  gray,
+  zinc,
+  neutral,
+  stone,
+  red,
+  orange,
+  amber,
+  yellow,
+  lime,
+  green,
+  emerald,
+  teal,
+  cyan,
+  sky,
+  blue,
+  indigo,
+  violet,
+  purple,
+  fuchsia,
+  pink,
+  rose,
+}
+
+const white = '#fff'
+const black = '#000'
+
+// Change this to experiment with different color palettes (slate, gray, zinc, neutral, stone)
+const scale = zinc
 
 export const getCoreSpec = (): CoreSpec => ({
   spacing: {
@@ -92,76 +427,92 @@ export const getCoreSpec = (): CoreSpec => ({
 export const getLightColorsSpec = (): ColorSpec => ({
   color: {
     text: {
-      high: '219 5% 5%',
-      base: '219 5% 23%',
-      low: '219 6% 36%',
-      lower: '219 6% 42%',
-      lowest: '219 6% 47%',
-      disabled: '219 6% 36%',
+      high: black,
+      base: black,
+      low: scale[600],
+      lower: scale[600],
+      lowest: scale[600],
+      disabled: scale[500],
+      accent: 'oklch(0.51 0.15 142.33)',
+      note: scale[950],
+      info: blue[800],
+      warning: amber[800],
+      success: green[800],
+      danger: red[700],
     },
     accent: {
-      high: '117 62% 20%',
-      base: '117 62% 30%',
-      low: '150 15% 80%',
+      high: scale[900],
+      base: emerald[800],
+      low: emerald[100],
     },
     syntax: {
-      syntax1: '117 62% 30%',
-      syntax2: '27 90% 30%',
-      syntax3: '295 60% 40%',
-      syntax4: '240 60% 40%',
+      syntax1: 'oklch(0.51 0.15 142.33)',
+      syntax2: 'oklch(0.48 0.12 51.36)',
+      syntax3: 'oklch(0.51 0.2 324.32)',
+      syntax4: 'oklch(0.38 0.19 272.76)',
     },
-    note: hsl(slate.slate12),
-    info: hsl(blue.blue11),
-    warning: hsl(amber.amber11),
-    success: hsl(green.green11),
-    danger: hsl(red.red10),
     bg: {
-      high: '0 0% 100%',
-      base: hsl(slate.slate1),
-      low: hsl(slate.slate3),
-      lower: hsl(slate.slate4),
-      lowest: hsl(slate.slate7),
+      high: white,
+      base: white,
+      low: scale[100],
+      lower: scale[200],
+      lowest: scale[300],
+      accent: transparent(green[700], 10),
+      note: transparent(scale[950], 5),
+      info: transparent(blue[800], 5),
+      warning: transparent(amber[800], 5),
+      success: transparent(green[800], 5),
+      danger: transparent(red[700], 5),
     },
-    border: hsl(slate.slate4),
-    outline: hsl(green.green10),
+    border: scale[200],
+    outline: hsl(radixGreen.green10),
+    palette,
   },
 })
 
 export const getDarkColorsSpec = (): ColorSpec => ({
   color: {
+    bg: {
+      high: black,
+      base: scale[900],
+      low: scale[800],
+      lower: scale[700],
+      lowest: scale[600],
+      accent: transparent(green[50], 10),
+      note: transparent(scale[50], 5),
+      info: transparent(blue[200], 5),
+      warning: transparent(amber[200], 5),
+      success: transparent(green[200], 5),
+      danger: transparent(red[300], 5),
+    },
     text: {
-      high: '219 0% 100%',
-      base: '219 100% 100%',
-      low: '219 6% 70%',
-      lower: '219 6% 65%',
-      lowest: '219 6% 60%',
-      disabled: '219 6% 53%',
+      high: white,
+      base: white,
+      low: scale[400],
+      lower: scale[500],
+      lowest: scale[600],
+      disabled: scale[600],
+      accent: green[300],
+      note: scale[50],
+      info: blue[200],
+      warning: amber[200],
+      success: green[200],
+      danger: red[300],
     },
     accent: {
-      high: '150 95% 75%',
-      base: '150 90% 65%',
-      low: '150 15% 30%',
+      high: scale[100],
+      base: emerald[200],
+      low: emerald[900],
     },
     syntax: {
-      syntax1: '150 66% 66%',
-      syntax2: '40 50% 66%',
-      syntax3: '340 50% 75%',
-      syntax4: '210 77% 69%',
+      syntax1: 'oklch(0.83 0.13 159.66)',
+      syntax2: 'oklch(0.79 0.08 84.07)',
+      syntax3: 'oklch(0.74 0.11 249.51)',
+      syntax4: 'oklch(0.77 0.08 357.45)',
     },
-    note: hsl(slateDark.slate12),
-    info: hsl(blueDark.blue11),
-    warning: hsl(amberDark.amber11),
-    success: hsl(greenDark.green11),
-    danger: hsl(redDark.red10),
-    bg: {
-      high: '0 0% 0%',
-      base: '0 0% 0%',
-      low: hsl(slateDark.slate2),
-      lower: hsl(slateDark.slate3),
-      lowest: hsl(slateDark.slate4),
-    },
-    border: hsl(slateDark.slate4),
+    border: scale[800],
     outline: hsl(greenDark.green10),
+    palette,
   },
 })
 
@@ -269,10 +620,10 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     },
     link: {
       text: {
-        color: ds.color.accent.base,
+        color: ds.color.text.base,
         decorationLine: 'underline',
         decorationStyle: 'solid',
-        decorationColor: ds.color.accent.low,
+        decorationColor: transparent(ds.color.text.base, 25),
       },
       fontWeight: ds.font.weight.normal,
     },
@@ -284,13 +635,43 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
         spacing: ds.letterSpacing.sm,
       },
       color: {
-        bg: ds.color.bg.low,
+        bg: transparent(ds.color.text.base, 7),
       },
       letterSpacing: ds.letterSpacing.sm,
     },
     callout: {
       color: {
         text: ds.color.text.base,
+      },
+      note: {
+        color: {
+          text: ds.color.text.note,
+          bg: ds.color.bg.note,
+        },
+      },
+      info: {
+        color: {
+          text: ds.color.text.info,
+          bg: ds.color.bg.info,
+        },
+      },
+      warning: {
+        color: {
+          text: ds.color.text.warning,
+          bg: ds.color.bg.warning,
+        },
+      },
+      success: {
+        color: {
+          text: ds.color.text.success,
+          bg: ds.color.bg.success,
+        },
+      },
+      danger: {
+        color: {
+          text: ds.color.text.danger,
+          bg: ds.color.bg.danger,
+        },
       },
       font: {
         size: ds.font.size.sm,
@@ -301,14 +682,14 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     card: {
       color: {
         text: ds.color.text.base,
-        muted: ds.color.text.lower,
+        muted: ds.color.text.low,
         bg: ds.color.bg.low,
-        bgHover: ds.color.bg.lower,
+        bgHover: transparent(ds.color.bg.low, 70),
         border: ds.color.border,
-        borderHover: ds.color.accent.low,
-        icon: ds.color.accent.base,
-        cta: ds.color.accent.base,
-        ctaHover: ds.color.accent.high,
+        borderHover: ds.color.border,
+        icon: ds.color.text.base,
+        cta: ds.color.text.low,
+        ctaHover: ds.color.text.accent,
       },
       font: {
         title: {
@@ -445,6 +826,9 @@ export const componentsStyles = (ds: DesignSystem) => {
     'margin-bottom': gap.cluster,
   })
   return {
+    '::selection': {
+      'background-color': transparent(ds.color.text.high, 15),
+    },
     'p': {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
@@ -540,7 +924,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'background-color': ds.codeBlock.color.bg,
       'padding': ds.spacing.space1,
       'border-radius': ds.border.radius,
-      'color': ds.color.success,
+      'color': ds.color.text.success,
     },
     '.code-group': {
       'margin-top': gap.base,
@@ -580,17 +964,78 @@ export const componentsStyles = (ds: DesignSystem) => {
             'padding-left': ds.spacing['space1'],
             'padding-right': ds.spacing['space1'],
             'transition': 'color 150ms ease',
+            'cursor': 'pointer',
             '&:hover': {
-              'color': ds.color.text.base,
+              'color': ds.color.text.accent,
             },
           },
           '.tab-trigger[data-state="active"]': {
-            'color': ds.color.accent.base,
-            'box-shadow': `0 6px 0 0 ${ds.codeBlock.color.bg}, 0 8px 0 0 currentColor`,
+            'color': ds.color.text.accent,
+            'box-shadow': `0 7px 0 0 ${ds.codeBlock.color.bg}, 0 9px 0 0 currentColor`,
           },
         },
         '.select-trigger': {
           'margin-left': 'auto',
+        },
+      },
+    },
+    '.tabs': {
+      'margin-top': gap.base,
+      'margin-bottom': gap.cluster,
+      'display': 'flex',
+      'flex-direction': 'column',
+      '.header': {
+        'display': 'flex',
+        'align-items': 'center',
+        'gap': ds.spacing.space2,
+        'padding-top': ds.spacing['space1-5'],
+        // 'padding-bottom': ds.spacing['space1-5'],
+        '.tabs-list': {
+          'display': 'flex',
+          'background-color': ds.color.bg.low,
+          'border-top-left-radius': ds.border.radius,
+          'border-top-right-radius': ds.border.radius,
+          'padding': ds.spacing.space1,
+          'gap': ds.spacing.space1,
+          // 'margin-left': `calc(-1 * ${ds.spacing.space2})`,
+          '.tab-trigger': {
+            'color': ds.color.text.low,
+            'font-size': ds.font.size.sm,
+            'font-weight': ds.font.weight.medium,
+            'line-height': ds.font.height.sm,
+            'letter-spacing': ds.letterSpacing.sm,
+            'padding-left': ds.spacing.space2,
+            'padding-right': ds.spacing.space2,
+            'padding-top': ds.spacing.space1,
+            'padding-bottom': ds.spacing.space1,
+            'border-radius': `calc(${ds.border.radius} - 1px)`,
+            'cursor': 'pointer',
+            'transition': 'color 150ms ease',
+            '&:hover': {
+              'color': ds.color.text.high,
+            },
+          },
+          '.tab-trigger[data-state="active"]': {
+            'background-color': ds.color.bg.high,
+            'color': ds.color.text.high,
+            'box-shadow': '0 1px 4px -1px #0003',
+          },
+        },
+      },
+      '.tab-content': {
+        'padding-top': ds.spacing.space3,
+        'padding-bottom': ds.spacing.space3,
+        // 'background-color': transparent(ds.color.bg.low, 20),
+        'border': `1px solid ${transparent(ds.color.border, 60)}`,
+        'border-bottom-left-radius': ds.border.radius,
+        'border-bottom-right-radius': ds.border.radius,
+        'border-top-right-radius': ds.border.radius,
+        'padding': ds.spacing.space3,
+        '> *:first-child': {
+          'margin-top': '0',
+        },
+        '> *:last-child': {
+          'margin-bottom': '0',
         },
       },
     },
@@ -707,7 +1152,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'padding-right': ds.spacing.space2,
       'padding-top': ds.spacing.space1,
       'padding-bottom': ds.spacing.space1,
-      'border-color': color.note,
+      'border-color': ds.color.text.note,
       'p, ul, ol, li': {
         'font-size': ds.blockquote.font.size,
         'line-height': ds.blockquote.font.height,
@@ -727,12 +1172,8 @@ export const componentsStyles = (ds: DesignSystem) => {
       'display': 'flex',
       'flex-direction': 'column',
       'gap': ds.spacing.space1,
-      'border-left-width': ds.spacing.space1,
-      'border-left-style': 'solid',
-      'padding-left': ds.spacing.space2,
-      'padding-right': ds.spacing.space2,
-      'padding-top': ds.spacing.space1,
-      'padding-bottom': ds.spacing.space1,
+      'border-radius': ds.border.radius,
+      'padding': ds.spacing.space3,
       '.title': {
         'font-size': ds.font.size.sm,
         'font-weight': ds.font.weight.semiBold,
@@ -752,34 +1193,49 @@ export const componentsStyles = (ds: DesignSystem) => {
         },
       },
     },
-    '.callout.note': {
-      'border-color': color.note,
+    '.callout[data-variant="note"]': {
+      'background-color': ds.callout.note.color.bg,
       '.title': {
-        color: color.note,
+        'color': ds.callout.note.color.text,
+      },
+      '.body': {
+        'color': ds.callout.note.color.text,
       },
     },
-    '.callout.info': {
-      'border-color': color.info,
+    '.callout[data-variant="info"]': {
+      'background-color': ds.callout.info.color.bg,
       '.title': {
-        color: color.info,
+        'color': ds.callout.info.color.text,
+      },
+      '.body': {
+        'color': transparent(ds.callout.info.color.text, 90),
       },
     },
-    '.callout.tip': {
-      'border-color': color.success,
+    '.callout[data-variant="tip"]': {
+      'background-color': ds.callout.success.color.bg,
       '.title': {
-        color: color.success,
+        'color': ds.callout.success.color.text,
+      },
+      '.body': {
+        'color': ds.callout.success.color.text,
       },
     },
-    '.callout.warning': {
-      'border-color': color.warning,
+    '.callout[data-variant="warning"]': {
+      'background-color': ds.callout.warning.color.bg,
       '.title': {
-        color: color.warning,
+        'color': ds.callout.warning.color.text,
+      },
+      '.body': {
+        'color': ds.callout.warning.color.text,
       },
     },
-    '.callout.danger': {
-      'border-color': color.danger,
+    '.callout[data-variant="danger"]': {
+      'background-color': ds.callout.danger.color.bg,
       '.title': {
-        color: color.danger,
+        'color': ds.callout.danger.color.text,
+      },
+      '.body': {
+        'color': ds.callout.danger.color.text,
       },
     },
     '.card': {
@@ -1042,7 +1498,11 @@ export const componentsStyles = (ds: DesignSystem) => {
     },
     '.steps[data-title-size="h1"]': {
       '--step-title-line-height': ds.steps.title.h1.lineHeight,
-      '--step-indicator-size': ds.spacing.space6,
+      '--step-indicator-size': '1.75rem',
+    },
+    '.steps[data-title-size="h1"] .step-indicator': {
+      'font-size': ds.font.size.base,
+      'line-height': ds.font.height.base,
     },
     '.steps[data-title-size="h2"] .step-title': {
       'font-size': ds.steps.title.h2.fontSize,
@@ -1054,7 +1514,11 @@ export const componentsStyles = (ds: DesignSystem) => {
     },
     '.steps[data-title-size="h2"]': {
       '--step-title-line-height': ds.steps.title.h2.lineHeight,
-      '--step-indicator-size': ds.spacing.space6,
+      '--step-indicator-size': '1.75rem',
+    },
+    '.steps[data-title-size="h2"] .step-indicator': {
+      'font-size': ds.font.size.base,
+      'line-height': ds.font.height.base,
     },
     '.steps[data-title-size="h3"] .step-title': {
       'font-size': ds.steps.title.h3.fontSize,
@@ -1066,7 +1530,7 @@ export const componentsStyles = (ds: DesignSystem) => {
     },
     '.steps[data-title-size="h3"]': {
       '--step-title-line-height': ds.steps.title.h3.lineHeight,
-      '--step-indicator-size': ds.spacing.space6,
+      '--step-indicator-size': '1.75rem',
     },
     '.steps[data-title-size="h4"] .step-title': {
       'font-size': ds.steps.title.h4.fontSize,
@@ -1179,22 +1643,22 @@ export const componentsStyles = (ds: DesignSystem) => {
     'h4': headingStyle(ds.h4),
     'h5': headingStyle(ds.h5),
     'h6': headingStyle(ds.h6),
-    'p a, td a, li a': {
+    ':is(p, td, li) a': {
       'color': ds.link.text.color,
       'text-decoration-line': ds.link.text.decorationLine,
       'text-decoration-color': ds.link.text.decorationColor,
       'text-decoration-style': ds.link.text.decorationStyle,
       'font-weight': ds.link.fontWeight,
       'text-underline-offset': '0.25rem',
-      'transition': 'color 0.1s ease, text-decoration-color 0.1s ease',
+      'transition': 'color 0.15s ease, text-decoration-color 0.15s ease',
 
       '&:hover': {
-        'color': color.accent.high,
-        'text-decoration-color': color.accent.high,
+        'color': color.text.accent,
+        'text-decoration-color': transparent(ds.color.text.accent, 70),
       },
 
       '&:active': {
-        color: color.accent.high,
+        color: color.text.accent,
       },
     },
     'img': {
@@ -1328,7 +1792,7 @@ export const shikiCssVariables = (ds: DesignSystem) => ({
 const darkColorSpec = getDarkColorsSpec()
 const lightColorSpec: ColorSpec = getLightColorsSpec()
 const coreSpec: CoreSpec = getCoreSpec()
-const colors = cssSystem(lightColorSpec, '--p', (value: CssVar) => `hsl(${value})`)
+const colors = cssSystem(lightColorSpec, '--p')
 const core = cssSystem(coreSpec, '--p')
 
 const base: Base = { ...core, ...colors }

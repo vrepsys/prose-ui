@@ -35,18 +35,19 @@ export default async function Page({ params }: { params: Params }) {
   let page = findPage(path)
   if (!page) {
     return (
-      <div className="prose-ui relative mb-64 min-w-0 flex-1 px-[var(--article-padding-x)] md:px-[var(--article-padding-x-md)] lg:px-[var(--article-padding-x-lg)] xl:px-[var(--article-padding-x-xl)]">
+      <div className="prose-ui relative mb-64 min-w-0 flex-1 px-(--article-padding-x) md:px-(--article-padding-x-md) lg:px-(--article-padding-x-lg) xl:px-(--article-padding-x-xl)">
         <p>Page not found</p>
       </div>
     )
   }
   return (
     <>
-      <article className="prose-ui relative mb-64 min-w-0 flex-1 px-[var(--article-padding-x)] md:px-[var(--article-padding-x-md)] lg:px-[var(--article-padding-x-lg)] xl:px-[var(--article-padding-x-xl)]">
-        <MDXContent code={page.content} components={{ ...mdxComponents, ColorSwatch }} />
+      <article className="prose-ui relative min-h-full min-w-0 flex-1 px-(--article-padding-x) md:px-(--article-padding-x-md) lg:px-(--article-padding-x-lg) xl:px-(--article-padding-x-xl)">
+        <MDXContent code={page.content} components={{ ...mdxComponents }} />
+        <div className="h-[25vh]" aria-hidden="true" />
       </article>
 
-      <div className="sticky top-[var(--topnav-height)] hidden h-[calc(100vh-var(--topnav-height))] w-[var(--toc-width)] shrink-0 flex-col pt-[var(--article-padding-t)] lg:flex">
+      <div className="sticky top-0 hidden h-full w-(--toc-width) shrink-0 flex-col pt-(--article-padding-t) lg:flex">
         <Toc sections={page.toc} />
       </div>
     </>

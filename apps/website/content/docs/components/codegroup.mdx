@@ -4,6 +4,26 @@ Code groups let you display multiple code blocks as tabs, with optional language
 
 ## Basic usage
 
+```ts
+import Anthropic from '@anthropic-ai/sdk';
+
+const anthropic = new Anthropic();
+
+let messageBatch;
+while (true) {
+  messageBatch = await anthropic.messages.batches.retrieve(
+    MESSAGE_BATCH_ID
+  );
+  if (messageBatch.processing_status === 'ended') {
+    break;
+  }
+
+  console.log(`Batch ${messageBatch} is still processing... waiting`);
+  await new Promise(resolve => setTimeout(resolve, 60_000));
+}
+console.log(messageBatch);
+```
+
 Wrap multiple code blocks in a `<CodeGroup>` component. Each code block's `title` becomes a tab. Example:
 
 <CodeGroup>

@@ -1,0 +1,51 @@
+---
+title: Prose UI with Astro
+description: ""
+---
+
+Create a new project.
+
+```
+npm create astro@latest -- --template starlight
+```
+
+Add react
+
+```
+npx astro add react
+```
+
+Add MDX
+
+```
+npx astro add mdx
+```
+
+Install Prose UI
+
+```bash
+npm install @prose-ui/core @prose-ui/react @prose-ui/style sharp
+```
+
+Configure mdx rendering and react and add prose ui css styles to astro config
+
+```javascript title="astro.config.mjs"
+import { remarkPlugins } from "@prose-ui/core";
+import mdx from "@astrojs/mdx";
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      // ...
+      customCss: [
+        "@prose-ui/style/prose-ui.css",
+        "@prose-ui/style/katex.min.css",
+      ],
+    }),
+    mdx({
+      remarkPlugins: [...remarkPlugins()],
+    }),
+    react(),
+  ],
+});
+```

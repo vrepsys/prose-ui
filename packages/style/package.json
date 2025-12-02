@@ -23,7 +23,7 @@
     "build": "rm -rf dist && tsc && pnpm build:css && pnpm copy:katex",
     "build:css": "ts-node src/scripts/build-css.ts",
     "copy:katex": "node scripts/copy-katex-css.cjs",
-    "watch": "rm -rf dist && npx nodemon --watch src --ext ts --exec \"pnpm build\"",
+    "watch": "npx nodemon --watch src --ext ts --exec \"tsc && pnpm build:css\"",
     "bump:rc": "pnpm version prerelease --preid=rc --no-git-tag-version",
     "publish:rc": "pnpm publish --access public --tag next --no-git-checks",
     "bump:latest": "pnpm version patch --no-git-tag-version",

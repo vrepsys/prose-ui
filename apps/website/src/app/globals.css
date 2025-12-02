@@ -1,27 +1,94 @@
-@import '@prose-ui/style/prose-ui.css';
-@import '@prose-ui/style/katex.min.css';
+@import 'tailwindcss';
 
-@import '@radix-ui/colors/gray.css';
-@import '@radix-ui/colors/gray-dark.css';
+@import '@prose-ui/style/prose-ui.css' layer(base);
+@import '@prose-ui/style/katex.min.css' layer(base);
 
+@import '@radix-ui/colors/gray.css' layer(base);
+@import '@radix-ui/colors/gray-dark.css' layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
 
-.prose-ui {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    scroll-margin-top: 100px;
+@theme {
+  --text-color-color-high: var(--p-color-text-high);
+  --text-color-color-base: var(--p-color-text);
+  --text-color-color-low: var(--p-color-text-low);
+  --text-color-color-lower: var(--p-color-text-lower);
+  --text-color-color-lowest: var(--p-color-text-lowest);
+
+  --stroke-color-high: var(--p-color-text-high);
+  --stroke-color-base: var(--p-color-text);
+  --stroke-color-low: var(--p-color-text-low);
+  --stroke-color-lower: var(--p-color-text-lower);
+  --stroke-color-lowest: var(--p-color-text-lowest);
+
+  --background-color-high: var(--bg-high-mapped);
+  --background-color-base: var(--bg-base-mapped);
+  --background-color-low: var(--bg-low-mapped);
+  --background-color-lower: var(--bg-lower-mapped);
+  --background-color-lowest: var(--bg-lowest-mapped);
+
+  --border-color-color-base: var(--p-color-border);
+
+  /* --color-color-accent-high: var(--p-color-accent-high);
+  --color-color-accent-base: var(--p-color-accent);
+  --color-color-accent-low: var(--p-color-accent-low); */
+
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-sans:
+    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --text-sm: var(--p-font-size-sm);
+  --text-sm--line-height: var(--p-font-height-sm);
+  --text-sm--letter-spacing: var(--p-letter-spacing-sm);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer utilities {
+  .prose-ui {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      scroll-margin-top: 16px;
+    }
   }
 }
 
 @layer base {
   :root {
+    /* Background color mappings for Tailwind theme */
+    --bg-high-mapped: var(--p-color-bg-low);
+    --bg-base-mapped: var(--p-color-bg);
+    --bg-low-mapped: var(--p-color-bg-low);
+    --bg-lower-mapped: var(--p-color-bg-lower);
+    --bg-lowest-mapped: var(--p-color-bg-lowest);
+
     --p-font-family: var(--font-geist-sans);
     --p-font-family-heading: var(--font-geist-sans);
     --p-font-family-mono: var(--font-geist-mono);
@@ -56,38 +123,40 @@
     /* --p-code-block-font-size: 0.9375rem; */
     --p-code-block-font-weight: 400;
 
-    --p-color-accent-high: 0, 0%, 0%;
-    --p-color-accent: 0, 0%, 10%;
-    --p-color-accent-low: 0, 0%, 70%;
+    /* --p-color-accent-high: #000000;
+    --p-color-accent: var(--asdf);
+    --p-color-accent-low: #b3b3b3; */
+
     --button-primary-color-bg: var(--gray-12);
     --button-primary-color-text: var(--gray-1);
-    /* --p-color-syntax-syntax1: 207 100% 30%;
-    --p-color-syntax-syntax2: 153 100% 28%;
-    --p-color-syntax-syntax3: 0 55% 58%;
-    --p-color-syntax-syntax4: 256 50% 40%; */
+
   }
   :root:is(.dark) {
-    --p-color-accent-high: 180, 0%, 100%;
-    --p-color-accent: 180, 0%, 90%;
-    --p-color-accent-low: 180, 0%, 30%;
+    /* Background color mappings for dark theme */
+    --bg-high-mapped: var(--p-color-bg-high);
+    --bg-base-mapped: var(--p-color-bg);
+    --bg-low-mapped: var(--p-color-bg-low);
+    --bg-lower-mapped: var(--p-color-bg-lower);
+    --bg-lowest-mapped: var(--p-color-bg-lowest);
+
+    /* --p-color-accent-high: #ffffff;
+    --p-color-accent: #e6e6e6;
+    --p-color-accent-low: #4d4d4d; */
     --button-primary-color-bg: var(--gray-12);
     --button-primary-color-text: var(--gray-3);
-    --p-color-text: 219 10% 90%;
-    /* --p-color-syntax-syntax1: 207 61% 59%;
-    --p-color-syntax-syntax2: 153 40% 54%;
-    --p-color-syntax-syntax3: 0 79% 71%;
-    --p-color-syntax-syntax4: 256 30% 70%; */
-  }
-}
+    --p-color-text: #d9dce5;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+
+
+    /* --p-color-syntax-syntax1: var(--color-green-300);
+    --p-color-syntax-syntax2: var(--color-orange-300);
+    --p-color-syntax-syntax3: var(--color-purple-300);
+    --p-color-syntax-syntax4: var(--color-blue-300); */
   }
 }
 
 @layer base {
   * {
-    @apply border-color-base;
+    border-color: var(--p-color-border);
   }
 }

@@ -22,7 +22,7 @@ async function buildCss() {
 
   try {
     await fs.writeFile('dist/prose-ui.css', combinedCss, 'utf8')
-    console.log('CSS output written to styles/dist/prose-ui.css')
+    console.log('CSS output written to dist/prose-ui.css')
   } catch (error) {
     console.error('Error writing to file:', error)
   }

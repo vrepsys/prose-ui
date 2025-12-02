@@ -473,7 +473,7 @@ export const getLightColorsSpec = (): ColorSpec => ({
 export const getDarkColorsSpec = (): ColorSpec => ({
   color: {
     bg: {
-      high: black,
+      high: scale[950],
       base: scale[900],
       low: scale[800],
       lower: scale[700],
@@ -510,7 +510,7 @@ export const getDarkColorsSpec = (): ColorSpec => ({
       syntax3: 'oklch(0.74 0.11 249.51)',
       syntax4: 'oklch(0.77 0.08 357.45)',
     },
-    border: scale[800],
+    border: 'oklch(1 0 0 / 8%)',
     outline: hsl(greenDark.green10),
     palette,
   },
@@ -752,7 +752,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     },
     codeBlock: {
       color: {
-        bg: ds.color.bg.low,
+        bg: ds.color.bg.high,
         text: ds.color.text.base,
         constant: ds.color.syntax.syntax1,
         string: ds.color.syntax.syntax2,

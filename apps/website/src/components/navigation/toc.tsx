@@ -19,11 +19,33 @@ type Props = {
 export const Toc = ({ sections: rawSections }: Props) => {
   const sections = rawSections.filter((section) => section.depth === 2)
   const [currentSectionId, setCurrentSectionId] = useState(sections[0]?.id)
-  const [showScrollToTop, setShowScrollToTop] = useState(false)
+  const [scrolled, setScrolled] = useState(0)
   const scrollHandlerLocked = useRef(false)
   const scrollContainerRef = useContentScroll()
   const itemRefs = useRef<(HTMLLIElement | null)[]>([])
   const indicatorRef = useRef<HTMLDivElement>(null)
+
+  const smoothScrollTo = useCallback(
+    (targetScrollTop: number) => {
+      const container = scrollContainerRef?.current
+      if (!container) return
+
+      const start = container.scrollTop
+      const distance = targetScrollTop - start
+      const startTime = performance.now()
+      const duration = 150
+
+      const scroll = (currentTime: number) => {
+        const elapsed = currentTime - startTime
+        const progress = Math.min(elapsed / duration, 1)
+        const easeOut = 1 - Math.pow(1 - progress, 3)
+        container.scrollTop = start + distance * easeOut
+        if (progress < 1) requestAnimationFrame(scroll)
+      }
+      requestAnimationFrame(scroll)
+    },
+    [scrollContainerRef],
+  )
 
   const makeHeadings = useCallback(
     (sections: Section[]): Heading[] =>
@@ -54,7 +76,7 @@ export const Toc = ({ sections: rawSections }: Props) => {
 
     const handleScroll = () => {
       const top = container.scrollTop
-      setShowScrollToTop(top > 50)
+      setScrolled(top)
 
       if (scrollHandlerLocked.current) {
         return
@@ -80,10 +102,23 @@ export const Toc = ({ sections: rawSections }: Props) => {
     }
   }, [sections, makeHeadings, scrollContainerRef])
 
-  const setActive = (sectionId: string) => {
-    scrollHandlerLocked.current = true
-    setCurrentSectionId(sectionId)
-  }
+  const setActive = useCallback(
+    (sectionId: string, shouldScroll: boolean = true) => {
+      scrollHandlerLocked.current = true
+      setCurrentSectionId(sectionId)
+
+      if (shouldScroll) {
+        const el = document.getElementById(sectionId)
+        if (el) {
+          const style = window.getComputedStyle(el)
+          const scrollMt = parseFloat(style.scrollMarginTop)
+          const targetScrollTop = el.offsetTop - scrollMt
+          smoothScrollTo(targetScrollTop)
+        }
+      }
+    },
+    [smoothScrollTo],
+  )
 
   useEffect(() => {
     if (scrollHandlerLocked.current) {
@@ -137,34 +172,24 @@ export const Toc = ({ sections: rawSections }: Props) => {
             }}
             section={section}
             isActive={section.id === currentSectionId}
-            onClick={() => setActive(section.id)}
+            onClick={(e) => {
+              e.preventDefault()
+              setActive(section.id, true)
+            }}
           />
         ))}
       </ul>
       <div
-        className={`relative ml-[3px] mt-2 pl-3 transition-opacity duration-200 ${
-          showScrollToTop ? 'opacity-100' : 'pointer-events-none opacity-0'
-        }`}
+        className="relative ml-[3px] mt-2 pl-3 transition-opacity duration-200"
+        style={{
+          opacity: Math.min(Math.max(scrolled - 30, 0) / 300, 1),
+          pointerEvents: scrolled > 0 ? 'auto' : 'none',
+        }}
       >
         <Button
           variant="link"
           size="compact"
-          onClick={() => {
-            const container = scrollContainerRef?.current
-            if (!container) return
-            const start = container.scrollTop
-            const startTime = performance.now()
-            const duration = 150
-
-            const scroll = (currentTime: number) => {
-              const elapsed = currentTime - startTime
-              const progress = Math.min(elapsed / duration, 1)
-              const easeOut = 1 - Math.pow(1 - progress, 3)
-              container.scrollTop = start * (1 - easeOut)
-              if (progress < 1) requestAnimationFrame(scroll)
-            }
-            requestAnimationFrame(scroll)
-          }}
+          onClick={() => smoothScrollTo(0)}
         >
           Scroll to top
           <CircleArrowUpIcon className="size-4" />
@@ -177,7 +202,7 @@ export const Toc = ({ sections: rawSections }: Props) => {
 type ItemProps = {
   section: Section
   isActive: boolean
-  onClick: () => void
+  onClick: (e: React.MouseEvent) => void
 }
 
 const Item = forwardRef<HTMLLIElement, ItemProps>(({ section, isActive, onClick }, ref) => (

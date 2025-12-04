@@ -79,9 +79,10 @@ const SidenavFolder = ({ item, level }: { item: TreeNode; level: number }) => {
           }
         }}
         className={classes(
-          'hover:bg-color-low/60 group relative mb-px flex cursor-pointer flex-row items-center justify-between rounded-md px-3.5 py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
-          active ? 'text-color-accent-high' : 'hover:text-color-base text-color-low',
-          open && 'bg-color-lower',
+          'hover:bg-sidenav-hover group relative mb-px flex cursor-pointer flex-row items-center justify-between rounded-md px-3.5 py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
+          active ? 'bg-sidenav-active text-strong-foreground'
+          : 'hover:text-strong-foreground text-muted-foreground',
+          open && 'bg-sidenav-active',
         )}
       >
         <span>{item.name}</span>
@@ -94,7 +95,7 @@ const SidenavFolder = ({ item, level }: { item: TreeNode; level: number }) => {
           <ChevronRight
             className={classes(
               'transform-none transition-colors',
-              active ? 'stroke-color-base' : 'stroke-color-lower group-hover:stroke-color-low',
+              active ? 'stroke-strong-foreground' : 'stroke-xmuted-foreground group-hover:stroke-muted-foreground',
             )}
             size={15}
           />
@@ -143,8 +144,8 @@ const SidenavLink = ({ item }: { item: TreeNode; level: number }) => {
         className={classes(
           'mt-px flex w-full cursor-pointer rounded-lg px-3.5 py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
           active
-            ? 'bg-(--p-color-bg-lower) text-(--p-color-text-high)'
-            : 'hover:text-color-base text-color-low hover:bg-color-low/60',
+            ? 'bg-sidenav-active text-strong-foreground'
+            : 'hover:text-strong-foreground hover:bg-sidenav-hover text-muted-foreground',
         )}
         href={item.href!}
       >

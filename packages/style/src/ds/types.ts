@@ -98,11 +98,10 @@ export type Core = {
 export type Colors = {
   color: {
     text: {
-      high: CssValue
+      strong: CssValue
       base: CssValue
-      low: CssValue
-      lower: CssValue
-      lowest: CssValue
+      muted: CssValue
+      xmuted: CssValue
       disabled: CssValue
       accent: CssValue
       note: CssValue
@@ -110,24 +109,18 @@ export type Colors = {
       warning: CssValue
       success: CssValue
       danger: CssValue
-    }
-    accent: {
-      high: CssValue
-      base: CssValue
-      low: CssValue
-    }
-    syntax: {
       syntax1: CssValue
       syntax2: CssValue
       syntax3: CssValue
       syntax4: CssValue
-    }
+    },
     bg: {
-      high: CssValue
       base: CssValue
-      low: CssValue
-      lower: CssValue
-      lowest: CssValue
+      surface1: CssValue
+      surface1Hover: CssValue
+      surface2: CssValue
+      surface2Hover: CssValue
+      surface2Active: CssValue
       accent: CssValue
       note: CssValue
       info: CssValue
@@ -135,9 +128,11 @@ export type Colors = {
       success: CssValue
       danger: CssValue
     }
-    border: CssValue
-    outline: CssValue
-    palette: Palette
+    border: {
+      base: CssValue
+      subtle: CssValue
+      outline: CssValue
+    }
   }
 }
 

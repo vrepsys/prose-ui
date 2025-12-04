@@ -8,30 +8,23 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  --text-color-color-high: var(--p-color-text-high);
-  --text-color-color-base: var(--p-color-text);
-  --text-color-color-low: var(--p-color-text-low);
-  --text-color-color-lower: var(--p-color-text-lower);
-  --text-color-color-lowest: var(--p-color-text-lowest);
+@theme inline {
 
-  --stroke-color-high: var(--p-color-text-high);
-  --stroke-color-base: var(--p-color-text);
-  --stroke-color-low: var(--p-color-text-low);
-  --stroke-color-lower: var(--p-color-text-lower);
-  --stroke-color-lowest: var(--p-color-text-lowest);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-xmuted-foreground: var(--xmuted-foreground);
+  --color-strong-foreground: var(--strong-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-border-muted: var(--border-muted);
+  --color-sidenav-hover: var(--sidenav-hover);
+  --color-sidenav-active: var(--sidenav-active);
 
-  --background-color-high: var(--bg-high-mapped);
-  --background-color-base: var(--bg-base-mapped);
-  --background-color-low: var(--bg-low-mapped);
-  --background-color-lower: var(--bg-lower-mapped);
-  --background-color-lowest: var(--bg-lowest-mapped);
-
-  --border-color-color-base: var(--p-color-border);
-
-  /* --color-color-accent-high: var(--p-color-accent-high);
-  --color-color-accent-base: var(--p-color-accent);
-  --color-color-accent-low: var(--p-color-accent-low); */
 
   --font-mono:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
@@ -81,18 +74,33 @@
 }
 
 @layer base {
+  
   :root {
-    /* Background color mappings for Tailwind theme */
-    --bg-high-mapped: var(--p-color-bg-low);
-    --bg-base-mapped: var(--p-color-bg);
-    --bg-low-mapped: var(--p-color-bg-low);
-    --bg-lower-mapped: var(--p-color-bg-lower);
-    --bg-lowest-mapped: var(--p-color-bg-lowest);
+    --background: var(--p-color-bg-surface2);
+    --foreground: var(--p-color-text);
+    --card: var(--p-color-bg);
+    --card-foreground: var(--p-color-text);
+    --muted: var(--p-color-bg-surface1);
+    --muted-foreground: var(--p-color-text-muted);
+    --xmuted-foreground: var(--p-color-text-xmuted);
+    --strong-foreground: var(--p-color-text-strong);
+    --accent: var(--p-color-bg-accent);
+    --accent-foreground: var(--p-color-text-accent);
+    --border: var(--p-color-border);
+    --border-muted: var(--p-color-border-subtle);
+
+    --p-link-font-weight: 500;
+
+
+    --sidenav-width: 15.625rem;
+    --sidenav-hover: color-mix(in oklab, var(--p-color-text) 3%, transparent);
+    --sidenav-active: color-mix(in oklab, var(--p-color-text) 6%, transparent);
+
 
     --p-font-family: var(--font-geist-sans);
     --p-font-family-heading: var(--font-geist-sans);
     --p-font-family-mono: var(--font-geist-mono);
-    --sidenav-width: 15.625rem;
+
     --site-width: 80rem;
     --site-padding-x: 0.75rem;
     --toc-width: 12rem;
@@ -118,41 +126,10 @@
     }
   }
 
-  :root {
-    --p-link-font-weight: var(--p-font-weight-medium);
-    /* --p-code-block-font-size: 0.9375rem; */
-    --p-code-block-font-weight: 400;
-
-    /* --p-color-accent-high: #000000;
-    --p-color-accent: var(--asdf);
-    --p-color-accent-low: #b3b3b3; */
-
-    --button-primary-color-bg: var(--gray-12);
-    --button-primary-color-text: var(--gray-1);
-
-  }
-  :root:is(.dark) {
-    /* Background color mappings for dark theme */
-    --bg-high-mapped: var(--p-color-bg-high);
-    --bg-base-mapped: var(--p-color-bg);
-    --bg-low-mapped: var(--p-color-bg-low);
-    --bg-lower-mapped: var(--p-color-bg-lower);
-    --bg-lowest-mapped: var(--p-color-bg-lowest);
-
-    /* --p-color-accent-high: #ffffff;
-    --p-color-accent: #e6e6e6;
-    --p-color-accent-low: #4d4d4d; */
-    --button-primary-color-bg: var(--gray-12);
-    --button-primary-color-text: var(--gray-3);
-    --p-color-text: #d9dce5;
-
-
-
-    /* --p-color-syntax-syntax1: var(--color-green-300);
-    --p-color-syntax-syntax2: var(--color-orange-300);
-    --p-color-syntax-syntax3: var(--color-purple-300);
-    --p-color-syntax-syntax4: var(--color-blue-300); */
-  }
+  
+  /* .dark {
+    --p-color-text-accent: white;
+  } */
 }
 
 @layer base {

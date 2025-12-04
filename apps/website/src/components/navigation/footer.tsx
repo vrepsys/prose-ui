@@ -12,15 +12,7 @@ export const Footer = () => (
             href="https://x.com/vrepsys"
           >
             Valdemaras
-          </a>
-          , designed by{' '}
-          <a
-            className="text-color-low hover:text-color-base underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4 hover:decoration-[hsl(var(--p-color-text-base))]"
-            href="https://domasmark.us"
-          >
-            Domas
-          </a>
-          . Source code available on{' '}
+          </a>. Source code available on{' '}
           <a
             className="text-color-low hover:text-color-base underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4 hover:decoration-[hsl(var(--p-color-text-base))]"
             href="https://github.com/vrepsys/prose-ui"

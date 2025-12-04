@@ -31,7 +31,7 @@ export const TopNav = () => {
   return (
     <header
       className={classes(
-        'bg-high sticky top-0 z-20 flex h-(--topnav-height) w-full py-2',
+        'bg-background sticky top-0 z-20 flex h-(--topnav-height) w-full py-2',
       )}
       style={{
         borderBottomColor: `color-mix(in srgb, var(--p-color-border) ${borderOpacity * 100}%, transparent)`,

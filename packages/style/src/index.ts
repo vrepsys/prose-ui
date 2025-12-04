@@ -4,7 +4,6 @@ import type {
   Components,
   ComponentsSpec,
   CoreSpec,
-  CssVar,
   DesignSystem,
   TextStyle,
 } from './ds/index.js'
@@ -25,7 +24,7 @@ const negative = (value: string) => `calc(${value} * -1)`
 
 const transparent = (color: string, opacity: number) => `color-mix(in oklab, ${color} ${opacity}%, transparent)`
 
-const mix = (color1: string, color2: string, opacity: number = 100, ratio: number = 50) => `color-mix(in oklab, color-mix(in oklab, ${color1} ${100 - ratio}%, ${color2} ${ratio}%) ${opacity}%, transparent)`
+const mix = (color1: string, color2: string, ratio: number = 50, opacity: number = 100) => `color-mix(in oklab, color-mix(in oklab, ${color1} ${100 - ratio}%, ${color2} ${ratio}%) ${opacity}%, transparent)`
 
 const slate = {
   50: 'oklch(0.984 0.003 247.858)',
@@ -82,6 +81,8 @@ const neutral = {
   900: 'oklch(0.205 0 0)',
   950: 'oklch(0.145 0 0)',
 }
+
+
 
 const stone = {
   50: 'oklch(0.985 0.001 106.423)',
@@ -363,8 +364,22 @@ const palette = {
 const white = '#fff'
 const black = '#000'
 
+const custom = {
+  50: 'oklch(0.985 0 0)',
+  100: 'oklch(0.97 0 0)',
+  200: 'oklch(0.922 0 0)',
+  300: 'oklch(0.87 0 0)',
+  400: 'oklch(0.708 0 0)',
+  500: 'oklch(0.556 0 0)',
+  600: 'oklch(0.439 0 0)',
+  700: 'oklch(0.371 0 0)',
+  800: 'oklch(0.269 0 0)',
+  900: 'oklch(0.225 0 0)',
+  950: 'oklch(0.165 0 0)',
+}
+
 // Change this to experiment with different color palettes (slate, gray, zinc, neutral, stone)
-const scale = zinc
+const scale = custom
 
 export const getCoreSpec = (): CoreSpec => ({
   spacing: {
@@ -427,36 +442,29 @@ export const getCoreSpec = (): CoreSpec => ({
 export const getLightColorsSpec = (): ColorSpec => ({
   color: {
     text: {
-      high: black,
+      strong: black,
       base: black,
-      low: scale[600],
-      lower: scale[600],
-      lowest: scale[600],
+      muted: scale[600],
+      xmuted: scale[500],
       disabled: scale[500],
-      accent: 'oklch(0.51 0.15 142.33)',
+      accent: 'oklch(0.54 0.22 143.88)',
       note: scale[950],
       info: blue[800],
       warning: amber[800],
       success: green[800],
       danger: red[700],
-    },
-    accent: {
-      high: scale[900],
-      base: emerald[800],
-      low: emerald[100],
-    },
-    syntax: {
       syntax1: 'oklch(0.51 0.15 142.33)',
       syntax2: 'oklch(0.48 0.12 51.36)',
       syntax3: 'oklch(0.51 0.2 324.32)',
       syntax4: 'oklch(0.38 0.19 272.76)',
     },
     bg: {
-      high: white,
       base: white,
-      low: scale[100],
-      lower: scale[200],
-      lowest: scale[300],
+      surface1: custom[100],
+      surface1Hover: mix(custom[100], black, 3),
+      surface2: custom[100],
+      surface2Hover: mix(custom[100], black, 3),
+      surface2Active: white,
       accent: transparent(green[700], 10),
       note: transparent(scale[950], 5),
       info: transparent(blue[800], 5),
@@ -464,20 +472,29 @@ export const getLightColorsSpec = (): ColorSpec => ({
       success: transparent(green[800], 5),
       danger: transparent(red[700], 5),
     },
-    border: scale[200],
-    outline: hsl(radixGreen.green10),
-    palette,
+    border: {
+      base: 'oklch(0 0 0 / 10%)',
+      subtle: 'oklch(0 0 0 / 6%)',
+      outline: hsl(radixGreen.green10),
+    },
   },
 })
+
+const bg = {
+  base: scale[900],
+  surface1: mix(scale[900], scale[950], 60),
+  surface2: scale[950],
+}
 
 export const getDarkColorsSpec = (): ColorSpec => ({
   color: {
     bg: {
-      high: scale[950],
-      base: scale[900],
-      low: scale[800],
-      lower: scale[700],
-      lowest: scale[600],
+      base: bg.base,
+      surface1: bg.surface1,
+      surface2: bg.surface2,
+      surface1Hover: mix(bg.surface1, white, 3),
+      surface2Hover: mix(bg.surface2, white, 10),
+      surface2Active: mix(bg.surface2, white, 20),
       accent: transparent(green[50], 10),
       note: transparent(scale[50], 5),
       info: transparent(blue[200], 5),
@@ -486,33 +503,27 @@ export const getDarkColorsSpec = (): ColorSpec => ({
       danger: transparent(red[300], 5),
     },
     text: {
-      high: white,
-      base: white,
-      low: scale[400],
-      lower: scale[500],
-      lowest: scale[600],
+      strong: white,
+      base: scale[200],
+      muted: scale[400],
+      xmuted: scale[500],
       disabled: scale[600],
-      accent: green[300],
+      accent: 'oklch(0.78 0.1 155.05)',
       note: scale[50],
       info: blue[200],
       warning: amber[200],
       success: green[200],
       danger: red[300],
-    },
-    accent: {
-      high: scale[100],
-      base: emerald[200],
-      low: emerald[900],
-    },
-    syntax: {
       syntax1: 'oklch(0.83 0.13 159.66)',
       syntax2: 'oklch(0.79 0.08 84.07)',
       syntax3: 'oklch(0.74 0.11 249.51)',
       syntax4: 'oklch(0.77 0.08 357.45)',
     },
-    border: 'oklch(1 0 0 / 8%)',
-    outline: hsl(greenDark.green10),
-    palette,
+    border: {
+      base: 'oklch(1 0 0 / 7%)',
+      subtle: 'oklch(1 0 0 / 4%)',
+      outline: hsl(greenDark.green10),
+    },
   },
 })
 
@@ -523,7 +534,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     fontWeight: ds.font.weight.semiBold,
     lineHeight: '2.25rem',
     letterSpacing: '-0.065rem',
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
     [MEDIA_ABOVE_LARGE]: {
       fontSize: '2.125rem',
       lineHeight: '2.75rem',
@@ -536,7 +547,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: '1.75rem',
     letterSpacing: '-0.035rem',
     fontWeight: ds.font.weight.semiBold,
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
     [MEDIA_ABOVE_LARGE]: {
       fontSize: '1.375rem',
       lineHeight: '2rem',
@@ -548,7 +559,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: '1.5rem',
     letterSpacing: '-0.035rem',
     fontWeight: ds.font.weight.semiBold,
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
     [MEDIA_ABOVE_LARGE]: {
       fontSize: '1.125rem',
       lineHeight: '1.75rem',
@@ -560,7 +571,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: '1.5rem',
     letterSpacing: '-0.015rem',
     fontWeight: ds.font.weight.semiBold,
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
     [MEDIA_ABOVE_LARGE]: {
       fontSize: '1rem',
       lineHeight: '1.75rem',
@@ -572,7 +583,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: '1.25rem',
     letterSpacing: '-0.015rem',
     fontWeight: '500',
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
   }
   const baseTitle = {
     fontFamily: ds.font.family.heading,
@@ -580,7 +591,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: ds.font.height.base,
     letterSpacing: ds.letterSpacing.base,
     fontWeight: ds.font.weight.medium,
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
   }
 
   return {
@@ -613,19 +624,19 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
       lineHeight: '1.25rem',
       letterSpacing: '-0.015rem',
       fontWeight: ds.font.weight.semiBold,
-      color: ds.color.text.high,
+      color: ds.color.text.strong,
     },
     h6: {
       ...h6,
     },
     link: {
       text: {
-        color: ds.color.text.base,
+        color: ds.color.text.accent,
         decorationLine: 'underline',
         decorationStyle: 'solid',
-        decorationColor: transparent(ds.color.text.base, 25),
+        decorationColor: transparent(ds.color.text.accent, 25),
       },
-      fontWeight: ds.font.weight.normal,
+      fontWeight: 'inherit',
     },
     inlineCode: {
       font: {
@@ -635,7 +646,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
         spacing: ds.letterSpacing.sm,
       },
       color: {
-        bg: transparent(ds.color.text.base, 7),
+        bg: ds.color.bg.surface2,
       },
       letterSpacing: ds.letterSpacing.sm,
     },
@@ -682,13 +693,13 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     card: {
       color: {
         text: ds.color.text.base,
-        muted: ds.color.text.low,
-        bg: ds.color.bg.low,
-        bgHover: transparent(ds.color.bg.low, 70),
-        border: ds.color.border,
-        borderHover: ds.color.border,
+        muted: ds.color.text.muted,
+        bg: ds.color.bg.surface1,
+        bgHover: ds.color.bg.surface1Hover,
+        border: ds.color.border.subtle,
+        borderHover: ds.color.border.base,
         icon: ds.color.text.base,
-        cta: ds.color.text.low,
+        cta: ds.color.text.muted,
         ctaHover: ds.color.text.accent,
       },
       font: {
@@ -711,11 +722,11 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     },
     steps: {
       indicator: {
-        bg: ds.color.bg.lower,
-        text: ds.color.text.high,
-        outline: ds.color.bg.lower,
+        bg: ds.color.bg.surface2,
+        text: ds.color.text.strong,
+        outline: ds.color.bg.surface2,
       },
-      connector: ds.color.border,
+      connector: ds.color.border.base,
       title: {
         base: { ...baseTitle },
         h1: { ...h1 },
@@ -728,12 +739,12 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
           lineHeight: '1.25rem',
           letterSpacing: '-0.015rem',
           fontWeight: ds.font.weight.semiBold,
-          color: ds.color.text.high,
+          color: ds.color.text.strong,
         },
         h6: { ...h6 },
       },
       body: {
-        color: ds.color.text.low,
+        color: ds.color.text.muted,
         size: ds.font.size.base,
         height: ds.font.height.base,
         weight: ds.font.weight.normal,
@@ -752,17 +763,17 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     },
     codeBlock: {
       color: {
-        bg: ds.color.bg.high,
+        bg: ds.color.bg.surface2,
         text: ds.color.text.base,
-        constant: ds.color.syntax.syntax1,
-        string: ds.color.syntax.syntax2,
-        comment: ds.color.text.low,
-        keyword: ds.color.syntax.syntax3,
+        constant: ds.color.text.syntax1,
+        string: ds.color.text.syntax2,
+        comment: ds.color.text.muted,
+        keyword: ds.color.text.syntax3,
         parameter: ds.color.text.base,
-        function: ds.color.syntax.syntax4,
-        stringExpression: ds.color.syntax.syntax2,
+        function: ds.color.text.syntax4,
+        stringExpression: ds.color.text.syntax2,
         punctuation: ds.color.text.base,
-        link: ds.color.syntax.syntax2,
+        link: ds.color.text.syntax2,
       },
       font: {
         size: ds.font.size.sm,
@@ -772,7 +783,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
       },
       lineNumber: {
         color: {
-          text: ds.color.text.lower,
+          text: ds.color.text.xmuted,
         },
       },
     },
@@ -789,17 +800,17 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
           weight: ds.font.weight.semiBold,
         },
         color: {
-          text: ds.color.text.low,
+          text: ds.color.text.muted,
         },
       },
       border: {
-        color: ds.color.border,
+        color: ds.color.border.base,
       },
     },
     frame: {
       caption: {
         color: {
-          text: ds.color.text.low,
+          text: ds.color.text.muted,
         },
         font: {
           size: ds.font.size.sm,
@@ -827,7 +838,11 @@ export const componentsStyles = (ds: DesignSystem) => {
   })
   return {
     '::selection': {
-      'background-color': transparent(ds.color.text.high, 15),
+      'background-color': transparent(ds.color.text.strong, 15),
+    },
+    ':focus-visible': {
+      'outline': `2px solid ${color.text.accent}`,
+      'outline-offset': '2px',
     },
     'p': {
       'margin-top': gap.base,
@@ -885,7 +900,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'background-color': ds.codeBlock.color.bg,
       'border-radius': ds.border.radius,
       'padding': ds.spacing.space1,
-      'color': ds.color.text.lowest,
+      'color': ds.color.text.xmuted,
       'transition': 'color 150ms ease, background-color 150ms ease',
       'cursor': 'pointer',
 
@@ -911,8 +926,8 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
     },
     '.copy-button:hover': {
-      'color': ds.color.text.lower,
-      'background-color': ds.color.bg.lower,
+      'color': ds.color.text.base,
+      'background-color': ds.color.bg.surface2Hover,
       '.icon-default': {
         opacity: '0',
       },
@@ -930,22 +945,22 @@ export const componentsStyles = (ds: DesignSystem) => {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-width': '1px',
-      'border-color': ds.color.border,
+      'border-color': ds.color.border.base,
       'border-radius': ds.border.radius,
       'background-color': ds.codeBlock.color.bg,
       'display': 'flex',
       'flex-direction': 'column',
-      '.header': {
+        '.header': {
         'display': 'flex',
         'align-items': 'center',
         'justify-content': 'space-between',
         'gap': ds.spacing.space2,
-        'border-bottom': `1px solid ${ds.color.border}`,
+        'border-bottom': `1px solid ${ds.color.border.base}`,
         'padding-top': ds.spacing['space1-5'],
         'padding-bottom': ds.spacing['space1-5'],
         'padding-left': ds.spacing.space3,
         'padding-right': ds.spacing['space1-5'],
-        'border-color': ds.color.border,
+        'border-color': ds.color.border.base,
         '.header-actions': {
           'display': 'flex',
           'align-items': 'center',
@@ -956,7 +971,7 @@ export const componentsStyles = (ds: DesignSystem) => {
           'gap': ds.spacing.space1,
           'margin-left': `calc(-1 * ${ds.spacing.space1})`,
           '.tab-trigger': {
-            'color': ds.color.text.low,
+            'color': ds.color.text.muted,
             'font-size': ds.font.size.sm,
             'font-weight': ds.font.weight.medium,
             'line-height': ds.font.height.sm,
@@ -992,14 +1007,14 @@ export const componentsStyles = (ds: DesignSystem) => {
         // 'padding-bottom': ds.spacing['space1-5'],
         '.tabs-list': {
           'display': 'flex',
-          'background-color': ds.color.bg.low,
+          'background-color': ds.color.bg.surface2,
           'border-top-left-radius': ds.border.radius,
           'border-top-right-radius': ds.border.radius,
           'padding': ds.spacing.space1,
           'gap': ds.spacing.space1,
           // 'margin-left': `calc(-1 * ${ds.spacing.space2})`,
           '.tab-trigger': {
-            'color': ds.color.text.low,
+            'color': ds.color.text.muted,
             'font-size': ds.font.size.sm,
             'font-weight': ds.font.weight.medium,
             'line-height': ds.font.height.sm,
@@ -1012,13 +1027,14 @@ export const componentsStyles = (ds: DesignSystem) => {
             'cursor': 'pointer',
             'transition': 'color 150ms ease',
             '&:hover': {
-              'color': ds.color.text.high,
+              'color': ds.color.text.strong,
+              'background-color': ds.color.bg.surface2Hover,
             },
           },
           '.tab-trigger[data-state="active"]': {
-            'background-color': ds.color.bg.high,
-            'color': ds.color.text.high,
-            'box-shadow': '0 1px 4px -1px #0003',
+            'background-color': ds.color.bg.surface2Active,
+            'color': ds.color.text.strong,
+            'box-shadow': '1px 2px 4px -1px #0003',
           },
         },
       },
@@ -1026,7 +1042,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'padding-top': ds.spacing.space3,
         'padding-bottom': ds.spacing.space3,
         // 'background-color': transparent(ds.color.bg.low, 20),
-        'border': `1px solid ${transparent(ds.color.border, 60)}`,
+        'border': `1px solid ${ds.color.border.subtle}`,
         'border-bottom-left-radius': ds.border.radius,
         'border-bottom-right-radius': ds.border.radius,
         'border-top-right-radius': ds.border.radius,
@@ -1043,7 +1059,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-width': '1px',
-      'border-color': ds.color.border,
+      'border-color': ds.color.border.base,
       'border-radius': ds.border.radius,
       'background-color': ds.codeBlock.color.bg,
       'display': 'flex',
@@ -1053,14 +1069,14 @@ export const componentsStyles = (ds: DesignSystem) => {
         'display': 'flex',
         'align-items': 'center',
         'justify-content': 'space-between',
-        'border-bottom': `1px solid ${ds.color.border}`,
+        'border-bottom': `1px solid ${ds.color.border.base}`,
         'padding-top': ds.spacing['space1-5'],
         'padding-bottom': ds.spacing['space1-5'],
         'padding-left': ds.spacing.space3,
         'padding-right': ds.spacing['space1-5'],
-        'border-color': ds.color.border,
+        'border-color': ds.color.border.base,
         '.title': {
-          'color': ds.color.text.low,
+          'color': ds.color.text.muted,
           'font-size': ds.font.size.sm,
           'line-height': ds.font.height.sm,
           'letter-spacing': ds.letterSpacing.sm,
@@ -1260,10 +1276,6 @@ export const componentsStyles = (ds: DesignSystem) => {
         '&:active': {
           'transform': 'translateY(1px)',
         },
-      },
-      '&:focus-visible': {
-        'outline': `2px solid ${color.outline}`,
-        'outline-offset': '2px',
       },
       '.card-content': {
         'display': 'flex',
@@ -1586,7 +1598,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
 
       '> li::marker': {
-        color: ds.color.text.lowest,
+        color: ds.color.text.xmuted,
       },
     },
     'ol': {
@@ -1657,6 +1669,10 @@ export const componentsStyles = (ds: DesignSystem) => {
         'text-decoration-color': transparent(ds.color.text.accent, 70),
       },
 
+      '&:focus-visible': {
+        'border-radius': ds.border.radius,
+      },
+
       '&:active': {
         color: color.text.accent,
       },
@@ -1673,7 +1689,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'overflow': 'hidden',
 
       'td, th': {
-        'border-bottom': `1px solid ${ds.color.border}`,
+        'border-bottom': `1px solid ${ds.color.border.base}`,
         'min-width': ds.spacing.space4,
         'padding-top': ds.spacing.space3,
         'padding-bottom': ds.spacing.space3,
@@ -1755,7 +1771,7 @@ export const componentsStyles = (ds: DesignSystem) => {
     },
     '.scroll-area-scrollbar': {
       'display': 'flex',
-      'background-color': color.bg.low,
+      'background-color': color.bg.surface1,
       'touch-action': 'none',
       'user-select': 'none',
       'border-radius': ds.spacing['space1-5'],
@@ -1766,7 +1782,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
     },
     '.scroll-area-thumb': {
-      'background': color.bg.lowest,
+      'background': color.bg.surface2,
       'border-radius': ds.spacing['space1-5'],
       'position': 'relative',
     },

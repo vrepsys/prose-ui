@@ -8,14 +8,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: `transition ease-in-out text-[hsl(var(--p-color-bg-high))] bg-[hsl(var(--p-color-text-high))] active:translate-y-px rounded-md sm:rounded-sm hover:ring-1 ring-offset-[hsl(var(--p-color-bg))] hover:ring-color-accent-low hover:ring-offset-2`,
+        primary: `transition ease-in-out text-[var(--p-color-bg-surface2)] bg-[var(--p-color-text-strong)] active:translate-y-px rounded-md sm:rounded-sm hover:ring-1 ring-offset-[var(--p-color-bg)] hover:ring-[color-mix(in oklab, var(--p-color-text) 10%, white)] hover:ring-offset-2`,
         reactive:
-          'transition text-color-base group-hover:text-[hsl(var(--p-color-bg-high))] hover:brightness-125 hover:saturation-125 group-hover:bg-[hsl(var(--p-color-text-high))] hover:bg-color-accent-base active:translate-y-px rounded-md sm:rounded-sm tracking-tight',
+          'transition text-color-base group-hover:text-[var(--p-color-bg-surface2)] hover:brightness-125 hover:saturation-125 group-hover:bg-[var(--p-color-text-strong)] hover:bg-color-accent-base active:translate-y-px rounded-md sm:rounded-sm tracking-tight',
         secondary:
           'text-color-base hover:text-color-base bg-color-low hover:bg-color-lower active:translate-y-px rounded-md sm:rounded-sm',
         ghost:
           'text-color-low hover:text-color-base hover:bg-color-low/60 active:translate-y-px rounded-md sm:rounded-sm',
-        link: 'text-color-low hover:text-color-base',
+        link: 'text-color-low hover:text-color-base', 
         navitem: 'rounded-lg',
       },
       size: {

@@ -34,8 +34,8 @@ const order = [
 
 const RenderedExample = ({ content }: { content: string }) => {
   return (
-    <div className="prose-ui flex min-w-0 flex-col">
-      <div className="bg-color-low/60 sticky top-21 w-full max-w-full rounded-sm px-5 py-4 [&>*:first-child]:mt-0">
+    <div className="prose-ui flex min-w-0 flex-col rounded-sm">
+      <div className="bg-color-low/60 sticky top-21 w-full max-w-full  px-5 py-4 [&>*:first-child]:mt-0">
         <MDXContent code={content ?? ''} components={{ ...mdxComponents, LandingButtons }} />
       </div>
     </div>
@@ -53,7 +53,8 @@ export default () => {
     <div className="w-full">
       <div className="pb-24">
         {intro && (
-          <div className="prose-ui [&>*:nth-child(2)]:text-color-low mx-auto mb-20 mt-16 w-full max-w-(--site-width) px-(--site-padding-x) [&>*:first-child]:mt-0">
+          <div className="prose-ui bg-background [&>*:nth-child(2)]:text-muted-foreground
+           mx-auto mb-20 mt-16 w-full max-w-(--site-width) px-(--site-padding-x) [&>*:first-child]:mt-0">
             <MDXContent
               code={intro.content ?? ''}
               components={{ ...mdxComponents, LandingButtons }}

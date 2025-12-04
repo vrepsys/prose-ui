@@ -148,39 +148,39 @@ export const Toc = ({ sections: rawSections }: Props) => {
     indicatorRef.current.style.height = `${height}px`
   }, [currentSectionId, sections])
 
-  if (sections.length === 0) {
-    return null
-  }
-
   return (
     <nav className="relative flex flex-col">
-      <h2 className="py-1.5 text-sm font-semibold">On this page</h2>
+      {sections.length > 0 && (
+        <>
+          <h2 className="py-1.5 text-sm font-semibold text-foreground">On this page</h2>
 
-      <ul role="list" className="border-color-low relative ml-px border-l-2 pl-3">
-        {/* Sliding indicator */}
-        <div
-          ref={indicatorRef}
-          className="absolute -left-0.5 w-0.5 bg-(--p-color-text-accent) transition-all duration-200 ease-out"
-          style={{ top: 0, height: 0 }}
-        />
+          <ul role="list" className="relative ml-px border-l-2 pl-3">
+            {/* Sliding indicator */}
+            <div
+              ref={indicatorRef}
+              className="absolute -left-0.5 w-0.5 bg-accent-foreground transition-all duration-200 ease-out"
+              style={{ top: 0, height: 0 }}
+            />
 
-        {sections.map((section, index) => (
-          <Item
-            key={section.id}
-            ref={(el) => {
-              itemRefs.current[index] = el
-            }}
-            section={section}
-            isActive={section.id === currentSectionId}
-            onClick={(e) => {
-              e.preventDefault()
-              setActive(section.id, true)
-            }}
-          />
-        ))}
-      </ul>
+            {sections.map((section, index) => (
+              <Item
+                key={section.id}
+                ref={(el) => {
+                  itemRefs.current[index] = el
+                }}
+                section={section}
+                isActive={section.id === currentSectionId}
+                onClick={(e) => {
+                  e.preventDefault()
+                  setActive(section.id, true)
+                }}
+              />
+            ))}
+          </ul>
+        </>
+      )}
       <div
-        className="relative ml-[3px] mt-2 pl-3 transition-opacity duration-200"
+        className="text-xmuted-foreground hover:text-muted-foreground relative ml-[3px] mt-2 pl-3 transition-opacity duration-200"
         style={{
           opacity: Math.min(Math.max(scrolled - 30, 0) / 300, 1),
           pointerEvents: scrolled > 0 ? 'auto' : 'none',
@@ -211,7 +211,7 @@ const Item = forwardRef<HTMLLIElement, ItemProps>(({ section, isActive, onClick 
       asChild
       variant="link"
       size="compact"
-      className={isActive ? 'text-color-accent-high text-wrap' : 'text-wrap'}
+      className={isActive ? 'text-accent-foreground text-wrap' : 'text-xmuted-foreground text-wrap hover:text-muted-foreground'}
     >
       <Link href={`#${section.id}`} onClick={onClick}>
         {section.title}

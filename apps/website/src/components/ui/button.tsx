@@ -8,13 +8,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: `transition ease-in-out text-[var(--p-color-bg-surface2)] bg-[var(--p-color-text-strong)] active:translate-y-px rounded-md sm:rounded-sm hover:ring-1 ring-offset-[var(--p-color-bg)] hover:ring-[color-mix(in oklab, var(--p-color-text) 10%, white)] hover:ring-offset-2`,
+        primary: `transition ease-in-out text-background bg-strong-foreground hover:bg-strong-foreground/90 active:translate-y-px rounded-md sm:rounded-sm hover:ring-1 ring-offset-background hover:ring-foreground/20 hover:ring-offset-2`,
         reactive:
-          'transition text-color-base group-hover:text-[var(--p-color-bg-surface2)] hover:brightness-125 hover:saturation-125 group-hover:bg-[var(--p-color-text-strong)] hover:bg-color-accent-base active:translate-y-px rounded-md sm:rounded-sm tracking-tight',
+          'transition text-base group-hover:text-base/90 group-hover:bg-[var(--p-color-text-strong)] hover:bg-color-accent-base active:translate-y-px rounded-md sm:rounded-sm tracking-tight',
         secondary:
           'text-color-base hover:text-color-base bg-color-low hover:bg-color-lower active:translate-y-px rounded-md sm:rounded-sm',
         ghost:
-          'text-color-low hover:text-color-base hover:bg-color-low/60 active:translate-y-px rounded-md sm:rounded-sm',
+          'text-muted-foreground hover:text-strong-foreground hover:bg-sidenav-hover active:translate-y-px rounded-md sm:rounded-sm',
         link: 'text-color-low hover:text-color-base', 
         navitem: 'rounded-lg',
       },
@@ -33,12 +33,12 @@ const buttonVariants = cva(
       {
         variant: 'navitem',
         active: true,
-        class: 'bg-color-low text-color-accent-high',
+        class: 'bg-sidenav-active text-strong-foreground',
       },
       {
         variant: 'navitem',
         active: false,
-        class: 'hover:text-color-base text-color-low hover:bg-color-low/60',
+        class: 'text-muted-foreground hover:text-strong-foreground hover:bg-sidenav-hover',
       },
     ],
     defaultVariants: {

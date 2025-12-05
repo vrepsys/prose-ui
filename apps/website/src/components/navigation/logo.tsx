@@ -36,7 +36,7 @@ export const Logo = ({
     <Link
       onClick={onClick}
       href={href}
-      className="flex items-center gap-1 text-nowrap font-semibold"
+      className="flex items-center gap-1 text-nowrap font-semibold cursor-pointer"
     >
       <SVG className="mr-0.5" />
       Prose UI

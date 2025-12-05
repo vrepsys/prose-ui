@@ -1,5 +1,7 @@
 # Code block
 
+<Subtitle>Syntax-highlighted code with line numbers and titles.</Subtitle>
+
 You can add code blocks with line numbers and a title using Markdown syntax like this:
 
 ````mdx title="Markdown syntax" showLineNumbers
@@ -32,28 +34,28 @@ Since code highlighting happens server-side (the `CodeBlock` is a server compone
 
 To customize the highlighter theme colors we recommend that you override the following css variables:
 
-| CSS Variable               |
-| :------------------------- |
-| `--p-color-syntax-syntax1` |
-| `--p-color-syntax-syntax2` |
-| `--p-color-syntax-syntax3` |
-| `--p-color-syntax-syntax4` |
+| CSS Variable             |
+| :----------------------- |
+| `--p-color-text-syntax1` |
+| `--p-color-text-syntax2` |
+| `--p-color-text-syntax3` |
+| `--p-color-text-syntax4` |
 
 ## Fine-tuning code highlighting
 
 If you'd like more granular control, you can modify syntax token colors for the code block component. Below are all the available CSS variables and their default values:
 
-|     Variable                              | Default value                        |
-| :---------------------------------------- | :----------------------------------- |
-| `--p-code-block-color-text`               | `hsl(var(--p-color-text))`           |
-| `--p-code-block-color-constant`           | `hsl(var(--p-color-syntax-syntax1))` |
-| `--p-code-block-color-string`             | `hsl(var(--p-color-syntax-syntax2))` |
-| `--p-code-block-color-comment`            | `hsl(var(--p-color-text-low))`       |
-| `--p-code-block-color-keyword`            | `hsl(var(--p-color-syntax-syntax3))` |
-| `--p-code-block-color-parameter`          | `hsl(var(--p-color-text))`           |
-| `--p-code-block-color-function`           | `hsl(var(--p-color-syntax-syntax4))` |
-| `--p-code-block-color-string-expression`  | `hsl(var(--p-color-syntax-syntax2))` |
-| `--p-code-block-color-punctuation`        | `hsl(var(--p-color-text))`           |
-| `--p-code-block-color-link`               | `hsl(var(--p-color-syntax-syntax2))` |
+| Variable                                 | Default value                |
+| :--------------------------------------- | :--------------------------- |
+| `--p-code-block-color-text`              | `var(--p-color-text)`        |
+| `--p-code-block-color-constant`          | `var(--p-color-text-syntax1)` |
+| `--p-code-block-color-string`            | `var(--p-color-text-syntax2)` |
+| `--p-code-block-color-comment`           | `var(--p-color-text-muted)`  |
+| `--p-code-block-color-keyword`           | `var(--p-color-text-syntax3)` |
+| `--p-code-block-color-parameter`         | `var(--p-color-text)`        |
+| `--p-code-block-color-function`          | `var(--p-color-text-syntax4)` |
+| `--p-code-block-color-string-expression` | `var(--p-color-text-syntax2)` |
+| `--p-code-block-color-punctuation`       | `var(--p-color-text)`        |
+| `--p-code-block-color-link`              | `var(--p-color-text-syntax2)` |
 
 To learn more about Prose UI design system and CSS variables check out the [styling page](/docs/styling).

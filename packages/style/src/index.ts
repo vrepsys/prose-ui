@@ -444,8 +444,9 @@ export const getLightColorsSpec = (): ColorSpec => ({
     text: {
       strong: black,
       base: black,
-      muted: scale[600],
-      xmuted: scale[500],
+      
+      muted: 'oklch(0.5 0 0)',
+      xmuted: 'oklch(0.58 0 0)',
       disabled: scale[500],
       accent: 'oklch(0.54 0.22 143.88)',
       note: scale[950],
@@ -720,6 +721,23 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
         },
       },
     },
+    subtitle: {
+      color: {
+        text: ds.color.text.muted,
+      },
+      font: {
+        size: '1rem',
+        height: '1.5rem',
+        weight: ds.font.weight.normal,
+      },
+      [MEDIA_ABOVE_LARGE]: {
+        font: {
+          size: '1.125rem',
+          height: '1.75rem',
+          weight: ds.font.weight.normal,
+        },
+      },
+    },
     steps: {
       indicator: {
         bg: ds.color.bg.surface2,
@@ -988,6 +1006,13 @@ export const componentsStyles = (ds: DesignSystem) => {
             'color': ds.color.text.accent,
             'box-shadow': `0 7px 0 0 ${ds.codeBlock.color.bg}, 0 9px 0 0 currentColor`,
           },
+        },
+        '.title': {
+          'color': ds.color.text.muted,
+          'font-size': ds.font.size.sm,
+          'line-height': ds.font.height.sm,
+          'letter-spacing': ds.letterSpacing.sm,
+          'font-weight': ds.font.weight.medium,
         },
         '.select-trigger': {
           'margin-left': 'auto',
@@ -1655,6 +1680,25 @@ export const componentsStyles = (ds: DesignSystem) => {
     'h4': headingStyle(ds.h4),
     'h5': headingStyle(ds.h5),
     'h6': headingStyle(ds.h6),
+    '.subtitle': {
+      'margin-top': gap.base,
+      'margin-bottom': gap.base,
+      'font-size': ds.font.size.base,
+      'line-height': ds.font.height.base,
+      'font-weight': ds.subtitle.font.weight,
+      'color': ds.subtitle.color.text,
+    },
+    ':is(h1, h2, h3, h4, h5, h6):has(+ .subtitle)': {
+      'margin-bottom': '0.5rem',
+    },
+    ':is(h1, h2, h3, h4, h5, h6) + .subtitle': {
+      'margin-top': '0',
+      'margin-bottom': gap.cluster,
+    },
+    'h1 + .subtitle': {
+      'font-size': ds.subtitle.font.size,
+      'line-height': ds.subtitle.font.height,
+    },
     ':is(p, td, li) a': {
       'color': ds.link.text.color,
       'text-decoration-line': ds.link.text.decorationLine,

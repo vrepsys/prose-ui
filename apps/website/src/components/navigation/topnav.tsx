@@ -12,26 +12,25 @@ import { classes } from '@/utils/classes'
 
 export const TopNav = () => {
   const pathname = usePathname()
-  const [scrolled, setScrolled] = useState(0)
-  const [borderOpacity, setBorderOpacity] = useState(pathname === '/' ? 0 : 1)
+  const isLandingPage = pathname === '/'
+  const [borderOpacity, setBorderOpacity] = useState(0)
 
   useEffect(() => {
+    if (!isLandingPage) return
+
     const handleScroll = () => {
-      setScrolled(window.scrollY)
+      setBorderOpacity(Math.min(window.scrollY, 80) / 80)
     }
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
-
-  useEffect(() => {
-    setBorderOpacity(pathname === '/' ? Math.min(scrolled, 80) / 80 : 1)
-  }, [scrolled, pathname])
+  }, [isLandingPage])
   return (
     <header
       className={classes(
-        'bg-background sticky top-0 z-20 flex h-(--topnav-height) w-full py-2',
+        'bg-background sticky top-0 z-20 flex h-(--topnav-height) w-full border-b py-2',
       )}
       style={{
         borderBottomColor: `color-mix(in srgb, var(--p-color-border) ${borderOpacity * 100}%, transparent)`,

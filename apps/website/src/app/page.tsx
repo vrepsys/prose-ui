@@ -34,7 +34,7 @@ const order = [
 
 const RenderedExample = ({ content }: { content: string }) => {
   return (
-    <div className="prose-ui flex min-w-0 flex-col rounded-sm">
+    <div className="prose-ui shadow-xs flex min-w-0 flex-col rounded-sm">
       <div className="bg-color-low/60 sticky top-21 w-full max-w-full  px-5 py-4 [&>*:first-child]:mt-0">
         <MDXContent code={content ?? ''} components={{ ...mdxComponents, LandingButtons }} />
       </div>

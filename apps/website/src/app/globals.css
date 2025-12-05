@@ -126,10 +126,14 @@
     }
   }
 
-  
-  /* .dark {
-    --p-color-text-accent: white;
-  } */
+}
+
+:root {
+  --p-color-text-accent: black;
+}
+
+.dark {
+  --p-color-text-accent: white;
 }
 
 @layer base {

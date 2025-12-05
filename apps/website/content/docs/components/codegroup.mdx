@@ -1,28 +1,10 @@
 # Code group
 
+<Subtitle>Display multiple code blocks as tabs with language switching.</Subtitle>
+
 Code groups let you display multiple code blocks as tabs, with optional language switching. This is useful for showing the same code in different languages, or grouping related code snippets together.
 
 ## Basic usage
-
-```ts
-import Anthropic from '@anthropic-ai/sdk';
-
-const anthropic = new Anthropic();
-
-let messageBatch;
-while (true) {
-  messageBatch = await anthropic.messages.batches.retrieve(
-    MESSAGE_BATCH_ID
-  );
-  if (messageBatch.processing_status === 'ended') {
-    break;
-  }
-
-  console.log(`Batch ${messageBatch} is still processing... waiting`);
-  await new Promise(resolve => setTimeout(resolve, 60_000));
-}
-console.log(messageBatch);
-```
 
 Wrap multiple code blocks in a `<CodeGroup>` component. Each code block's `title` becomes a tab. Example:
 
@@ -105,6 +87,48 @@ const total = (n: number) => `$${n.toFixed(2)}`
 
 ```javascript title='Format'
 const total = (n) => `$${n.toFixed(2)}`
+```
+
+</CodeGroup>
+````
+
+## Language-only switching
+
+When all code blocks share the same `title`, no tabs are displayed — only a language selector appears. This is useful when showing the same code example in multiple languages:
+
+<CodeGroup>
+
+```typescript title='Example'
+const greet = (name: string): string => `Hello, ${name}!`
+```
+
+```javascript title='Example'
+const greet = (name) => `Hello, ${name}!`
+```
+
+```python title='Example'
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+```
+
+</CodeGroup>
+
+Source:
+
+````mdx title="Markdown syntax"
+<CodeGroup>
+
+```typescript title='Example'
+const greet = (name: string): string => `Hello, ${name}!`
+```
+
+```javascript title='Example'
+const greet = (name) => `Hello, ${name}!`
+```
+
+```python title='Example'
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
 ```
 
 </CodeGroup>

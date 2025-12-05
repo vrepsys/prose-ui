@@ -1,5 +1,7 @@
 # Card
 
+<Subtitle>Highlight navigation, related reading, and key resources.</Subtitle>
+
 Use cards to highlight navigation targets, related reading, or key callouts directly inside your MDX content.
 
 <Card title="Track progress" icon="panel-left-close" href="/docs/roadmap">
@@ -64,26 +66,46 @@ Set the `cta` text to add a small call to action and control whether an arrow is
 />
 ```
 
-## Use with Columns
+## Cards grid
 
-Combine cards inside the `Columns` layout to build responsive grids. By default, columns collapse to a single column on small screens.
+Use the `Cards` component to lay out multiple cards in a responsive grid. By default, it renders 3 columns and collapses to a single column on small screens.
 
-<Columns columns={2}>
-  <Card title="Start here" icon="book-open" href="/docs">
-    Read the documentation to get up and running with Prose UI.
+<Cards>
+  <Card title="Docs" icon="book-open" href="/docs" cta="Visit" arrow="true">
+    Start with the Prose UI documentation.
   </Card>
-  <Card title="View components" icon="panel-left-close" href="/docs/components/overview">
-    See the full list of components you can use in MDX.
+  <Card title="Components" icon="panel-left-close" href="/docs/components/overview" cta="Open" arrow="true">
+    Browse the available MDX-ready components.
   </Card>
-  <Card title="Customize styles" icon="sparkles" href="/docs/styling">
-    Learn how to tailor the design tokens to your brand.
+  <Card title="Styling" icon="sparkles" href="/docs/styling" cta="Open" arrow="true">
+    Learn how to theme and adjust typography tokens.
   </Card>
-</Columns>
+</Cards>
 
 ```jsx
-<Columns columns={2}>
-  <Card title="Start here" icon="book-open" href="/docs">...</Card>
-  <Card title="View components" icon="panel-left-close" href="/docs/components/overview">...</Card>
-  <Card title="Customize styles" icon="sparkles" href="/docs/styling">...</Card>
-</Columns>
+<Cards>
+  <Card title="Docs" icon="book-open" href="/docs" cta="Visit" arrow="true">...</Card>
+  <Card title="Components" icon="panel-left-close" href="/docs/components/overview" cta="Open" arrow="true">...</Card>
+  <Card title="Styling" icon="sparkles" href="/docs/styling" cta="Open" arrow="true">...</Card>
+</Cards>
+```
+
+### Custom column count
+
+Control the number of columns with the `columns` prop. On narrow viewports, the layout still stacks into a single column.
+
+<Cards columns={2}>
+  <Card title="Two columns" icon="divide">
+    Set `columns={2}` to force a two-column layout on wider screens.
+  </Card>
+  <Card title="Responsive stacking" icon="smartphone">
+    On small screens, the grid collapses to one column automatically.
+  </Card>
+</Cards>
+
+```jsx
+<Cards columns={2}>
+  <Card title="Two columns" icon="divide">...</Card>
+  <Card title="Responsive stacking" icon="smartphone">...</Card>
+</Cards>
 ```

@@ -1,6 +1,7 @@
 import type { MDXComponents } from 'mdx/types.js'
 import { Callout } from './callout.js'
 import { Caption } from './caption.js'
+import { Subtitle } from './subtitle.js'
 import { CodeBlock } from './code-block/code-block.js'
 import { CodeGroup } from './code-group.js'
 import { Frame } from './frame.js'
@@ -10,7 +11,7 @@ import { InlineMath } from './inline-math.js'
 import { BlockMath } from './block-math.js'
 import { Link, type LinkProps } from './link.js'
 import { Card } from './card.js'
-import { Columns } from './columns.js'
+import { Cards } from './cards.js'
 import { Steps, Step } from './steps.js'
 import { parseBoolean } from './booleanish.js'
 import TabsDemo from './tabs-demo.js'
@@ -33,12 +34,13 @@ const baseComponents = {
   CodeBlock,
   CodeGroup,
   Card,
-  Columns,
+  Cards,
   Steps,
   Step,
   Image,
   Frame,
   Caption,
+  Subtitle,
   Link,
   h1,
   h2,
@@ -67,7 +69,7 @@ export const mdxComponents = createMdxComponents()
 export {
   Callout,
   Card,
-  Columns,
+  Cards,
   CodeBlock,
   CodeGroup,
   Frame,
@@ -77,6 +79,7 @@ export {
   InlineMath,
   BlockMath,
   Caption,
+  Subtitle,
   Steps,
   Step,
   Tabs,

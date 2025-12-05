@@ -102,6 +102,9 @@ export const CodeGroup = ({ groupId, languages, tabs }: CodeGroupProps) => {
 
   // Only show language selector if there are multiple languages
   const showLanguageSelector = languages.length > 1
+  // Only show tabs if there are multiple tabs
+  const showTabs = tabs.length > 1
+  const singleTabTitle = tabs[0]?.title
 
   return (
     <Tabs.Root
@@ -110,13 +113,17 @@ export const CodeGroup = ({ groupId, languages, tabs }: CodeGroupProps) => {
       onValueChange={handleTabChange}
     >
       <div className="header">
-        <Tabs.List className="tabs-list">
-          {tabs.map((tab) => (
-            <Tabs.Trigger key={tab.title} className="tab-trigger" value={tab.title}>
-              {tab.title}
-            </Tabs.Trigger>
-          ))}
-        </Tabs.List>
+        {showTabs ? (
+          <Tabs.List className="tabs-list">
+            {tabs.map((tab) => (
+              <Tabs.Trigger key={tab.title} className="tab-trigger" value={tab.title}>
+                {tab.title}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+        ) : (
+          <div className="title">{singleTabTitle}</div>
+        )}
         <div className="header-actions">
           {showLanguageSelector && (
             <Select value={selectedLang} onValueChange={handleLangChange}>

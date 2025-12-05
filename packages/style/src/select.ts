@@ -88,7 +88,7 @@ export const selectPortalStyles = (ds: DesignSystem) => ({
     'max-height': 'var(--radix-select-content-available-height)',
     'overflow-y': 'auto',
     'overflow-x': 'hidden',
-    'background-color': ds.color.bg.surface2,
+    'background-color': ds.color.bg.base,
     'border': `1px solid ${ds.color.border.base}`,
     'border-radius': ds.border.radius,
     'box-shadow': '0 4px 12px rgba(0, 0, 0, 0.15)',

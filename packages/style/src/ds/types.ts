@@ -245,6 +245,16 @@ export type Components = {
       }
     }
   }
+  subtitle: {
+    color: {
+      text: CssValue
+    }
+    font: {
+      size: CssValue
+      height: CssValue
+      weight: CssValue
+    }
+  }
   steps: {
     indicator: {
       bg: CssValue

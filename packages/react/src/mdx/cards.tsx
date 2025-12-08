@@ -9,7 +9,7 @@ export type CardsProps = ComponentPropsWithoutRef<'div'> & {
 export const Cards = ({ columns = 3, className, children, style, ...rest }: CardsProps) => {
   return (
     <div
-      className={classes('columns', className)}
+      className={classes('cards', className)}
       style={{ '--columns': columns, ...style } as CSSProperties}
       {...rest}
     >

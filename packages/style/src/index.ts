@@ -844,6 +844,10 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
 export const componentsStyles = (ds: DesignSystem) => {
   const gap = ds.content.gap
   const color = ds.color
+
+  // Container elements that should cluster together when consecutive
+  const cluster = '.code-block, .code-group, .callout, .card, .cards, .frame'
+
   const headingStyle = (style: TextStyle) => ({
     'font-family': style.fontFamily,
     'font-size': style.fontSize,
@@ -865,18 +869,28 @@ export const componentsStyles = (ds: DesignSystem) => {
     'p': {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
-      '& + .code-block, & + ul, & + ol, & + .card, & + .columns': {
-        'margin-top': gap.cluster,
-      },
     },
-    '.code-block + .code-block, .callout + .callout, .card + .card, .columns + .columns': {
+    // Paragraph followed by cluster element or list → tight spacing
+    [`p + :is(${cluster}, ul, ol:not(.steps))`]: {
+      'margin-top': gap.cluster,
+    },
+    // Heading followed by any content → tight spacing
+    [`:is(h1, h2, h3, h4, h5, h6) + :is(p, ul, ol:not(.steps), blockquote, table, ${cluster})`]: {
+      'margin-top': gap.cluster,
+    },
+    // Consecutive headings → tight spacing
+    ':is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6)': {
+      'margin-top': gap.base,
+    },
+    // Consecutive cluster elements → tight spacing
+    [`:is(${cluster}) + :is(${cluster})`]: {
       'margin-top': gap.cluster,
     },
     'code': {
       'font-family': ds.font.family.mono,
     },
     'li': {
-      '& > .code-block, & > table, & > .frame, & > .callout, & > .card, & > .columns, & > ul, & > ol': {
+      [`& > :is(${cluster}, table, ul, ol)`]: {
         'margin-top': gap.cluster,
         'margin-bottom': gap.cluster,
       },
@@ -886,11 +900,6 @@ export const componentsStyles = (ds: DesignSystem) => {
       '& > p': {
         'margin-top': '0',
         'margin-bottom': '0',
-      },
-    },
-    'h1, h2, h3, h4, h5, h6': {
-      '& + table, & + .callout, & + .card, & + .columns, & + p, & + ul, & + ol': {
-        'margin-top': gap.cluster,
       },
     },
     'p, table, li': {
@@ -1028,7 +1037,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'display': 'flex',
         'align-items': 'center',
         'gap': ds.spacing.space2,
-        'padding-top': ds.spacing['space1-5'],
+        // 'padding-top': ds.spacing['space1-5'],
         // 'padding-bottom': ds.spacing['space1-5'],
         '.tabs-list': {
           'display': 'flex',
@@ -1398,10 +1407,10 @@ export const componentsStyles = (ds: DesignSystem) => {
         'color': ds.card.color.ctaHover,
       },
     },
-    '.columns > .card': {
+    '.cards > .card': {
       'margin': '0',
     },
-    '.columns': {
+    '.cards': {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'display': 'grid',
@@ -1508,6 +1517,9 @@ export const componentsStyles = (ds: DesignSystem) => {
     '.step-body > *:first-child': {
       'margin-top': '0',
     },
+    '.step-body > *:last-child': {
+      'margin-bottom': '0',
+    },
     '.step-title': {
       'margin': '0',
       'color': ds.steps.title.base.color,
@@ -1524,6 +1536,7 @@ export const componentsStyles = (ds: DesignSystem) => {
     '.steps[data-title-size="base"]': {
       '--step-title-line-height': ds.steps.title.base.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
+      '--step-gap': ds.spacing.space4,
     },
     '.steps[data-title-size="h1"] .step-title': {
       'font-size': ds.steps.title.h1.fontSize,
@@ -1536,6 +1549,7 @@ export const componentsStyles = (ds: DesignSystem) => {
     '.steps[data-title-size="h1"]': {
       '--step-title-line-height': ds.steps.title.h1.lineHeight,
       '--step-indicator-size': '1.75rem',
+      '--step-gap': ds.spacing.space5,
     },
     '.steps[data-title-size="h1"] .step-indicator': {
       'font-size': ds.font.size.base,
@@ -1552,6 +1566,7 @@ export const componentsStyles = (ds: DesignSystem) => {
     '.steps[data-title-size="h2"]': {
       '--step-title-line-height': ds.steps.title.h2.lineHeight,
       '--step-indicator-size': '1.75rem',
+      '--step-gap': ds.spacing.space5,
     },
     '.steps[data-title-size="h2"] .step-indicator': {
       'font-size': ds.font.size.base,
@@ -1568,6 +1583,7 @@ export const componentsStyles = (ds: DesignSystem) => {
     '.steps[data-title-size="h3"]': {
       '--step-title-line-height': ds.steps.title.h3.lineHeight,
       '--step-indicator-size': '1.75rem',
+      '--step-gap': ds.spacing.space4,
     },
     '.steps[data-title-size="h4"] .step-title': {
       'font-size': ds.steps.title.h4.fontSize,
@@ -1580,6 +1596,7 @@ export const componentsStyles = (ds: DesignSystem) => {
     '.steps[data-title-size="h4"]': {
       '--step-title-line-height': ds.steps.title.h4.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
+      '--step-gap': ds.spacing.space4,
     },
     '.steps[data-title-size="h5"] .step-title': {
       'font-size': ds.steps.title.h5.fontSize,
@@ -1592,6 +1609,7 @@ export const componentsStyles = (ds: DesignSystem) => {
     '.steps[data-title-size="h5"]': {
       '--step-title-line-height': ds.steps.title.h5.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
+      '--step-gap': ds.spacing.space4,
     },
     '.steps[data-title-size="h6"] .step-title': {
       'font-size': ds.steps.title.h6.fontSize,
@@ -1604,9 +1622,10 @@ export const componentsStyles = (ds: DesignSystem) => {
     '.steps[data-title-size="h6"]': {
       '--step-title-line-height': ds.steps.title.h6.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
+      '--step-gap': ds.spacing.space4,
     },
     '@media (max-width: 768px)': {
-      '.columns': {
+      '.cards': {
         'grid-template-columns': 'repeat(1, minmax(0, 1fr))',
       },
     },
@@ -1669,7 +1688,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'margin-bottom': gap.cluster,
       'border': '0',
       'border-top': '1px solid',
-      'border-color': color.border,
+      'border-color': color.border.base,
     },
     'hr:has(+ :is(h1, h2, h3, h4, h5, h6))': {
       'margin-top': gap.heading,
@@ -1689,7 +1708,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'color': ds.subtitle.color.text,
     },
     ':is(h1, h2, h3, h4, h5, h6):has(+ .subtitle)': {
-      'margin-bottom': '0.5rem',
+      'margin-bottom': gap.cluster,
     },
     ':is(h1, h2, h3, h4, h5, h6) + .subtitle': {
       'margin-top': '0',

@@ -176,6 +176,19 @@ const remarkImage = ({ imageDir, basePath }: Options = { imageDir: DEFAULT_IMAGE
       },
     )
 
+    // Wrap block images in Frame by converting single-Image paragraphs to Frame elements
+    visit(tree, 'paragraph', (node: any) => {
+      if (node.children.length !== 1) return
+      const child = node.children[0]
+      if (child.type !== 'mdxJsxFlowElement' && child.type !== 'mdxJsxTextElement') return
+      if (child.name !== 'Image') return
+
+      // Convert paragraph to Frame
+      node.type = 'mdxJsxFlowElement'
+      node.name = 'Frame'
+      node.attributes = []
+    })
+
     done()
   }
   return plugin

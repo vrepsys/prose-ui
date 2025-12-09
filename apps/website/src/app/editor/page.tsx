@@ -12,7 +12,7 @@ const Templates = () => {
   return (
     <div>
       <div className="mx-auto w-full max-w-(--site-width) flex-1 items-center justify-between px-(--site-padding-x)">
-        <div className="prose-ui pb-8">
+        <div className="prose-ui bg-background pb-8">
           <h1 className="mb-(--p-content-gap-cluster) mt-(--p-content-gap-heading) text-(length:--p-h1-font-size) font-(--p-h1-font-weight) leading-(--p-h1-line-height) tracking-(--p-h1-letter-spacing) text-(--p-h1-color)">
             Editor
           </h1>

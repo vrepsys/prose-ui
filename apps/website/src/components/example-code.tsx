@@ -11,7 +11,7 @@ export const ExampleCode = async ({ fileName, code }: ExampleCodeProps) => {
 
   return (
     <div className="flex min-w-0 flex-col">
-      <div className="prose-ui bg-card sticky top-21 w-full max-w-full rounded-sm border [--shiki-background:hsl(var(--p-color-bg))]">
+      <div className="prose-ui bg-card sticky top-21 w-full max-w-full rounded-sm border border-border/70 [--shiki-background:hsl(var(--p-color-bg))]">
         <div className="text-muted-foreground border-border-muted/50 mb-4 inline-block w-full border-b px-4 py-2 text-sm">
           {fileName}
         </div>

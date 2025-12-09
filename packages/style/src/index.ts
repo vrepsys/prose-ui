@@ -847,6 +847,7 @@ export const componentsStyles = (ds: DesignSystem) => {
 
   // Container elements that should cluster together when consecutive
   const cluster = '.code-block, .code-group, .callout, .card, .cards, .frame'
+  const NP = ':where(:not(.not-prose, .not-prose *))'
 
   const headingStyle = (style: TextStyle) => ({
     'font-family': style.fontFamily,
@@ -859,37 +860,37 @@ export const componentsStyles = (ds: DesignSystem) => {
     'margin-bottom': gap.cluster,
   })
   return {
-    '::selection': {
+    [`*${NP}::selection`]: {
       'background-color': transparent(ds.color.text.strong, 15),
     },
-    ':focus-visible': {
+    [`:focus-visible${NP}`]: {
       'outline': `2px solid ${color.text.accent}`,
       'outline-offset': '2px',
     },
-    'p': {
+    [`p${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
     },
-    // Paragraph followed by cluster element or list → tight spacing
-    [`p + :is(${cluster}, ul, ol:not(.steps))`]: {
+    // Paragraph followed by cluster element or list → tight spacing (skip .not-prose)
+    [`p${NP} + :is(${cluster}, ul, ol:not(.steps))${NP}`]: {
       'margin-top': gap.cluster,
     },
     // Heading followed by any content → tight spacing
-    [`:is(h1, h2, h3, h4, h5, h6) + :is(p, ul, ol:not(.steps), blockquote, table, ${cluster})`]: {
+    [`:is(h1, h2, h3, h4, h5, h6)${NP} + :is(p, ul, ol:not(.steps), blockquote, table, ${cluster})${NP}`]: {
       'margin-top': gap.cluster,
     },
     // Consecutive headings → tight spacing
-    ':is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6)': {
+    [`:is(h1, h2, h3, h4, h5, h6)${NP} + :is(h1, h2, h3, h4, h5, h6)${NP}`]: {
       'margin-top': gap.base,
     },
     // Consecutive cluster elements → tight spacing
-    [`:is(${cluster}) + :is(${cluster})`]: {
+    [`:is(${cluster})${NP} + :is(${cluster})${NP}`]: {
       'margin-top': gap.cluster,
     },
-    'code': {
+    [`code${NP}`]: {
       'font-family': ds.font.family.mono,
     },
-    'li': {
+    [`li${NP}`]: {
       [`& > :is(${cluster}, table, ul, ol)`]: {
         'margin-top': gap.cluster,
         'margin-bottom': gap.cluster,
@@ -902,7 +903,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'margin-bottom': '0',
       },
     },
-    'p, table, li': {
+    [`p${NP}, table${NP}, li${NP}`]: {
       'code': {
         'background-color': ds.inlineCode.color.bg,
         'padding-left': ds.spacing.space1,
@@ -922,7 +923,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'border-radius': '0',
       },
     },
-    '.copy-button': {
+    [`.copy-button${NP}`]: {
       'position': 'relative',
       'background-color': ds.codeBlock.color.bg,
       'border-radius': ds.border.radius,
@@ -952,7 +953,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         opacity: '0',
       },
     },
-    '.copy-button:hover': {
+    [`.copy-button${NP}:hover`]: {
       'color': ds.color.text.base,
       'background-color': ds.color.bg.surface2Hover,
       '.icon-default': {
@@ -962,13 +963,13 @@ export const componentsStyles = (ds: DesignSystem) => {
         opacity: '1',
       },
     },
-    '.copied-icon': {
+    [`.copied-icon${NP}`]: {
       'background-color': ds.codeBlock.color.bg,
       'padding': ds.spacing.space1,
       'border-radius': ds.border.radius,
       'color': ds.color.text.success,
     },
-    '.code-group': {
+    [`.code-group${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-width': '1px',
@@ -1028,7 +1029,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         },
       },
     },
-    '.tabs': {
+    [`.tabs${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'display': 'flex',
@@ -1089,7 +1090,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         },
       },
     },
-    '.code-block': {
+    [`.code-block${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-width': '1px',
@@ -1118,7 +1119,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         },
       },
     },
-    '.code-block, .code-group': {
+    [`.code-block${NP}, .code-group${NP}`]: {
       '.body:has(> .copy-button), .body:has(> .copied-icon)': {
         'padding-right': ds.spacing.space6,
         '.scroll-area-root': {
@@ -1194,7 +1195,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'word-break': 'keep-all',
       },
     },
-    'blockquote': {
+    [`.blockquote${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-left-width': ds.spacing['space0-5'],
@@ -1216,7 +1217,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'margin-bottom': '0',
       },
     },
-    '.callout': {
+    [`.callout${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'display': 'flex',
@@ -1243,7 +1244,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         },
       },
     },
-    '.callout[data-variant="note"]': {
+    [`.callout[data-variant="note"]${NP}`]: {
       'background-color': ds.callout.note.color.bg,
       '.title': {
         'color': ds.callout.note.color.text,
@@ -1252,7 +1253,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'color': ds.callout.note.color.text,
       },
     },
-    '.callout[data-variant="info"]': {
+    [`.callout[data-variant="info"]${NP}`]: {
       'background-color': ds.callout.info.color.bg,
       '.title': {
         'color': ds.callout.info.color.text,
@@ -1261,7 +1262,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'color': transparent(ds.callout.info.color.text, 90),
       },
     },
-    '.callout[data-variant="tip"]': {
+    [`.callout[data-variant="tip"]${NP}`]: {
       'background-color': ds.callout.success.color.bg,
       '.title': {
         'color': ds.callout.success.color.text,
@@ -1270,7 +1271,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'color': ds.callout.success.color.text,
       },
     },
-    '.callout[data-variant="warning"]': {
+    [`.callout[data-variant="warning"]${NP}`]: {
       'background-color': ds.callout.warning.color.bg,
       '.title': {
         'color': ds.callout.warning.color.text,
@@ -1279,7 +1280,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'color': ds.callout.warning.color.text,
       },
     },
-    '.callout[data-variant="danger"]': {
+    [`.callout[data-variant="danger"]${NP}`]: {
       'background-color': ds.callout.danger.color.bg,
       '.title': {
         'color': ds.callout.danger.color.text,
@@ -1288,7 +1289,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'color': ds.callout.danger.color.text,
       },
     },
-    '.card': {
+    [`.card${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'display': 'flex',
@@ -1407,10 +1408,10 @@ export const componentsStyles = (ds: DesignSystem) => {
         'color': ds.card.color.ctaHover,
       },
     },
-    '.cards > .card': {
+    [`.cards > .card${NP}`]: {
       'margin': '0',
     },
-    '.cards': {
+    [`.cards${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'display': 'grid',
@@ -1423,7 +1424,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'margin': '0',
       },
     },
-    '.steps': {
+    [`.steps${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'list-style': 'none',
@@ -1432,7 +1433,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'flex-direction': 'column',
       'counter-reset': 'step',
       '--step-indicator-size': ds.spacing.space5,
-      '--step-gap': ds.spacing.space3,
+      '--step-gap': ds.spacing.space5,
       '--step-connector-gap': ds.spacing.space2,
       '--step-title-line-height': ds.steps.title.base.lineHeight,
       '--step-indicator-offset': 'calc((var(--step-title-line-height) - var(--step-indicator-size)) / 2)',
@@ -1446,7 +1447,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         marginBottom: '0',
       },
     },
-    '.step': {
+    [`.step${NP}`]: {
       'display': 'grid',
       'grid-template-columns': 'auto 1fr',
       'column-gap': ds.spacing.space3,
@@ -1456,10 +1457,10 @@ export const componentsStyles = (ds: DesignSystem) => {
       'padding-top': 'max(0px, calc(var(--step-indicator-offset) * -1))',
       'padding-bottom': 'var(--step-gap)',
     },
-    '.step:last-child': {
+    [`.step:last-child${NP}`]: {
       'padding-bottom': '0',
     },
-    '.step:not(:last-child)::after': {
+    [`.step:not(:last-child)${NP}::after`]: {
       'content': "''",
       'position': 'absolute',
       'left': 'calc((var(--step-indicator-size) / 2) - 0.5px)',
@@ -1468,7 +1469,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'width': '1px',
       'background-color': ds.steps.connector,
     },
-    '.step:last-child::after': {
+    [`.step:last-child${NP}::after`]: {
       'content': "''",
       'position': 'absolute',
       'left': 'calc((var(--step-indicator-size) / 2) - 0.5px)',
@@ -1477,7 +1478,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'width': '1px',
       'background-image': `linear-gradient(to bottom, ${ds.steps.connector} 0%, ${ds.steps.connector} 80%, transparent 100%)`,
     },
-    '.step-indicator': {
+    [`.step-indicator${NP}`]: {
       'width': 'var(--step-indicator-size)',
       'height': 'var(--step-indicator-size)',
       'border-radius': '999px',
@@ -1494,38 +1495,38 @@ export const componentsStyles = (ds: DesignSystem) => {
       'box-shadow': `0 0 0 1px ${ds.steps.indicator.outline}`,
       'margin-top': 'var(--step-indicator-offset)',
     },
-    '.step-number': {
+    [`.step-number${NP}`]: {
       'display': 'inline-flex',
       'align-items': 'center',
       'justify-content': 'center',
       'width': '100%',
       'height': '100%',
     },
-    '.step-number::before': {
+    [`.step-number${NP}::before`]: {
       'content': 'counter(step)',
     },
-    '.step-indicator svg': {
+    [`.step-indicator svg${NP}`]: {
       width: '60%',
       height: '60%',
     },
-    '.step-content': {
+    [`.step-content${NP}`]: {
       'display': 'flex',
       'flex-direction': 'column',
       'gap': ds.spacing['space0-5'],
       'min-width': '0',
     },
-    '.step-body > *:first-child': {
+    [`.step-body > *:first-child${NP}`]: {
       'margin-top': '0',
     },
-    '.step-body > *:last-child': {
+    [`.step-body > *:last-child${NP}`]: {
       'margin-bottom': '0',
     },
-    '.step-title': {
+    [`.step-title${NP}`]: {
       'margin': '0',
       'color': ds.steps.title.base.color,
       'font-weight': ds.steps.title.base.fontWeight,
     },
-    '.steps[data-title-size="base"] .step-title': {
+    [`.steps[data-title-size="base"] .step-title${NP}`]: {
       'font-size': ds.steps.title.base.fontSize,
       'line-height': ds.steps.title.base.lineHeight,
       'letter-spacing': ds.steps.title.base.letterSpacing,
@@ -1533,12 +1534,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.base.fontWeight,
       'color': ds.steps.title.base.color,
     },
-    '.steps[data-title-size="base"]': {
+    [`.steps[data-title-size="base"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.base.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
-      '--step-gap': ds.spacing.space4,
     },
-    '.steps[data-title-size="h1"] .step-title': {
+    [`.steps[data-title-size="h1"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h1.fontSize,
       'line-height': ds.steps.title.h1.lineHeight,
       'letter-spacing': ds.steps.title.h1.letterSpacing,
@@ -1546,16 +1546,15 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h1.fontWeight,
       'color': ds.steps.title.h1.color,
     },
-    '.steps[data-title-size="h1"]': {
+    [`.steps[data-title-size="h1"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h1.lineHeight,
       '--step-indicator-size': '1.75rem',
-      '--step-gap': ds.spacing.space5,
     },
-    '.steps[data-title-size="h1"] .step-indicator': {
+    [`.steps[data-title-size="h1"] .step-indicator${NP}`]: {
       'font-size': ds.font.size.base,
       'line-height': ds.font.height.base,
     },
-    '.steps[data-title-size="h2"] .step-title': {
+    [`.steps[data-title-size="h2"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h2.fontSize,
       'line-height': ds.steps.title.h2.lineHeight,
       'letter-spacing': ds.steps.title.h2.letterSpacing,
@@ -1563,16 +1562,15 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h2.fontWeight,
       'color': ds.steps.title.h2.color,
     },
-    '.steps[data-title-size="h2"]': {
+    [`.steps[data-title-size="h2"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h2.lineHeight,
       '--step-indicator-size': '1.75rem',
-      '--step-gap': ds.spacing.space5,
     },
-    '.steps[data-title-size="h2"] .step-indicator': {
+    [`.steps[data-title-size="h2"] .step-indicator${NP}`]: {
       'font-size': ds.font.size.base,
       'line-height': ds.font.height.base,
     },
-    '.steps[data-title-size="h3"] .step-title': {
+    [`.steps[data-title-size="h3"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h3.fontSize,
       'line-height': ds.steps.title.h3.lineHeight,
       'letter-spacing': ds.steps.title.h3.letterSpacing,
@@ -1580,12 +1578,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h3.fontWeight,
       'color': ds.steps.title.h3.color,
     },
-    '.steps[data-title-size="h3"]': {
+    [`.steps[data-title-size="h3"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h3.lineHeight,
       '--step-indicator-size': '1.75rem',
-      '--step-gap': ds.spacing.space4,
     },
-    '.steps[data-title-size="h4"] .step-title': {
+    [`.steps[data-title-size="h4"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h4.fontSize,
       'line-height': ds.steps.title.h4.lineHeight,
       'letter-spacing': ds.steps.title.h4.letterSpacing,
@@ -1593,12 +1590,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h4.fontWeight,
       'color': ds.steps.title.h4.color,
     },
-    '.steps[data-title-size="h4"]': {
+    [`.steps[data-title-size="h4"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h4.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
-      '--step-gap': ds.spacing.space4,
     },
-    '.steps[data-title-size="h5"] .step-title': {
+    [`.steps[data-title-size="h5"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h5.fontSize,
       'line-height': ds.steps.title.h5.lineHeight,
       'letter-spacing': ds.steps.title.h5.letterSpacing,
@@ -1606,12 +1602,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h5.fontWeight,
       'color': ds.steps.title.h5.color,
     },
-    '.steps[data-title-size="h5"]': {
+    [`.steps[data-title-size="h5"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h5.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
-      '--step-gap': ds.spacing.space4,
     },
-    '.steps[data-title-size="h6"] .step-title': {
+    [`.steps[data-title-size="h6"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h6.fontSize,
       'line-height': ds.steps.title.h6.lineHeight,
       'letter-spacing': ds.steps.title.h6.letterSpacing,
@@ -1619,17 +1614,16 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h6.fontWeight,
       'color': ds.steps.title.h6.color,
     },
-    '.steps[data-title-size="h6"]': {
+    [`.steps[data-title-size="h6"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h6.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
-      '--step-gap': ds.spacing.space4,
     },
     '@media (max-width: 768px)': {
-      '.cards': {
+      [`.cards${NP}`]: {
         'grid-template-columns': 'repeat(1, minmax(0, 1fr))',
       },
     },
-    'ul': {
+    [`ul${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'list-style-type': 'disc',
@@ -1645,7 +1639,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         color: ds.color.text.xmuted,
       },
     },
-    'ol': {
+    [`ol${NP}`]: {
       'counter-reset': 'index',
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
@@ -1683,23 +1677,23 @@ export const componentsStyles = (ds: DesignSystem) => {
         },
       },
     },
-    'hr': {
+    [`hr${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border': '0',
       'border-top': '1px solid',
       'border-color': color.border.base,
     },
-    'hr:has(+ :is(h1, h2, h3, h4, h5, h6))': {
+    [`hr:has(+ :is(h1, h2, h3, h4, h5, h6))${NP}`]: {
       'margin-top': gap.heading,
     },
-    'h1': headingStyle(ds.h1),
-    'h2': headingStyle(ds.h2),
-    'h3': headingStyle(ds.h3),
-    'h4': headingStyle(ds.h4),
-    'h5': headingStyle(ds.h5),
-    'h6': headingStyle(ds.h6),
-    '.subtitle': {
+    [`h1${NP}`]: headingStyle(ds.h1),
+    [`h2${NP}`]: headingStyle(ds.h2),
+    [`h3${NP}`]: headingStyle(ds.h3),
+    [`h4${NP}`]: headingStyle(ds.h4),
+    [`h5${NP}`]: headingStyle(ds.h5),
+    [`h6${NP}`]: headingStyle(ds.h6),
+    [`.subtitle${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.base,
       'font-size': ds.font.size.base,
@@ -1707,18 +1701,18 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.subtitle.font.weight,
       'color': ds.subtitle.color.text,
     },
-    ':is(h1, h2, h3, h4, h5, h6):has(+ .subtitle)': {
+    [`:is(h1, h2, h3, h4, h5, h6):has(+ .subtitle)${NP}`]: {
       'margin-bottom': gap.cluster,
     },
-    ':is(h1, h2, h3, h4, h5, h6) + .subtitle': {
+    [`:is(h1, h2, h3, h4, h5, h6) + .subtitle${NP}`]: {
       'margin-top': '0',
       'margin-bottom': gap.cluster,
     },
-    'h1 + .subtitle': {
+    [`h1 + .subtitle${NP}`]: {
       'font-size': ds.subtitle.font.size,
       'line-height': ds.subtitle.font.height,
     },
-    ':is(p, td, li) a': {
+    [`:is(p, td, li) a${NP}`]: {
       'color': ds.link.text.color,
       'text-decoration-line': ds.link.text.decorationLine,
       'text-decoration-color': ds.link.text.decorationColor,
@@ -1740,12 +1734,12 @@ export const componentsStyles = (ds: DesignSystem) => {
         color: color.text.accent,
       },
     },
-    'img': {
+    [`img${NP}`]: {
       'display': 'inline-block',
       'border-radius': ds.border.radius,
     },
 
-    'table': {
+    [`table${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-collapse': 'collapse',
@@ -1782,11 +1776,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
     },
 
-    'table h1, table h2, table h3, table h4, table h5, table h6': {
+    [`table h1${NP}, table h2${NP}, table h3${NP}, table h4${NP}, table h5${NP}, table h6${NP}`]: {
       margin: '0',
     },
 
-    '.frame': {
+    [`.frame${NP}`]: {
       'display': 'flex',
       'flex-direction': 'column',
       'margin-top': gap.base,
@@ -1824,15 +1818,15 @@ export const componentsStyles = (ds: DesignSystem) => {
         width: 'auto',
       },
     },
-    '.scroll-area-root': {
+    [`.scroll-area-root${NP}`]: {
       position: 'relative',
       overflow: 'hidden',
     },
-    '.scroll-area-viewport': {
+    [`.scroll-area-viewport${NP}`]: {
       width: '100%',
       height: '100%',
     },
-    '.scroll-area-scrollbar': {
+    [`.scroll-area-scrollbar${NP}`]: {
       'display': 'flex',
       'background-color': color.bg.surface1,
       'touch-action': 'none',
@@ -1844,13 +1838,20 @@ export const componentsStyles = (ds: DesignSystem) => {
         height: ds.spacing['space1-5'],
       },
     },
-    '.scroll-area-thumb': {
+    [`.scroll-area-thumb${NP}`]: {
       'background': color.bg.surface2,
       'border-radius': ds.spacing['space1-5'],
       'position': 'relative',
     },
     // Select trigger styles (inline, inside .prose-ui)
-    ...selectTriggerStyles(ds),
+    ...Object.fromEntries(
+      Object.entries(selectTriggerStyles(ds)).map(([selector, value]) => [
+        selector
+          .replace(/\.select-trigger/g, `.select-trigger${NP}`)
+          .replace(/\.select-icon/g, `.select-icon${NP}`),
+        value,
+      ]),
+    ),
   }
 }
 

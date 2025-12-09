@@ -1224,7 +1224,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'flex-direction': 'column',
       'gap': ds.spacing.space1,
       'border-radius': ds.border.radius,
-      'padding': ds.spacing.space3,
+      'padding': ds.spacing.space4,
       '.title': {
         'font-size': ds.font.size.sm,
         'font-weight': ds.font.weight.semiBold,

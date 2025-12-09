@@ -6,17 +6,23 @@ import { classes } from "@/utils/classes"
 import { ContentScrollProvider } from "@/components/content-scroll-context"
 import { ScrollBar } from "./scroll-area"
 
+type ContentScrollAreaProps = React.ComponentProps<typeof ScrollAreaPrimitive.Root> & {
+  viewportRef?: React.RefObject<HTMLDivElement | null>
+}
+
 function ContentScrollArea({
   className,
   children,
   type = "scroll",
+  viewportRef: externalViewportRef,
   ...props
-}: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {
-  const viewportRef = React.useRef<HTMLDivElement>(null)
+}: ContentScrollAreaProps) {
+  const internalViewportRef = React.useRef<HTMLDivElement>(null)
+  const viewportRef = externalViewportRef ?? internalViewportRef
 
   return (
     <ScrollAreaPrimitive.Root
-      data-slot="scroll-area"
+      data-slot="content-scroll-area"
       type={type}
       className={classes("relative", className)}
       {...props}
@@ -37,4 +43,3 @@ function ContentScrollArea({
 }
 
 export { ContentScrollArea }
-

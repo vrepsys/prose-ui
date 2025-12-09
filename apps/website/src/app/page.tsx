@@ -27,6 +27,7 @@ const order = [
   'steps.mdx',
   'code-blocks.mdx',
   'code-groups.mdx',
+  'tabs.mdx',
   'math-formulas.mdx',
   'tables.mdx',
   'styling.mdx',

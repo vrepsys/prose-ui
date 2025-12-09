@@ -13,7 +13,7 @@ export default function Layout({
       <div className="mx-auto grid h-full min-h-0 max-w-(--site-width) grid-rows-[1fr] md:grid-cols-[var(--sidenav-width)_minmax(0,1fr)] lg:grid-cols-[var(--sidenav-width)_minmax(0,1fr)_var(--toc-width)]">
         <div className="hidden h-full min-h-0 shrink-0 md:block">
           <ScrollArea className="h-full min-h-0">
-            <div className="py-(--article-padding-t) pr-3 pl-(--site-padding-x)">
+            <div className="pr-3 pl-(--site-padding-x)">
               <SideNav tree={navigationTree} />
             </div>
           </ScrollArea>

@@ -10,7 +10,7 @@ export const LandingButtons = ({ className }: { className: string }) => {
         <Link href="/docs">View documentation</Link>
       </Button>
       <Button variant="ghost" size="lg" asChild>
-        <Link href="https://github.com/vrepsys/prose-ui" className="!text-color-base">
+        <Link href="https://github.com/vrepsys/prose-ui" className="text-color-base!">
           <SiGithub size={16} /> Star on GitHub
         </Link>
       </Button>

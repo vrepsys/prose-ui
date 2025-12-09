@@ -10,7 +10,7 @@ type Props = {
 
 export const Callout = ({ variant, title, children }: Props) => {
   return (
-    <div className={classes('callout', variant ?? 'note')}>
+    <div className={classes('callout')} data-variant={variant ?? 'note'}>
       {title && <div className="title">{title}</div>}
       <div className="body">{children}</div>
     </div>

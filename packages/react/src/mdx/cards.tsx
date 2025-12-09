@@ -1,15 +1,15 @@
 import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react'
 import { classes } from '../classes.js'
 
-export type ColumnsProps = ComponentPropsWithoutRef<'div'> & {
+export type CardsProps = ComponentPropsWithoutRef<'div'> & {
   columns?: number
   children: ReactNode
 }
 
-export const Columns = ({ columns = 3, className, children, style, ...rest }: ColumnsProps) => {
+export const Cards = ({ columns = 3, className, children, style, ...rest }: CardsProps) => {
   return (
     <div
-      className={classes('columns', className)}
+      className={classes('cards', className)}
       style={{ '--columns': columns, ...style } as CSSProperties}
       {...rest}
     >
@@ -17,3 +17,4 @@ export const Columns = ({ columns = 3, className, children, style, ...rest }: Co
     </div>
   )
 }
+

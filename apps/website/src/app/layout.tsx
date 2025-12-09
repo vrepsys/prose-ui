@@ -64,7 +64,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
-      <body className="bg-color-base min-h-screen font-sans antialiased">
+      <body className="bg-background min-h-screen font-sans antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

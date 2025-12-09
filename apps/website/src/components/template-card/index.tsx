@@ -55,7 +55,7 @@ export const TemplateCard = ({ image, title, description, previewUrl, sourceUrl 
         </div>
       </div>
       <div className="relative w-full px-4 pb-4 sm:px-2 sm:pb-2">
-        <Image alt="Template preview" className="border-color-base/30 rounded border" src={image} />
+        <Image alt="Template preview" className="border-color-base/30 rounded-sm border" src={image} />
       </div>
     </div>
   )

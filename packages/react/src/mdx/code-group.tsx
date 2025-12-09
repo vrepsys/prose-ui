@@ -10,46 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from '../ui/select.js'
-
-// --- Sync infrastructure ---
-type ChangeListener = (value: string) => void
-
-function createSyncStore(storageKey: string) {
-  const listeners = new Set<ChangeListener>()
-
-  return {
-    subscribe(listener: ChangeListener) {
-      listeners.add(listener)
-      return () => {
-        listeners.delete(listener)
-      }
-    },
-    broadcast(value: string) {
-      localStorage.setItem(storageKey, value)
-      listeners.forEach((listener) => listener(value))
-    },
-    getStored(): string | null {
-      if (typeof window === 'undefined') return null
-      return localStorage.getItem(storageKey)
-    },
-  }
-}
-
-// Global language sync (always active)
-const langSync = createSyncStore('prose-ui-code-lang')
-
-// Tab sync stores per groupId (created on demand)
-const tabSyncStores = new Map<string, ReturnType<typeof createSyncStore>>()
-
-function getTabSync(groupId: string) {
-  let store = tabSyncStores.get(groupId)
-  if (!store) {
-    store = createSyncStore(`prose-ui-code-tab-${groupId}`)
-    tabSyncStores.set(groupId, store)
-  }
-  return store
-}
-// --- End sync infrastructure ---
+import { langSync, getTabSync } from './sync.js'
 
 type CodeVariant = {
   code: string
@@ -126,11 +87,8 @@ export const CodeGroup = ({ groupId, languages, tabs }: CodeGroupProps) => {
 
   const handleTabChange = (tab: string) => {
     if (groupId) {
-      console.log('broadcasting tab', groupId, tab)
       getTabSync(groupId).broadcast(tab)
     } else {
-        console.log('tab change without group id', groupId, tab)
-
       setActiveTab(tab)
     }
   }
@@ -144,6 +102,9 @@ export const CodeGroup = ({ groupId, languages, tabs }: CodeGroupProps) => {
 
   // Only show language selector if there are multiple languages
   const showLanguageSelector = languages.length > 1
+  // Only show tabs if there are multiple tabs
+  const showTabs = tabs.length > 1
+  const singleTabTitle = tabs[0]?.title
 
   return (
     <Tabs.Root
@@ -152,13 +113,17 @@ export const CodeGroup = ({ groupId, languages, tabs }: CodeGroupProps) => {
       onValueChange={handleTabChange}
     >
       <div className="header">
-        <Tabs.List className="tabs-list">
-          {tabs.map((tab) => (
-            <Tabs.Trigger key={tab.title} className="tab-trigger" value={tab.title}>
-              {tab.title}
-            </Tabs.Trigger>
-          ))}
-        </Tabs.List>
+        {showTabs ? (
+          <Tabs.List className="tabs-list">
+            {tabs.map((tab) => (
+              <Tabs.Trigger key={tab.title} className="tab-trigger" value={tab.title}>
+                {tab.title}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+        ) : (
+          <div className="title">{singleTabTitle}</div>
+        )}
         <div className="header-actions">
           {showLanguageSelector && (
             <Select value={selectedLang} onValueChange={handleLangChange}>

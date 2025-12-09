@@ -106,7 +106,9 @@ test('transform code block without language', async () => {
 
 test('transform markdown image', async () => {
   const input = `![Alt text](/demo.png)`
-  const output = `<Image src="/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" zoom={true} />
+  const output = `<Frame>
+  <Image src="/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" zoom={true} />
+</Frame>
 `
   await expectOutput(input, output)
 })
@@ -122,14 +124,18 @@ test('standalone markdown image keeps zoom enabled', async () => {
   const input = `
 ![Alt text](/demo.png)
 `
-  const output = `<Image src="/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" zoom={true} />
+  const output = `<Frame>
+  <Image src="/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" zoom={true} />
+</Frame>
 `
   await expectOutput(input, output)
 })
 
 test('transform markdown image with url mapping', async () => {
   const input = `![Alt text](/demo.png)`
-  const output = `<Image src="/docs/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" zoom={true} />
+  const output = `<Frame>
+  <Image src="/docs/demo.png" alt="Alt text" width={1600} height={900} blurDataURL="${DEMO_IMG_BLUR_DATA_URL}" zoom={true} />
+</Frame>
 `
   await expectOutput(input, output, {
     image: { imageDir: 'test/images', basePath: '/docs' },
@@ -139,7 +145,9 @@ test('transform markdown image with url mapping', async () => {
 test('transform remote image, pass exactly same url as in markdown', async () => {
   const input = `![Alt text](https://hello.world/isr.png)`
 
-  const output = `<Image src="https://hello.world/isr.png" alt="Alt text" zoom={true} />
+  const output = `<Frame>
+  <Image src="https://hello.world/isr.png" alt="Alt text" zoom={true} />
+</Frame>
 `
   await expectOutput(input, output)
 })
@@ -147,14 +155,16 @@ test('transform remote image, pass exactly same url as in markdown', async () =>
 test('transform remote image, exactly the same url as in markdown, even with mapUrl', async () => {
   const input = `![Alt text](https://hello.world/isr.png)`
 
-  const output = `<Image src="https://hello.world/isr.png" alt="Alt text" zoom={true} />
+  const output = `<Frame>
+  <Image src="https://hello.world/isr.png" alt="Alt text" zoom={true} />
+</Frame>
 `
   await expectOutput(input, output, {
     image: { imageDir: 'test/images', basePath: '/docs' },
   })
 })
 
-test('Tag does not change if image does not exist', async () => {
+test('standalone JSX image does not get framed', async () => {
   const input = `<Image src="/does-not-exist.png" alt="Alt text" />`
 
   const output = `<Image src="/does-not-exist.png" alt="Alt text" zoom={true} />

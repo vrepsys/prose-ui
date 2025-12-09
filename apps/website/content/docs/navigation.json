@@ -7,11 +7,6 @@
         "type": "link",
         "name": "Introduction",
         "href": "/docs"
-      },
-      {
-        "type": "link",
-        "name": "Roadmap",
-        "href": "/docs/roadmap"
       }
     ]
   },
@@ -67,6 +62,11 @@
       },
       {
         "type": "link",
+        "name": "Tabs",
+        "href": "/docs/components/tabs"
+      },
+      {
+        "type": "link",
         "name": "Callout",
         "href": "/docs/components/callout"
       },
@@ -84,11 +84,6 @@
         "type": "link",
         "name": "Table",
         "href": "/docs/components/table"
-      },
-      {
-        "type": "link",
-        "name": "Columns",
-        "href": "/docs/components/columns"
       },
       {
         "type": "link",

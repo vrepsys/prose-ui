@@ -4,22 +4,13 @@ import type {
   Components,
   ComponentsSpec,
   CoreSpec,
-  CssVar,
   DesignSystem,
   TextStyle,
 } from './ds/index.js'
 import { cssSystem, cssVariables, MEDIA_ABOVE_LARGE } from './ds/index.js'
 import {
-  slateDark,
-  blueDark,
   greenDark,
-  amberDark,
-  redDark,
-  slate,
-  blue,
-  green,
-  amber,
-  red,
+  green as radixGreen,
 } from '@radix-ui/colors'
 
 import { hexToHsl } from './utils/hex-to-hsl.js'
@@ -30,6 +21,365 @@ const hsl = (color: string) => {
 }
 
 const negative = (value: string) => `calc(${value} * -1)`
+
+const transparent = (color: string, opacity: number) => `color-mix(in oklab, ${color} ${opacity}%, transparent)`
+
+const mix = (color1: string, color2: string, ratio: number = 50, opacity: number = 100) => `color-mix(in oklab, color-mix(in oklab, ${color1} ${100 - ratio}%, ${color2} ${ratio}%) ${opacity}%, transparent)`
+
+const slate = {
+  50: 'oklch(0.984 0.003 247.858)',
+  100: 'oklch(0.968 0.007 247.896)',
+  200: 'oklch(0.929 0.013 255.508)',
+  300: 'oklch(0.869 0.022 252.894)',
+  400: 'oklch(0.704 0.04 256.788)',
+  500: 'oklch(0.554 0.046 257.417)',
+  600: 'oklch(0.446 0.043 257.281)',
+  700: 'oklch(0.372 0.044 257.287)',
+  800: 'oklch(0.279 0.041 260.031)',
+  900: 'oklch(0.208 0.042 265.755)',
+  950: 'oklch(0.129 0.042 264.695)',
+}
+
+const gray = {
+  50: 'oklch(0.985 0.002 247.839)',
+  100: 'oklch(0.967 0.003 264.542)',
+  200: 'oklch(0.928 0.006 264.531)',
+  300: 'oklch(0.872 0.01 258.338)',
+  400: 'oklch(0.707 0.022 261.325)',
+  500: 'oklch(0.551 0.027 264.364)',
+  600: 'oklch(0.446 0.03 256.802)',
+  700: 'oklch(0.373 0.034 259.733)',
+  800: 'oklch(0.278 0.033 256.848)',
+  900: 'oklch(0.21 0.034 264.665)',
+  950: 'oklch(0.13 0.028 261.692)',
+}
+
+const zinc = {
+  50: 'oklch(0.985 0 0)',
+  100: 'oklch(0.967 0.001 286.375)',
+  200: 'oklch(0.92 0.004 286.32)',
+  300: 'oklch(0.871 0.006 286.286)',
+  400: 'oklch(0.705 0.015 286.067)',
+  500: 'oklch(0.552 0.016 285.938)',
+  600: 'oklch(0.442 0.017 285.786)',
+  700: 'oklch(0.37 0.013 285.805)',
+  800: 'oklch(0.274 0.006 286.033)',
+  900: 'oklch(0.21 0.006 285.885)',
+  950: 'oklch(0.141 0.005 285.823)',
+}
+
+const neutral = {
+  50: 'oklch(0.985 0 0)',
+  100: 'oklch(0.97 0 0)',
+  200: 'oklch(0.922 0 0)',
+  300: 'oklch(0.87 0 0)',
+  400: 'oklch(0.708 0 0)',
+  500: 'oklch(0.556 0 0)',
+  600: 'oklch(0.439 0 0)',
+  700: 'oklch(0.371 0 0)',
+  800: 'oklch(0.269 0 0)',
+  900: 'oklch(0.205 0 0)',
+  950: 'oklch(0.145 0 0)',
+}
+
+
+
+const stone = {
+  50: 'oklch(0.985 0.001 106.423)',
+  100: 'oklch(0.97 0.001 106.424)',
+  200: 'oklch(0.923 0.003 48.717)',
+  300: 'oklch(0.869 0.005 56.366)',
+  400: 'oklch(0.709 0.01 56.259)',
+  500: 'oklch(0.553 0.013 58.071)',
+  600: 'oklch(0.444 0.011 73.639)',
+  700: 'oklch(0.374 0.01 67.558)',
+  800: 'oklch(0.268 0.007 34.298)',
+  900: 'oklch(0.216 0.006 56.043)',
+  950: 'oklch(0.147 0.004 49.25)',
+}
+
+const red = {
+  50: 'oklch(0.971 0.013 17.38)',
+  100: 'oklch(0.936 0.032 17.717)',
+  200: 'oklch(0.885 0.062 18.334)',
+  300: 'oklch(0.808 0.114 19.571)',
+  400: 'oklch(0.704 0.191 22.216)',
+  500: 'oklch(0.637 0.237 25.331)',
+  600: 'oklch(0.577 0.245 27.325)',
+  700: 'oklch(0.505 0.213 27.518)',
+  800: 'oklch(0.444 0.177 26.899)',
+  900: 'oklch(0.396 0.141 25.723)',
+  950: 'oklch(0.258 0.092 26.042)',
+}
+
+const orange = {
+  50: 'oklch(0.98 0.016 73.684)',
+  100: 'oklch(0.954 0.038 75.164)',
+  200: 'oklch(0.901 0.076 70.697)',
+  300: 'oklch(0.837 0.128 66.29)',
+  400: 'oklch(0.75 0.183 55.934)',
+  500: 'oklch(0.705 0.213 47.604)',
+  600: 'oklch(0.646 0.222 41.116)',
+  700: 'oklch(0.553 0.195 38.402)',
+  800: 'oklch(0.47 0.157 37.304)',
+  900: 'oklch(0.408 0.123 38.172)',
+  950: 'oklch(0.266 0.079 36.259)',
+}
+
+const amber = {
+  50: 'oklch(0.987 0.022 95.277)',
+  100: 'oklch(0.962 0.059 95.617)',
+  200: 'oklch(0.924 0.12 95.746)',
+  300: 'oklch(0.879 0.169 91.605)',
+  400: 'oklch(0.828 0.189 84.429)',
+  500: 'oklch(0.769 0.188 70.08)',
+  600: 'oklch(0.666 0.179 58.318)',
+  700: 'oklch(0.555 0.163 48.998)',
+  800: 'oklch(0.473 0.137 46.201)',
+  900: 'oklch(0.414 0.112 45.904)',
+  950: 'oklch(0.279 0.077 45.635)',
+}
+
+const yellow = {
+  50: 'oklch(0.987 0.026 102.212)',
+  100: 'oklch(0.973 0.071 103.193)',
+  200: 'oklch(0.945 0.129 101.54)',
+  300: 'oklch(0.905 0.182 98.111)',
+  400: 'oklch(0.852 0.199 91.936)',
+  500: 'oklch(0.795 0.184 86.047)',
+  600: 'oklch(0.681 0.162 75.834)',
+  700: 'oklch(0.554 0.135 66.442)',
+  800: 'oklch(0.476 0.114 61.907)',
+  900: 'oklch(0.421 0.095 57.708)',
+  950: 'oklch(0.286 0.066 53.813)',
+}
+
+const lime = {
+  50: 'oklch(0.986 0.031 120.757)',
+  100: 'oklch(0.967 0.067 122.328)',
+  200: 'oklch(0.938 0.127 124.321)',
+  300: 'oklch(0.897 0.196 126.665)',
+  400: 'oklch(0.841 0.238 128.85)',
+  500: 'oklch(0.768 0.233 130.85)',
+  600: 'oklch(0.648 0.2 131.684)',
+  700: 'oklch(0.532 0.157 131.589)',
+  800: 'oklch(0.453 0.124 130.933)',
+  900: 'oklch(0.405 0.101 131.063)',
+  950: 'oklch(0.274 0.072 132.109)',
+}
+
+const green = {
+  50: 'oklch(0.982 0.018 155.826)',
+  100: 'oklch(0.962 0.044 156.743)',
+  200: 'oklch(0.925 0.084 155.995)',
+  300: 'oklch(0.871 0.15 154.449)',
+  400: 'oklch(0.792 0.209 151.711)',
+  500: 'oklch(0.723 0.219 149.579)',
+  600: 'oklch(0.627 0.194 149.214)',
+  700: 'oklch(0.527 0.154 150.069)',
+  800: 'oklch(0.448 0.119 151.328)',
+  900: 'oklch(0.393 0.095 152.535)',
+  950: 'oklch(0.266 0.065 152.934)',
+}
+
+const emerald = {
+  50: 'oklch(0.979 0.021 166.113)',
+  100: 'oklch(0.95 0.052 163.051)',
+  200: 'oklch(0.905 0.093 164.15)',
+  300: 'oklch(0.845 0.143 164.978)',
+  400: 'oklch(0.765 0.177 163.223)',
+  500: 'oklch(0.696 0.17 162.48)',
+  600: 'oklch(0.596 0.145 163.225)',
+  700: 'oklch(0.508 0.118 165.612)',
+  800: 'oklch(0.432 0.095 166.913)',
+  900: 'oklch(0.378 0.077 168.94)',
+  950: 'oklch(0.262 0.051 172.552)',
+}
+
+const teal = {
+  50: 'oklch(0.984 0.014 180.72)',
+  100: 'oklch(0.953 0.051 180.801)',
+  200: 'oklch(0.91 0.096 180.426)',
+  300: 'oklch(0.855 0.138 181.071)',
+  400: 'oklch(0.777 0.152 181.912)',
+  500: 'oklch(0.704 0.14 182.503)',
+  600: 'oklch(0.6 0.118 184.704)',
+  700: 'oklch(0.511 0.096 186.391)',
+  800: 'oklch(0.437 0.078 188.216)',
+  900: 'oklch(0.386 0.063 188.416)',
+  950: 'oklch(0.277 0.046 192.524)',
+}
+
+const cyan = {
+  50: 'oklch(0.984 0.019 200.873)',
+  100: 'oklch(0.956 0.045 203.388)',
+  200: 'oklch(0.917 0.08 205.041)',
+  300: 'oklch(0.865 0.127 207.078)',
+  400: 'oklch(0.789 0.154 211.53)',
+  500: 'oklch(0.715 0.143 215.221)',
+  600: 'oklch(0.609 0.126 221.723)',
+  700: 'oklch(0.52 0.105 223.128)',
+  800: 'oklch(0.45 0.085 224.283)',
+  900: 'oklch(0.398 0.07 227.392)',
+  950: 'oklch(0.302 0.056 229.695)',
+}
+
+const sky = {
+  50: 'oklch(0.977 0.013 236.62)',
+  100: 'oklch(0.951 0.026 236.824)',
+  200: 'oklch(0.901 0.058 230.902)',
+  300: 'oklch(0.828 0.111 230.318)',
+  400: 'oklch(0.746 0.16 232.661)',
+  500: 'oklch(0.685 0.169 237.323)',
+  600: 'oklch(0.588 0.158 241.966)',
+  700: 'oklch(0.5 0.134 242.749)',
+  800: 'oklch(0.443 0.11 240.79)',
+  900: 'oklch(0.391 0.09 240.876)',
+  950: 'oklch(0.293 0.066 243.157)',
+}
+
+const blue = {
+  50: 'oklch(0.97 0.014 254.604)',
+  100: 'oklch(0.932 0.032 255.585)',
+  200: 'oklch(0.882 0.059 254.128)',
+  300: 'oklch(0.809 0.105 251.813)',
+  400: 'oklch(0.707 0.165 254.624)',
+  500: 'oklch(0.623 0.214 259.815)',
+  600: 'oklch(0.546 0.245 262.881)',
+  700: 'oklch(0.488 0.243 264.376)',
+  800: 'oklch(0.424 0.199 265.638)',
+  900: 'oklch(0.379 0.146 265.522)',
+  950: 'oklch(0.282 0.091 267.935)',
+}
+
+const indigo = {
+  50: 'oklch(0.962 0.018 272.314)',
+  100: 'oklch(0.93 0.034 272.788)',
+  200: 'oklch(0.87 0.065 274.039)',
+  300: 'oklch(0.785 0.115 274.713)',
+  400: 'oklch(0.673 0.182 276.935)',
+  500: 'oklch(0.585 0.233 277.117)',
+  600: 'oklch(0.511 0.262 276.966)',
+  700: 'oklch(0.457 0.24 277.023)',
+  800: 'oklch(0.398 0.195 277.366)',
+  900: 'oklch(0.359 0.144 278.697)',
+  950: 'oklch(0.257 0.09 281.288)',
+}
+
+const violet = {
+  50: 'oklch(0.969 0.016 293.756)',
+  100: 'oklch(0.943 0.029 294.588)',
+  200: 'oklch(0.894 0.057 293.283)',
+  300: 'oklch(0.811 0.111 293.571)',
+  400: 'oklch(0.702 0.183 293.541)',
+  500: 'oklch(0.606 0.25 292.717)',
+  600: 'oklch(0.541 0.281 293.009)',
+  700: 'oklch(0.491 0.27 292.581)',
+  800: 'oklch(0.432 0.232 292.759)',
+  900: 'oklch(0.38 0.189 293.745)',
+  950: 'oklch(0.283 0.141 291.089)',
+}
+
+const purple = {
+  50: 'oklch(0.977 0.014 308.299)',
+  100: 'oklch(0.946 0.033 307.174)',
+  200: 'oklch(0.902 0.063 306.703)',
+  300: 'oklch(0.827 0.119 306.383)',
+  400: 'oklch(0.714 0.203 305.504)',
+  500: 'oklch(0.627 0.265 303.9)',
+  600: 'oklch(0.558 0.288 302.321)',
+  700: 'oklch(0.496 0.265 301.924)',
+  800: 'oklch(0.438 0.218 303.724)',
+  900: 'oklch(0.381 0.176 304.987)',
+  950: 'oklch(0.291 0.149 302.717)',
+}
+
+const fuchsia = {
+  50: 'oklch(0.977 0.017 320.058)',
+  100: 'oklch(0.952 0.037 318.852)',
+  200: 'oklch(0.903 0.076 319.62)',
+  300: 'oklch(0.833 0.145 321.434)',
+  400: 'oklch(0.74 0.238 322.16)',
+  500: 'oklch(0.667 0.295 322.15)',
+  600: 'oklch(0.591 0.293 322.896)',
+  700: 'oklch(0.518 0.253 323.949)',
+  800: 'oklch(0.452 0.211 324.591)',
+  900: 'oklch(0.401 0.17 325.612)',
+  950: 'oklch(0.293 0.136 325.661)',
+}
+
+const pink = {
+  50: 'oklch(0.971 0.014 343.198)',
+  100: 'oklch(0.948 0.028 342.258)',
+  200: 'oklch(0.899 0.061 343.231)',
+  300: 'oklch(0.823 0.12 346.018)',
+  400: 'oklch(0.718 0.202 349.761)',
+  500: 'oklch(0.656 0.241 354.308)',
+  600: 'oklch(0.592 0.249 0.584)',
+  700: 'oklch(0.525 0.223 3.958)',
+  800: 'oklch(0.459 0.187 3.815)',
+  900: 'oklch(0.408 0.153 2.432)',
+  950: 'oklch(0.284 0.109 3.907)',
+}
+
+const rose = {
+  50: 'oklch(0.969 0.015 12.422)',
+  100: 'oklch(0.941 0.03 12.58)',
+  200: 'oklch(0.892 0.058 10.001)',
+  300: 'oklch(0.81 0.117 11.638)',
+  400: 'oklch(0.712 0.194 13.428)',
+  500: 'oklch(0.645 0.246 16.439)',
+  600: 'oklch(0.586 0.253 17.585)',
+  700: 'oklch(0.514 0.222 16.935)',
+  800: 'oklch(0.455 0.188 13.697)',
+  900: 'oklch(0.41 0.159 10.272)',
+  950: 'oklch(0.271 0.105 12.094)',
+}
+
+const palette = {
+  slate,
+  gray,
+  zinc,
+  neutral,
+  stone,
+  red,
+  orange,
+  amber,
+  yellow,
+  lime,
+  green,
+  emerald,
+  teal,
+  cyan,
+  sky,
+  blue,
+  indigo,
+  violet,
+  purple,
+  fuchsia,
+  pink,
+  rose,
+}
+
+const white = '#fff'
+const black = '#000'
+
+const custom = {
+  50: 'oklch(0.985 0 0)',
+  100: 'oklch(0.97 0 0)',
+  200: 'oklch(0.922 0 0)',
+  300: 'oklch(0.87 0 0)',
+  400: 'oklch(0.708 0 0)',
+  500: 'oklch(0.556 0 0)',
+  600: 'oklch(0.439 0 0)',
+  700: 'oklch(0.371 0 0)',
+  800: 'oklch(0.269 0 0)',
+  900: 'oklch(0.225 0 0)',
+  950: 'oklch(0.165 0 0)',
+}
+
+// Change this to experiment with different color palettes (slate, gray, zinc, neutral, stone)
+const scale = custom
 
 export const getCoreSpec = (): CoreSpec => ({
   spacing: {
@@ -92,76 +442,89 @@ export const getCoreSpec = (): CoreSpec => ({
 export const getLightColorsSpec = (): ColorSpec => ({
   color: {
     text: {
-      high: '219 5% 5%',
-      base: '219 5% 23%',
-      low: '219 6% 36%',
-      lower: '219 6% 42%',
-      lowest: '219 6% 47%',
-      disabled: '219 6% 36%',
+      strong: black,
+      base: black,
+      
+      muted: 'oklch(0.5 0 0)',
+      xmuted: 'oklch(0.58 0 0)',
+      disabled: scale[500],
+      accent: 'oklch(0.54 0.22 143.88)',
+      note: scale[950],
+      info: blue[800],
+      warning: amber[800],
+      success: green[800],
+      danger: red[700],
+      syntax1: 'oklch(0.51 0.15 142.33)',
+      syntax2: 'oklch(0.48 0.12 51.36)',
+      syntax3: 'oklch(0.51 0.2 324.32)',
+      syntax4: 'oklch(0.38 0.19 272.76)',
     },
-    accent: {
-      high: '117 62% 20%',
-      base: '117 62% 30%',
-      low: '150 15% 80%',
-    },
-    syntax: {
-      syntax1: '117 62% 30%',
-      syntax2: '27 90% 30%',
-      syntax3: '295 60% 40%',
-      syntax4: '240 60% 40%',
-    },
-    note: hsl(slate.slate12),
-    info: hsl(blue.blue11),
-    warning: hsl(amber.amber11),
-    success: hsl(green.green11),
-    danger: hsl(red.red10),
     bg: {
-      high: '0 0% 100%',
-      base: hsl(slate.slate1),
-      low: hsl(slate.slate3),
-      lower: hsl(slate.slate4),
-      lowest: hsl(slate.slate7),
+      base: white,
+      surface1: custom[100],
+      surface1Hover: mix(custom[100], black, 3),
+      surface2: custom[100],
+      surface2Hover: mix(custom[100], black, 3),
+      surface2Active: white,
+      accent: transparent(green[700], 10),
+      note: transparent(scale[950], 5),
+      info: transparent(blue[800], 5),
+      warning: transparent(amber[800], 5),
+      success: transparent(green[800], 5),
+      danger: transparent(red[700], 5),
     },
-    border: hsl(slate.slate4),
-    outline: hsl(green.green10),
+    border: {
+      base: 'oklch(0 0 0 / 10%)',
+      subtle: 'oklch(0 0 0 / 6%)',
+      outline: hsl(radixGreen.green10),
+    },
   },
 })
 
+const bg = {
+  base: scale[900],
+  surface1: mix(scale[900], scale[950], 60),
+  surface2: scale[950],
+}
+
 export const getDarkColorsSpec = (): ColorSpec => ({
   color: {
-    text: {
-      high: '219 0% 100%',
-      base: '219 100% 100%',
-      low: '219 6% 70%',
-      lower: '219 6% 65%',
-      lowest: '219 6% 60%',
-      disabled: '219 6% 53%',
-    },
-    accent: {
-      high: '150 95% 75%',
-      base: '150 90% 65%',
-      low: '150 15% 30%',
-    },
-    syntax: {
-      syntax1: '150 66% 66%',
-      syntax2: '40 50% 66%',
-      syntax3: '340 50% 75%',
-      syntax4: '210 77% 69%',
-    },
-    note: hsl(slateDark.slate12),
-    info: hsl(blueDark.blue11),
-    warning: hsl(amberDark.amber11),
-    success: hsl(greenDark.green11),
-    danger: hsl(redDark.red10),
     bg: {
-      high: '0 0% 0%',
-      base: '0 0% 0%',
-      low: hsl(slateDark.slate2),
-      lower: hsl(slateDark.slate3),
-      lowest: hsl(slateDark.slate4),
+      base: bg.base,
+      surface1: bg.surface1,
+      surface2: bg.surface2,
+      surface1Hover: mix(bg.surface1, white, 3),
+      surface2Hover: mix(bg.surface2, white, 10),
+      surface2Active: mix(bg.surface2, white, 20),
+      accent: transparent(green[50], 10),
+      note: transparent(scale[50], 5),
+      info: transparent(blue[200], 5),
+      warning: transparent(amber[200], 5),
+      success: transparent(green[200], 5),
+      danger: transparent(red[300], 5),
     },
-    border: hsl(slateDark.slate4),
-    outline: hsl(greenDark.green10),
+    text: {
+      strong: white,
+      base: scale[200],
+      muted: scale[400],
+      xmuted: scale[500],
+      disabled: scale[600],
+      accent: 'oklch(0.78 0.1 155.05)',
+      note: scale[50],
+      info: blue[200],
+      warning: amber[200],
+      success: green[200],
+      danger: red[300],
+      syntax1: 'oklch(0.83 0.13 159.66)',
+      syntax2: 'oklch(0.79 0.08 84.07)',
+      syntax3: 'oklch(0.74 0.11 249.51)',
+      syntax4: 'oklch(0.77 0.08 357.45)',
+    },
+    border: {
+      base: 'oklch(1 0 0 / 7%)',
+      subtle: 'oklch(1 0 0 / 4%)',
+      outline: hsl(greenDark.green10),
+    },
   },
 })
 
@@ -172,7 +535,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     fontWeight: ds.font.weight.semiBold,
     lineHeight: '2.25rem',
     letterSpacing: '-0.065rem',
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
     [MEDIA_ABOVE_LARGE]: {
       fontSize: '2.125rem',
       lineHeight: '2.75rem',
@@ -185,7 +548,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: '1.75rem',
     letterSpacing: '-0.035rem',
     fontWeight: ds.font.weight.semiBold,
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
     [MEDIA_ABOVE_LARGE]: {
       fontSize: '1.375rem',
       lineHeight: '2rem',
@@ -197,7 +560,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: '1.5rem',
     letterSpacing: '-0.035rem',
     fontWeight: ds.font.weight.semiBold,
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
     [MEDIA_ABOVE_LARGE]: {
       fontSize: '1.125rem',
       lineHeight: '1.75rem',
@@ -209,7 +572,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: '1.5rem',
     letterSpacing: '-0.015rem',
     fontWeight: ds.font.weight.semiBold,
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
     [MEDIA_ABOVE_LARGE]: {
       fontSize: '1rem',
       lineHeight: '1.75rem',
@@ -221,7 +584,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: '1.25rem',
     letterSpacing: '-0.015rem',
     fontWeight: '500',
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
   }
   const baseTitle = {
     fontFamily: ds.font.family.heading,
@@ -229,7 +592,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     lineHeight: ds.font.height.base,
     letterSpacing: ds.letterSpacing.base,
     fontWeight: ds.font.weight.medium,
-    color: ds.color.text.high,
+    color: ds.color.text.strong,
   }
 
   return {
@@ -262,19 +625,19 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
       lineHeight: '1.25rem',
       letterSpacing: '-0.015rem',
       fontWeight: ds.font.weight.semiBold,
-      color: ds.color.text.high,
+      color: ds.color.text.strong,
     },
     h6: {
       ...h6,
     },
     link: {
       text: {
-        color: ds.color.accent.base,
+        color: ds.color.text.accent,
         decorationLine: 'underline',
         decorationStyle: 'solid',
-        decorationColor: ds.color.accent.low,
+        decorationColor: transparent(ds.color.text.accent, 25),
       },
-      fontWeight: ds.font.weight.normal,
+      fontWeight: 'inherit',
     },
     inlineCode: {
       font: {
@@ -284,13 +647,43 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
         spacing: ds.letterSpacing.sm,
       },
       color: {
-        bg: ds.color.bg.low,
+        bg: ds.color.bg.surface2,
       },
       letterSpacing: ds.letterSpacing.sm,
     },
     callout: {
       color: {
         text: ds.color.text.base,
+      },
+      note: {
+        color: {
+          text: ds.color.text.note,
+          bg: ds.color.bg.note,
+        },
+      },
+      info: {
+        color: {
+          text: ds.color.text.info,
+          bg: ds.color.bg.info,
+        },
+      },
+      warning: {
+        color: {
+          text: ds.color.text.warning,
+          bg: ds.color.bg.warning,
+        },
+      },
+      success: {
+        color: {
+          text: ds.color.text.success,
+          bg: ds.color.bg.success,
+        },
+      },
+      danger: {
+        color: {
+          text: ds.color.text.danger,
+          bg: ds.color.bg.danger,
+        },
       },
       font: {
         size: ds.font.size.sm,
@@ -301,14 +694,14 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     card: {
       color: {
         text: ds.color.text.base,
-        muted: ds.color.text.lower,
-        bg: ds.color.bg.low,
-        bgHover: ds.color.bg.lower,
-        border: ds.color.border,
-        borderHover: ds.color.accent.low,
-        icon: ds.color.accent.base,
-        cta: ds.color.accent.base,
-        ctaHover: ds.color.accent.high,
+        muted: ds.color.text.muted,
+        bg: ds.color.bg.surface1,
+        bgHover: ds.color.bg.surface1Hover,
+        border: ds.color.border.subtle,
+        borderHover: ds.color.border.base,
+        icon: ds.color.text.base,
+        cta: ds.color.text.muted,
+        ctaHover: ds.color.text.accent,
       },
       font: {
         title: {
@@ -328,13 +721,30 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
         },
       },
     },
+    subtitle: {
+      color: {
+        text: ds.color.text.muted,
+      },
+      font: {
+        size: '1rem',
+        height: '1.5rem',
+        weight: ds.font.weight.normal,
+      },
+      [MEDIA_ABOVE_LARGE]: {
+        font: {
+          size: '1.125rem',
+          height: '1.75rem',
+          weight: ds.font.weight.normal,
+        },
+      },
+    },
     steps: {
       indicator: {
-        bg: ds.color.bg.lower,
-        text: ds.color.text.high,
-        outline: ds.color.bg.lower,
+        bg: ds.color.bg.surface2,
+        text: ds.color.text.strong,
+        outline: ds.color.bg.surface2,
       },
-      connector: ds.color.border,
+      connector: ds.color.border.base,
       title: {
         base: { ...baseTitle },
         h1: { ...h1 },
@@ -347,12 +757,12 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
           lineHeight: '1.25rem',
           letterSpacing: '-0.015rem',
           fontWeight: ds.font.weight.semiBold,
-          color: ds.color.text.high,
+          color: ds.color.text.strong,
         },
         h6: { ...h6 },
       },
       body: {
-        color: ds.color.text.low,
+        color: ds.color.text.muted,
         size: ds.font.size.base,
         height: ds.font.height.base,
         weight: ds.font.weight.normal,
@@ -371,17 +781,17 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     },
     codeBlock: {
       color: {
-        bg: ds.color.bg.low,
+        bg: ds.color.bg.surface2,
         text: ds.color.text.base,
-        constant: ds.color.syntax.syntax1,
-        string: ds.color.syntax.syntax2,
-        comment: ds.color.text.low,
-        keyword: ds.color.syntax.syntax3,
+        constant: ds.color.text.syntax1,
+        string: ds.color.text.syntax2,
+        comment: ds.color.text.muted,
+        keyword: ds.color.text.syntax3,
         parameter: ds.color.text.base,
-        function: ds.color.syntax.syntax4,
-        stringExpression: ds.color.syntax.syntax2,
+        function: ds.color.text.syntax4,
+        stringExpression: ds.color.text.syntax2,
         punctuation: ds.color.text.base,
-        link: ds.color.syntax.syntax2,
+        link: ds.color.text.syntax2,
       },
       font: {
         size: ds.font.size.sm,
@@ -391,7 +801,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
       },
       lineNumber: {
         color: {
-          text: ds.color.text.lower,
+          text: ds.color.text.xmuted,
         },
       },
     },
@@ -408,17 +818,17 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
           weight: ds.font.weight.semiBold,
         },
         color: {
-          text: ds.color.text.low,
+          text: ds.color.text.muted,
         },
       },
       border: {
-        color: ds.color.border,
+        color: ds.color.border.base,
       },
     },
     frame: {
       caption: {
         color: {
-          text: ds.color.text.low,
+          text: ds.color.text.muted,
         },
         font: {
           size: ds.font.size.sm,
@@ -434,6 +844,11 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
 export const componentsStyles = (ds: DesignSystem) => {
   const gap = ds.content.gap
   const color = ds.color
+
+  // Container elements that should cluster together when consecutive
+  const cluster = '.code-block, .code-group, .callout, .card, .cards, .frame'
+  const NP = ':where(:not(.not-prose, .not-prose *))'
+
   const headingStyle = (style: TextStyle) => ({
     'font-family': style.fontFamily,
     'font-size': style.fontSize,
@@ -445,21 +860,38 @@ export const componentsStyles = (ds: DesignSystem) => {
     'margin-bottom': gap.cluster,
   })
   return {
-    'p': {
+    [`*${NP}::selection`]: {
+      'background-color': transparent(ds.color.text.strong, 15),
+    },
+    [`:focus-visible${NP}`]: {
+      'outline': `2px solid ${color.text.accent}`,
+      'outline-offset': '2px',
+    },
+    [`p${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
-      '& + .code-block, & + ul, & + ol, & + .card, & + .columns': {
-        'margin-top': gap.cluster,
-      },
     },
-    '.code-block + .code-block, .callout + .callout, .card + .card, .columns + .columns': {
+    // Paragraph followed by cluster element or list → tight spacing (skip .not-prose)
+    [`p${NP} + :is(${cluster}, ul, ol:not(.steps))${NP}`]: {
       'margin-top': gap.cluster,
     },
-    'code': {
+    // Heading followed by any content → tight spacing
+    [`:is(h1, h2, h3, h4, h5, h6)${NP} + :is(p, ul, ol:not(.steps), blockquote, table, ${cluster})${NP}`]: {
+      'margin-top': gap.cluster,
+    },
+    // Consecutive headings → tight spacing
+    [`:is(h1, h2, h3, h4, h5, h6)${NP} + :is(h1, h2, h3, h4, h5, h6)${NP}`]: {
+      'margin-top': gap.base,
+    },
+    // Consecutive cluster elements → tight spacing
+    [`:is(${cluster})${NP} + :is(${cluster})${NP}`]: {
+      'margin-top': gap.cluster,
+    },
+    [`code${NP}`]: {
       'font-family': ds.font.family.mono,
     },
-    'li': {
-      '& > .code-block, & > table, & > .frame, & > .callout, & > .card, & > .columns, & > ul, & > ol': {
+    [`li${NP}`]: {
+      [`& > :is(${cluster}, table, ul, ol)`]: {
         'margin-top': gap.cluster,
         'margin-bottom': gap.cluster,
       },
@@ -471,12 +903,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'margin-bottom': '0',
       },
     },
-    'h1, h2, h3, h4, h5, h6': {
-      '& + table, & + .callout, & + .card, & + .columns, & + p, & + ul, & + ol': {
-        'margin-top': gap.cluster,
-      },
-    },
-    'p, table, li': {
+    [`p${NP}, table${NP}, li${NP}`]: {
       'code': {
         'background-color': ds.inlineCode.color.bg,
         'padding-left': ds.spacing.space1,
@@ -496,12 +923,12 @@ export const componentsStyles = (ds: DesignSystem) => {
         'border-radius': '0',
       },
     },
-    '.copy-button': {
+    [`.copy-button${NP}`]: {
       'position': 'relative',
       'background-color': ds.codeBlock.color.bg,
       'border-radius': ds.border.radius,
       'padding': ds.spacing.space1,
-      'color': ds.color.text.lowest,
+      'color': ds.color.text.xmuted,
       'transition': 'color 150ms ease, background-color 150ms ease',
       'cursor': 'pointer',
 
@@ -526,9 +953,9 @@ export const componentsStyles = (ds: DesignSystem) => {
         opacity: '0',
       },
     },
-    '.copy-button:hover': {
-      'color': ds.color.text.lower,
-      'background-color': ds.color.bg.lower,
+    [`.copy-button${NP}:hover`]: {
+      'color': ds.color.text.base,
+      'background-color': ds.color.bg.surface2Hover,
       '.icon-default': {
         opacity: '0',
       },
@@ -536,32 +963,32 @@ export const componentsStyles = (ds: DesignSystem) => {
         opacity: '1',
       },
     },
-    '.copied-icon': {
+    [`.copied-icon${NP}`]: {
       'background-color': ds.codeBlock.color.bg,
       'padding': ds.spacing.space1,
       'border-radius': ds.border.radius,
-      'color': ds.color.success,
+      'color': ds.color.text.success,
     },
-    '.code-group': {
+    [`.code-group${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-width': '1px',
-      'border-color': ds.color.border,
+      'border-color': ds.color.border.base,
       'border-radius': ds.border.radius,
       'background-color': ds.codeBlock.color.bg,
       'display': 'flex',
       'flex-direction': 'column',
-      '.header': {
+        '.header': {
         'display': 'flex',
         'align-items': 'center',
         'justify-content': 'space-between',
         'gap': ds.spacing.space2,
-        'border-bottom': `1px solid ${ds.color.border}`,
+        'border-bottom': `1px solid ${ds.color.border.base}`,
         'padding-top': ds.spacing['space1-5'],
         'padding-bottom': ds.spacing['space1-5'],
         'padding-left': ds.spacing.space3,
         'padding-right': ds.spacing['space1-5'],
-        'border-color': ds.color.border,
+        'border-color': ds.color.border.base,
         '.header-actions': {
           'display': 'flex',
           'align-items': 'center',
@@ -572,7 +999,7 @@ export const componentsStyles = (ds: DesignSystem) => {
           'gap': ds.spacing.space1,
           'margin-left': `calc(-1 * ${ds.spacing.space1})`,
           '.tab-trigger': {
-            'color': ds.color.text.low,
+            'color': ds.color.text.muted,
             'font-size': ds.font.size.sm,
             'font-weight': ds.font.weight.medium,
             'line-height': ds.font.height.sm,
@@ -580,25 +1007,94 @@ export const componentsStyles = (ds: DesignSystem) => {
             'padding-left': ds.spacing['space1'],
             'padding-right': ds.spacing['space1'],
             'transition': 'color 150ms ease',
+            'cursor': 'pointer',
             '&:hover': {
-              'color': ds.color.text.base,
+              'color': ds.color.text.accent,
             },
           },
           '.tab-trigger[data-state="active"]': {
-            'color': ds.color.accent.base,
-            'box-shadow': `0 6px 0 0 ${ds.codeBlock.color.bg}, 0 8px 0 0 currentColor`,
+            'color': ds.color.text.accent,
+            'box-shadow': `0 7px 0 0 ${ds.codeBlock.color.bg}, 0 9px 0 0 currentColor`,
           },
+        },
+        '.title': {
+          'color': ds.color.text.muted,
+          'font-size': ds.font.size.sm,
+          'line-height': ds.font.height.sm,
+          'letter-spacing': ds.letterSpacing.sm,
+          'font-weight': ds.font.weight.medium,
         },
         '.select-trigger': {
           'margin-left': 'auto',
         },
       },
     },
-    '.code-block': {
+    [`.tabs${NP}`]: {
+      'margin-top': gap.base,
+      'margin-bottom': gap.cluster,
+      'display': 'flex',
+      'flex-direction': 'column',
+      '.header': {
+        'display': 'flex',
+        'align-items': 'center',
+        'gap': ds.spacing.space2,
+        // 'padding-top': ds.spacing['space1-5'],
+        // 'padding-bottom': ds.spacing['space1-5'],
+        '.tabs-list': {
+          'display': 'flex',
+          'background-color': ds.color.bg.surface2,
+          'border-top-left-radius': ds.border.radius,
+          'border-top-right-radius': ds.border.radius,
+          'padding': ds.spacing.space1,
+          'gap': ds.spacing.space1,
+          // 'margin-left': `calc(-1 * ${ds.spacing.space2})`,
+          '.tab-trigger': {
+            'color': ds.color.text.muted,
+            'font-size': ds.font.size.sm,
+            'font-weight': ds.font.weight.medium,
+            'line-height': ds.font.height.sm,
+            'letter-spacing': ds.letterSpacing.sm,
+            'padding-left': ds.spacing.space2,
+            'padding-right': ds.spacing.space2,
+            'padding-top': ds.spacing.space1,
+            'padding-bottom': ds.spacing.space1,
+            'border-radius': `calc(${ds.border.radius} - 1px)`,
+            'cursor': 'pointer',
+            'transition': 'color 150ms ease',
+            '&:hover': {
+              'color': ds.color.text.strong,
+              'background-color': ds.color.bg.surface2Hover,
+            },
+          },
+          '.tab-trigger[data-state="active"]': {
+            'background-color': ds.color.bg.surface2Active,
+            'color': ds.color.text.strong,
+            'box-shadow': '1px 2px 4px -1px #0003',
+          },
+        },
+      },
+      '.tab-content': {
+        'padding-top': ds.spacing.space3,
+        'padding-bottom': ds.spacing.space3,
+        // 'background-color': transparent(ds.color.bg.low, 20),
+        'border': `1px solid ${ds.color.border.subtle}`,
+        'border-bottom-left-radius': ds.border.radius,
+        'border-bottom-right-radius': ds.border.radius,
+        'border-top-right-radius': ds.border.radius,
+        'padding': ds.spacing.space3,
+        '> *:first-child': {
+          'margin-top': '0',
+        },
+        '> *:last-child': {
+          'margin-bottom': '0',
+        },
+      },
+    },
+    [`.code-block${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-width': '1px',
-      'border-color': ds.color.border,
+      'border-color': ds.color.border.base,
       'border-radius': ds.border.radius,
       'background-color': ds.codeBlock.color.bg,
       'display': 'flex',
@@ -608,14 +1104,14 @@ export const componentsStyles = (ds: DesignSystem) => {
         'display': 'flex',
         'align-items': 'center',
         'justify-content': 'space-between',
-        'border-bottom': `1px solid ${ds.color.border}`,
+        'border-bottom': `1px solid ${ds.color.border.base}`,
         'padding-top': ds.spacing['space1-5'],
         'padding-bottom': ds.spacing['space1-5'],
         'padding-left': ds.spacing.space3,
         'padding-right': ds.spacing['space1-5'],
-        'border-color': ds.color.border,
+        'border-color': ds.color.border.base,
         '.title': {
-          'color': ds.color.text.low,
+          'color': ds.color.text.muted,
           'font-size': ds.font.size.sm,
           'line-height': ds.font.height.sm,
           'letter-spacing': ds.letterSpacing.sm,
@@ -623,7 +1119,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         },
       },
     },
-    '.code-block, .code-group': {
+    [`.code-block${NP}, .code-group${NP}`]: {
       '.body:has(> .copy-button), .body:has(> .copied-icon)': {
         'padding-right': ds.spacing.space6,
         '.scroll-area-root': {
@@ -699,7 +1195,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'word-break': 'keep-all',
       },
     },
-    'blockquote': {
+    [`.blockquote${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-left-width': ds.spacing['space0-5'],
@@ -707,7 +1203,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'padding-right': ds.spacing.space2,
       'padding-top': ds.spacing.space1,
       'padding-bottom': ds.spacing.space1,
-      'border-color': color.note,
+      'border-color': ds.color.text.note,
       'p, ul, ol, li': {
         'font-size': ds.blockquote.font.size,
         'line-height': ds.blockquote.font.height,
@@ -721,18 +1217,14 @@ export const componentsStyles = (ds: DesignSystem) => {
         'margin-bottom': '0',
       },
     },
-    '.callout': {
+    [`.callout${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'display': 'flex',
       'flex-direction': 'column',
       'gap': ds.spacing.space1,
-      'border-left-width': ds.spacing.space1,
-      'border-left-style': 'solid',
-      'padding-left': ds.spacing.space2,
-      'padding-right': ds.spacing.space2,
-      'padding-top': ds.spacing.space1,
-      'padding-bottom': ds.spacing.space1,
+      'border-radius': ds.border.radius,
+      'padding': ds.spacing.space3,
       '.title': {
         'font-size': ds.font.size.sm,
         'font-weight': ds.font.weight.semiBold,
@@ -752,37 +1244,52 @@ export const componentsStyles = (ds: DesignSystem) => {
         },
       },
     },
-    '.callout.note': {
-      'border-color': color.note,
+    [`.callout[data-variant="note"]${NP}`]: {
+      'background-color': ds.callout.note.color.bg,
       '.title': {
-        color: color.note,
+        'color': ds.callout.note.color.text,
+      },
+      '.body': {
+        'color': ds.callout.note.color.text,
       },
     },
-    '.callout.info': {
-      'border-color': color.info,
+    [`.callout[data-variant="info"]${NP}`]: {
+      'background-color': ds.callout.info.color.bg,
       '.title': {
-        color: color.info,
+        'color': ds.callout.info.color.text,
+      },
+      '.body': {
+        'color': transparent(ds.callout.info.color.text, 90),
       },
     },
-    '.callout.tip': {
-      'border-color': color.success,
+    [`.callout[data-variant="tip"]${NP}`]: {
+      'background-color': ds.callout.success.color.bg,
       '.title': {
-        color: color.success,
+        'color': ds.callout.success.color.text,
+      },
+      '.body': {
+        'color': ds.callout.success.color.text,
       },
     },
-    '.callout.warning': {
-      'border-color': color.warning,
+    [`.callout[data-variant="warning"]${NP}`]: {
+      'background-color': ds.callout.warning.color.bg,
       '.title': {
-        color: color.warning,
+        'color': ds.callout.warning.color.text,
+      },
+      '.body': {
+        'color': ds.callout.warning.color.text,
       },
     },
-    '.callout.danger': {
-      'border-color': color.danger,
+    [`.callout[data-variant="danger"]${NP}`]: {
+      'background-color': ds.callout.danger.color.bg,
       '.title': {
-        color: color.danger,
+        'color': ds.callout.danger.color.text,
+      },
+      '.body': {
+        'color': ds.callout.danger.color.text,
       },
     },
-    '.card': {
+    [`.card${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'display': 'flex',
@@ -804,10 +1311,6 @@ export const componentsStyles = (ds: DesignSystem) => {
         '&:active': {
           'transform': 'translateY(1px)',
         },
-      },
-      '&:focus-visible': {
-        'outline': `2px solid ${color.outline}`,
-        'outline-offset': '2px',
       },
       '.card-content': {
         'display': 'flex',
@@ -905,10 +1408,10 @@ export const componentsStyles = (ds: DesignSystem) => {
         'color': ds.card.color.ctaHover,
       },
     },
-    '.columns > .card': {
+    [`.cards > .card${NP}`]: {
       'margin': '0',
     },
-    '.columns': {
+    [`.cards${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'display': 'grid',
@@ -921,7 +1424,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'margin': '0',
       },
     },
-    '.steps': {
+    [`.steps${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'list-style': 'none',
@@ -930,7 +1433,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'flex-direction': 'column',
       'counter-reset': 'step',
       '--step-indicator-size': ds.spacing.space5,
-      '--step-gap': ds.spacing.space3,
+      '--step-gap': ds.spacing.space5,
       '--step-connector-gap': ds.spacing.space2,
       '--step-title-line-height': ds.steps.title.base.lineHeight,
       '--step-indicator-offset': 'calc((var(--step-title-line-height) - var(--step-indicator-size)) / 2)',
@@ -944,7 +1447,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         marginBottom: '0',
       },
     },
-    '.step': {
+    [`.step${NP}`]: {
       'display': 'grid',
       'grid-template-columns': 'auto 1fr',
       'column-gap': ds.spacing.space3,
@@ -954,10 +1457,10 @@ export const componentsStyles = (ds: DesignSystem) => {
       'padding-top': 'max(0px, calc(var(--step-indicator-offset) * -1))',
       'padding-bottom': 'var(--step-gap)',
     },
-    '.step:last-child': {
+    [`.step:last-child${NP}`]: {
       'padding-bottom': '0',
     },
-    '.step:not(:last-child)::after': {
+    [`.step:not(:last-child)${NP}::after`]: {
       'content': "''",
       'position': 'absolute',
       'left': 'calc((var(--step-indicator-size) / 2) - 0.5px)',
@@ -966,7 +1469,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'width': '1px',
       'background-color': ds.steps.connector,
     },
-    '.step:last-child::after': {
+    [`.step:last-child${NP}::after`]: {
       'content': "''",
       'position': 'absolute',
       'left': 'calc((var(--step-indicator-size) / 2) - 0.5px)',
@@ -975,7 +1478,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'width': '1px',
       'background-image': `linear-gradient(to bottom, ${ds.steps.connector} 0%, ${ds.steps.connector} 80%, transparent 100%)`,
     },
-    '.step-indicator': {
+    [`.step-indicator${NP}`]: {
       'width': 'var(--step-indicator-size)',
       'height': 'var(--step-indicator-size)',
       'border-radius': '999px',
@@ -992,35 +1495,38 @@ export const componentsStyles = (ds: DesignSystem) => {
       'box-shadow': `0 0 0 1px ${ds.steps.indicator.outline}`,
       'margin-top': 'var(--step-indicator-offset)',
     },
-    '.step-number': {
+    [`.step-number${NP}`]: {
       'display': 'inline-flex',
       'align-items': 'center',
       'justify-content': 'center',
       'width': '100%',
       'height': '100%',
     },
-    '.step-number::before': {
+    [`.step-number${NP}::before`]: {
       'content': 'counter(step)',
     },
-    '.step-indicator svg': {
+    [`.step-indicator svg${NP}`]: {
       width: '60%',
       height: '60%',
     },
-    '.step-content': {
+    [`.step-content${NP}`]: {
       'display': 'flex',
       'flex-direction': 'column',
       'gap': ds.spacing['space0-5'],
       'min-width': '0',
     },
-    '.step-body > *:first-child': {
+    [`.step-body > *:first-child${NP}`]: {
       'margin-top': '0',
     },
-    '.step-title': {
+    [`.step-body > *:last-child${NP}`]: {
+      'margin-bottom': '0',
+    },
+    [`.step-title${NP}`]: {
       'margin': '0',
       'color': ds.steps.title.base.color,
       'font-weight': ds.steps.title.base.fontWeight,
     },
-    '.steps[data-title-size="base"] .step-title': {
+    [`.steps[data-title-size="base"] .step-title${NP}`]: {
       'font-size': ds.steps.title.base.fontSize,
       'line-height': ds.steps.title.base.lineHeight,
       'letter-spacing': ds.steps.title.base.letterSpacing,
@@ -1028,11 +1534,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.base.fontWeight,
       'color': ds.steps.title.base.color,
     },
-    '.steps[data-title-size="base"]': {
+    [`.steps[data-title-size="base"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.base.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
     },
-    '.steps[data-title-size="h1"] .step-title': {
+    [`.steps[data-title-size="h1"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h1.fontSize,
       'line-height': ds.steps.title.h1.lineHeight,
       'letter-spacing': ds.steps.title.h1.letterSpacing,
@@ -1040,11 +1546,15 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h1.fontWeight,
       'color': ds.steps.title.h1.color,
     },
-    '.steps[data-title-size="h1"]': {
+    [`.steps[data-title-size="h1"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h1.lineHeight,
-      '--step-indicator-size': ds.spacing.space6,
+      '--step-indicator-size': '1.75rem',
     },
-    '.steps[data-title-size="h2"] .step-title': {
+    [`.steps[data-title-size="h1"] .step-indicator${NP}`]: {
+      'font-size': ds.font.size.base,
+      'line-height': ds.font.height.base,
+    },
+    [`.steps[data-title-size="h2"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h2.fontSize,
       'line-height': ds.steps.title.h2.lineHeight,
       'letter-spacing': ds.steps.title.h2.letterSpacing,
@@ -1052,11 +1562,15 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h2.fontWeight,
       'color': ds.steps.title.h2.color,
     },
-    '.steps[data-title-size="h2"]': {
+    [`.steps[data-title-size="h2"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h2.lineHeight,
-      '--step-indicator-size': ds.spacing.space6,
+      '--step-indicator-size': '1.75rem',
     },
-    '.steps[data-title-size="h3"] .step-title': {
+    [`.steps[data-title-size="h2"] .step-indicator${NP}`]: {
+      'font-size': ds.font.size.base,
+      'line-height': ds.font.height.base,
+    },
+    [`.steps[data-title-size="h3"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h3.fontSize,
       'line-height': ds.steps.title.h3.lineHeight,
       'letter-spacing': ds.steps.title.h3.letterSpacing,
@@ -1064,11 +1578,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h3.fontWeight,
       'color': ds.steps.title.h3.color,
     },
-    '.steps[data-title-size="h3"]': {
+    [`.steps[data-title-size="h3"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h3.lineHeight,
-      '--step-indicator-size': ds.spacing.space6,
+      '--step-indicator-size': '1.75rem',
     },
-    '.steps[data-title-size="h4"] .step-title': {
+    [`.steps[data-title-size="h4"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h4.fontSize,
       'line-height': ds.steps.title.h4.lineHeight,
       'letter-spacing': ds.steps.title.h4.letterSpacing,
@@ -1076,11 +1590,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h4.fontWeight,
       'color': ds.steps.title.h4.color,
     },
-    '.steps[data-title-size="h4"]': {
+    [`.steps[data-title-size="h4"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h4.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
     },
-    '.steps[data-title-size="h5"] .step-title': {
+    [`.steps[data-title-size="h5"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h5.fontSize,
       'line-height': ds.steps.title.h5.lineHeight,
       'letter-spacing': ds.steps.title.h5.letterSpacing,
@@ -1088,11 +1602,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h5.fontWeight,
       'color': ds.steps.title.h5.color,
     },
-    '.steps[data-title-size="h5"]': {
+    [`.steps[data-title-size="h5"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h5.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
     },
-    '.steps[data-title-size="h6"] .step-title': {
+    [`.steps[data-title-size="h6"] .step-title${NP}`]: {
       'font-size': ds.steps.title.h6.fontSize,
       'line-height': ds.steps.title.h6.lineHeight,
       'letter-spacing': ds.steps.title.h6.letterSpacing,
@@ -1100,16 +1614,16 @@ export const componentsStyles = (ds: DesignSystem) => {
       'font-weight': ds.steps.title.h6.fontWeight,
       'color': ds.steps.title.h6.color,
     },
-    '.steps[data-title-size="h6"]': {
+    [`.steps[data-title-size="h6"]${NP}`]: {
       '--step-title-line-height': ds.steps.title.h6.lineHeight,
       '--step-indicator-size': ds.spacing.space5,
     },
     '@media (max-width: 768px)': {
-      '.columns': {
+      [`.cards${NP}`]: {
         'grid-template-columns': 'repeat(1, minmax(0, 1fr))',
       },
     },
-    'ul': {
+    [`ul${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'list-style-type': 'disc',
@@ -1122,10 +1636,10 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
 
       '> li::marker': {
-        color: ds.color.text.lowest,
+        color: ds.color.text.xmuted,
       },
     },
-    'ol': {
+    [`ol${NP}`]: {
       'counter-reset': 'index',
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
@@ -1163,53 +1677,76 @@ export const componentsStyles = (ds: DesignSystem) => {
         },
       },
     },
-    'hr': {
+    [`hr${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border': '0',
       'border-top': '1px solid',
-      'border-color': color.border,
+      'border-color': color.border.base,
     },
-    'hr:has(+ :is(h1, h2, h3, h4, h5, h6))': {
+    [`hr:has(+ :is(h1, h2, h3, h4, h5, h6))${NP}`]: {
       'margin-top': gap.heading,
     },
-    'h1': headingStyle(ds.h1),
-    'h2': headingStyle(ds.h2),
-    'h3': headingStyle(ds.h3),
-    'h4': headingStyle(ds.h4),
-    'h5': headingStyle(ds.h5),
-    'h6': headingStyle(ds.h6),
-    'p a, td a, li a': {
+    [`h1${NP}`]: headingStyle(ds.h1),
+    [`h2${NP}`]: headingStyle(ds.h2),
+    [`h3${NP}`]: headingStyle(ds.h3),
+    [`h4${NP}`]: headingStyle(ds.h4),
+    [`h5${NP}`]: headingStyle(ds.h5),
+    [`h6${NP}`]: headingStyle(ds.h6),
+    [`.subtitle${NP}`]: {
+      'margin-top': gap.base,
+      'margin-bottom': gap.base,
+      'font-size': ds.font.size.base,
+      'line-height': ds.font.height.base,
+      'font-weight': ds.subtitle.font.weight,
+      'color': ds.subtitle.color.text,
+    },
+    [`:is(h1, h2, h3, h4, h5, h6):has(+ .subtitle)${NP}`]: {
+      'margin-bottom': gap.cluster,
+    },
+    [`:is(h1, h2, h3, h4, h5, h6) + .subtitle${NP}`]: {
+      'margin-top': '0',
+      'margin-bottom': gap.cluster,
+    },
+    [`h1 + .subtitle${NP}`]: {
+      'font-size': ds.subtitle.font.size,
+      'line-height': ds.subtitle.font.height,
+    },
+    [`:is(p, td, li) a${NP}`]: {
       'color': ds.link.text.color,
       'text-decoration-line': ds.link.text.decorationLine,
       'text-decoration-color': ds.link.text.decorationColor,
       'text-decoration-style': ds.link.text.decorationStyle,
       'font-weight': ds.link.fontWeight,
       'text-underline-offset': '0.25rem',
-      'transition': 'color 0.1s ease, text-decoration-color 0.1s ease',
+      'transition': 'color 0.15s ease, text-decoration-color 0.15s ease',
 
       '&:hover': {
-        'color': color.accent.high,
-        'text-decoration-color': color.accent.high,
+        'color': color.text.accent,
+        'text-decoration-color': transparent(ds.color.text.accent, 70),
+      },
+
+      '&:focus-visible': {
+        'border-radius': ds.border.radius,
       },
 
       '&:active': {
-        color: color.accent.high,
+        color: color.text.accent,
       },
     },
-    'img': {
+    [`img${NP}`]: {
       'display': 'inline-block',
       'border-radius': ds.border.radius,
     },
 
-    'table': {
+    [`table${NP}`]: {
       'margin-top': gap.base,
       'margin-bottom': gap.cluster,
       'border-collapse': 'collapse',
       'overflow': 'hidden',
 
       'td, th': {
-        'border-bottom': `1px solid ${ds.color.border}`,
+        'border-bottom': `1px solid ${ds.color.border.base}`,
         'min-width': ds.spacing.space4,
         'padding-top': ds.spacing.space3,
         'padding-bottom': ds.spacing.space3,
@@ -1239,11 +1776,11 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
     },
 
-    'table h1, table h2, table h3, table h4, table h5, table h6': {
+    [`table h1${NP}, table h2${NP}, table h3${NP}, table h4${NP}, table h5${NP}, table h6${NP}`]: {
       margin: '0',
     },
 
-    '.frame': {
+    [`.frame${NP}`]: {
       'display': 'flex',
       'flex-direction': 'column',
       'margin-top': gap.base,
@@ -1281,17 +1818,17 @@ export const componentsStyles = (ds: DesignSystem) => {
         width: 'auto',
       },
     },
-    '.scroll-area-root': {
+    [`.scroll-area-root${NP}`]: {
       position: 'relative',
       overflow: 'hidden',
     },
-    '.scroll-area-viewport': {
+    [`.scroll-area-viewport${NP}`]: {
       width: '100%',
       height: '100%',
     },
-    '.scroll-area-scrollbar': {
+    [`.scroll-area-scrollbar${NP}`]: {
       'display': 'flex',
-      'background-color': color.bg.low,
+      'background-color': color.bg.surface1,
       'touch-action': 'none',
       'user-select': 'none',
       'border-radius': ds.spacing['space1-5'],
@@ -1301,13 +1838,20 @@ export const componentsStyles = (ds: DesignSystem) => {
         height: ds.spacing['space1-5'],
       },
     },
-    '.scroll-area-thumb': {
-      'background': color.bg.lowest,
+    [`.scroll-area-thumb${NP}`]: {
+      'background': color.bg.surface2,
       'border-radius': ds.spacing['space1-5'],
       'position': 'relative',
     },
     // Select trigger styles (inline, inside .prose-ui)
-    ...selectTriggerStyles(ds),
+    ...Object.fromEntries(
+      Object.entries(selectTriggerStyles(ds)).map(([selector, value]) => [
+        selector
+          .replace(/\.select-trigger/g, `.select-trigger${NP}`)
+          .replace(/\.select-icon/g, `.select-icon${NP}`),
+        value,
+      ]),
+    ),
   }
 }
 
@@ -1328,7 +1872,7 @@ export const shikiCssVariables = (ds: DesignSystem) => ({
 const darkColorSpec = getDarkColorsSpec()
 const lightColorSpec: ColorSpec = getLightColorsSpec()
 const coreSpec: CoreSpec = getCoreSpec()
-const colors = cssSystem(lightColorSpec, '--p', (value: CssVar) => `hsl(${value})`)
+const colors = cssSystem(lightColorSpec, '--p')
 const core = cssSystem(coreSpec, '--p')
 
 const base: Base = { ...core, ...colors }

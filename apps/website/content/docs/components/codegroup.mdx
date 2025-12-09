@@ -1,5 +1,7 @@
 # Code group
 
+<Subtitle>Display multiple code blocks as tabs with language switching.</Subtitle>
+
 Code groups let you display multiple code blocks as tabs, with optional language switching. This is useful for showing the same code in different languages, or grouping related code snippets together.
 
 ## Basic usage
@@ -85,6 +87,48 @@ const total = (n: number) => `$${n.toFixed(2)}`
 
 ```javascript title='Format'
 const total = (n) => `$${n.toFixed(2)}`
+```
+
+</CodeGroup>
+````
+
+## Language-only switching
+
+When all code blocks share the same `title`, no tabs are displayed — only a language selector appears. This is useful when showing the same code example in multiple languages:
+
+<CodeGroup>
+
+```typescript title='Example'
+const greet = (name: string): string => `Hello, ${name}!`
+```
+
+```javascript title='Example'
+const greet = (name) => `Hello, ${name}!`
+```
+
+```python title='Example'
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+```
+
+</CodeGroup>
+
+Source:
+
+````mdx title="Markdown syntax"
+<CodeGroup>
+
+```typescript title='Example'
+const greet = (name: string): string => `Hello, ${name}!`
+```
+
+```javascript title='Example'
+const greet = (name) => `Hello, ${name}!`
+```
+
+```python title='Example'
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
 ```
 
 </CodeGroup>

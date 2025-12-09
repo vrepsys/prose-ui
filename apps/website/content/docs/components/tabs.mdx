@@ -1,0 +1,137 @@
+# Tabs
+
+<Subtitle>Organize content into switchable panels.</Subtitle>
+
+Tabs let you organize content into multiple panels, where only one panel is visible at a time. This is useful for grouping related information or presenting alternatives.
+
+## Basic usage
+
+Wrap multiple `<Tab>` components inside a `<Tabs>` component. Each tab's `value` prop becomes both the tab label and identifier.
+
+<Tabs>
+  <Tab value="Overview">
+    This is the overview panel. It contains introductory information about the topic.
+  </Tab>
+  <Tab value="Details">
+    This panel contains more detailed information that users can explore when needed.
+  </Tab>
+  <Tab value="Examples">
+    Here you'll find practical examples and use cases.
+  </Tab>
+</Tabs>
+
+Source:
+
+```mdx title="Markdown syntax"
+<Tabs>
+  <Tab value="Overview">
+    This is the overview panel. It contains introductory information about the topic.
+  </Tab>
+  <Tab value="Details">
+    This panel contains more detailed information that users can explore when needed.
+  </Tab>
+  <Tab value="Examples">
+    Here you'll find practical examples and use cases.
+  </Tab>
+</Tabs>
+```
+
+## Rich content
+
+Tabs can contain any MDX content including code blocks, lists, callouts, and other components.
+
+<Tabs>
+  <Tab value="Installation">
+    Install the package using your preferred package manager:
+
+    ```bash
+    npm install @prose-ui/react
+    ```
+  </Tab>
+  <Tab value="Configuration">
+    Add the styles to your app:
+
+    1. Import the CSS file
+    2. Wrap your content with the `prose-ui` class
+    3. Use the MDX components
+  </Tab>
+</Tabs>
+
+Source:
+
+````mdx title="Markdown syntax"
+<Tabs>
+  <Tab value="Installation">
+    Install the package using your preferred package manager:
+
+    ```bash
+    npm install @prose-ui/react
+    ```
+  </Tab>
+  <Tab value="Configuration">
+    Add the styles to your app:
+
+    1. Import the CSS file
+    2. Wrap your content with the `prose-ui` class
+    3. Use the MDX components
+  </Tab>
+</Tabs>
+````
+
+## Synced tabs with groupId
+
+Use the `groupId` prop to sync tab selection across multiple `<Tabs>` components on the same page. Tabs and Code Groups with the same `groupId` will keep their active tab in sync when they share matching tab values.
+
+<Tabs groupId="platform">
+  <Tab value="macOS">
+    Open Terminal and run the installation command.
+  </Tab>
+  <Tab value="Windows">
+    Open PowerShell as Administrator.
+  </Tab>
+  <Tab value="Linux">
+    Open your terminal emulator of choice.
+  </Tab>
+</Tabs>
+
+<Tabs groupId="platform">
+  <Tab value="macOS">
+    Configuration files are stored in `~/Library/Application Support/`.
+  </Tab>
+  <Tab value="Windows">
+    Configuration files are stored in `%APPDATA%`.
+  </Tab>
+  <Tab value="Linux">
+    Configuration files are stored in `~/.config/`.
+  </Tab>
+</Tabs>
+
+Source:
+
+```mdx title="Markdown syntax"
+<Tabs groupId="platform">
+  <Tab value="macOS">
+    Open Terminal and run the installation command.
+  </Tab>
+  <Tab value="Windows">
+    Open PowerShell as Administrator.
+  </Tab>
+  <Tab value="Linux">
+    Open your terminal emulator of choice.
+  </Tab>
+</Tabs>
+
+<!-- Later on the same page... -->
+
+<Tabs groupId="platform">
+  <Tab value="macOS">
+    Configuration files are stored in `~/Library/Application Support/`.
+  </Tab>
+  <Tab value="Windows">
+    Configuration files are stored in `%APPDATA%`.
+  </Tab>
+  <Tab value="Linux">
+    Configuration files are stored in `~/.config/`.
+  </Tab>
+</Tabs>
+```

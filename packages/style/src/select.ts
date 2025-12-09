@@ -18,20 +18,20 @@ export const selectTriggerStyles = (ds: DesignSystem) => ({
     'padding-bottom': ds.spacing.space1,
     'font-size': ds.font.size.sm,
     'line-height': ds.font.height.sm,
-    'color': ds.color.text.lowest,
+    'color': ds.color.text.xmuted,
     'cursor': 'pointer',
     'outline': 'none',
     'transition': 'border-color 150ms ease, color 150ms ease',
     'white-space': 'nowrap',
     '&:hover': {
-      'border-color': ds.color.accent.low,
+      'border-color': ds.color.border.base,
       'color': ds.color.text.base,
     },
     '&:focus-visible': {
-      'border-color': ds.color.accent.base,
+      'border-color': ds.color.border.base,
     },
     '&[data-placeholder]': {
-      'color': ds.color.text.lowest,
+      'color': ds.color.text.xmuted,
     },
     '&:disabled': {
       'cursor': 'not-allowed',
@@ -88,8 +88,8 @@ export const selectPortalStyles = (ds: DesignSystem) => ({
     'max-height': 'var(--radix-select-content-available-height)',
     'overflow-y': 'auto',
     'overflow-x': 'hidden',
-    'background-color': ds.color.bg.low,
-    'border': `1px solid ${ds.color.border}`,
+    'background-color': ds.color.bg.base,
+    'border': `1px solid ${ds.color.border.base}`,
     'border-radius': ds.border.radius,
     'box-shadow': '0 4px 12px rgba(0, 0, 0, 0.15)',
     'font-family': ds.font.family.base,
@@ -140,8 +140,8 @@ export const selectPortalStyles = (ds: DesignSystem) => ({
     'outline': 'none',
     'user-select': 'none',
     '&[data-highlighted]': {
-      'background-color': ds.color.bg.lower,
-      'color': ds.color.text.high,
+      'background-color': ds.color.bg.surface2Hover,
+      'color': ds.color.text.strong,
     },
     '&[data-disabled]': {
       'pointer-events': 'none',
@@ -168,7 +168,7 @@ export const selectPortalStyles = (ds: DesignSystem) => ({
     'padding-bottom': ds.spacing.space1,
     'font-size': ds.font.size.sm,
     'font-weight': ds.font.weight.medium,
-    'color': ds.color.text.lowest,
+    'color': ds.color.text.xmuted,
   },
   '.prose-ui-select-separator': {
     'height': '1px',
@@ -176,7 +176,7 @@ export const selectPortalStyles = (ds: DesignSystem) => ({
     'margin-bottom': ds.spacing.space1,
     'margin-left': `calc(-1 * ${ds.spacing.space1})`,
     'margin-right': `calc(-1 * ${ds.spacing.space1})`,
-    'background-color': ds.color.border,
+    'background-color': ds.color.border.base,
     'pointer-events': 'none',
   },
   '.prose-ui-select-scroll-button': {
@@ -190,7 +190,7 @@ export const selectPortalStyles = (ds: DesignSystem) => ({
   '.prose-ui-select-scroll-icon': {
     'width': '14px',
     'height': '14px',
-    'color': ds.color.text.low,
+    'color': ds.color.text.muted,
   },
   '@media (prefers-reduced-motion: reduce)': {
     '.prose-ui-select-content': {

@@ -15,9 +15,9 @@ type Props = {
 
 const SidenavCategory = ({ item, level }: { item: TreeNode; level: number }) => {
   return (
-    <div className="ml-[0.875rem] flex flex-col md:ml-2 [&:not(:first-child)]:mt-6">
+    <div className="ml-3.5 flex flex-col md:ml-2 not-first:mt-6">
       <h4 className="text-color-base px-0 py-1.5 font-semibold md:text-sm">{item.name}</h4>
-      <ul className="-ml-[0.875rem] flex flex-col md:-ml-2" aria-label={item.name}>
+      <ul className="-ml-3.5 flex flex-col md:-ml-2" aria-label={item.name}>
         <SidenavItems items={item.children} level={level + 1} />
       </ul>
     </div>
@@ -79,9 +79,10 @@ const SidenavFolder = ({ item, level }: { item: TreeNode; level: number }) => {
           }
         }}
         className={classes(
-          'hover:bg-color-low/60 group relative mb-px flex cursor-pointer flex-row items-center justify-between rounded-md px-[0.875rem] py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
-          active ? 'text-color-accent-high' : 'hover:text-color-base text-color-low',
-          open && 'bg-color-lower',
+          'hover:bg-sidenav-hover group relative mb-px flex cursor-pointer flex-row items-center justify-between rounded-md px-3.5 py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
+          active ? 'bg-sidenav-active text-strong-foreground'
+          : 'hover:text-strong-foreground text-muted-foreground',
+          open && 'bg-sidenav-active',
         )}
       >
         <span>{item.name}</span>
@@ -94,7 +95,7 @@ const SidenavFolder = ({ item, level }: { item: TreeNode; level: number }) => {
           <ChevronRight
             className={classes(
               'transform-none transition-colors',
-              active ? 'stroke-color-base' : 'stroke-color-lower group-hover:stroke-color-low',
+              active ? 'stroke-strong-foreground' : 'stroke-xmuted-foreground group-hover:stroke-muted-foreground',
             )}
             size={15}
           />
@@ -141,10 +142,10 @@ const SidenavLink = ({ item }: { item: TreeNode; level: number }) => {
     <li>
       <Link
         className={classes(
-          'mt-px flex w-full cursor-pointer rounded-lg px-[0.875rem] py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
+          'mt-px flex w-full cursor-pointer rounded-lg px-3.5 py-2 font-medium transition md:px-2 md:py-[0.3rem] md:text-sm',
           active
-            ? 'bg-color-low text-color-accent-high'
-            : 'hover:text-color-base text-color-low hover:bg-color-low/60',
+            ? 'bg-sidenav-active text-strong-foreground'
+            : 'hover:text-strong-foreground hover:bg-sidenav-hover text-muted-foreground',
         )}
         href={item.href!}
       >
@@ -174,11 +175,11 @@ export const SideNav = ({ tree }: Props) => {
   const node = generateTree(tree)
   return (
     <SidenavProvider tree={node}>
-      <nav>
+      <aside>
         <ul className="">
           <SidenavItems items={node} level={0} />
         </ul>
-      </nav>
+      </aside>
     </SidenavProvider>
   )
 }

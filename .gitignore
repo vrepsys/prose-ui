@@ -27,6 +27,11 @@ out/
 build
 dist
 
+# Publish only the built CSS for style package
+!packages/style/dist/
+packages/style/dist/*
+!packages/style/dist/prose-ui.css
+
 
 # Debug
 npm-debug.log*

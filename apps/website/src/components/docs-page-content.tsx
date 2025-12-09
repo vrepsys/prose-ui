@@ -27,7 +27,7 @@ export function DocsPageContent({
           </ContentScrollArea>
         </div>
 
-        <div className="hidden h-full min-h-0 w-(--toc-width) pr-(--site-padding-x) flex-col pt-(--article-padding-t) lg:flex">
+        <div className="hidden h-full min-h-0 w-(--toc-width) pr-(--site-padding-x) flex-col lg:flex">
           <Toc sections={toc} />
         </div>
       </>

@@ -1,4 +1,3 @@
-import { ColorSwatch } from '@/components/color-swatch'
 import { DocsPageContent } from '@/components/docs-page-content'
 import { MDXContent } from '@content-collections/mdx/react'
 import { mdxComponents } from '@prose-ui/next'

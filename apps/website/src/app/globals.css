@@ -76,11 +76,11 @@
 @layer base {
   
   :root {
-    --background: var(--p-color-bg-surface2);
+    --background: var(--p-color-bg-surface1);
     --foreground: var(--p-color-text);
     --card: var(--p-color-bg);
     --card-foreground: var(--p-color-text);
-    --muted: var(--p-color-bg-surface1);
+    --muted: var(--p-color-bg-surface2);
     --muted-foreground: var(--p-color-text-muted);
     --xmuted-foreground: var(--p-color-text-xmuted);
     --strong-foreground: var(--p-color-text-strong);

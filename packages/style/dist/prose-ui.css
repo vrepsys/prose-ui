@@ -28,7 +28,7 @@
     --p-color-text-syntax3: oklch(0.51 0.2 324.32);
     --p-color-text-syntax4: oklch(0.38 0.19 272.76);
     --p-color-bg: #fff;
-    --p-color-bg-surface1: oklch(0.97 0 0);
+    --p-color-bg-surface1: oklch(0.98 0 0);
     --p-color-bg-surface1hover: color-mix(in oklab, color-mix(in oklab, oklch(0.97 0 0) 97%, #000 3%) 100%, transparent);
     --p-color-bg-surface2: oklch(0.97 0 0);
     --p-color-bg-surface2hover: color-mix(in oklab, color-mix(in oklab, oklch(0.97 0 0) 97%, #000 3%) 100%, transparent);
@@ -126,7 +126,7 @@
     --p-color-text-syntax3: oklch(0.51 0.2 324.32);
     --p-color-text-syntax4: oklch(0.38 0.19 272.76);
     --p-color-bg: #fff;
-    --p-color-bg-surface1: oklch(0.97 0 0);
+    --p-color-bg-surface1: oklch(0.98 0 0);
     --p-color-bg-surface1hover: color-mix(in oklab, color-mix(in oklab, oklch(0.97 0 0) 97%, #000 3%) 100%, transparent);
     --p-color-bg-surface2: oklch(0.97 0 0);
     --p-color-bg-surface2hover: color-mix(in oklab, color-mix(in oklab, oklch(0.97 0 0) 97%, #000 3%) 100%, transparent);
@@ -260,9 +260,9 @@
     --p-subtitle-font-size: 1rem;
     --p-subtitle-font-height: 1.5rem;
     --p-subtitle-font-weight: var(--p-font-weight-normal);
-    --p-steps-indicator-bg: var(--p-color-bg-surface2);
-    --p-steps-indicator-text: var(--p-color-text-strong);
-    --p-steps-indicator-outline: var(--p-color-bg-surface2);
+    --p-steps-indicator-bg: var(--p-color-bg-surface1);
+    --p-steps-indicator-text: var(--p-color-text-muted);
+    --p-steps-indicator-outline: var(--p-color-bg-surface1);
     --p-steps-connector: var(--p-color-border);
     --p-steps-title-base-font-family: var(--p-font-family-heading);
     --p-steps-title-base-font-size: var(--p-font-size);

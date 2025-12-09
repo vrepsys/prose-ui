@@ -461,9 +461,9 @@ export const getLightColorsSpec = (): ColorSpec => ({
     },
     bg: {
       base: white,
-      surface1: custom[100],
+      surface1: 'oklch(0.98 0 0)',
       surface1Hover: mix(custom[100], black, 3),
-      surface2: custom[100],
+      surface2: 'oklch(0.97 0 0)',
       surface2Hover: mix(custom[100], black, 3),
       surface2Active: white,
       accent: transparent(green[700], 10),
@@ -740,9 +740,9 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
     },
     steps: {
       indicator: {
-        bg: ds.color.bg.surface2,
-        text: ds.color.text.strong,
-        outline: ds.color.bg.surface2,
+        bg: ds.color.bg.surface1,
+        text: ds.color.text.muted,
+        outline: ds.color.bg.surface1,
       },
       connector: ds.color.border.base,
       title: {

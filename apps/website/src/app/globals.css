@@ -106,7 +106,7 @@
     --toc-width: 12rem;
     --topnav-height: 3.5rem;
     --article-padding-t: var(--p-content-gap-heading);
-    --article-padding-x: 0;
+    --article-padding-x: theme(padding.4);
     --article-padding-x-md: theme(padding.6);
     --article-padding-x-lg: theme(padding.10);
     --article-padding-x-xl: theme(padding.14);

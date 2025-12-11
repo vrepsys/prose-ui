@@ -44,7 +44,7 @@ export const MobileNav = ({ className }: { className?: string }) => {
                   <Dialog.Title>Navigation</Dialog.Title>
                 </VisuallyHidden.Root>
                 <motion.nav
-                  className="bg-color-base border-color-base flex h-(--topnav-height) w-full items-center justify-between gap-2 border-b px-(--site-padding-x) py-2"
+                  className="bg-background border flex h-(--topnav-height) w-full items-center justify-between gap-2 border-b px-(--site-padding-x) py-2"
                   transition={{ duration: 0.15, ease: 'easeInOut' }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -65,7 +65,7 @@ export const MobileNav = ({ className }: { className?: string }) => {
                 </motion.nav>
 
                 <motion.nav
-                  className="bg-color-base flex h-full flex-col gap-0 overflow-y-scroll"
+                  className="bg-background flex h-full flex-col gap-0 overflow-y-scroll"
                   transition={{ duration: 0.15, ease: 'easeInOut' }}
                   initial={{ translateX: 100, opacity: 0 }}
                   animate={{ translateX: 0, opacity: 1 }}
@@ -83,7 +83,6 @@ export const MobileNav = ({ className }: { className?: string }) => {
                       ]}
                     />
                   </div>
-                  <Footer />
                 </motion.nav>
               </div>
             </Dialog.Content>

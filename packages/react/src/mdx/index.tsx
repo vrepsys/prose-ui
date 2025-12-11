@@ -14,7 +14,6 @@ import { Card } from './card.js'
 import { Cards } from './cards.js'
 import { Steps, Step } from './steps.js'
 import { parseBoolean } from './booleanish.js'
-import TabsDemo from './tabs-demo.js'
 import { Tabs, Tab } from './tabs.js'
 export type { Booleanish } from './booleanish.js'
 
@@ -48,7 +47,6 @@ const baseComponents = {
   h4,
   h5,
   h6,
-  TabsDemo,
   Tabs,
   Tab,
 }

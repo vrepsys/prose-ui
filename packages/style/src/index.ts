@@ -1224,10 +1224,26 @@ export const componentsStyles = (ds: DesignSystem) => {
       'flex-direction': 'column',
       'gap': ds.spacing.space1,
       'border-radius': ds.border.radius,
-      'padding': ds.spacing.space3,
+      'padding': ds.spacing.space4,
+      '.icon': {
+        width: ds.spacing.space4,
+        height: ds.spacing.space4,
+      },
       '.title': {
+        display: 'inline-flex',
+        'align-items': 'center',
+        'gap': ds.spacing.space2,
         'font-size': ds.font.size.sm,
-        'font-weight': ds.font.weight.semiBold,
+        'font-weight': ds.font.weight.semiBold
+      },
+      '.body-container': {
+        display: 'flex',
+        'align-items': 'flex-start',
+        'gap': ds.spacing.space2,
+        '.icon': {
+          'flex-shrink': 0,
+          'margin-top': `calc((${ds.callout.font.height} - ${ds.spacing.space4}) / 2)`,
+        },
       },
       '.body': {
         ':first-child': {
@@ -1236,7 +1252,6 @@ export const componentsStyles = (ds: DesignSystem) => {
         ':last-child': {
           'margin-bottom': '0',
         },
-        'color': ds.callout.color.text,
         'p, ul, ol, li': {
           'font-size': ds.callout.font.size,
           'line-height': ds.callout.font.height,
@@ -1249,7 +1264,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       '.title': {
         'color': ds.callout.note.color.text,
       },
-      '.body': {
+      '.body-container': {
         'color': ds.callout.note.color.text,
       },
     },
@@ -1258,7 +1273,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       '.title': {
         'color': ds.callout.info.color.text,
       },
-      '.body': {
+      '.body-container': {
         'color': transparent(ds.callout.info.color.text, 90),
       },
     },
@@ -1267,7 +1282,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       '.title': {
         'color': ds.callout.success.color.text,
       },
-      '.body': {
+      '.body-container': {
         'color': ds.callout.success.color.text,
       },
     },
@@ -1276,7 +1291,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       '.title': {
         'color': ds.callout.warning.color.text,
       },
-      '.body': {
+      '.body-container': {
         'color': ds.callout.warning.color.text,
       },
     },
@@ -1285,7 +1300,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       '.title': {
         'color': ds.callout.danger.color.text,
       },
-      '.body': {
+      '.body-container': {
         'color': ds.callout.danger.color.text,
       },
     },

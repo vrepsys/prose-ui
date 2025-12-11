@@ -4,6 +4,8 @@
 
 Callout elements are meant to draw attention to important information or provide additional context to the user.
 
+## Variants with titles
+
 <Callout variant="note" title="Note">
   The note callout is a subtle callout used to provide supplementary information
   or tips. It helps users gain additional insights without distracting from the
@@ -45,4 +47,32 @@ Source:
 <Callout variant="tip" title="Tip">...</Callout>
 <Callout variant="warning" title="Warning">...</Callout>
 <Callout variant="danger" title="Danger">...</Callout>
+```
+
+## Callouts without titles
+
+Titles are optional. When omitted, the icon is shown next to the body text.
+
+<Callout variant="info">
+  Use a simple note without a title when you want to keep the focus on the body
+  copy while still providing emphasis.
+</Callout>
+
+<Callout variant="warning">
+  For important warnings that don't need a heading, omit the title to keep the
+  callout compact.
+</Callout>
+
+Source:
+
+```mdx
+<Callout variant="info">
+  Use a simple note without a title when you want to keep the focus on the body
+  copy while still providing emphasis.
+</Callout>
+
+<Callout variant="warning">
+  For important warnings that don't need a heading, omit the title to keep the
+  callout compact.
+</Callout>
 ```

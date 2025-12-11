@@ -16,7 +16,10 @@ export const TopNav = () => {
   const [borderOpacity, setBorderOpacity] = useState(0)
 
   useEffect(() => {
-    if (!isLandingPage) return
+    if (!isLandingPage) {
+      setBorderOpacity(0)
+      return
+    }
 
     const handleScroll = () => {
       setBorderOpacity(Math.min(window.scrollY, 80) / 80)

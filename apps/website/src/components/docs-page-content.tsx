@@ -21,7 +21,7 @@ export function DocsPageContent({
         <div className="relative h-full min-h-0 min-w-0 pb-2 pr-2 lg:pr-4">
           <ContentScrollArea
             viewportRef={viewportRef}
-            className="h-full min-h-0 w-full bg-card rounded-lg shadow-xs border border-border/75"
+            className="h-full min-h-0 w-full bg-card rounded-lg shadow-xs border border-border/75 dark:border-0"
           >
             {article}
           </ContentScrollArea>

@@ -12,7 +12,6 @@ import { Logo } from './logo'
 import { Button } from '../ui/button'
 import { MenuIcon, XIcon } from 'lucide-react'
 import { GithubButton } from '../github-button'
-import { Footer } from './footer'
 
 export const MobileNav = ({ className }: { className?: string }) => {
   const [open, setOpen] = useState(false)

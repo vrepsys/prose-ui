@@ -36,7 +36,7 @@ function ContentScrollArea({
           {children}
         </ContentScrollProvider>
       </ScrollAreaPrimitive.Viewport>
-      <ScrollBar />
+      <ScrollBar className="py-1.5" />
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
   )

@@ -13,6 +13,22 @@ Styling is organized around a design system, with its CSS variables (design toke
 - Component-specific variables
 
 
+## Opt out of Prose styles
+
+If you need certain elements inside a `.prose-ui` container to keep their own styles, add the `not-prose` class. Prose UI will skip those elements and their children.
+
+```tsx title="Keep a section unstyled inside Prose UI"
+<article className="prose-ui space-y-6">
+  <h1>Styled heading</h1>
+  <p>Regular prose content.</p>
+
+  <div className="not-prose">
+    <h1>Page title outside Prose UI</h1>
+    <button className="btn-primary">Custom button</button>
+  </div>
+</article>
+```
+
 
 ## Core Variables
 
@@ -94,4 +110,3 @@ Or customize code blocks:
   --p-inline-code-color-bg: var(--p-color-bg-surface2);
 }
 ```
-

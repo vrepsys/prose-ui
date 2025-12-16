@@ -33,9 +33,10 @@ export const TopNav = () => {
   return (
     <header
       className={classes(
-        'bg-background sticky top-0 z-20 flex h-(--topnav-height) w-full border-b py-2',
+        'bg-background sticky top-0 z-20 flex h-(--topnav-height) w-full py-2',
       )}
       style={{
+        borderBottomWidth: scrollBorderDisabled ? '0px' : '1px',
         borderBottomColor: `color-mix(in srgb, var(--p-color-border) ${borderOpacity * 100}%, transparent)`,
       }}
     >
@@ -52,7 +53,7 @@ export const TopNav = () => {
             <Link href="/templates">Templates</Link>
           </Button> */}
           <Button variant="navitem" active={/^\/editor(\/|$)/.test(pathname)} asChild>
-            <Link href="/editor">Editor</Link>
+            <Link href="/editor">Visual Editor</Link>
           </Button>
           <div className="hidden items-center justify-start gap-2 md:flex">
             <GithubButton />

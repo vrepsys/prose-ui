@@ -16,7 +16,7 @@ export const HighlightedCodeBlockBody = ({
 }) => {
   const lines = code.trim().split(/\r\n|\r|\n/)
   return (
-    <div className="body">
+    <div className="code-block-body">
       {code && showLineNumbers && (
         <div className="line-numbers">
           {Array(lines.length)

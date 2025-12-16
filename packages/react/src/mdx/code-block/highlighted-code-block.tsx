@@ -17,8 +17,8 @@ export const HighlightedCodeBlock = ({
   return (
     <div {...attrs} className="code-block">
       {title && (
-        <div className="header">
-          <div className="title">{title}</div>
+        <div className="code-block-header">
+          <div className="code-block-title">{title}</div>
           <CopyButton content={code} />
         </div>
       )}

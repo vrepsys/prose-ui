@@ -112,19 +112,19 @@ export const CodeGroup = ({ groupId, languages, tabs }: CodeGroupProps) => {
       value={activeTab}
       onValueChange={handleTabChange}
     >
-      <div className="header">
+      <div className="code-group-header">
         {showTabs ? (
-          <Tabs.List className="tabs-list">
+          <Tabs.List className="code-group-tabs-list">
             {tabs.map((tab) => (
-              <Tabs.Trigger key={tab.title} className="tab-trigger" value={tab.title}>
+              <Tabs.Trigger key={tab.title} className="code-group-tab-trigger" value={tab.title}>
                 {tab.title}
               </Tabs.Trigger>
             ))}
           </Tabs.List>
         ) : (
-          <div className="title">{singleTabTitle}</div>
+          <div className="code-group-title">{singleTabTitle}</div>
         )}
-        <div className="header-actions">
+        <div className="code-group-header-actions">
           {showLanguageSelector && (
             <Select value={selectedLang} onValueChange={handleLangChange}>
               <SelectTrigger size="sm">

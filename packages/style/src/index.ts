@@ -932,12 +932,12 @@ export const componentsStyles = (ds: DesignSystem) => {
       'transition': 'color 150ms ease, background-color 150ms ease',
       'cursor': 'pointer',
 
-      '.icon-wrapper': {
+      '.copy-button-icon-wrapper': {
         position: 'relative',
         width: '16px',
         height: '16px',
       },
-      '.icon': {
+      '.copy-button-icon': {
         position: 'absolute',
         top: '0',
         left: '0',
@@ -945,21 +945,21 @@ export const componentsStyles = (ds: DesignSystem) => {
         height: '100%',
         transition: 'opacity 150ms ease',
       },
-      '.icon-default': {
+      '.copy-button-icon-default': {
         opacity: '1',
       },
 
-      '.icon-hover': {
+      '.copy-button-icon-hover': {
         opacity: '0',
       },
     },
     [`.copy-button${NP}:hover`]: {
       'color': ds.color.text.base,
       'background-color': ds.color.bg.surface2Hover,
-      '.icon-default': {
+      '.copy-button-icon-default': {
         opacity: '0',
       },
-      '.icon-hover': {
+      '.copy-button-icon-hover': {
         opacity: '1',
       },
     },
@@ -978,7 +978,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'background-color': ds.codeBlock.color.bg,
       'display': 'flex',
       'flex-direction': 'column',
-        '.header': {
+        '.code-group-header': {
         'display': 'flex',
         'align-items': 'center',
         'justify-content': 'space-between',
@@ -989,16 +989,16 @@ export const componentsStyles = (ds: DesignSystem) => {
         'padding-left': ds.spacing.space3,
         'padding-right': ds.spacing['space1-5'],
         'border-color': ds.color.border.base,
-        '.header-actions': {
+        '.code-group-header-actions': {
           'display': 'flex',
           'align-items': 'center',
           'gap': ds.spacing['space0-5'],
         },
-        '.tabs-list': {
+        '.code-group-tabs-list': {
           'display': 'flex',
           'gap': ds.spacing.space1,
           'margin-left': `calc(-1 * ${ds.spacing.space1})`,
-          '.tab-trigger': {
+          '.code-group-tab-trigger': {
             'color': ds.color.text.muted,
             'font-size': ds.font.size.sm,
             'font-weight': ds.font.weight.medium,
@@ -1012,12 +1012,12 @@ export const componentsStyles = (ds: DesignSystem) => {
               'color': ds.color.text.accent,
             },
           },
-          '.tab-trigger[data-state="active"]': {
+          '.code-group-tab-trigger[data-state="active"]': {
             'color': ds.color.text.accent,
             'box-shadow': `0 7px 0 0 ${ds.codeBlock.color.bg}, 0 9px 0 0 currentColor`,
           },
         },
-        '.title': {
+        '.code-group-title': {
           'color': ds.color.text.muted,
           'font-size': ds.font.size.sm,
           'line-height': ds.font.height.sm,
@@ -1034,7 +1034,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'margin-bottom': gap.cluster,
       'display': 'flex',
       'flex-direction': 'column',
-      '.header': {
+      '.tabs-header': {
         'display': 'flex',
         'align-items': 'center',
         'gap': ds.spacing.space2,
@@ -1100,7 +1100,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       'display': 'flex',
       'flex-direction': 'column',
 
-      '.header': {
+      '.code-block-header': {
         'display': 'flex',
         'align-items': 'center',
         'justify-content': 'space-between',
@@ -1110,7 +1110,7 @@ export const componentsStyles = (ds: DesignSystem) => {
         'padding-left': ds.spacing.space3,
         'padding-right': ds.spacing['space1-5'],
         'border-color': ds.color.border.base,
-        '.title': {
+        '.code-block-title': {
           'color': ds.color.text.muted,
           'font-size': ds.font.size.sm,
           'line-height': ds.font.height.sm,
@@ -1120,7 +1120,7 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
     },
     [`.code-block${NP}, .code-group${NP}`]: {
-      '.body:has(> .copy-button), .body:has(> .copied-icon)': {
+      '.code-block-body:has(> .copy-button), .code-block-body:has(> .copied-icon)': {
         'padding-right': ds.spacing.space6,
         '.scroll-area-root': {
           'position': 'relative',
@@ -1137,7 +1137,7 @@ export const componentsStyles = (ds: DesignSystem) => {
           },
         },
       },
-      '.body': {
+      '.code-block-body': {
         'position': 'relative',
         'display': 'flex',
         'width': '100%',
@@ -1225,27 +1225,31 @@ export const componentsStyles = (ds: DesignSystem) => {
       'gap': ds.spacing.space1,
       'border-radius': ds.border.radius,
       'padding': ds.spacing.space4,
-      '.icon': {
+      '.callout-icon': {
         width: ds.spacing.space4,
         height: ds.spacing.space4,
       },
-      '.title': {
+      '.callout-title': {
         display: 'inline-flex',
         'align-items': 'center',
         'gap': ds.spacing.space2,
         'font-size': ds.font.size.sm,
         'font-weight': ds.font.weight.semiBold
       },
-      '.body-container': {
+      '.callout-body-container': {
         display: 'flex',
+        'width': '100%',
+        'min-width': '0',
         'align-items': 'flex-start',
         'gap': ds.spacing.space2,
-        '.icon': {
+        '.callout-icon': {
           'flex-shrink': 0,
           'margin-top': `calc((${ds.callout.font.height} - ${ds.spacing.space4}) / 2)`,
         },
       },
-      '.body': {
+      '.callout-body': {
+        'flex': '1',
+        'min-width': '0',
         ':first-child': {
           'margin-top': '0',
         },
@@ -1261,46 +1265,46 @@ export const componentsStyles = (ds: DesignSystem) => {
     },
     [`.callout[data-variant="note"]${NP}`]: {
       'background-color': ds.callout.note.color.bg,
-      '.title': {
+      '.callout-title': {
         'color': ds.callout.note.color.text,
       },
-      '.body-container': {
+      '.callout-body-container': {
         'color': ds.callout.note.color.text,
       },
     },
     [`.callout[data-variant="info"]${NP}`]: {
       'background-color': ds.callout.info.color.bg,
-      '.title': {
+      '.callout-title': {
         'color': ds.callout.info.color.text,
       },
-      '.body-container': {
+      '.callout-body-container': {
         'color': transparent(ds.callout.info.color.text, 90),
       },
     },
     [`.callout[data-variant="tip"]${NP}`]: {
       'background-color': ds.callout.success.color.bg,
-      '.title': {
+      '.callout-title': {
         'color': ds.callout.success.color.text,
       },
-      '.body-container': {
+      '.callout-body-container': {
         'color': ds.callout.success.color.text,
       },
     },
     [`.callout[data-variant="warning"]${NP}`]: {
       'background-color': ds.callout.warning.color.bg,
-      '.title': {
+      '.callout-title': {
         'color': ds.callout.warning.color.text,
       },
-      '.body-container': {
+      '.callout-body-container': {
         'color': ds.callout.warning.color.text,
       },
     },
     [`.callout[data-variant="danger"]${NP}`]: {
       'background-color': ds.callout.danger.color.bg,
-      '.title': {
+      '.callout-title': {
         'color': ds.callout.danger.color.text,
       },
-      '.body-container': {
+      '.callout-body-container': {
         'color': ds.callout.danger.color.text,
       },
     },

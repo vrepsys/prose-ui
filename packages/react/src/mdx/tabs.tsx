@@ -70,7 +70,7 @@ export function Tabs({ groupId, items = [], children }: TabsProps) {
       value={activeTab}
       onValueChange={handleTabChange}
     >
-      <div className="header">
+      <div className="tabs-header">
         <RadixTabs.List className="tabs-list">
           {items.map((value) => (
             <RadixTabs.Trigger key={value} className="tab-trigger" value={value}>

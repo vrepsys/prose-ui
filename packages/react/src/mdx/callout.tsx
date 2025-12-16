@@ -29,15 +29,15 @@ export const Callout = ({ variant, title, children }: Props) => {
 
   return (
     <div className={classes('callout')} data-variant={variant ?? 'note'}>
-      <div className="content">
+      <div className="callout-content">
         {title && (
-          <div className="title">
-            <Icon className='icon' aria-hidden="true" /> {title}
+          <div className="callout-title">
+            <Icon className='callout-icon' aria-hidden="true" /> {title}
           </div>
         )}
-        <div className="body-container">
-          {!title && <Icon className='icon' aria-hidden="true" />}
-          <div className="body">{children}</div>
+        <div className="callout-body-container">
+          {!title && <Icon className='callout-icon' aria-hidden="true" />}
+          <div className="callout-body">{children}</div>
         </div>
       </div>
     </div>

@@ -40,9 +40,9 @@ export const CopyButton = ({ content }: { content: string }) => {
       className="copy-button"
       onClick={handleCopy}
     >
-      <div className="icon-wrapper">
-        <Clipboard className="icon icon-default" size={16} />
-        <ClipboardCopy className="icon icon-hover" size={16} />
+      <div className="copy-button-icon-wrapper">
+        <Clipboard className="copy-button-icon copy-button-icon-default" size={16} />
+        <ClipboardCopy className="copy-button-icon copy-button-icon-hover" size={16} />
       </div>
     </button>
   )

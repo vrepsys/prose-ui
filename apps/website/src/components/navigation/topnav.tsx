@@ -12,12 +12,12 @@ import { classes } from '@/utils/classes'
 
 export const TopNav = () => {
   const pathname = usePathname()
-  const isLandingPage = pathname === '/'
+  const scrollBorderDisabled = pathname?.startsWith('/docs')
   const [borderOpacity, setBorderOpacity] = useState(0)
 
   useEffect(() => {
-    if (!isLandingPage) {
-      setBorderOpacity(0)
+    if (scrollBorderDisabled) {
+      setBorderOpacity(1)
       return
     }
 
@@ -29,11 +29,11 @@ export const TopNav = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [isLandingPage])
+  }, [scrollBorderDisabled])
   return (
     <header
       className={classes(
-        'bg-background sticky top-0 z-20 flex h-(--topnav-height) w-full py-2',
+        'bg-background sticky top-0 z-20 flex h-(--topnav-height) w-full border-b py-2',
       )}
       style={{
         borderBottomColor: `color-mix(in srgb, var(--p-color-border) ${borderOpacity * 100}%, transparent)`,

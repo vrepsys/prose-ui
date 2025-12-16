@@ -42,13 +42,13 @@
       },
       {
         "type": "link",
-        "name": "Typography",
-        "href": "/docs/components/typography"
+        "name": "Callout",
+        "href": "/docs/components/callout"
       },
       {
         "type": "link",
-        "name": "Image",
-        "href": "/docs/components/image"
+        "name": "Card",
+        "href": "/docs/components/card"
       },
       {
         "type": "link",
@@ -62,18 +62,18 @@
       },
       {
         "type": "link",
-        "name": "Tabs",
-        "href": "/docs/components/tabs"
+        "name": "Frame",
+        "href": "/docs/components/frame"
       },
       {
         "type": "link",
-        "name": "Callout",
-        "href": "/docs/components/callout"
+        "name": "Image",
+        "href": "/docs/components/image"
       },
       {
         "type": "link",
-        "name": "Card",
-        "href": "/docs/components/card"
+        "name": "Link",
+        "href": "/docs/components/link"
       },
       {
         "type": "link",
@@ -82,23 +82,23 @@
       },
       {
         "type": "link",
-        "name": "Table",
-        "href": "/docs/components/table"
-      },
-      {
-        "type": "link",
         "name": "Steps",
         "href": "/docs/components/steps"
       },
       {
         "type": "link",
-        "name": "Frame",
-        "href": "/docs/components/frame"
+        "name": "Table",
+        "href": "/docs/components/table"
       },
       {
         "type": "link",
-        "name": "Link",
-        "href": "/docs/components/link"
+        "name": "Tabs",
+        "href": "/docs/components/tabs"
+      },
+      {
+        "type": "link",
+        "name": "Typography",
+        "href": "/docs/components/typography"
       }
     ]
   },

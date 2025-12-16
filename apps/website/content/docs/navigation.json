@@ -7,6 +7,11 @@
         "type": "link",
         "name": "Introduction",
         "href": "/docs"
+      },
+      {
+        "type": "link",
+        "name": "About",
+        "href": "/docs/about"
       }
     ]
   },

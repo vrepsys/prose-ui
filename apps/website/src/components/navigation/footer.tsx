@@ -6,13 +6,21 @@ export const Footer = () => (
       <div className="flex items-center gap-4 md:gap-1">
         <Logo />{' '}
         <p className="text-color-lowest my-0! text-sm font-medium">
-          Created by{' '}
+          Learn more on the{' '}
+          <a
+            className="text-color-low hover:text-color-base underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4 hover:decoration-[hsl(var(--p-color-text-base))]"
+            href="/docs/about"
+          >
+            About page
+          </a>
+          . Follow on{' '}
           <a
             className="text-color-low hover:text-color-base underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4 hover:decoration-[hsl(var(--p-color-text-base))]"
             href="https://x.com/vrepsys"
           >
-            Valdemaras
-          </a>. Source code available on{' '}
+            X
+          </a>
+          . Source code available on{' '}
           <a
             className="text-color-low hover:text-color-base underline decoration-[hsl(var(--p-color-text-lowest))] underline-offset-4 hover:decoration-[hsl(var(--p-color-text-base))]"
             href="https://github.com/vrepsys/prose-ui"

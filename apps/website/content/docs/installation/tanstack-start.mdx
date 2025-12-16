@@ -63,7 +63,7 @@ import { z } from "zod";
  
 const posts = defineCollection({
   name: "posts",
-  directory: "content",
+  directory: "content/posts",
   include: "**/*.mdx",
   schema: z.object({
     content: z.string(),
@@ -103,7 +103,7 @@ In your `content-collections.ts`, initialize and pass `remarkPlugins` to the MDX
 import { remarkPlugins } from '@prose-ui/core'
 
 // ...
-const content = await compileMDX(ctx, page, {
+const mdx = await compileMDX(context, document, {
    remarkPlugins: remarkPlugins(),
 })
 // ...

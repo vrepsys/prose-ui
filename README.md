@@ -8,7 +8,7 @@
 
 Prose UI is an open-source library of React components and customizable CSS styles for rendering Markdown and MDX content. It gives you polished typography and thoughtfully designed components for documentation sites, blogs, and any content-focused application.
 
-[Documentation](https://prose-ui.com/docs) · [Live Demo](https://prose-ui.com/demo) · [GitHub](https://github.com/vrepsys/prose-ui)
+[Documentation](https://prose-ui.com/docs) · [GitHub](https://github.com/vrepsys/prose-ui)
 
 ## Why Prose UI?
 
@@ -33,8 +33,10 @@ See the [installation guide](https://prose-ui.com/docs/installation/overview) fo
 ## Quick Start
 
 ```tsx
-import { mdxComponents } from '@prose-ui/react'
+// Import the css
 import '@prose-ui/style/prose-ui.css'
+
+import { mdxComponents } from '@prose-ui/react'
 
 // Pass components to your MDX renderer
 <MDXContent components={mdxComponents} />
@@ -60,10 +62,6 @@ Prose UI follows [GitHub Flavored Markdown](https://github.github.com/gfm) synta
 
 Browse all components in the [component documentation](https://prose-ui.com/docs/components/overview).
 
-## Dhub — Visual Markdown Editor
-
-Looking for a visual editing experience? [Dhub](https://dhub.dev) is a git-based CMS for technical documentation with Notion-like Markdown editing. It commits directly to GitHub, so you keep your Git workflow with no lock-in. Prose UI was built alongside Dhub to provide the rendering layer.
-
 ## Development
 
 This is a monorepo containing the website, docs, and source code for Prose UI packages.
@@ -73,6 +71,10 @@ pnpm install
 cd apps/website
 pnpm dev
 ```
+
+## Dhub — Visual Markdown Editor
+
+Looking for a visual editing experience? [Dhub](https://dhub.dev) is a git-based CMS for technical documentation with Notion-like Markdown editing. It commits directly to GitHub, so you keep your Git workflow with no lock-in. Prose UI was built alongside Dhub to provide the rendering layer.
 
 ## License
 

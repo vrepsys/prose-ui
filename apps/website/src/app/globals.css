@@ -24,7 +24,9 @@
   --color-border-muted: var(--border-muted);
   --color-sidenav-hover: var(--sidenav-hover);
   --color-sidenav-active: var(--sidenav-active);
-
+  --text-sm: var(--p-font-size-sm);
+  --text-sm--line-height: var(--p-font-height-sm);
+  --text-sm--letter-spacing: var(--p-letter-spacing-sm);
 
   --font-mono:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
@@ -33,9 +35,7 @@
     var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-  --text-sm: var(--p-font-size-sm);
-  --text-sm--line-height: var(--p-font-height-sm);
-  --text-sm--letter-spacing: var(--p-letter-spacing-sm);
+
 }
 
 /*

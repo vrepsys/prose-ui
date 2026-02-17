@@ -9,6 +9,7 @@
   },
   "exports": {
     "./prose-ui.css": "./dist/prose-ui.css",
+    "./katex.css": "./dist/katex.min.css",
     "./katex.min.css": "./dist/katex.min.css",
     "./fonts/*": "./dist/fonts/*"
   },

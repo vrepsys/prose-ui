@@ -30,7 +30,7 @@ import '@prose-ui/style/prose-ui.css'
 For math formulas, also import the KaTeX styles:
 
 ```css
-@import '@prose-ui/style/katex.min.css';
+@import '@prose-ui/style/katex.css';
 ```
 
 ### Available components

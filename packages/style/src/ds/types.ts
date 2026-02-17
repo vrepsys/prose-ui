@@ -290,6 +290,7 @@ export type Components = {
     }
   }
   codeBlock: {
+    maxHeight: CssValue
     color: {
       text: CssValue
       bg: CssValue

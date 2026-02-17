@@ -17,19 +17,21 @@ export const HighlightedCodeBlockBody = ({
   const lines = code.trim().split(/\r\n|\r|\n/)
   return (
     <div className="code-block-body">
-      {code && showLineNumbers && (
-        <div className="line-numbers">
-          {Array(lines.length)
-            .fill(0)
-            .map((_, i) => (
-              <div className="line-number" key={i}>
-                {i + 1}
-              </div>
-            ))}
-        </div>
-      )}
       <ScrollArea>
-        <div className="code-container" dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+        <div className="code-block-inner">
+          {code && showLineNumbers && (
+            <div className="line-numbers">
+              {Array(lines.length)
+                .fill(0)
+                .map((_, i) => (
+                  <div className="line-number" key={i}>
+                    {i + 1}
+                  </div>
+                ))}
+            </div>
+          )}
+          <div className="code-container" dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+        </div>
       </ScrollArea>
       {showCopyButton && <CopyButton content={code} />}
     </div>

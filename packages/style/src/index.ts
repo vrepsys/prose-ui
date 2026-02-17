@@ -780,6 +780,7 @@ export const getComponentsSpec = (ds: Base): ComponentsSpec => {
       },
     },
     codeBlock: {
+      maxHeight: '40dvh',
       color: {
         bg: ds.color.bg.surface2,
         text: ds.color.text.base,
@@ -1139,7 +1140,6 @@ export const componentsStyles = (ds: DesignSystem) => {
       },
       '.code-block-body': {
         'position': 'relative',
-        'display': 'flex',
         'width': '100%',
         'font-family': ds.font.family.mono,
         'font-size': ds.codeBlock.font.size,
@@ -1148,6 +1148,12 @@ export const componentsStyles = (ds: DesignSystem) => {
         'letter-spacing': ds.codeBlock.font.spacing,
         'word-break': 'keep-all',
         'font-variant-ligatures': 'none',
+        '.scroll-area-root': {
+          'max-height': ds.codeBlock.maxHeight,
+        },
+        '.scroll-area-viewport': {
+          'max-height': 'inherit',
+        },
         '.copy-button': {
           // 'visibility': 'hidden',
           // 'transition': 'opacity 100ms ease',
@@ -1167,6 +1173,11 @@ export const componentsStyles = (ds: DesignSystem) => {
           // opacity: 1,
           visibility: 'visible',
         },
+      },
+      '.code-block-inner': {
+        'display': 'flex',
+        'width': 'fit-content',
+        'min-width': '100%',
       },
       '.line-numbers': {
         'user-select': 'none',
@@ -1852,15 +1863,25 @@ export const componentsStyles = (ds: DesignSystem) => {
       'user-select': 'none',
       'border-radius': ds.spacing['space1-5'],
       '&[data-orientation="horizontal"]': {
+        'flex-direction': 'row',
         margin: '2px 0',
         padding: '0 2px',
         height: ds.spacing['space1-5'],
       },
+      '&[data-orientation="vertical"]': {
+        'flex-direction': 'column',
+        margin: '0 2px',
+        padding: '2px 0',
+        width: ds.spacing['space1-5'],
+      },
     },
     [`.scroll-area-thumb${NP}`]: {
-      'background': color.bg.surface2,
+      'background': color.text.xmuted,
       'border-radius': ds.spacing['space1-5'],
       'position': 'relative',
+    },
+    [`.scroll-area-corner${NP}`]: {
+      'background-color': 'transparent',
     },
     // Select trigger styles (inline, inside .prose-ui)
     ...Object.fromEntries(

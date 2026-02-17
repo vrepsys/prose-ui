@@ -315,6 +315,7 @@
     --p-blockquote-font-weight: var(--p-font-weight-normal);
     --p-blockquote-font-height: var(--p-font-height);
     --p-blockquote-font-style: italic;
+    --p-code-block-max-height: 40dvh;
     --p-code-block-color-bg: var(--p-color-bg-surface2);
     --p-code-block-color-text: var(--p-color-text);
     --p-code-block-color-constant: var(--p-color-text-syntax1);
@@ -643,7 +644,6 @@
 }
 .prose-ui .code-block:where(:not(.not-prose, .not-prose *)) .code-block-body, .prose-ui .code-group:where(:not(.not-prose, .not-prose *)) .code-block-body {
     position: relative;
-    display: flex;
     width: 100%;
     font-family: var(--p-font-family-mono);
     font-size: var(--p-code-block-font-size);
@@ -652,6 +652,12 @@
     letter-spacing: var(--p-code-block-font-spacing);
     word-break: keep-all;
     font-variant-ligatures: none;
+}
+.prose-ui .code-block:where(:not(.not-prose, .not-prose *)) .code-block-body .scroll-area-root, .prose-ui .code-group:where(:not(.not-prose, .not-prose *)) .code-block-body .scroll-area-root {
+    max-height: var(--p-code-block-max-height);
+}
+.prose-ui .code-block:where(:not(.not-prose, .not-prose *)) .code-block-body .scroll-area-viewport, .prose-ui .code-group:where(:not(.not-prose, .not-prose *)) .code-block-body .scroll-area-viewport {
+    max-height: inherit;
 }
 .prose-ui .code-block:where(:not(.not-prose, .not-prose *)) .code-block-body .copy-button, .prose-ui .code-group:where(:not(.not-prose, .not-prose *)) .code-block-body .copy-button {
     position: absolute;
@@ -665,6 +671,11 @@
 }
 .prose-ui .code-block:where(:not(.not-prose, .not-prose *)) .code-block-body:hover .copy-button, .prose-ui .code-group:where(:not(.not-prose, .not-prose *)) .code-block-body:hover .copy-button {
     visibility: visible;
+}
+.prose-ui .code-block:where(:not(.not-prose, .not-prose *)) .code-block-inner, .prose-ui .code-group:where(:not(.not-prose, .not-prose *)) .code-block-inner {
+    display: flex;
+    width: fit-content;
+    min-width: 100%;
 }
 .prose-ui .code-block:where(:not(.not-prose, .not-prose *)) .line-numbers, .prose-ui .code-group:where(:not(.not-prose, .not-prose *)) .line-numbers {
     user-select: none;
@@ -1385,14 +1396,24 @@
     border-radius: var(--p-spacing-space1-5);
 }
 .prose-ui .scroll-area-scrollbar:where(:not(.not-prose, .not-prose *))[data-orientation="horizontal"] {
+    flex-direction: row;
     margin: 2px 0;
     padding: 0 2px;
     height: var(--p-spacing-space1-5);
 }
+.prose-ui .scroll-area-scrollbar:where(:not(.not-prose, .not-prose *))[data-orientation="vertical"] {
+    flex-direction: column;
+    margin: 0 2px;
+    padding: 2px 0;
+    width: var(--p-spacing-space1-5);
+}
 .prose-ui .scroll-area-thumb:where(:not(.not-prose, .not-prose *)) {
-    background: var(--p-color-bg-surface2);
+    background: var(--p-color-text-xmuted);
     border-radius: var(--p-spacing-space1-5);
     position: relative;
+}
+.prose-ui .scroll-area-corner:where(:not(.not-prose, .not-prose *)) {
+    background-color: transparent;
 }
 .prose-ui .select-trigger:where(:not(.not-prose, .not-prose *)) {
     display: inline-flex;

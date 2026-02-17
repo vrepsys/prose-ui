@@ -19,7 +19,7 @@ Import the styles in your global stylesheet:
 For math formulas, also import KaTeX styles:
 
 ```css
-@import '@prose-ui/style/katex.min.css';
+@import '@prose-ui/style/katex.css';
 ```
 
 Then wrap your content with the `prose-ui` class:

@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @import '@prose-ui/style/prose-ui.css' layer(base);
-@import '@prose-ui/style/katex.min.css' layer(base);
+@import '@prose-ui/style/katex.css' layer(base);
 
 @import '@radix-ui/colors/gray.css' layer(base);
 @import '@radix-ui/colors/gray-dark.css' layer(base);

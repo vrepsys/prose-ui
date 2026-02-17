@@ -30,7 +30,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 24
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
 
@@ -48,8 +48,6 @@ jobs:
 
       - name: Publish
         run: pnpm -r publish --access public --tag next --no-git-checks --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -71,7 +69,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 24
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
 
@@ -89,8 +87,6 @@ jobs:
 
       - name: Publish
         run: pnpm -r publish --access public --tag latest --no-git-checks --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v5

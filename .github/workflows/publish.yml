@@ -1,0 +1,99 @@
+name: Publish to npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: "Release type"
+        required: true
+        type: choice
+        options:
+          - rc
+          - latest
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish_rc:
+    if: github.event.inputs.release_type == 'rc'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Bump version
+        run: pnpm bump:rc
+
+      - name: Build packages
+        run: pnpm build --filter './packages/*'
+
+      - name: Run tests
+        run: pnpm test:ci --filter='./packages/*'
+
+      - name: Publish
+        run: pnpm -r publish --access public --tag next --no-git-checks --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: publish release candidate
+          tagging_message: rc
+
+  publish_latest:
+    if: github.event.inputs.release_type == 'latest'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Bump version
+        run: pnpm bump:latest
+
+      - name: Build packages
+        run: pnpm build --filter './packages/*'
+
+      - name: Run tests
+        run: pnpm test:ci --filter='./packages/*'
+
+      - name: Publish
+        run: pnpm -r publish --access public --tag latest --no-git-checks --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: publish latest version
+          tagging_message: latest
